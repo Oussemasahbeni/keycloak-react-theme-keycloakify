@@ -1,4 +1,4 @@
-@import url(./assets/fonts/geist/index.css);
+@import url(./assets/fonts/inter/inter.css);
 
 @tailwind base;
 @tailwind components;
@@ -7,7 +7,7 @@
 body.kcBodyClass {
     @apply bg-none bg-no-repeat bg-center bg-fixed;
     @apply bg-gray-100;
-    @apply font-geist;
+    font-family: "Inter var", sans-serif;
 }
 
 .kcHeaderWrapperClass {
