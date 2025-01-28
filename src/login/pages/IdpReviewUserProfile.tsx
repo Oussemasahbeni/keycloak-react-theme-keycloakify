@@ -1,11 +1,12 @@
-import type { JSX } from "keycloakify/tools/JSX";
-import { useState } from "react";
-import type { LazyOrNot } from "keycloakify/tools/LazyOrNot";
+import { Button } from "@/components/ui/button";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { UserProfileFormFieldsProps } from "keycloakify/login/UserProfileFormFieldsProps";
-import type { KcContext } from "../KcContext";
+import type { JSX } from "keycloakify/tools/JSX";
+import type { LazyOrNot } from "keycloakify/tools/LazyOrNot";
+import { useState } from "react";
 import type { I18n } from "../i18n";
+import type { KcContext } from "../KcContext";
 
 type IdpReviewUserProfileProps = PageProps<Extract<KcContext, { pageId: "idp-review-user-profile.ftl" }>, I18n> & {
     UserProfileFormFields: LazyOrNot<(props: UserProfileFormFieldsProps) => JSX.Element>;
@@ -49,12 +50,15 @@ export default function IdpReviewUserProfile(props: IdpReviewUserProfileProps) {
                         <div className={kcClsx("kcFormOptionsWrapperClass")} />
                     </div>
                     <div id="kc-form-buttons" className={kcClsx("kcFormButtonsClass")}>
-                        <input
+                        <Button className="w-full" disabled={!isFomSubmittable} type="submit">
+                            {msgStr("doSubmit")}
+                        </Button>
+                        {/* <input
                             className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonBlockClass", "kcButtonLargeClass")}
                             type="submit"
                             value={msgStr("doSubmit")}
                             disabled={!isFomSubmittable}
-                        />
+                        /> */}
                     </div>
                 </div>
             </form>

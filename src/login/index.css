@@ -10,8 +10,23 @@ body.kcBodyClass {
     font-family: "Inter var", sans-serif;
 }
 
+a:hover {
+    @apply text-violet-800 !important;
+}
+
 .kcHeaderWrapperClass {
     @apply text-3xl font-bold underline;
+}
+input[type="checkbox"],
+input[type="radio"] {
+    margin: 0;
+    vertical-align: middle;
+    line-height: normal;
+}
+
+input[type="checkbox"]:checked,
+input[type="radio"]:checked {
+    @apply accent-primary;
 }
 
 @layer base {

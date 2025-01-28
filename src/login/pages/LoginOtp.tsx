@@ -1,7 +1,9 @@
-import { Fragment } from "react";
-import { getKcClsx } from "keycloakify/login/lib/kcClsx";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
+import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
+import { Fragment } from "react";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 
@@ -61,7 +63,7 @@ export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "
                         </label>
                     </div>
                     <div className={kcClsx("kcInputWrapperClass")}>
-                        <input
+                        <Input
                             id="otp"
                             name="otp"
                             autoComplete="off"
@@ -88,13 +90,9 @@ export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "
                         <div className={kcClsx("kcFormOptionsWrapperClass")}></div>
                     </div>
                     <div id="kc-form-buttons" className={kcClsx("kcFormButtonsClass")}>
-                        <input
-                            className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonBlockClass", "kcButtonLargeClass")}
-                            name="login"
-                            id="kc-login"
-                            type="submit"
-                            value={msgStr("doLogIn")}
-                        />
+                        <Button className={"w-full"} name="login" id="kc-login" type="submit">
+                            {msgStr("doLogIn")}
+                        </Button>
                     </div>
                 </div>
             </form>

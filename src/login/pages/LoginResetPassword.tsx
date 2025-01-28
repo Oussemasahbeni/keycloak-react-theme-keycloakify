@@ -1,5 +1,7 @@
-import { getKcClsx } from "keycloakify/login/lib/kcClsx";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
+import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
@@ -39,7 +41,7 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
                         </label>
                     </div>
                     <div className={kcClsx("kcInputWrapperClass")}>
-                        <input
+                        <Input
                             type="text"
                             id="username"
                             name="username"
@@ -70,11 +72,9 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
                     </div>
 
                     <div id="kc-form-buttons" className={kcClsx("kcFormButtonsClass")}>
-                        <input
-                            className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonBlockClass", "kcButtonLargeClass")}
-                            type="submit"
-                            value={msgStr("doSubmit")}
-                        />
+                        <Button className={"w-full"} type="submit">
+                            {msgStr("doSubmit")}
+                        </Button>
                     </div>
                 </div>
             </form>

@@ -1,5 +1,7 @@
-import { getKcClsx, KcClsx } from "keycloakify/login/lib/kcClsx";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
+import { getKcClsx, KcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
@@ -41,7 +43,7 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                         <>
                             <li>
                                 <p>{msg("loginTotpManualStep2")}</p>
-                                <p>
+                                <p className="mt-2">
                                     <span id="kc-totp-secret-key">{totp.totpSecretEncoded}</span>
                                 </p>
                                 <p>
@@ -101,7 +103,7 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                             <span className="required">*</span>
                         </div>
                         <div className={kcClsx("kcInputWrapperClass")}>
-                            <input
+                            <Input
                                 type="text"
                                 id="totp"
                                 name="totp"
@@ -133,7 +135,7 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                             {totp.otpCredentials.length >= 1 && <span className="required">*</span>}
                         </div>
                         <div className={kcClsx("kcInputWrapperClass")}>
-                            <input
+                            <Input
                                 type="text"
                                 id="userLabel"
                                 name="userLabel"
@@ -160,13 +162,23 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
 
                     {isAppInitiatedAction ? (
                         <>
-                            <input
+                            {/* <input
                                 type="submit"
                                 className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonLargeClass")}
                                 id="saveTOTPBtn"
                                 value={msgStr("doSubmit")}
-                            />
-                            <button
+                            /> */}
+
+                            <div className="flex justify-between mt-4">
+                                <Button id="saveTOTPBtn" type="submit">
+                                    {msgStr("doSubmit")}
+                                </Button>
+                                <Button className="bg-gray-400 hover:bg-gray-500 " value="true" id="cancelTOTPBtn" name="cancel-aia" type="submit">
+                                    {msgStr("doCancel")}
+                                </Button>
+                            </div>
+
+                            {/* <button
                                 type="submit"
                                 className={kcClsx("kcButtonClass", "kcButtonDefaultClass", "kcButtonLargeClass", "kcButtonLargeClass")}
                                 id="cancelTOTPBtn"
@@ -174,15 +186,18 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                                 value="true"
                             >
                                 {msg("doCancel")}
-                            </button>
+                            </button> */}
                         </>
                     ) : (
-                        <input
-                            type="submit"
-                            className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonLargeClass")}
-                            id="saveTOTPBtn"
-                            value={msgStr("doSubmit")}
-                        />
+                        <Button id="saveTOTPBtn" className="w-full" type="submit">
+                            {msgStr("doSubmit")}
+                        </Button>
+                        // <input
+                        //     type="submit"
+                        //     className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonLargeClass")}
+                        //     id="saveTOTPBtn"
+                        //     value={msgStr("doSubmit")}
+                        // />
                     )}
                 </form>
             </>

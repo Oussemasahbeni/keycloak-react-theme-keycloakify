@@ -8,7 +8,6 @@ import { useInitialize } from "keycloakify/login/Template.useInitialize";
 import type { TemplateProps } from "keycloakify/login/TemplateProps";
 import { clsx } from "keycloakify/tools/clsx";
 import { useSetClassName } from "keycloakify/tools/useSetClassName";
-import { AlertCircle } from "lucide-react";
 import { useEffect } from "react";
 import type { I18n } from "./i18n";
 import type { KcContext } from "./KcContext";
@@ -66,39 +65,41 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                     Inspark
                 </a> */}
 
+                <div className="absolute top-5 right-10">
+                    {enabledLanguages.length > 1 && (
+                        <div className={kcClsx("kcLocaleMainClass")} id="kc-locale">
+                            <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                    <Button
+                                        tabIndex={1}
+                                        variant="secondary"
+                                        size="sm"
+                                        aria-label={msgStr("languages")}
+                                        aria-haspopup="true"
+                                        aria-expanded="false"
+                                        aria-controls="language-switch1"
+                                        className="px-3 py-0 border-gray-400 hover:border-gray-500 focus-visible:border-gray-400   border-2"
+                                    >
+                                        {currentLanguage.label}
+                                    </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent id="language-switch1" role="menu">
+                                    {enabledLanguages.map(({ languageTag, label, href }, i) => (
+                                        <DropdownMenuItem key={languageTag} role="none">
+                                            <a role="menuitem" id={`language-${i + 1}`} className={kcClsx("kcLocaleItemClass")} href={href}>
+                                                {label}{" "}
+                                            </a>
+                                        </DropdownMenuItem>
+                                    ))}
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                        </div>
+                    )}
+                </div>
                 <Card>
                     <CardHeader className="text-center px-6 pt-6">
                         <div className="flex items-center justify-between gap-2">
                             <img src="insparklogodark.svg" className="h-10 w-28" alt="" />
-                            {enabledLanguages.length > 1 && (
-                                <div className={kcClsx("kcLocaleMainClass")} id="kc-locale">
-                                    <DropdownMenu>
-                                        <DropdownMenuTrigger asChild>
-                                            <Button
-                                                tabIndex={1}
-                                                variant="secondary"
-                                                size="sm"
-                                                aria-label={msgStr("languages")}
-                                                aria-haspopup="true"
-                                                aria-expanded="false"
-                                                aria-controls="language-switch1"
-                                                className="px-3 py-0"
-                                            >
-                                                {currentLanguage.label}
-                                            </Button>
-                                        </DropdownMenuTrigger>
-                                        <DropdownMenuContent id="language-switch1" role="menu">
-                                            {enabledLanguages.map(({ languageTag, label, href }, i) => (
-                                                <DropdownMenuItem key={languageTag} role="none">
-                                                    <a role="menuitem" id={`language-${i + 1}`} className={kcClsx("kcLocaleItemClass")} href={href}>
-                                                        {label}{" "}
-                                                    </a>
-                                                </DropdownMenuItem>
-                                            ))}
-                                        </DropdownMenuContent>
-                                    </DropdownMenu>
-                                </div>
-                            )}
                         </div>
 
                         <CardTitle>
@@ -140,15 +141,13 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                             <div id="kc-content-wrapper">
                                 {" "}
                                 {displayMessage && message !== undefined && (message.type !== "warning" || !isAppInitiatedAction) && (
-                                    <Alert variant="destructive" className="flex items-start">
-                                        <AlertCircle className="h-4 w-4">
-                                            <div>
-                                                {message.type === "success" && <span className={kcClsx("kcFeedbackSuccessIcon")}></span>}
-                                                {message.type === "warning" && <span className={kcClsx("kcFeedbackWarningIcon")}></span>}
-                                                {message.type === "error" && <span className={kcClsx("kcFeedbackErrorIcon")}></span>}
-                                                {message.type === "info" && <span className={kcClsx("kcFeedbackInfoIcon")}></span>}
-                                            </div>
-                                        </AlertCircle>
+                                    <Alert variant="destructive" className="flex  gap-2 justify-center">
+                                        <div>
+                                            {message.type === "success" && <span className={kcClsx("kcFeedbackSuccessIcon")}></span>}
+                                            {message.type === "warning" && <span className={kcClsx("kcFeedbackWarningIcon")}></span>}
+                                            {message.type === "error" && <span className={kcClsx("kcFeedbackErrorIcon")}></span>}
+                                            {message.type === "info" && <span className={kcClsx("kcFeedbackInfoIcon")}></span>}
+                                        </div>{" "}
                                         <AlertDescription>
                                             <div
                                                 className={clsx(

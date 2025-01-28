@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
@@ -26,20 +27,15 @@ export default function DeleteCredential(props: PageProps<Extract<KcContext, { p
         >
             <div id="kc-delete-text">{msg("deleteCredentialMessage", credentialLabel)}</div>
             <form className="form-actions" action={url.loginAction} method="POST">
-                <input
-                    className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonLargeClass")}
-                    name="accept"
-                    id="kc-accept"
-                    type="submit"
-                    value={msgStr("doConfirmDelete")}
-                />
-                <input
-                    className={kcClsx("kcButtonClass", "kcButtonDefaultClass", "kcButtonLargeClass")}
-                    name="cancel-aia"
-                    value={msgStr("doCancel")}
-                    id="kc-decline"
-                    type="submit"
-                />
+                <div className="flex justify-between mt-4">
+                    <Button className={"bg-blue-600 hover:bg-blue-700"} name="accept" id="kc-accept" type="submit" value={msgStr("doConfirmDelete")}>
+                        {msgStr("doConfirmDelete")}
+                    </Button>
+
+                    <Button className="bg-gray-400 hover:bg-gray-500 " name="cancel-aia" id="kc-decline" type="submit">
+                        {msgStr("doCancel")}
+                    </Button>
+                </div>
             </form>
             <div className="clearfix" />
         </Template>

@@ -1,7 +1,8 @@
-import { clsx } from "keycloakify/tools/clsx";
+import { Button } from "@/components/ui/button";
 import { getKcClsx, type KcClsx } from "keycloakify/login/lib/kcClsx";
 import { useScript } from "keycloakify/login/pages/LoginRecoveryAuthnCodeConfig.useScript";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
+import { clsx } from "keycloakify/tools/clsx";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 
@@ -29,7 +30,7 @@ export default function LoginRecoveryAuthnCodeConfig(props: PageProps<Extract<Kc
             classes={classes}
             headerNode={msg("recovery-code-config-header")}
         >
-            <div className={clsx("pf-c-alert", "pf-m-warning", "pf-m-inline", kcClsx("kcRecoveryCodesWarning"))} aria-label="Warning alert">
+            <div className={clsx("pf-c-alert", "pf-m-warning", "pf-m-inline", "mt-2", kcClsx("kcRecoveryCodesWarning"))} aria-label="Warning alert">
                 <div className="pf-c-alert__icon">
                     <i className="pficon-warning-triangle-o" aria-hidden="true" />
                 </div>
@@ -64,7 +65,7 @@ export default function LoginRecoveryAuthnCodeConfig(props: PageProps<Extract<Kc
             </div>
 
             {/* confirmation checkbox */}
-            <div className={kcClsx("kcFormOptionsClass")}>
+            <div className={`space-x-2`}>
                 <input
                     className={kcClsx("kcCheckInputClass")}
                     type="checkbox"
@@ -105,13 +106,9 @@ export default function LoginRecoveryAuthnCodeConfig(props: PageProps<Extract<Kc
                         </button>
                     </>
                 ) : (
-                    <input
-                        type="submit"
-                        className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonBlockClass", "kcButtonLargeClass")}
-                        id="saveRecoveryAuthnCodesBtn"
-                        value={msgStr("recovery-codes-action-complete")}
-                        disabled
-                    />
+                    <Button type="submit" className="w-full" id="saveRecoveryAuthnCodesBtn" disabled>
+                        {msgStr("recovery-codes-action-complete")}
+                    </Button>
                 )}
             </form>
         </Template>
@@ -124,7 +121,7 @@ function LogoutOtherSessions(props: { kcClsx: KcClsx; i18n: I18n }) {
     const { msg } = i18n;
 
     return (
-        <div id="kc-form-options" className={kcClsx("kcFormOptionsClass")}>
+        <div id="kc-form-options">
             <div className={kcClsx("kcFormOptionsWrapperClass")}>
                 <div className="checkbox">
                     <label>

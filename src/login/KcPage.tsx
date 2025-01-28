@@ -23,6 +23,7 @@ const LoginIdpLinkEmail = lazy(() => import("./pages/LoginIdpLinkEmail"));
 const LoginPageExpired = lazy(() => import("./pages/LoginPageExpired"));
 const LoginConfigTotp = lazy(() => import("./pages/LoginConfigTotp"));
 const LogoutConfirm = lazy(() => import("./pages/LogoutConfirm"));
+const LoginResetPassword = lazy(() => import("./pages/LoginResetPassword"));
 const Info = lazy(() => import("./pages/Info"));
 const Error = lazy(() => import("./pages/Error"));
 const WebauthnAuthenticate = lazy(() => import("./pages/WebauthnAuthenticate"));
@@ -48,6 +49,8 @@ const LoginPasskeysConditionalAuthenticate = lazy(
 const LoginIdpLinkConfirmOverride = lazy(
     () => import("./pages/LoginIdpLinkConfirmOverride")
 );
+const DeleteAccountConfirm = lazy(() => import("./pages/DeleteAccountConfirm"));
+const LoginUpdatePassword = lazy(() => import("./pages/LoginUpdatePassword"));
 
 const doMakeUserConfirmPassword = true;
 
@@ -153,6 +156,22 @@ export default function KcPage(props: { kcContext: KcContext }) {
                     case "login-config-totp.ftl":
                         return (
                             <LoginConfigTotp
+                                {...{ kcContext, i18n, classes }}
+                                Template={Template}
+                                doUseDefaultCss={true}
+                            />
+                        );
+                    case "login-update-password.ftl":
+                        return (
+                            <LoginUpdatePassword
+                                {...{ kcContext, i18n, classes }}
+                                Template={Template}
+                                doUseDefaultCss={true}
+                            />
+                        );
+                    case "login-reset-password.ftl":
+                        return (
+                            <LoginResetPassword
                                 {...{ kcContext, i18n, classes }}
                                 Template={Template}
                                 doUseDefaultCss={true}
@@ -293,6 +312,14 @@ export default function KcPage(props: { kcContext: KcContext }) {
                     case "login-passkeys-conditional-authenticate.ftl":
                         return (
                             <LoginPasskeysConditionalAuthenticate
+                                {...{ kcContext, i18n, classes }}
+                                Template={Template}
+                                doUseDefaultCss={true}
+                            />
+                        );
+                    case "delete-account-confirm.ftl":
+                        return (
+                            <DeleteAccountConfirm
                                 {...{ kcContext, i18n, classes }}
                                 Template={Template}
                                 doUseDefaultCss={true}

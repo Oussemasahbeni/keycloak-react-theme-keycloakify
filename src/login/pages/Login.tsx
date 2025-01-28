@@ -136,8 +136,12 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                     {msg("password")}
 
                                     {realm.resetPasswordAllowed && (
-                                        <span className="text-primary">
-                                            <a tabIndex={6} href={url.loginResetCredentialsUrl}>
+                                        <span>
+                                            <a
+                                                className="text-primary hover:text-violet-600 focus:text-violet-600"
+                                                tabIndex={6}
+                                                href={url.loginResetCredentialsUrl}
+                                            >
                                                 {msg("doForgotPassword")}
                                             </a>
                                         </span>
@@ -178,7 +182,6 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                                     id="rememberMe"
                                                     name="rememberMe"
                                                     type="checkbox"
-                                                    className="text-primary"
                                                     defaultChecked={!!login.rememberMe}
                                                 />{" "}
                                                 {msg("rememberMe")}
