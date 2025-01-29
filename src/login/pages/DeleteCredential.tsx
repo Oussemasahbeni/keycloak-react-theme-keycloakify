@@ -9,7 +9,7 @@ export default function DeleteCredential(props: PageProps<Extract<KcContext, { p
 
     const { msgStr, msg } = i18n;
 
-    const { kcClsx } = getKcClsx({
+    getKcClsx({
         doUseDefaultCss,
         classes
     });

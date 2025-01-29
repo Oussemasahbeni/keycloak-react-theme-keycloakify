@@ -130,7 +130,7 @@ function LogoutOtherSessions(props: { kcClsx: KcClsx; i18n: I18n }) {
 }
 
 function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: string; children: JSX.Element }) {
-    const { kcClsx, i18n, passwordInputId, children } = props;
+    const { i18n, passwordInputId, children } = props;
 
     const { msgStr } = i18n;
 

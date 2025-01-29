@@ -86,7 +86,7 @@ export default function LoginUsername(props: PageProps<Extract<KcContext, { page
                         >
                             {!usernameHidden && (
                                 <div className={kcClsx("kcFormGroupClass")}>
-                                    <Label htmlFor="username">
+                                    <Label>
                                         {!realm.loginWithEmailAllowed
                                             ? msg("username")
                                             : !realm.registrationEmailAsUsername

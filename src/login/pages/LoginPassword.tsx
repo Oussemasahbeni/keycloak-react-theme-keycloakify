@@ -52,9 +52,7 @@ export default function LoginPassword(props: PageProps<Extract<KcContext, { page
                                 {msg("password")}
                             </label> */}
 
-                            <Label className="flex justify-between" htmlFor="password">
-                                {msg("password")}
-                            </Label>
+                            <Label className="flex justify-between">{msg("password")}</Label>
 
                             <PasswordWrapper kcClsx={kcClsx} i18n={i18n} passwordInputId="password">
                                 <Input
@@ -123,7 +121,7 @@ export default function LoginPassword(props: PageProps<Extract<KcContext, { page
 }
 
 function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: string; children: JSX.Element }) {
-    const { kcClsx, i18n, passwordInputId, children } = props;
+    const { i18n, passwordInputId, children } = props;
 
     const { msgStr } = i18n;
 
