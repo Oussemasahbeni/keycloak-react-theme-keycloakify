@@ -1,9 +1,10 @@
-import type { JSX } from "keycloakify/tools/JSX";
-import { useState } from "react";
-import type { LazyOrNot } from "keycloakify/tools/LazyOrNot";
-import { getKcClsx } from "keycloakify/login/lib/kcClsx";
+import { Button } from "@/components/ui/button";
 import type { UserProfileFormFieldsProps } from "keycloakify/login/UserProfileFormFieldsProps";
+import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
+import type { JSX } from "keycloakify/tools/JSX";
+import type { LazyOrNot } from "keycloakify/tools/LazyOrNot";
+import { useState } from "react";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 
@@ -49,27 +50,19 @@ export default function LoginUpdateProfile(props: LoginUpdateProfileProps) {
                         <div className={kcClsx("kcFormOptionsWrapperClass")} />
                     </div>
                     <div id="kc-form-buttons" className={kcClsx("kcFormButtonsClass")}>
-                        <input
-                            disabled={!isFormSubmittable}
-                            className={kcClsx(
-                                "kcButtonClass",
-                                "kcButtonPrimaryClass",
-                                !isAppInitiatedAction && "kcButtonBlockClass",
-                                "kcButtonLargeClass"
-                            )}
-                            type="submit"
-                            value={msgStr("doSubmit")}
-                        />
+                        <Button disabled={!isFormSubmittable} className="w-full" type="submit" value={msgStr("doSubmit")}>
+                            {msgStr("doSubmit")}
+                        </Button>
                         {isAppInitiatedAction && (
-                            <button
-                                className={kcClsx("kcButtonClass", "kcButtonDefaultClass", "kcButtonLargeClass")}
+                            <Button
+                                className="bg-gray-400 hover:bg-gray-500 w-full mt-2 "
                                 type="submit"
                                 name="cancel-aia"
                                 value="true"
                                 formNoValidate
                             >
                                 {msg("doCancel")}
-                            </button>
+                            </Button>
                         )}
                     </div>
                 </div>

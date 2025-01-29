@@ -141,7 +141,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                             <div id="kc-content-wrapper">
                                 {" "}
                                 {displayMessage && message !== undefined && (message.type !== "warning" || !isAppInitiatedAction) && (
-                                    <Alert variant="destructive" className="flex  gap-2 justify-center">
+                                    <Alert variant={getAlertVariant(message.type)} className="flex  gap-2 justify-center">
                                         <div>
                                             {message.type === "success" && <span className={kcClsx("kcFeedbackSuccessIcon")}></span>}
                                             {message.type === "warning" && <span className={kcClsx("kcFeedbackWarningIcon")}></span>}
@@ -192,3 +192,16 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
         </div>
     );
 }
+
+const getAlertVariant = (type: string) => {
+    switch (type) {
+        case "error":
+            return "destructive";
+        case "warning":
+            return "warning";
+        case "success":
+            return "success";
+        default:
+            return "default";
+    }
+};

@@ -1,8 +1,11 @@
-import type { JSX } from "keycloakify/tools/JSX";
-import { useIsPasswordRevealed } from "keycloakify/tools/useIsPasswordRevealed";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { getKcClsx, type KcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
+import type { JSX } from "keycloakify/tools/JSX";
+import { useIsPasswordRevealed } from "keycloakify/tools/useIsPasswordRevealed";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 
@@ -36,14 +39,13 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
                     </div>
                     <div className={kcClsx("kcInputWrapperClass")}>
                         <PasswordWrapper kcClsx={kcClsx} i18n={i18n} passwordInputId="password-new">
-                            <input
+                            <Input
                                 type="password"
                                 id="password-new"
                                 name="password-new"
                                 className={kcClsx("kcInputClass")}
                                 autoFocus
                                 autoComplete="new-password"
-                                aria-invalid={messagesPerField.existsError("password", "password-confirm")}
                             />
                         </PasswordWrapper>
 
@@ -68,14 +70,13 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
                     </div>
                     <div className={kcClsx("kcInputWrapperClass")}>
                         <PasswordWrapper kcClsx={kcClsx} i18n={i18n} passwordInputId="password-confirm">
-                            <input
+                            <Input
                                 type="password"
                                 id="password-confirm"
                                 name="password-confirm"
                                 className={kcClsx("kcInputClass")}
                                 autoFocus
                                 autoComplete="new-password"
-                                aria-invalid={messagesPerField.existsError("password", "password-confirm")}
                             />
                         </PasswordWrapper>
 
@@ -94,25 +95,13 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
                 <div className={kcClsx("kcFormGroupClass")}>
                     <LogoutOtherSessions kcClsx={kcClsx} i18n={i18n} />
                     <div id="kc-form-buttons" className={kcClsx("kcFormButtonsClass")}>
-                        <input
-                            className={kcClsx(
-                                "kcButtonClass",
-                                "kcButtonPrimaryClass",
-                                !isAppInitiatedAction && "kcButtonBlockClass",
-                                "kcButtonLargeClass"
-                            )}
-                            type="submit"
-                            value={msgStr("doSubmit")}
-                        />
+                        <Button className="w-full" type="submit" value={msgStr("doSubmit")}>
+                            {msgStr("doSubmit")}
+                        </Button>
                         {isAppInitiatedAction && (
-                            <button
-                                className={kcClsx("kcButtonClass", "kcButtonDefaultClass", "kcButtonLargeClass")}
-                                type="submit"
-                                name="cancel-aia"
-                                value="true"
-                            >
+                            <Button className="bg-gray-400 hover:bg-gray-500 w-full mt-2 " type="submit" name="cancel-aia" value="true">
                                 {msg("doCancel")}
-                            </button>
+                            </Button>
                         )}
                     </div>
                 </div>
@@ -148,16 +137,16 @@ function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: s
     const { isPasswordRevealed, toggleIsPasswordRevealed } = useIsPasswordRevealed({ passwordInputId });
 
     return (
-        <div className={kcClsx("kcInputGroup")}>
+        <div className="relative">
             {children}
             <button
                 type="button"
-                className={kcClsx("kcFormPasswordVisibilityButtonClass")}
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
                 aria-label={msgStr(isPasswordRevealed ? "hidePassword" : "showPassword")}
                 aria-controls={passwordInputId}
                 onClick={toggleIsPasswordRevealed}
             >
-                <i className={kcClsx(isPasswordRevealed ? "kcFormPasswordVisibilityIconHide" : "kcFormPasswordVisibilityIconShow")} aria-hidden />
+                {isPasswordRevealed ? <FiEye /> : <FiEyeOff />}
             </button>
         </div>
     );

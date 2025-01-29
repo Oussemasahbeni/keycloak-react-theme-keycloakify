@@ -51,6 +51,7 @@ const LoginIdpLinkConfirmOverride = lazy(
 );
 const DeleteAccountConfirm = lazy(() => import("./pages/DeleteAccountConfirm"));
 const LoginUpdatePassword = lazy(() => import("./pages/LoginUpdatePassword"));
+const LoginVerifyEmail = lazy(() => import("./pages/LoginVerifyEmail"));
 
 const doMakeUserConfirmPassword = true;
 
@@ -180,6 +181,14 @@ export default function KcPage(props: { kcContext: KcContext }) {
                     case "logout-confirm.ftl":
                         return (
                             <LogoutConfirm
+                                {...{ kcContext, i18n, classes }}
+                                Template={Template}
+                                doUseDefaultCss={true}
+                            />
+                        );
+                    case "login-verify-email.ftl":
+                        return (
+                            <LoginVerifyEmail
                                 {...{ kcContext, i18n, classes }}
                                 Template={Template}
                                 doUseDefaultCss={true}

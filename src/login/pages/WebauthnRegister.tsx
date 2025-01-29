@@ -1,6 +1,7 @@
+import { Button } from "@/components/ui/button";
 import { getKcClsx, type KcClsx } from "keycloakify/login/lib/kcClsx";
-import { useScript } from "keycloakify/login/pages/WebauthnRegister.useScript";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
+import { useScript } from "keycloakify/login/pages/WebauthnRegister.useScript";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 
@@ -30,7 +31,7 @@ export default function WebauthnRegister(props: PageProps<Extract<KcContext, { p
             headerNode={
                 <>
                     <span className={kcClsx("kcWebAuthnKeyIcon")} />
-                    {msg("webauthn-registration-title")}
+                    <span className="ml-1">{msg("webauthn-registration-title")}</span>
                 </>
             }
         >
@@ -45,24 +46,15 @@ export default function WebauthnRegister(props: PageProps<Extract<KcContext, { p
                     <LogoutOtherSessions kcClsx={kcClsx} i18n={i18n} />
                 </div>
             </form>
-            <input
-                type="submit"
-                className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonBlockClass", "kcButtonLargeClass")}
-                id={authButtonId}
-                value={msgStr("doRegisterSecurityKey")}
-            />
+            <Button type="submit" className={"bg-blue-600 hover:bg-blue-700 w-full"} id={authButtonId} value={msgStr("doRegisterSecurityKey")}>
+                {msgStr("doRegisterSecurityKey")}
+            </Button>
 
             {!isSetRetry && isAppInitiatedAction && (
                 <form action={url.loginAction} className={kcClsx("kcFormClass")} id="kc-webauthn-settings-form" method="post">
-                    <button
-                        type="submit"
-                        className={kcClsx("kcButtonClass", "kcButtonDefaultClass", "kcButtonBlockClass", "kcButtonLargeClass")}
-                        id="cancelWebAuthnAIA"
-                        name="cancel-aia"
-                        value="true"
-                    >
-                        {msg("doCancel")}
-                    </button>
+                    <Button type="submit" className="bg-gray-400 hover:bg-gray-500 w-full " id="cancelWebAuthnAIA" name="cancel-aia" value="true">
+                        {msgStr("doCancel")}
+                    </Button>
                 </form>
             )}
         </Template>

@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
@@ -60,21 +61,19 @@ export default function LoginX509Info(props: PageProps<Extract<KcContext, { page
                     </div>
                     <div id="kc-form-buttons" className={kcClsx("kcFormButtonsClass")}>
                         <div className={kcClsx("kcFormButtonsWrapperClass")}>
-                            <input
-                                className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonLargeClass")}
-                                name="login"
-                                id="kc-login"
-                                type="submit"
-                                value={msgStr("doContinue")}
-                            />
+                            <Button name="login" id="kc-login" type="submit" value={msgStr("doContinue")}>
+                                {msgStr("doContinue")}
+                            </Button>
                             {x509.formData.isUserEnabled && (
-                                <input
-                                    className={kcClsx("kcButtonClass", "kcButtonDefaultClass", "kcButtonLargeClass")}
+                                <Button
+                                    className="bg-gray-400 hover:bg-gray-500 ml-2 "
                                     name="cancel"
                                     id="kc-cancel"
                                     type="submit"
                                     value={msgStr("doIgnore")}
-                                />
+                                >
+                                    {msgStr("doIgnore")}
+                                </Button>
                             )}
                         </div>
                     </div>

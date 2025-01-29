@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
@@ -28,7 +29,7 @@ export default function WebauthnError(props: PageProps<Extract<KcContext, { page
                 <input type="hidden" id="executionValue" name="authenticationExecution" />
                 <input type="hidden" id="isSetRetry" name="isSetRetry" />
             </form>
-            <input
+            <Button
                 tabIndex={4}
                 onClick={() => {
                     // @ts-expect-error: Trusted Keycloak's code
@@ -39,22 +40,17 @@ export default function WebauthnError(props: PageProps<Extract<KcContext, { page
                     document.getElementById("kc-error-credential-form").submit();
                 }}
                 type="button"
-                className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonBlockClass", "kcButtonLargeClass")}
+                className={"bg-blue-600 hover:bg-blue-700 w-full"}
                 name="try-again"
                 id="kc-try-again"
-                value={msgStr("doTryAgain")}
-            />
+            >
+                {msgStr("doTryAgain")}
+            </Button>
             {isAppInitiatedAction && (
                 <form action={url.loginAction} className={kcClsx("kcFormClass")} id="kc-webauthn-settings-form" method="post">
-                    <button
-                        type="submit"
-                        className={kcClsx("kcButtonClass", "kcButtonDefaultClass", "kcButtonBlockClass", "kcButtonLargeClass")}
-                        id="cancelWebAuthnAIA"
-                        name="cancel-aia"
-                        value="true"
-                    >
+                    <Button type="submit" className="bg-gray-400 hover:bg-gray-500 w-full " id="cancelWebAuthnAIA" name="cancel-aia" value="true">
                         {msgStr("doCancel")}
-                    </button>
+                    </Button>
                 </form>
             )}
         </Template>
