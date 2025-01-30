@@ -99,7 +99,7 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
                             {msgStr("doSubmit")}
                         </Button>
                         {isAppInitiatedAction && (
-                            <Button className="bg-gray-400 hover:bg-gray-500 w-full mt-2 " type="submit" name="cancel-aia" value="true">
+                            <Button variant="secondary" className=" w-full mt-2 " type="submit" name="cancel-aia" value="true">
                                 {msg("doCancel")}
                             </Button>
                         )}

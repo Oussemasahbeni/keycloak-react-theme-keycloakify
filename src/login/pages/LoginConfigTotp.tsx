@@ -173,7 +173,7 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                                 <Button id="saveTOTPBtn" type="submit">
                                     {msgStr("doSubmit")}
                                 </Button>
-                                <Button className="bg-gray-400 hover:bg-gray-500 " value="true" id="cancelTOTPBtn" name="cancel-aia" type="submit">
+                                <Button variant="secondary" value="true" id="cancelTOTPBtn" name="cancel-aia" type="submit">
                                     {msgStr("doCancel")}
                                 </Button>
                             </div>

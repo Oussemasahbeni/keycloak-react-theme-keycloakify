@@ -31,7 +31,7 @@ export default function Terms(props: PageProps<Extract<KcContext, { pageId: "ter
                     <Button name="accept" id="kc-accept" type="submit">
                         {msgStr("doAccept")}
                     </Button>
-                    <Button className="bg-gray-400 hover:bg-gray-500 " name="cancel" id="kc-decline" type="submit" value={msgStr("doDecline")}>
+                    <Button variant="secondary" name="cancel" id="kc-decline" type="submit" value={msgStr("doDecline")}>
                         {msgStr("doDecline")}
                     </Button>
                 </div>

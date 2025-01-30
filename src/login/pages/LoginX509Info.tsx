@@ -66,7 +66,8 @@ export default function LoginX509Info(props: PageProps<Extract<KcContext, { page
                             </Button>
                             {x509.formData.isUserEnabled && (
                                 <Button
-                                    className="bg-gray-400 hover:bg-gray-500 ml-2 "
+                                    variant={"secondary"}
+                                    className=" ml-2 "
                                     name="cancel"
                                     id="kc-cancel"
                                     type="submit"

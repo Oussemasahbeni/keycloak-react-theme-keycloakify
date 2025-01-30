@@ -54,13 +54,7 @@ export default function LoginUpdateProfile(props: LoginUpdateProfileProps) {
                             {msgStr("doSubmit")}
                         </Button>
                         {isAppInitiatedAction && (
-                            <Button
-                                className="bg-gray-400 hover:bg-gray-500 w-full mt-2 "
-                                type="submit"
-                                name="cancel-aia"
-                                value="true"
-                                formNoValidate
-                            >
+                            <Button variant="secondary" className=" w-full mt-2 " type="submit" name="cancel-aia" value="true">
                                 {msg("doCancel")}
                             </Button>
                         )}

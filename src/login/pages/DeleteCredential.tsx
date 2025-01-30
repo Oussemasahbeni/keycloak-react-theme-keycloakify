@@ -32,7 +32,7 @@ export default function DeleteCredential(props: PageProps<Extract<KcContext, { p
                         {msgStr("doConfirmDelete")}
                     </Button>
 
-                    <Button className="bg-gray-400 hover:bg-gray-500 " name="cancel-aia" id="kc-decline" type="submit">
+                    <Button variant="secondary" name="cancel-aia" id="kc-decline" type="submit">
                         {msgStr("doCancel")}
                     </Button>
                 </div>
