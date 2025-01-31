@@ -1,4 +1,4 @@
-import { Text, render } from "jsx-email";
+import { Button, Text, render } from "jsx-email";
 import {
   GetSubject,
   GetTemplate,
@@ -11,9 +11,8 @@ import { createVariablesHelper } from "keycloakify-emails/variables";
 interface TemplateProps extends Omit<GetTemplateProps, "plainText"> {}
 
 const paragraph = {
-  color: "#777",
-  fontSize: "16px",
-  lineHeight: "24px",
+  lineHeight: 1.5,
+  fontSize: 14,
   textAlign: "left" as const,
 };
 
@@ -27,22 +26,33 @@ export const templateName = "Email Update Confirmation";
 const { exp } = createVariablesHelper("email-update-confirmation.ftl");
 
 export const Template = ({ locale }: TemplateProps) => (
-  <EmailLayout preview={`Here is a preview`} locale={locale}>
-    <Text style={paragraph}>
-      <p>
+  <EmailLayout preview={`Update email`} locale={locale}>
+      <Text style={paragraph}>
         To update your {exp("realmName")} account with email address {exp("newEmail")},
         click the link below
-      </p>
-      <p>
+      </Text>
+
+      <Button
+                      width={152}
+                      height={40}
+                      backgroundColor="#5e6ad2"
+                      borderRadius={3}
+                      textColor="#fff"
+                      fontSize={15}
+                      href={exp("link")}                      
+                      >
+                        Update email
+                    </Button>
+      {/* <Text style={paragraph}>
         <a href={exp("link")}>{exp("link")}</a>
-      </p>
-      <p>
+      </Text> */}
+      <Text style={paragraph}>
         This link will expire within {exp("linkExpirationFormatter(linkExpiration)")}.
-      </p>
-      <p>
+      </Text>
+      <Text style={paragraph}>
         If you don't want to proceed with this modification, just ignore this message.
-      </p>
-    </Text>
+      </Text>
+    
   </EmailLayout>
 );
 

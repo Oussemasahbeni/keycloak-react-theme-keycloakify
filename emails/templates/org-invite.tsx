@@ -1,4 +1,4 @@
-import { Text, render } from "jsx-email";
+import { Button, Text, render } from "jsx-email";
 import {
   GetSubject,
   GetTemplate,
@@ -13,9 +13,8 @@ import { createVariablesHelper } from "keycloakify-emails/variables";
 interface TemplateProps extends Omit<GetTemplateProps, "plainText"> {}
 
 const paragraph = {
-  color: "#777",
-  fontSize: "16px",
-  lineHeight: "24px",
+  lineHeight: 1.5,
+  fontSize: 14,
   textAlign: "left" as const,
 };
 
@@ -29,7 +28,7 @@ export const templateName = "Org Invite";
 const { exp, v } = createVariablesHelper("org-invite.ftl");
 
 export const Template = ({ locale }: TemplateProps) => (
-  <EmailLayout preview={`Here is a preview`} locale={locale}>
+  <EmailLayout preview={`Organization invite`} locale={locale}>
     <Text style={paragraph}>
       <Fm.If condition={`${v("firstName")}?? && ${v("lastName")}??`}>
         <p>
@@ -37,17 +36,30 @@ export const Template = ({ locale }: TemplateProps) => (
         </p>
       </Fm.If>
 
-      <p>
+      <Text style={paragraph}>
         You were invited to join the {exp("organization.name")} organization. Click the
         link below to join.{" "}
-      </p>
-      <p>
+      </Text>
+
+       <Button
+                width={152}
+                height={40}
+                backgroundColor="#5e6ad2"
+                borderRadius={3}
+                textColor="#fff"
+                fontSize={15}
+                href={exp("link")}                      
+                >
+                 Join the organization
+              </Button>
+      {/* <Text style={paragraph}>
         <a href={exp("link")}>Link to join the organization</a>
-      </p>
-      <p>
+
+      </Text> */}
+      <Text style={paragraph}>
         This link will expire within {exp("linkExpirationFormatter(linkExpiration)")}.
-      </p>
-      <p>If you don't want to join the organization, just ignore this message.</p>
+      </Text>
+      <Text style={paragraph}>If you don't want to join the organization, just ignore this message.</Text>
     </Text>
   </EmailLayout>
 );

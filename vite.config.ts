@@ -16,7 +16,7 @@ export default defineConfig({
                   templatesSrcDirPath: import.meta.dirname + "/emails/templates",
                   themeNames: buildContext.themeNames,
                   keycloakifyBuildDirPath: buildContext.keycloakifyBuildDirPath,
-                  locales: ["en", "pl"],
+                  locales: ["en", "fr"],
                   cwd: import.meta.dirname,
                   esbuild: {}, // optional esbuild options
                 });

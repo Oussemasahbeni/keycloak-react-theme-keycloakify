@@ -1,4 +1,4 @@
-import { Text, render } from "jsx-email";
+import { Button, Text, render } from "jsx-email";
 import {
   GetSubject,
   GetTemplate,
@@ -8,12 +8,11 @@ import { createVariablesHelper } from "keycloakify-emails/variables";
 
 import { EmailLayout } from "../layout";
 
-interface TemplateProps extends Omit<GetTemplateProps, "plainText"> {}
+interface TemplateProps extends Omit<GetTemplateProps, "plainText"> { }
 
 const paragraph = {
-  color: "#777",
-  fontSize: "16px",
-  lineHeight: "24px",
+  lineHeight: 1.5,
+  fontSize: 14,
   textAlign: "left" as const,
 };
 
@@ -27,23 +26,33 @@ export const templateName = "Password Reset";
 const { exp } = createVariablesHelper("password-reset.ftl");
 
 export const Template = ({ locale }: TemplateProps) => (
-  <EmailLayout preview={`Here is a preview`} locale={locale}>
-    <Text style={paragraph}>
-      <p>
-        Someone just requested to change your {exp("realmName")} account's credentials. If
+  <EmailLayout preview={`Password reset`} locale={locale}>
+      <Text style={paragraph}>
+        Someone just requested to change your {exp("realmName")} account&apos;s credentials. If
         this was you, click on the link below to reset them.
-      </p>
-      <p>
-        <a href={exp("link")}>Link to reset credentials</a>
-      </p>
-      <p>
+      </Text>
+      <Text>
+        {/* <a href={exp("link")}>Link to reset credentials</a> */}
+
+        <Button
+          width={152}
+          height={40}
+          backgroundColor="#5e6ad2"
+          borderRadius={3}
+          textColor="#fff"
+          fontSize={15}
+          href={exp("link")}                      
+          >
+          Reset credentials
+        </Button>
+      </Text>
+      <Text style={paragraph}>
         This link will expire within {exp("linkExpirationFormatter(linkExpiration)")}.
-      </p>
-      <p>
-        If you don't want to reset your credentials, just ignore this message and nothing
+      </Text>
+      <Text style={paragraph}>
+        If you don&apos;t want to reset your credentials, just ignore this message and nothing
         will be changed.
-      </p>
-    </Text>
+      </Text>
   </EmailLayout>
 );
 export const getTemplate: GetTemplate = async (props) => {
