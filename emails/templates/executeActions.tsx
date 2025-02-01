@@ -21,19 +21,20 @@ export const previewProps: TemplateProps = {
   themeName: "vanilla",
 };
 
-export const templateName = "Identity Provider Link";
+export const templateName = "ExecuteActions";
 
-const { exp } = createVariablesHelper("identity-provider-link.ftl");
+const { exp } = createVariablesHelper("executeActions.ftl");
 
 export const Template = ({ locale }: TemplateProps) => (
-  <EmailLayout preview={`Identity Providerl`} locale={locale}>
-   
+  <EmailLayout preview={`Excute Actions`} locale={locale}>
+
     <Text style={paragraph}>
-      Someone wants to link your {exp("identityProviderDisplayName")} account with {exp("realmName")} account of user {exp("identityProviderContext.username")}.
+      Your administrator has just requested that you update your {exp("realmName")} account by performing the following action(s):
+      {exp("")}
     </Text>
 
     <Text style={paragraph}>
-      If this was you, click the link below to link accounts
+      Click on the link below to start this process.
     </Text>
 
     <Button
@@ -45,19 +46,15 @@ export const Template = ({ locale }: TemplateProps) => (
       fontSize={15}
       href={exp("link")}
     >
-      Link Accounts
+      Update Account
     </Button>
-    {/* <Text style={paragraph}>
-        <a href={exp("link")}>{exp("link")}</a>
-      </Text> */}
+
     <Text style={paragraph}>
       This link will expire within {exp("linkExpirationFormatter(linkExpiration)")}.
     </Text>
+
     <Text style={paragraph}>
-      If you don&apos;t want to proceed with this modification, just ignore this message.
-    </Text>
-    <Text style={paragraph}>
-      If you link accounts, you will be able to login to {exp("identityProviderDisplayName")} through {exp("realmName")}.
+      If you are unaware that your administrator has requested this, just ignore this message and nothing will be changed.
     </Text>
 
   </EmailLayout>
@@ -68,5 +65,5 @@ export const getTemplate: GetTemplate = async (props) => {
 };
 
 export const getSubject: GetSubject = async (_props) => {
-  return "Link {0}"
+  return "Update Your Account"
 };

@@ -26,7 +26,7 @@ export const templateName = "Identity Provider Link";
 const { exp } = createVariablesHelper("identity-provider-link.ftl");
 
 export const Template = ({ locale }: TemplateProps) => (
-  <EmailLayout preview={`Identity Providerl`} locale={locale}>
+  <EmailLayout preview={`Identity Provider`} locale={locale}>
    
     <Text style={paragraph}>
       Someone wants to link your {exp("identityProviderDisplayName")} account with {exp("realmName")} account of user {exp("identityProviderContext.username")}.
@@ -47,9 +47,6 @@ export const Template = ({ locale }: TemplateProps) => (
     >
       Link Accounts
     </Button>
-    {/* <Text style={paragraph}>
-        <a href={exp("link")}>{exp("link")}</a>
-      </Text> */}
     <Text style={paragraph}>
       This link will expire within {exp("linkExpirationFormatter(linkExpiration)")}.
     </Text>
