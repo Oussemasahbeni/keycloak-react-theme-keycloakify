@@ -21,19 +21,20 @@ export const previewProps: TemplateProps = {
   themeName: "vanilla",
 };
 
-export const templateName = "Identity Provider Link";
+export const templateName = "Remove Credential";
 
-const { exp } = createVariablesHelper("identity-provider-link.ftl");
+const { exp } = createVariablesHelper("event-remove_credential.ftl");
 
 export const Template = ({ locale }: TemplateProps) => (
-  <EmailLayout preview={`Identity Providerl`} locale={locale}>
+  <EmailLayout preview={`Remove Credential`} locale={locale}>
+   {/* check the credential type, it's not found */}
    
     <Text style={paragraph}>
-      Someone wants to link your {exp("identityProviderDisplayName")} account with {exp("realmName")} account of user {exp("identityProviderContext.username")}.
+      Credential {exp("event.credentialType")} was removed from your account on {exp("event.date")} from {exp("event.ipAddress")}.  
     </Text>
 
     <Text style={paragraph}>
-      If this was you, click the link below to link accounts
+      If this was not you, please contact an administrator.
     </Text>
 
     <Button
