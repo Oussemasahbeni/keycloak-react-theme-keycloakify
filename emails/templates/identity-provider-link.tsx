@@ -8,7 +8,6 @@ import { EmailLayout } from "../layout";
 
 import { createVariablesHelper } from "keycloakify-emails/variables";
 
-
 interface TemplateProps extends Omit<GetTemplateProps, "plainText"> { }
 
 const paragraph = {
@@ -16,20 +15,25 @@ const paragraph = {
   fontSize: 14,
   textAlign: "left" as const,
 };
+
 export const previewProps: TemplateProps = {
   locale: "en",
   themeName: "vanilla",
 };
 
-export const templateName = "Email Verification";
+export const templateName = "Identity Provider Link";
 
-const { exp } = createVariablesHelper("email-verification.ftl");
+const { exp } = createVariablesHelper("identity-provider-link.ftl");
 
 export const Template = ({ locale }: TemplateProps) => (
-  <EmailLayout preview={`Verfiy Emai`} locale={locale}>
+  <EmailLayout preview={`Identity Providerl`} locale={locale}>
+   
     <Text style={paragraph}>
-      Someone has created a {exp("user.firstName")} account with this email address. If
-      this was you, click the link below to verify your email address
+      Someone wants to link your {exp("identityProviderDisplayName")} account with {exp("realmName")} account of user {exp("identityProviderContext.username")}.
+    </Text>
+
+    <Text style={paragraph}>
+      If this was you, click the link below to link accounts
     </Text>
 
     <Button
@@ -41,15 +45,21 @@ export const Template = ({ locale }: TemplateProps) => (
       fontSize={15}
       href={exp("link")}
     >
-      Verify email
+      Link Accounts
     </Button>
     {/* <Text style={paragraph}>
-        <a href={exp("link")}>Link to e-mail address verification</a>
+        <a href={exp("link")}>{exp("link")}</a>
       </Text> */}
     <Text style={paragraph}>
       This link will expire within {exp("linkExpirationFormatter(linkExpiration)")}.
     </Text>
-    <Text style={paragraph}>If you didn't create this account, just ignore this message.</Text>
+    <Text style={paragraph}>
+      If you don&apos;t want to proceed with this modification, just ignore this message.
+    </Text>
+    <Text style={paragraph}>
+      If you link accounts, you will be able to login to {exp("identityProviderDisplayName")} through {exp("realmName")}.
+    </Text>
+
   </EmailLayout>
 );
 
@@ -58,5 +68,5 @@ export const getTemplate: GetTemplate = async (props) => {
 };
 
 export const getSubject: GetSubject = async (_props) => {
-  return "Verify email";
+  return "Link {0}"
 };

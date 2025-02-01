@@ -11,6 +11,11 @@ export default defineConfig({
         react(),
         keycloakify({
             accountThemeImplementation: "none",
+            themeName: "keylearn-theme",
+            keycloakVersionTargets: {
+                "22-to-25": false,
+                "all-other-versions": "keylearn-theme.jar"
+            },
             postBuild: async (buildContext) => {
                 await buildEmailTheme({
                   templatesSrcDirPath: import.meta.dirname + "/emails/templates",
