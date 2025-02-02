@@ -9,7 +9,7 @@ import type { TemplateProps } from "keycloakify/login/TemplateProps";
 import { clsx } from "keycloakify/tools/clsx";
 import { useSetClassName } from "keycloakify/tools/useSetClassName";
 import { useEffect } from "react";
-import insparklogodarkSvgUrl from "./assets/img/insparklogodark.svg";
+import companylogo from "./assets/img/companylogo.svg";
 import type { I18n } from "./i18n";
 import type { KcContext } from "./KcContext";
 
@@ -100,7 +100,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                 <Card>
                     <CardHeader className="text-center px-6 pt-6">
                         <div className="flex items-center justify-between gap-2">
-                            <img src={insparklogodarkSvgUrl} className="h-10 w-28" alt="" />
+                            <img src={companylogo} className="h-10 w-28" alt="" />
                         </div>
 
                         <CardTitle>
