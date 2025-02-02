@@ -1,4 +1,4 @@
-import { Button, Text, render } from "jsx-email";
+import { Button, Raw, Text, render } from "jsx-email";
 import {
   GetSubject,
   GetTemplate,
@@ -8,7 +8,7 @@ import { EmailLayout } from "../layout";
 
 import { createVariablesHelper } from "keycloakify-emails/variables";
 
-interface TemplateProps extends Omit<GetTemplateProps, "plainText"> { }
+type TemplateProps = Omit<GetTemplateProps, "plainText">
 
 const paragraph = {
   lineHeight: 1.5,
@@ -30,7 +30,9 @@ export const Template = ({ locale }: TemplateProps) => (
 
     <Text style={paragraph}>
       Your administrator has just requested that you update your {exp("realmName")} account by performing the following action(s):
-      {exp("")}
+      <Raw 
+      content="<#assign requiredActionsText><#if requiredActions??><#list requiredActions><#items as reqActionItem>${msg('requiredAction.${reqActionItem}')}<#sep>, </#sep></#items></#list></#if></#assign>">
+      </Raw>
     </Text>
 
     <Text style={paragraph}>
@@ -64,6 +66,6 @@ export const getTemplate: GetTemplate = async (props) => {
   return await render(<Template {...props} />, { plainText: props.plainText });
 };
 
-export const getSubject: GetSubject = async (_props) => {
+export const getSubject: GetSubject = async () => {
   return "Update Your Account"
 };

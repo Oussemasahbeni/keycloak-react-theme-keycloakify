@@ -76,7 +76,7 @@ export const Template = ({ locale }: TemplateProps) => (
                 fontSize={15}
                 href="https://linear.app"
               >
-                Login to Linear
+                Login to Inspark
               </Button>
             </Text>
             <Text style={paragraph}>

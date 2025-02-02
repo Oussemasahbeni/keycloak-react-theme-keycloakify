@@ -8,7 +8,7 @@ import { createVariablesHelper } from "keycloakify-emails/variables";
 
 import { EmailLayout } from "../layout";
 
-interface TemplateProps extends Omit<GetTemplateProps, "plainText"> { }
+type TemplateProps = Omit<GetTemplateProps, "plainText">
 
 const paragraph = {
   lineHeight: 1.5,
@@ -59,6 +59,6 @@ export const getTemplate: GetTemplate = async (props) => {
   return await render(<Template {...props} />, { plainText: props.plainText });
 };
 
-export const getSubject: GetSubject = async (_props) => {
+export const getSubject: GetSubject = async () => {
   return "Reset password";
 };

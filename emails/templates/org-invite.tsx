@@ -10,7 +10,7 @@ import { EmailLayout } from "../layout";
 import { createVariablesHelper } from "keycloakify-emails/variables";
 
 
-interface TemplateProps extends Omit<GetTemplateProps, "plainText"> {}
+type TemplateProps = Omit<GetTemplateProps, "plainText">
 
 const paragraph = {
   lineHeight: 1.5,
@@ -42,7 +42,7 @@ export const Template = ({ locale }: TemplateProps) => (
       </Text>
 
        <Button
-                width={152}
+                width={162}
                 height={40}
                 backgroundColor="#5e6ad2"
                 borderRadius={3}
@@ -59,7 +59,7 @@ export const Template = ({ locale }: TemplateProps) => (
       <Text style={paragraph}>
         This link will expire within {exp("linkExpirationFormatter(linkExpiration)")}.
       </Text>
-      <Text style={paragraph}>If you don't want to join the organization, just ignore this message.</Text>
+      <Text style={paragraph}>If you don&apos;t want to join the organization, just ignore this message.</Text>
     </Text>
   </EmailLayout>
 );
@@ -68,6 +68,6 @@ export const getTemplate: GetTemplate = async (props) => {
   return await render(<Template {...props} />, { plainText: props.plainText });
 };
 
-export const getSubject: GetSubject = async (_props) => {
+export const getSubject: GetSubject = async () => {
   return "Invitation to join the {0} organization";
 };
