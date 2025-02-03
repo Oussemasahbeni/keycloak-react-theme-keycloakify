@@ -50,9 +50,9 @@ export const Template = ({ locale, t }: TemplateProps) => {
         {t('org-invite.message', { organizationName: exp("organization.name") })}
       </Text>
 
-      <div style={isRTL ? { textAlign: 'right' } : { textAlign: 'left' }}>
         <Button
           width={162}
+          align={isRTL ? "right" : "left"}
           height={40}
           backgroundColor="#5e6ad2"
           borderRadius={3}
@@ -62,7 +62,6 @@ export const Template = ({ locale, t }: TemplateProps) => {
         >
           {t('org-invite.joinButton')}
         </Button>
-      </div>
 
       <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
         {t('org-invite.linkExpiration', { expiration: exp("linkExpirationFormatter(linkExpiration)") })}

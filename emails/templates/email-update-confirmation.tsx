@@ -1,3 +1,4 @@
+import { applyRTL } from 'emails/utils/RTL';
 import i18n, { TFunction } from 'i18next';
 import { Button, Text, render } from "jsx-email";
 import {
@@ -7,7 +8,6 @@ import {
 } from "keycloakify-emails";
 import { createVariablesHelper } from "keycloakify-emails/variables";
 import { EmailLayout } from "../layout";
-import { applyRTL } from 'emails/utils/RTL';
 
 type TemplateProps = Omit<GetTemplateProps, "plainText"> & { t: TFunction };
 
@@ -45,19 +45,18 @@ export const Template = ({ locale, t }: TemplateProps) => {
         {t('email-update-confirmation.clickLinkBelow')}
       </Text>
 
-      <div style={isRTL ? { textAlign: 'right' } : { textAlign: 'left' }}>
         <Button
           width={isRTL ? 220 : 152}
           height={40}
           backgroundColor="#5e6ad2"
           borderRadius={3}
           textColor="#fff"
+          align={isRTL ? "right" : "left"}
           fontSize={15}
           href={exp("link")}
         >
           {t('email-update-confirmation.updateEmail')}
         </Button>
-      </div>
       <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
         {t('email-update-confirmation.linkExpiration', { expiration: exp("linkExpirationFormatter(linkExpiration)") })}
       </Text>

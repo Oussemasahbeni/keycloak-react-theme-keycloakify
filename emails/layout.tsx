@@ -85,7 +85,7 @@ export const EmailLayout = ({
 
 
   return (
-    <Html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
+    <Html lang={locale} >
       <Head />
       <Preview>{preview}</Preview>
       <Body style={main}>

@@ -25,17 +25,9 @@ const rtlStyle = {
   textAlign: 'right' as const,
 };
 
-const buttonContainer = {
-  textAlign: 'left' as const,
-};
-
-const buttonContainerRTL = {
-  textAlign: 'right' as const,
-};
-
 export const previewProps: TemplateProps = {
-  t: i18n.getFixedT('en'),
-  locale: "en",
+  t: i18n.getFixedT('ar'),
+  locale: "ar",
   themeName: "vanilla",
 };
 
@@ -70,10 +62,10 @@ export const Template = ({ locale, t }: TemplateProps) => {
       <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
         {t('email-test.passwordAdvice')}
       </Text>
-      <div style={isRTL ? buttonContainerRTL : buttonContainer}>
         <Button
           width={isRTL ? 220 : 152}
           height={40}
+          align={isRTL ? "right" : "left"}
           backgroundColor="#5e6ad2"
           borderRadius={3}
           textColor="#fff"
@@ -82,7 +74,6 @@ export const Template = ({ locale, t }: TemplateProps) => {
         >
           {t('email-test.loginButton')}
         </Button>
-      </div>
       <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
         {t('email-test.contactSupport', { realmName: exp("realmName") })}
       </Text>

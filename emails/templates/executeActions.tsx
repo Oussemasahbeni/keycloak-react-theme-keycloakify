@@ -48,11 +48,12 @@ export const Template = ({ locale, t }: TemplateProps) => {
         {t('executeActions.clickLink')}
       </Text>
 
-      <div style={isRTL ? { textAlign: 'right' } : { textAlign: 'left' }}>
         <Button
           width={152}
           height={40}
           backgroundColor="#5e6ad2"
+          align={isRTL ? "right" : "left"}
+
           borderRadius={3}
           textColor="#fff"
           fontSize={15}
@@ -60,7 +61,6 @@ export const Template = ({ locale, t }: TemplateProps) => {
         >
           {t('executeActions.updateAccountButton')}
         </Button>
-      </div>
 
       <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
         {t('executeActions.linkExpiration', { expiration: exp("linkExpirationFormatter(linkExpiration)") })}

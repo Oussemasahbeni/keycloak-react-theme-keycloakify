@@ -41,9 +41,9 @@ export const Template = ({ locale, t }: TemplateProps) => {
         {t('email-verification.message', { firstName: exp("user.firstName") })}
       </Text>
 
-      <div style={isRTL ? { textAlign: 'right' } : { textAlign: 'left' }}>
         <Button
           width={isRTL ? 220 : 152}
+          align={isRTL ? "right" : "left"}
           height={40}
           backgroundColor="#5e6ad2"
           borderRadius={3}
@@ -53,7 +53,6 @@ export const Template = ({ locale, t }: TemplateProps) => {
         >
           {t('email-verification.verifyButton')}
         </Button>
-      </div>
       <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
         {t('email-verification.linkExpiration', { expiration: exp("linkExpirationFormatter(linkExpiration)") })}
       </Text>

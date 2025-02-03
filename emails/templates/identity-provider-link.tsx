@@ -45,9 +45,9 @@ export const Template = ({ locale, t }: TemplateProps) => {
         {t('identity-provider-link.clickLink')}
       </Text>
 
-      <div style={isRTL ? { textAlign: 'right' } : { textAlign: 'left' }}>
         <Button
           width={152}
+          align={isRTL ? "right" : "left"}
           height={40}
           backgroundColor="#5e6ad2"
           borderRadius={3}
@@ -57,7 +57,6 @@ export const Template = ({ locale, t }: TemplateProps) => {
         >
           {t('identity-provider-link.linkAccountsButton')}
         </Button>
-      </div>
       <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
         {t('identity-provider-link.linkExpiration', { expiration: exp("linkExpirationFormatter(linkExpiration)") })}
       </Text>
