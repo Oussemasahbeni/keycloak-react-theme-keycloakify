@@ -1,14 +1,15 @@
+import { applyRTL } from 'emails/utils/RTL';
+import i18n, { TFunction } from 'i18next';
 import { Button, Text, render } from "jsx-email";
 import {
   GetSubject,
   GetTemplate,
   GetTemplateProps,
 } from "keycloakify-emails";
+import { createVariablesHelper } from "keycloakify-emails/variables";
 import { EmailLayout } from "../layout";
 
-import { createVariablesHelper } from "keycloakify-emails/variables";
-
-type TemplateProps = Omit<GetTemplateProps, "plainText">
+type TemplateProps = Omit<GetTemplateProps, "plainText"> & { t: TFunction };
 
 const paragraph = {
   lineHeight: 1.5,
@@ -16,7 +17,13 @@ const paragraph = {
   textAlign: "left" as const,
 };
 
+const rtlStyle = {
+  direction: 'rtl' as const,
+  textAlign: 'right' as const,
+};
+
 export const previewProps: TemplateProps = {
+  t: i18n.getFixedT('en'),
   locale: "en",
   themeName: "vanilla",
 };
@@ -25,45 +32,51 @@ export const templateName = "Identity Provider Link";
 
 const { exp } = createVariablesHelper("identity-provider-link.ftl");
 
-export const Template = ({ locale }: TemplateProps) => (
-  <EmailLayout preview={`Identity Provider`} locale={locale}>
-   
-    <Text style={paragraph}>
-      Someone wants to link your {exp("identityProviderDisplayName")} account with {exp("realmName")} account of user {exp("identityProviderContext.username")}.
-    </Text>
+export const Template = ({ locale, t }: TemplateProps) => {
+  const isRTL = locale === 'ar';
 
-    <Text style={paragraph}>
-      If this was you, click the link below to link accounts
-    </Text>
+  return (
+    <EmailLayout preview={t('identity-provider-link.subject')} locale={locale}>
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('identity-provider-link.message', { identityProviderDisplayName: exp("identityProviderDisplayName"), realmName: exp("realmName"), username: exp("identityProviderContext.username") })}
+      </Text>
 
-    <Button
-      width={152}
-      height={40}
-      backgroundColor="#5e6ad2"
-      borderRadius={3}
-      textColor="#fff"
-      fontSize={15}
-      href={exp("link")}
-    >
-      Link Accounts
-    </Button>
-    <Text style={paragraph}>
-      This link will expire within {exp("linkExpirationFormatter(linkExpiration)")}.
-    </Text>
-    <Text style={paragraph}>
-      If you don&apos;t want to proceed with this modification, just ignore this message.
-    </Text>
-    <Text style={paragraph}>
-      If you link accounts, you will be able to login to {exp("identityProviderDisplayName")} through {exp("realmName")}.
-    </Text>
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('identity-provider-link.clickLink')}
+      </Text>
 
-  </EmailLayout>
-);
-
-export const getTemplate: GetTemplate = async (props) => {
-  return await render(<Template {...props} />, { plainText: props.plainText });
+      <div style={isRTL ? { textAlign: 'right' } : { textAlign: 'left' }}>
+        <Button
+          width={152}
+          height={40}
+          backgroundColor="#5e6ad2"
+          borderRadius={3}
+          textColor="#fff"
+          fontSize={15}
+          href={exp("link")}
+        >
+          {t('identity-provider-link.linkAccountsButton')}
+        </Button>
+      </div>
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('identity-provider-link.linkExpiration', { expiration: exp("linkExpirationFormatter(linkExpiration)") })}
+      </Text>
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('identity-provider-link.ignoreMessage')}
+      </Text>
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('identity-provider-link.loginInfo', { identityProviderDisplayName: exp("identityProviderDisplayName"), realmName: exp("realmName") })}
+      </Text>
+    </EmailLayout>
+  );
 };
 
-export const getSubject: GetSubject = async () => {
-  return "Link {0}"
+export const getTemplate: GetTemplate = async (props) => {
+  const t = i18n.getFixedT(props.locale);
+  return await render(<Template {...props} t={t} />, { plainText: props.plainText });
+};
+
+export const getSubject: GetSubject = async (props) => {
+  const t = i18n.getFixedT(props.locale);
+  return t('identity-provider-link.subject');
 };

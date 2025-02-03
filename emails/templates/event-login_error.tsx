@@ -1,14 +1,15 @@
+import { applyRTL } from 'emails/utils/RTL';
+import i18n, { TFunction } from 'i18next';
 import { Text, render } from "jsx-email";
 import {
   GetSubject,
   GetTemplate,
   GetTemplateProps,
 } from "keycloakify-emails";
+import { createVariablesHelper } from "keycloakify-emails/variables";
 import { EmailLayout } from "../layout";
 
-import { createVariablesHelper } from "keycloakify-emails/variables";
-
-type TemplateProps = Omit<GetTemplateProps, "plainText">
+type TemplateProps = Omit<GetTemplateProps, "plainText"> & { t: TFunction };
 
 const paragraph = {
   lineHeight: 1.5,
@@ -16,7 +17,13 @@ const paragraph = {
   textAlign: "left" as const,
 };
 
+const rtlStyle = {
+  direction: 'rtl' as const,
+  textAlign: 'right' as const,
+};
+
 export const previewProps: TemplateProps = {
+  t: i18n.getFixedT('en'),
   locale: "en",
   themeName: "vanilla",
 };
@@ -25,24 +32,28 @@ export const templateName = "Login Error";
 
 const { exp } = createVariablesHelper("event-login_error.ftl");
 
-export const Template = ({ locale }: TemplateProps) => (
-  <EmailLayout preview={`Login Error`} locale={locale}>
-   
-    <Text style={paragraph}>
-     A failed login attempt was detected to your account on {exp("event.date")} from {exp("event.ipAddress")}. 
-    </Text>
+export const Template = ({ locale, t }: TemplateProps) => {
+  const isRTL = locale === 'ar';
 
-    <Text style={paragraph}>
-      If this was not you, please contact an administrator.
-    </Text>
+  return (
+    <EmailLayout preview={t('event-login_error.subject')} locale={locale}>
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('event-login_error.message', { date: exp("event.date"), ipAddress: exp("event.ipAddress") })}
+      </Text>
 
-  </EmailLayout>
-);
-
-export const getTemplate: GetTemplate = async (props) => {
-  return await render(<Template {...props} />, { plainText: props.plainText });
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('event-login_error.contactAdmin')}
+      </Text>
+    </EmailLayout>
+  );
 };
 
-export const getSubject: GetSubject = async () => {
-  return "Login error"
+export const getTemplate: GetTemplate = async (props) => {
+  const t = i18n.getFixedT(props.locale);
+  return await render(<Template {...props} t={t} />, { plainText: props.plainText });
+};
+
+export const getSubject: GetSubject = async (props) => {
+  const t = i18n.getFixedT(props.locale);
+  return t('event-login_error.subject');
 };

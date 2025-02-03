@@ -1,22 +1,29 @@
+import { applyRTL } from 'emails/utils/RTL';
+import i18n, { TFunction } from 'i18next';
 import { Button, Text, render } from "jsx-email";
 import {
   GetSubject,
   GetTemplate,
   GetTemplateProps,
 } from "keycloakify-emails";
+import { createVariablesHelper } from "keycloakify-emails/variables";
 import { EmailLayout } from "../layout";
 
-import { createVariablesHelper } from "keycloakify-emails/variables";
-
-
-type TemplateProps = Omit<GetTemplateProps, "plainText">
+type TemplateProps = Omit<GetTemplateProps, "plainText"> & { t: TFunction };
 
 const paragraph = {
   lineHeight: 1.5,
   fontSize: 14,
   textAlign: "left" as const,
 };
+
+const rtlStyle = {
+  direction: 'rtl' as const,
+  textAlign: 'right' as const,
+};
+
 export const previewProps: TemplateProps = {
+  t: i18n.getFixedT('en'),
   locale: "en",
   themeName: "vanilla",
 };
@@ -25,38 +32,44 @@ export const templateName = "Email Verification";
 
 const { exp } = createVariablesHelper("email-verification.ftl");
 
-export const Template = ({ locale }: TemplateProps) => (
-  <EmailLayout preview={`Verfiy Emai`} locale={locale}>
-    <Text style={paragraph}>
-      Someone has created a {exp("user.firstName")} account with this email address. If
-      this was you, click the link below to verify your email address
-    </Text>
+export const Template = ({ locale, t }: TemplateProps) => {
+  const isRTL = locale === 'ar';
 
-    <Button
-      width={152}
-      height={40}
-      backgroundColor="#5e6ad2"
-      borderRadius={3}
-      textColor="#fff"
-      fontSize={15}
-      href={exp("link")}
-    >
-      Verify email
-    </Button>
-    {/* <Text style={paragraph}>
-        <a href={exp("link")}>Link to e-mail address verification</a>
-      </Text> */}
-    <Text style={paragraph}>
-      This link will expire within {exp("linkExpirationFormatter(linkExpiration)")}.
-    </Text>
-    <Text style={paragraph}>If you didn&apos;t create this account, just ignore this message.</Text>
-  </EmailLayout>
-);
+  return (
+    <EmailLayout preview={t('email-verification.subject')} locale={locale}>
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('email-verification.message', { firstName: exp("user.firstName") })}
+      </Text>
 
-export const getTemplate: GetTemplate = async (props) => {
-  return await render(<Template {...props} />, { plainText: props.plainText });
+      <div style={isRTL ? { textAlign: 'right' } : { textAlign: 'left' }}>
+        <Button
+          width={isRTL ? 220 : 152}
+          height={40}
+          backgroundColor="#5e6ad2"
+          borderRadius={3}
+          textColor="#fff"
+          fontSize={15}
+          href={exp("link")}
+        >
+          {t('email-verification.verifyButton')}
+        </Button>
+      </div>
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('email-verification.linkExpiration', { expiration: exp("linkExpirationFormatter(linkExpiration)") })}
+      </Text>
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('email-verification.ignoreMessage')}
+      </Text>
+    </EmailLayout>
+  );
 };
 
-export const getSubject: GetSubject = async () => {
-  return "Verify email";
+export const getTemplate: GetTemplate = async (props) => {
+  const t = i18n.getFixedT(props.locale);
+  return await render(<Template {...props} t={t} />, { plainText: props.plainText });
+};
+
+export const getSubject: GetSubject = async (props) => {
+  const t = i18n.getFixedT(props.locale);
+  return t('email-verification.subject');
 };

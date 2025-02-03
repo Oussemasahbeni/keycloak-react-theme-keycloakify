@@ -1,6 +1,7 @@
 import { Body, Column, Container, Head, Html, Img, Preview, Row, Section, Text } from "jsx-email";
 import { createVariablesHelper } from "keycloakify-emails/variables";
 import { PropsWithChildren, ReactNode } from "react";
+import i18n from "./i18n";
 
 
 const main = {
@@ -80,51 +81,54 @@ export const EmailLayout = ({
   children,
   preview,
 }: PropsWithChildren<{ preview: ReactNode; locale: string; }>) => {
+  const t = i18n.getFixedT(locale);
+
+
   return (
-    <Html lang={locale} dir= {locale === "ar" ? "rtl" : "ltr"}>
+    <Html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <Head />
       <Preview>{preview}</Preview>
       <Body style={main}>
-      <Container style={container}>
-      <Section style={logo}>
-        <Img width={200} src="https://res.cloudinary.com/dyo9yeeck/image/upload/v1738352235/plutj3dm2hposbgpy4i6.png" />
-      </Section>
+        <Container style={container}>
+          <Section style={logo}>
+            <Img width={200} src="https://res.cloudinary.com/dyo9yeeck/image/upload/v1738352235/plutj3dm2hposbgpy4i6.png" />
+          </Section>
 
-      <Section style={sectionsBorders}>
+          <Section style={sectionsBorders}>
             <Row>
               <Column style={sectionBorder} />
               <Column style={sectionCenter} />
               <Column style={sectionBorder} />
             </Row>
-      </Section>
-        
-      <Section style={content}>{children}</Section>
-        
+          </Section>
+
+          <Section style={content}>{children}</Section>
 
 
-      <Section style={sectionsBordersBottom}>
+
+          <Section style={sectionsBordersBottom}>
             <Row>
               <Column style={sectionBorder} />
               <Column style={sectionCenter} />
               <Column style={sectionBorder} />
             </Row>
-      </Section>
-      <Section style={footer}>
-          <Row>
-            <Column align="right" style={{ width: '32px', height: '48px', paddingRight: '8px' }}>
-              <Img src="https://img.icons8.com/color/48/facebook-new.png" /> 
-            </Column>
-            <Column align="left" style={{width: '32px', height: '48px', paddingLeft: '8px' }}>
-              <Img src="https://img.icons8.com/ios-filled/50/twitterx--v1.png" />
-            </Column>
-          </Row>
-          <Row>
-            <Text style={{ textAlign: 'center', color: '#706a7b' }}>
-              © {currentYear} {exp("realmName")}, All Rights Reserved <br />
-              Pole Tech. Ghazela, 2036 Ariana, Tunisia
-            </Text>
-          </Row>
-      </Section>
+          </Section>
+          <Section style={footer}>
+            <Row>
+              <Column align="right" style={{ width: '32px', height: '48px', paddingRight: '8px' }}>
+                <Img src="https://img.icons8.com/color/48/facebook-new.png" />
+              </Column>
+              <Column align="left" style={{ width: '32px', height: '48px', paddingLeft: '8px' }}>
+                <Img src="https://img.icons8.com/ios-filled/50/twitterx--v1.png" />
+              </Column>
+            </Row>
+            <Row>
+              <Text style={{ textAlign: 'center', color: '#706a7b' }}>
+                {t('footer.allRightsReserved', { currentYear, realmName: exp("realmName") })} <br />
+                {t('footer.address')}
+              </Text>
+            </Row>
+          </Section>
         </Container>
       </Body>
     </Html>

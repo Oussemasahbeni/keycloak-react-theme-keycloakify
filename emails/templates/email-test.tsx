@@ -1,4 +1,5 @@
-import { messages } from "emails/messages/message";
+import { applyRTL } from 'emails/utils/RTL';
+import i18n, { TFunction } from 'i18next';
 import { Button, Link, render, Text } from "jsx-email";
 import {
   GetSubject,
@@ -8,7 +9,7 @@ import {
 import { createVariablesHelper } from "keycloakify-emails/variables";
 import { EmailLayout } from "../layout";
 
-type TemplateProps = Omit<GetTemplateProps, "plainText">;
+type TemplateProps = Omit<GetTemplateProps, "plainText"> & { t: TFunction };
 
 const paragraph = {
   lineHeight: 1.5,
@@ -33,6 +34,7 @@ const buttonContainerRTL = {
 };
 
 export const previewProps: TemplateProps = {
+  t: i18n.getFixedT('en'),
   locale: "en",
   themeName: "vanilla",
 };
@@ -46,29 +48,28 @@ const formattedDate = new Intl.DateTimeFormat('en', {
   timeStyle: 'medium',
 }).format(new Date());
 
-export const Template = ({ locale }: TemplateProps) => {
-  const msg = messages[locale];
+export const Template = ({ locale, t }: TemplateProps) => {
   const isRTL = locale === 'ar';
 
   return (
     <EmailLayout preview={"Here is a preview"} locale={locale}>
-      <Text style={{ ...paragraph, ...(isRTL && rtlStyle) }}>{msg.greeting} oussema,</Text>
-      <Text style={{ ...paragraph, ...(isRTL && rtlStyle) }}>
-        {msg.passwordUpdate.replace("{date}", formattedDate)}
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>{t('email-test.greeting')} oussema,</Text>
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('email-test.passwordUpdate', { date: formattedDate })}
       </Text>
-      <Text style={{ ...paragraph, ...(isRTL && rtlStyle) }}>
-        {msg.passwordReset}{' '}
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('email-test.passwordReset')}{' '}
         <Link href="#" style={link}>
-          {msg.passwordReset}
+          {t('email-test.passwordReset')}
         </Link>{' '}
-        {msg.passwordReset}
+        {t('email-test.passwordReset')}
       </Text>
-      <Text style={{ ...paragraph, ...(isRTL && rtlStyle) }}>
-        {msg.passwordAdvice}
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('email-test.passwordAdvice')}
       </Text>
       <div style={isRTL ? buttonContainerRTL : buttonContainer}>
         <Button
-          width={isRTL ? 220: 152}
+          width={isRTL ? 220 : 152}
           height={40}
           backgroundColor="#5e6ad2"
           borderRadius={3}
@@ -76,34 +77,27 @@ export const Template = ({ locale }: TemplateProps) => {
           fontSize={15}
           href="https://linear.app"
         >
-          {msg.loginButton}
+          {t('email-test.loginButton')}
         </Button>
       </div>
-      <Text style={{ ...paragraph, ...(isRTL && rtlStyle) }}>
-        {msg.contactSupport.replace("{realmName}", exp("realmName"))}
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('email-test.contactSupport', { realmName: exp("realmName") })}
       </Text>
-      <Text style={{ ...paragraph, ...(isRTL && rtlStyle) }}>
-        {msg.thanks},
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('email-test.thanks')},
         <br />
-        {msg.supportTeam.replace("{realmName}", exp("realmName"))}
+        {t('email-test.supportTeam', { realmName: exp("realmName") })}
       </Text>
     </EmailLayout>
   );
 };
 
 export const getTemplate: GetTemplate = async (props) => {
-  return await render(<Template {...props} />, { plainText: props.plainText });
+  const t = i18n.getFixedT(props.locale);
+  return await render(<Template {...props} t={t} />, { plainText: props.plainText });
 };
 
-export const getSubject: GetSubject = async (_props) => {
-  switch (_props.locale) {
-    case "en":
-      return "[KEYCLOAK] - SMTP test message";
-    case "fr":
-      return "[KEYCLOAK] - Message de test SMTP";
-    case "ar":
-      return "[KEYCLOAK] - رسالة اختبار SMTP";
-    default:
-      return "[KEYCLOAK] - SMTP test message";
-  }
+export const getSubject: GetSubject = async (props) => {
+  const t = i18n.getFixedT(props.locale);
+  return t('email-test.subject');
 };

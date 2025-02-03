@@ -1,14 +1,15 @@
+import { applyRTL } from 'emails/utils/RTL';
+import i18n, { TFunction } from 'i18next';
 import { Button, Raw, Text, render } from "jsx-email";
 import {
   GetSubject,
   GetTemplate,
   GetTemplateProps,
 } from "keycloakify-emails";
+import { createVariablesHelper } from "keycloakify-emails/variables";
 import { EmailLayout } from "../layout";
 
-import { createVariablesHelper } from "keycloakify-emails/variables";
-
-type TemplateProps = Omit<GetTemplateProps, "plainText">
+type TemplateProps = Omit<GetTemplateProps, "plainText"> & { t: TFunction };
 
 const paragraph = {
   lineHeight: 1.5,
@@ -16,7 +17,13 @@ const paragraph = {
   textAlign: "left" as const,
 };
 
+const rtlStyle = {
+  direction: 'rtl' as const,
+  textAlign: 'right' as const,
+};
+
 export const previewProps: TemplateProps = {
+  t: i18n.getFixedT('en'),
   locale: "en",
   themeName: "vanilla",
 };
@@ -25,47 +32,53 @@ export const templateName = "ExecuteActions";
 
 const { exp } = createVariablesHelper("executeActions.ftl");
 
-export const Template = ({ locale }: TemplateProps) => (
-  <EmailLayout preview={`Excute Actions`} locale={locale}>
+export const Template = ({ locale, t }: TemplateProps) => {
+  const isRTL = locale === 'ar';
 
-    <Text style={paragraph}>
-      Your administrator has just requested that you update your {exp("realmName")} account by performing the following action(s):
-      <Raw 
-      content="<#assign requiredActionsText><#if requiredActions??><#list requiredActions><#items as reqActionItem>${msg('requiredAction.${reqActionItem}')}<#sep>, </#sep></#items></#list></#if></#assign>">
-      </Raw>
-    </Text>
+  return (
+    <EmailLayout preview={t('executeActions.subject')} locale={locale}>
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('executeActions.message', { realmName: exp("realmName") })}
+        <Raw 
+          content="<#assign requiredActionsText><#if requiredActions??><#list requiredActions><#items as reqActionItem>${msg('requiredAction.${reqActionItem}')}<#sep>, </#sep></#items></#list></#if></#assign>"
+        />
+      </Text>
 
-    <Text style={paragraph}>
-      Click on the link below to start this process.
-    </Text>
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('executeActions.clickLink')}
+      </Text>
 
-    <Button
-      width={152}
-      height={40}
-      backgroundColor="#5e6ad2"
-      borderRadius={3}
-      textColor="#fff"
-      fontSize={15}
-      href={exp("link")}
-    >
-      Update Account
-    </Button>
+      <div style={isRTL ? { textAlign: 'right' } : { textAlign: 'left' }}>
+        <Button
+          width={152}
+          height={40}
+          backgroundColor="#5e6ad2"
+          borderRadius={3}
+          textColor="#fff"
+          fontSize={15}
+          href={exp("link")}
+        >
+          {t('executeActions.updateAccountButton')}
+        </Button>
+      </div>
 
-    <Text style={paragraph}>
-      This link will expire within {exp("linkExpirationFormatter(linkExpiration)")}.
-    </Text>
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('executeActions.linkExpiration', { expiration: exp("linkExpirationFormatter(linkExpiration)") })}
+      </Text>
 
-    <Text style={paragraph}>
-      If you are unaware that your administrator has requested this, just ignore this message and nothing will be changed.
-    </Text>
-
-  </EmailLayout>
-);
-
-export const getTemplate: GetTemplate = async (props) => {
-  return await render(<Template {...props} />, { plainText: props.plainText });
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('executeActions.ignoreMessage')}
+      </Text>
+    </EmailLayout>
+  );
 };
 
-export const getSubject: GetSubject = async () => {
-  return "Update Your Account"
+export const getTemplate: GetTemplate = async (props) => {
+  const t = i18n.getFixedT(props.locale);
+  return await render(<Template {...props} t={t} />, { plainText: props.plainText });
+};
+
+export const getSubject: GetSubject = async (props) => {
+  const t = i18n.getFixedT(props.locale);
+  return t('executeActions.subject');
 };

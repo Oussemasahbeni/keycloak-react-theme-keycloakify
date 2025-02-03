@@ -1,3 +1,5 @@
+import { applyRTL } from 'emails/utils/RTL';
+import i18n, { TFunction } from 'i18next';
 import { Button, Text, render } from "jsx-email";
 import {
   GetSubject,
@@ -5,12 +7,10 @@ import {
   GetTemplateProps,
 } from "keycloakify-emails";
 import * as Fm from "keycloakify-emails/jsx-email";
+import { createVariablesHelper } from "keycloakify-emails/variables";
 import { EmailLayout } from "../layout";
 
-import { createVariablesHelper } from "keycloakify-emails/variables";
-
-
-type TemplateProps = Omit<GetTemplateProps, "plainText">
+type TemplateProps = Omit<GetTemplateProps, "plainText"> & { t: TFunction };
 
 const paragraph = {
   lineHeight: 1.5,
@@ -18,7 +18,13 @@ const paragraph = {
   textAlign: "left" as const,
 };
 
+const rtlStyle = {
+  direction: 'rtl' as const,
+  textAlign: 'right' as const,
+};
+
 export const previewProps: TemplateProps = {
+  t: i18n.getFixedT('en'),
   locale: "en",
   themeName: "vanilla",
 };
@@ -27,47 +33,53 @@ export const templateName = "Org Invite";
 
 const { exp, v } = createVariablesHelper("org-invite.ftl");
 
-export const Template = ({ locale }: TemplateProps) => (
-  <EmailLayout preview={`Organization invite`} locale={locale}>
-    <Text style={paragraph}>
-      <Fm.If condition={`${v("firstName")}?? && ${v("lastName")}??`}>
-        <p>
-          Hi, {exp("firstName")} {exp("lastName")}.
-        </p>
-      </Fm.If>
+export const Template = ({ locale, t }: TemplateProps) => {
+  const isRTL = locale === 'ar';
 
-      <Text style={paragraph}>
-        You were invited to join the {exp("organization.name")} organization. Click the
-        link below to join.{" "}
+  return (
+    <EmailLayout preview={t('org-invite.subject')} locale={locale}>
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        <Fm.If condition={`${v("firstName")}?? && ${v("lastName")}??`}>
+          <p>
+            {t('org-invite.greeting', { firstName: exp("firstName"), lastName: exp("lastName") })}
+          </p>
+        </Fm.If>
       </Text>
 
-       <Button
-                width={162}
-                height={40}
-                backgroundColor="#5e6ad2"
-                borderRadius={3}
-                textColor="#fff"
-                fontSize={15}
-                href={exp("link")}                      
-                >
-                 Join the organization
-              </Button>
-      {/* <Text style={paragraph}>
-        <a href={exp("link")}>Link to join the organization</a>
-
-      </Text> */}
-      <Text style={paragraph}>
-        This link will expire within {exp("linkExpirationFormatter(linkExpiration)")}.
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('org-invite.message', { organizationName: exp("organization.name") })}
       </Text>
-      <Text style={paragraph}>If you don&apos;t want to join the organization, just ignore this message.</Text>
-    </Text>
-  </EmailLayout>
-);
 
-export const getTemplate: GetTemplate = async (props) => {
-  return await render(<Template {...props} />, { plainText: props.plainText });
+      <div style={isRTL ? { textAlign: 'right' } : { textAlign: 'left' }}>
+        <Button
+          width={162}
+          height={40}
+          backgroundColor="#5e6ad2"
+          borderRadius={3}
+          textColor="#fff"
+          fontSize={15}
+          href={exp("link")}
+        >
+          {t('org-invite.joinButton')}
+        </Button>
+      </div>
+
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('org-invite.linkExpiration', { expiration: exp("linkExpirationFormatter(linkExpiration)") })}
+      </Text>
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('org-invite.ignoreMessage')}
+      </Text>
+    </EmailLayout>
+  );
 };
 
-export const getSubject: GetSubject = async () => {
-  return "Invitation to join the {0} organization";
+export const getTemplate: GetTemplate = async (props) => {
+  const t = i18n.getFixedT(props.locale);
+  return await render(<Template {...props} t={t} />, { plainText: props.plainText });
+};
+
+export const getSubject: GetSubject = async (props) => {
+  const t = i18n.getFixedT(props.locale);
+  return t('org-invite.subject');
 };

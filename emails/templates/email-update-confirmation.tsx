@@ -1,14 +1,15 @@
+import i18n, { TFunction } from 'i18next';
 import { Button, Text, render } from "jsx-email";
 import {
   GetSubject,
   GetTemplate,
   GetTemplateProps,
 } from "keycloakify-emails";
-import { EmailLayout } from "../layout";
-
 import { createVariablesHelper } from "keycloakify-emails/variables";
+import { EmailLayout } from "../layout";
+import { applyRTL } from 'emails/utils/RTL';
 
-type TemplateProps = Omit<GetTemplateProps, "plainText">
+type TemplateProps = Omit<GetTemplateProps, "plainText"> & { t: TFunction };
 
 const paragraph = {
   lineHeight: 1.5,
@@ -16,7 +17,13 @@ const paragraph = {
   textAlign: "left" as const,
 };
 
+const rtlStyle = {
+  direction: 'rtl' as const,
+  textAlign: 'right' as const,
+};
+
 export const previewProps: TemplateProps = {
+  t: i18n.getFixedT('en'),
   locale: "en",
   themeName: "vanilla",
 };
@@ -25,41 +32,48 @@ export const templateName = "Email Update Confirmation";
 
 const { exp } = createVariablesHelper("email-update-confirmation.ftl");
 
-export const Template = ({ locale }: TemplateProps) => (
-  <EmailLayout preview={`Update email`} locale={locale}>
-    <Text style={paragraph}>
-      To update your {exp("realmName")} account with email address {exp("newEmail")},
-      click the link below
-    </Text>
+export const Template = ({ locale, t }: TemplateProps) => {
+  const isRTL = locale === 'ar';
 
-    <Button
-      width={152}
-      height={40}
-      backgroundColor="#5e6ad2"
-      borderRadius={3}
-      textColor="#fff"
-      fontSize={15}
-      href={exp("link")}
-    >
-      Update email
-    </Button>
-    {/* <Text style={paragraph}>
-        <a href={exp("link")}>{exp("link")}</a>
-      </Text> */}
-    <Text style={paragraph}>
-      This link will expire within {exp("linkExpirationFormatter(linkExpiration)")}.
-    </Text>
-    <Text style={paragraph}>
-      If you don&apos;t want to proceed with this modification, just ignore this message.
-    </Text>
+  return (
+    <EmailLayout preview={t('email-update-confirmation.subject')} locale={locale}>
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('email-update-confirmation.updateEmailAddress', { realmName: exp("realmName"), newEmail: exp("newEmail") })}
+      </Text>
 
-  </EmailLayout>
-);
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('email-update-confirmation.clickLinkBelow')}
+      </Text>
 
-export const getTemplate: GetTemplate = async (props) => {
-  return await render(<Template {...props} />, { plainText: props.plainText });
+      <div style={isRTL ? { textAlign: 'right' } : { textAlign: 'left' }}>
+        <Button
+          width={isRTL ? 220 : 152}
+          height={40}
+          backgroundColor="#5e6ad2"
+          borderRadius={3}
+          textColor="#fff"
+          fontSize={15}
+          href={exp("link")}
+        >
+          {t('email-update-confirmation.updateEmail')}
+        </Button>
+      </div>
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('email-update-confirmation.linkExpiration', { expiration: exp("linkExpirationFormatter(linkExpiration)") })}
+      </Text>
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('email-update-confirmation.ignoreMessage')}
+      </Text>
+    </EmailLayout>
+  );
 };
 
-export const getSubject: GetSubject = async () => {
-  return "Verify new email";
+export const getTemplate: GetTemplate = async (props) => {
+  const t = i18n.getFixedT(props.locale);
+  return await render(<Template {...props} t={t} />, { plainText: props.plainText });
+};
+
+export const getSubject: GetSubject = async (props) => {
+  const t = i18n.getFixedT(props.locale);
+  return t('email-update-confirmation.subject');
 };

@@ -1,14 +1,15 @@
+import { applyRTL } from 'emails/utils/RTL';
+import i18n, { TFunction } from 'i18next';
 import { Text, render } from "jsx-email";
 import {
   GetSubject,
   GetTemplate,
   GetTemplateProps,
 } from "keycloakify-emails";
+import { createVariablesHelper } from "keycloakify-emails/variables";
 import { EmailLayout } from "../layout";
 
-import { createVariablesHelper } from "keycloakify-emails/variables";
-
-type TemplateProps = Omit<GetTemplateProps, "plainText">
+type TemplateProps = Omit<GetTemplateProps, "plainText"> & { t: TFunction };
 
 const paragraph = {
   lineHeight: 1.5,
@@ -16,7 +17,13 @@ const paragraph = {
   textAlign: "left" as const,
 };
 
+const rtlStyle = {
+  direction: 'rtl' as const,
+  textAlign: 'right' as const,
+};
+
 export const previewProps: TemplateProps = {
+  t: i18n.getFixedT('en'),
   locale: "en",
   themeName: "vanilla",
 };
@@ -25,23 +32,27 @@ export const templateName = "User Disabled by Temporary Lockout";
 
 const { exp } = createVariablesHelper("event-user_disabled_by_temporary_lockout.ftl");
 
-export const Template = ({ locale }: TemplateProps) => (
-  <EmailLayout preview={`User Disabled by Temporary Lockout`} locale={locale}>
+export const Template = ({ locale, t }: TemplateProps) => {
+  const isRTL = locale === 'ar';
 
-    <Text style={paragraph}>
-      Your user has been disabled temporarily because of multiple failed attemps on {exp("event.date")}.
-    </Text>
-    <Text style={paragraph}>
-      Please contact an administrator.
-    </Text>
-
-  </EmailLayout>
-);
-
-export const getTemplate: GetTemplate = async (props) => {
-  return await render(<Template {...props} />, { plainText: props.plainText });
+  return (
+    <EmailLayout preview={t('event-user_disabled_by_temporary_lockout.subject')} locale={locale}>
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('event-user_disabled_by_temporary_lockout.message', { date: exp("event.date") })}
+      </Text>
+      <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
+        {t('event-user_disabled_by_temporary_lockout.contactAdmin')}
+      </Text>
+    </EmailLayout>
+  );
 };
 
-export const getSubject: GetSubject = async () => {
-  return "User disabled by temporary lockout"
+export const getTemplate: GetTemplate = async (props) => {
+  const t = i18n.getFixedT(props.locale);
+  return await render(<Template {...props} t={t} />, { plainText: props.plainText });
+};
+
+export const getSubject: GetSubject = async (props) => {
+  const t = i18n.getFixedT(props.locale);
+  return t('event-user_disabled_by_temporary_lockout.subject');
 };

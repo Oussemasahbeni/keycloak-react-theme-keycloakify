@@ -1,0 +1,104 @@
+{
+    "email-test": {
+        "subject": "Test de courriel",
+        "greeting": "Bonjour",
+        "passwordUpdate": "Vous avez mis à jour le mot de passe de votre compte Twitch le {date}. Si c'était vous, aucune autre action n'est requise.",
+        "passwordReset": "Cependant, si vous n'avez PAS effectué ce changement de mot de passe, veuillez réinitialiser immédiatement le mot de passe de votre compte.",
+        "passwordAdvice": "N'oubliez pas d'utiliser un mot de passe à la fois fort et unique pour votre compte Twitch. Pour en savoir plus sur la création d'un mot de passe fort et unique,",
+        "loginButton": "Connexion à Inspark",
+        "contactSupport": "Vous avez encore des questions ? Veuillez contacter le support {realmName}",
+        "thanks": "Merci,",
+        "supportTeam": "Équipe de support {realmName}"
+    },
+    "email-update-confirmation": {
+        "subject": "Vérifier le nouveau courriel",
+        "linkExpiration": "Ce lien expirera dans {expiration}.",
+        "updateEmailAddress": "Pour mettre à jour votre compte {realmName} avec l'adresse courriel {newEmail}",
+        "clickLinkBelow": "cliquez sur le lien ci-dessous",
+        "updateEmail": "Mettre à jour le courriel",
+        "ignoreMessage": "Si vous ne souhaitez pas procéder à cette modification, ignorez simplement ce message."
+    },
+    "email-verification": {
+        "subject": "Vérifier le courriel",
+        "message": "Quelqu'un a créé un compte {firstName} avec cette adresse courriel. Si c'était vous, cliquez sur le lien ci-dessous pour vérifier votre adresse courriel.",
+        "verifyButton": "Vérifier le courriel",
+        "linkExpiration": "Ce lien expirera dans {expiration}.",
+        "ignoreMessage": "Si vous n'avez pas créé ce compte, ignorez simplement ce message."
+    },
+    "event-login_error": {
+        "subject": "Erreur de connexion",
+        "message": "Une tentative de connexion échouée a été détectée sur votre compte le {date} depuis {ipAddress}.",
+        "contactAdmin": "Si ce n'était pas vous, veuillez contacter un administrateur."
+    },
+    "event-remove_credential": {
+        "subject": "Supprimer les informations d'identification",
+        "message": "Les informations d'identification {credentialType} ont été supprimées de votre compte le {date} depuis {ipAddress}.",
+        "contactAdmin": "Si ce n'était pas vous, veuillez contacter un administrateur."
+    },
+    "event-remove_totp": {
+        "subject": "Supprimer OTP",
+        "message": "OTP a été supprimé de votre compte le {date} depuis {ipAddress}.",
+        "contactAdmin": "Si ce n'était pas vous, veuillez contacter un administrateur."
+    },
+    "event-update_credential": {
+        "subject": "Mettre à jour les informations d'identification",
+        "message": "Vos informations d'identification {credentialType} ont été modifiées le {date} depuis {ipAddress}.",
+        "contactAdmin": "Si ce n'était pas vous, veuillez contacter un administrateur."
+    },
+    "event-update_password": {
+        "subject": "Mettre à jour le mot de passe",
+        "message": "Votre mot de passe a été modifié le {date} depuis {ipAddress}.",
+        "contactAdmin": "Si ce n'était pas vous, veuillez contacter un administrateur."
+    },
+    "event-update_totp": {
+        "subject": "Mettre à jour OTP",
+        "message": "OTP a été mis à jour pour votre compte le {date} depuis {ipAddress}.",
+        "contactAdmin": "Si ce n'était pas vous, veuillez contacter un administrateur."
+    },
+    "event-user_disabled_by_permanent_lockout": {
+        "subject": "Utilisateur désactivé par verrouillage permanent",
+        "message": "Votre utilisateur a été désactivé de manière permanente en raison de plusieurs tentatives échouées le {date}.",
+        "contactAdmin": "Veuillez contacter un administrateur."
+    },
+    "event-user_disabled_by_temporary_lockout": {
+        "subject": "Utilisateur désactivé par verrouillage temporaire",
+        "message": "Votre utilisateur a été désactivé temporairement en raison de plusieurs tentatives échouées le {date}.",
+        "contactAdmin": "Veuillez contacter un administrateur."
+    },
+    "executeActions": {
+        "subject": "Mettre à jour votre compte",
+        "message": "Votre administrateur a demandé que vous mettiez à jour votre compte {realmName} en effectuant les actions suivantes :",
+        "clickLink": "Cliquez sur le lien ci-dessous pour commencer ce processus.",
+        "linkExpiration": "Ce lien expirera dans {expiration}.",
+        "ignoreMessage": "Si vous n'êtes pas au courant que votre administrateur a demandé cela, ignorez simplement ce message et rien ne changera.",
+        "updateAccountButton": "Mettre à jour le compte"
+    },
+    "identity-provider-link": {
+        "subject": "Lier {0}",
+        "message": "Quelqu'un veut lier votre compte {identityProviderDisplayName} avec le compte {realmName} de l'utilisateur {username}.",
+        "clickLink": "Si c'était vous, cliquez sur le lien ci-dessous pour lier les comptes",
+        "linkExpiration": "Ce lien expirera dans {expiration}.",
+        "ignoreMessage": "Si vous ne souhaitez pas procéder à cette modification, ignorez simplement ce message.",
+        "linkAccountsButton": "Lier les comptes",
+        "loginInfo": "Si vous liez les comptes, vous pourrez vous connecter à {identityProviderDisplayName} via {realmName}."
+    },
+    "org-invite": {
+        "subject": "Invitation à rejoindre l'organisation {0}",
+        "greeting": "Bonjour, {firstName} {lastName}.",
+        "message": "Vous avez été invité à rejoindre l'organisation {organizationName}. Cliquez sur le lien ci-dessous pour rejoindre.",
+        "linkExpiration": "Ce lien expirera dans {expiration}.",
+        "ignoreMessage": "Si vous ne souhaitez pas rejoindre l'organisation, ignorez simplement ce message.",
+        "joinButton": "Rejoindre l'organisation"
+    },
+    "password-reset": {
+        "subject": "Réinitialiser le mot de passe",
+        "message": "Quelqu'un a demandé à changer les informations d'identification de votre compte {realmName}. Si c'était vous, cliquez sur le lien ci-dessous pour les réinitialiser.",
+        "linkExpiration": "Ce lien expirera dans {expiration}.",
+        "ignoreMessage": "Si vous ne souhaitez pas réinitialiser vos informations d'identification, ignorez simplement ce message et rien ne changera.",
+        "resetButton": "Réinitialiser les informations d'identification"
+    },
+    "footer": {
+        "allRightsReserved": "© {currentYear} {realmName}, Tous droits réservés",
+        "address": "Pôle Tech. Ghazela, 2036 Ariana, Tunisie"
+    }
+}
