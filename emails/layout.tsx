@@ -81,7 +81,7 @@ export const EmailLayout = ({
   preview,
 }: PropsWithChildren<{ preview: ReactNode; locale: string; }>) => {
   return (
-    <Html lang={locale}>
+    <Html lang={locale} dir= {locale === "ar" ? "rtl" : "ltr"}>
       <Head />
       <Preview>{preview}</Preview>
       <Body style={main}>
