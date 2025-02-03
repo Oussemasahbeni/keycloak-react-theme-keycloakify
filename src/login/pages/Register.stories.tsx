@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { createKcPageStory } from "../KcPageStory";
 import type { Attribute } from "keycloakify/login";
+import { createKcPageStory } from "../KcPageStory";
 
 const { KcPageStory } = createKcPageStory({ pageId: "register.ftl" });
 
@@ -47,6 +47,18 @@ export const WithEmailAlreadyExists: Story = {
         />
     )
 };
+
+export const Arabic: Story = {
+    render: () => <KcPageStory 
+        kcContext={{
+            locale: {
+                currentLanguageTag: "ar",
+                rtl: true
+            }
+        }}
+    />
+};
+
 
 export const WithRestrictedToMITStudents: Story = {
     render: () => (

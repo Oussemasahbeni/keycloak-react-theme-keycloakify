@@ -54,6 +54,17 @@ export const WithoutRegistration: Story = {
     )
 };
 
+export const Arabic: Story = {
+    render: () => <KcPageStory 
+        kcContext={{
+            locale: {
+                currentLanguageTag: "ar",
+                rtl: true
+            }
+        }}
+    />
+};
+
 export const WithoutRememberMe: Story = {
     render: args => (
         <KcPageStory

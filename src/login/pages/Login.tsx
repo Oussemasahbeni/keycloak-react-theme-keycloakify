@@ -4,9 +4,9 @@ import { Label } from "@/components/ui/label";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { getKcClsx, type KcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
-import { assert } from "keycloakify/tools/assert";
 import { clsx } from "keycloakify/tools/clsx";
-import { useEffect, useReducer, useState } from "react";
+import { useIsPasswordRevealed } from "keycloakify/tools/useIsPasswordRevealed";
+import { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
@@ -19,7 +19,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
         classes
     });
 
-    const { social, realm, url, usernameHidden, login, auth, registrationDisabled, messagesPerField } = kcContext;
+    const { social, realm, url, usernameHidden, login, auth,locale, registrationDisabled, messagesPerField } = kcContext;
 
     const { msg, msgStr } = i18n;
 
@@ -148,7 +148,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                     )}
                                 </Label>
 
-                                <PasswordWrapper kcClsx={kcClsx} i18n={i18n} passwordInputId="password">
+                                <PasswordWrapper kcClsx={kcClsx} i18n={i18n} locale={locale} passwordInputId="password">
                                     <Input
                                         tabIndex={3}
                                         type="password"
@@ -218,27 +218,19 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
     );
 }
 
-function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: string; children: JSX.Element }) {
-    const { i18n, passwordInputId, children } = props;
+function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: string; locale: KcContext["locale"], children: JSX.Element }) {
+    const { i18n, passwordInputId, locale, children } = props;
 
     const { msgStr } = i18n;
 
-    const [isPasswordRevealed, toggleIsPasswordRevealed] = useReducer((isPasswordRevealed: boolean) => !isPasswordRevealed, false);
-
-    useEffect(() => {
-        const passwordInputElement = document.getElementById(passwordInputId);
-
-        assert(passwordInputElement instanceof HTMLInputElement);
-
-        passwordInputElement.type = isPasswordRevealed ? "text" : "password";
-    }, [isPasswordRevealed]);
+    const { isPasswordRevealed, toggleIsPasswordRevealed } = useIsPasswordRevealed({ passwordInputId });
 
     return (
         <div className="relative">
             {children}
             <button
                 type="button"
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+                className={`absolute inset-y-0 ${locale?.rtl ? 'left-0 pl-3' : 'right-0 pr-3'} flex items-center text-sm leading-5`}
                 aria-label={msgStr(isPasswordRevealed ? "hidePassword" : "showPassword")}
                 aria-controls={passwordInputId}
                 onClick={toggleIsPasswordRevealed}

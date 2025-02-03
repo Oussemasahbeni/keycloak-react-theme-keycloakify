@@ -19,7 +19,7 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
 
     const { msg, msgStr } = i18n;
 
-    const { url, messagesPerField, isAppInitiatedAction } = kcContext;
+    const { url, messagesPerField,locale, isAppInitiatedAction } = kcContext;
 
     return (
         <Template
@@ -38,7 +38,7 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
                         </label>
                     </div>
                     <div className={kcClsx("kcInputWrapperClass")}>
-                        <PasswordWrapper kcClsx={kcClsx} i18n={i18n} passwordInputId="password-new">
+                        <PasswordWrapper kcClsx={kcClsx} i18n={i18n} locale={locale} passwordInputId="password-new">
                             <Input
                                 type="password"
                                 id="password-new"
@@ -69,7 +69,7 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
                         </label>
                     </div>
                     <div className={kcClsx("kcInputWrapperClass")}>
-                        <PasswordWrapper kcClsx={kcClsx} i18n={i18n} passwordInputId="password-confirm">
+                        <PasswordWrapper kcClsx={kcClsx} i18n={i18n} locale={locale} passwordInputId="password-confirm">
                             <Input
                                 type="password"
                                 id="password-confirm"
@@ -129,8 +129,9 @@ function LogoutOtherSessions(props: { kcClsx: KcClsx; i18n: I18n }) {
     );
 }
 
-function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: string; children: JSX.Element }) {
-    const { i18n, passwordInputId, children } = props;
+
+function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: string; locale: KcContext["locale"], children: JSX.Element }) {
+    const { i18n, passwordInputId, locale, children } = props;
 
     const { msgStr } = i18n;
 
@@ -141,7 +142,7 @@ function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: s
             {children}
             <button
                 type="button"
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+                className={`absolute inset-y-0 ${locale?.rtl ? 'left-0 pl-3' : 'right-0 pr-3'} flex items-center text-sm leading-5`}
                 aria-label={msgStr(isPasswordRevealed ? "hidePassword" : "showPassword")}
                 aria-controls={passwordInputId}
                 onClick={toggleIsPasswordRevealed}
@@ -151,3 +152,4 @@ function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: s
         </div>
     );
 }
+

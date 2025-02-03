@@ -20,7 +20,7 @@ export default function LoginPassword(props: PageProps<Extract<KcContext, { page
         classes
     });
 
-    const { realm, url, messagesPerField } = kcContext;
+    const { realm, url,locale, messagesPerField } = kcContext;
 
     const { msg, msgStr } = i18n;
 
@@ -54,7 +54,7 @@ export default function LoginPassword(props: PageProps<Extract<KcContext, { page
 
                             <Label className="flex justify-between">{msg("password")}</Label>
 
-                            <PasswordWrapper kcClsx={kcClsx} i18n={i18n} passwordInputId="password">
+                            <PasswordWrapper kcClsx={kcClsx} i18n={i18n} locale={locale} passwordInputId="password">
                                 <Input
                                     tabIndex={2}
                                     type="password"
@@ -120,8 +120,9 @@ export default function LoginPassword(props: PageProps<Extract<KcContext, { page
     );
 }
 
-function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: string; children: JSX.Element }) {
-    const { i18n, passwordInputId, children } = props;
+
+function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: string; locale: KcContext["locale"], children: JSX.Element }) {
+    const { i18n, passwordInputId, locale, children } = props;
 
     const { msgStr } = i18n;
 
@@ -132,7 +133,7 @@ function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: s
             {children}
             <button
                 type="button"
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+                className={`absolute inset-y-0 ${locale?.rtl ? 'left-0 pl-3' : 'right-0 pr-3'} flex items-center text-sm leading-5`}
                 aria-label={msgStr(isPasswordRevealed ? "hidePassword" : "showPassword")}
                 aria-controls={passwordInputId}
                 onClick={toggleIsPasswordRevealed}
@@ -141,19 +142,4 @@ function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: s
             </button>
         </div>
     );
-
-    // return (
-    //     <div className={kcClsx("kcInputGroup")}>
-    //         {children}
-    //         <button
-    //             type="button"
-    //             className={kcClsx("kcFormPasswordVisibilityButtonClass")}
-    //             aria-label={msgStr(isPasswordRevealed ? "hidePassword" : "showPassword")}
-    //             aria-controls={passwordInputId}
-    //             onClick={toggleIsPasswordRevealed}
-    //         >
-    //             <i className={kcClsx(isPasswordRevealed ? "kcFormPasswordVisibilityIconHide" : "kcFormPasswordVisibilityIconShow")} aria-hidden />
-    //         </button>
-    //     </div>
-    // );
 }

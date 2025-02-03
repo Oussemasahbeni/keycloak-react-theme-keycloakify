@@ -42,6 +42,18 @@ export const WithPasswordError: Story = {
     )
 };
 
+export const Arabic: Story = {
+    render: () => <KcPageStory 
+        kcContext={{
+            locale: {
+                currentLanguageTag: "ar",
+                rtl: true
+            }
+        }}
+    />
+};
+
+
 /**
  * WithoutResetPasswordOption:
  * - Purpose: Tests the behavior when the reset password option is disabled.

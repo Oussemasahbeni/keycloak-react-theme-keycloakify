@@ -9,7 +9,7 @@ import { EmailLayout } from "../layout";
 import { createVariablesHelper } from "keycloakify-emails/variables";
 
 
-interface TemplateProps extends Omit<GetTemplateProps, "plainText"> {}
+type TemplateProps = Omit<GetTemplateProps, "plainText">
 
 // const paragraph = {
 //   color: "#777",
@@ -49,48 +49,48 @@ const formattedDate = new Intl.DateTimeFormat('en', {
 
 export const Template = ({ locale }: TemplateProps) => (
   <EmailLayout preview={"Here is a preview"} locale={locale}>
-            <Text style={paragraph}>Hi oussema,</Text>
-            <Text style={paragraph}>
-              You updated the password for your Twitch account on {formattedDate}. If this was you,
-              then no further action is required.
-            </Text>
-            <Text style={paragraph}>
-              However if you did NOT perform this password change, please{' '}
-              <Link href="#" style={link}>
-                reset your account password
-              </Link>{' '}
-              immediately.
-            </Text>
-            <Text style={paragraph}>
-              Remember to use a password that is both strong and unique to your Twitch account. To
-              learn more about how to create a strong and unique password,{' '}
-              {/* <Link href="#" style={link}>
+    <Text style={paragraph}>Hi oussema,</Text>
+    <Text style={paragraph}>
+      You updated the password for your Twitch account on {formattedDate}. If this was you,
+      then no further action is required.
+    </Text>
+    <Text style={paragraph}>
+      However if you did NOT perform this password change, please{' '}
+      <Link href="#" style={link}>
+        reset your account password
+      </Link>{' '}
+      immediately.
+    </Text>
+    <Text style={paragraph}>
+      Remember to use a password that is both strong and unique to your Twitch account. To
+      learn more about how to create a strong and unique password,{' '}
+      {/* <Link href="#" style={link}>
                 click here.
               </Link> */}
-              <Button
-                width={152}
-                height={40}
-                backgroundColor="#5e6ad2"
-                borderRadius={3}
-                textColor="#fff"
-                fontSize={15}
-                href="https://linear.app"
-              >
-                Login to Inspark
-              </Button>
-            </Text>
-            <Text style={paragraph}>
-              Still have questions? Please contact{' '}
-              <Link href="#" style={link}>
-              {exp("realmName")} Support
-              </Link>
-            </Text>
-            <Text style={paragraph}>
-              Thanks,
-              <br />
-              {exp("realmName")}, Support Team
-            </Text>
-        
+      <Button
+        width={152}
+        height={40}
+        backgroundColor="#5e6ad2"
+        borderRadius={3}
+        textColor="#fff"
+        fontSize={15}
+        href="https://linear.app"
+      >
+        Login to Inspark
+      </Button>
+    </Text>
+    <Text style={paragraph}>
+      Still have questions? Please contact{' '}
+      <Link href="#" style={link}>
+        {exp("realmName")} Support
+      </Link>
+    </Text>
+    <Text style={paragraph}>
+      Thanks,
+      <br />
+      {exp("realmName")}, Support Team
+    </Text>
+
     {/* <Container>
       <Img src={`${baseUrl}/kc-logo.png`} alt="KC Logo" width="83" height="75" />
     </Container>
@@ -103,5 +103,15 @@ export const getTemplate: GetTemplate = async (props) => {
 };
 
 export const getSubject: GetSubject = async (_props) => {
-  return "[KEYCLOAK] - SMTP test message";
+
+  switch (_props.locale) {
+    case "en":
+      return "[KEYCLOAK] - SMTP test message";
+    case "fr":
+      return "[KEYCLOAK] - Message de test SMTP";
+    case "ar":
+      return "[KEYCLOAK] - رسالة اختبار SMTP";
+    default:
+      return "[KEYCLOAK] - SMTP test message";
+  }
 };

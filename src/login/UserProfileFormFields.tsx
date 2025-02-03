@@ -21,6 +21,9 @@ export default function UserProfileFormFields(props: UserProfileFormFieldsProps<
 
     const { advancedMsg } = i18n;
 
+    const { locale } = kcContext;
+
+
     const {
         formState: { formFieldStates, isFormSubmittable },
         dispatchFormAction
@@ -80,6 +83,7 @@ export default function UserProfileFormFields(props: UserProfileFormFieldsProps<
                                     displayableErrors={displayableErrors}
                                     dispatchFormAction={dispatchFormAction}
                                     kcClsx={kcClsx}
+                                    locale={locale}
                                     i18n={i18n}
                                 />
                                 <FieldErrors attribute={attribute} displayableErrors={displayableErrors} kcClsx={kcClsx} fieldIndex={undefined} />
@@ -205,12 +209,13 @@ type InputFieldByTypeProps = {
     valueOrValues: string | string[];
     displayableErrors: FormFieldError[];
     dispatchFormAction: React.Dispatch<FormAction>;
+    locale: KcContext["locale"];
     i18n: I18n;
     kcClsx: KcClsx;
 };
 
 function InputFieldByType(props: InputFieldByTypeProps) {
-    const { attribute, valueOrValues } = props;
+    const { attribute, valueOrValues,locale } = props;
 
     switch (attribute.annotations.inputType) {
         case "textarea":
@@ -236,7 +241,7 @@ function InputFieldByType(props: InputFieldByTypeProps) {
 
             if (attribute.name === "password" || attribute.name === "password-confirm") {
                 return (
-                    <PasswordWrapper kcClsx={props.kcClsx} i18n={props.i18n} passwordInputId={attribute.name}>
+                    <PasswordWrapper kcClsx={props.kcClsx} i18n={props.i18n} locale={locale} passwordInputId={attribute.name}>
                         {inputNode}
                     </PasswordWrapper>
                 );
@@ -247,8 +252,8 @@ function InputFieldByType(props: InputFieldByTypeProps) {
     }
 }
 
-function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: string; children: JSX.Element }) {
-    const { i18n, passwordInputId, children } = props;
+function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: string; locale: KcContext["locale"], children: JSX.Element }) {
+    const { i18n, passwordInputId, locale, children } = props;
 
     const { msgStr } = i18n;
 
@@ -259,7 +264,7 @@ function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: s
             {children}
             <button
                 type="button"
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+                className={`absolute inset-y-0 ${locale?.rtl ? 'left-0 pl-3' : 'right-0 pr-3'} flex items-center text-sm leading-5`}
                 aria-label={msgStr(isPasswordRevealed ? "hidePassword" : "showPassword")}
                 aria-controls={passwordInputId}
                 onClick={toggleIsPasswordRevealed}
@@ -268,22 +273,8 @@ function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: s
             </button>
         </div>
     );
-
-    // return (
-    //     <div className={kcClsx("kcInputGroup")}>
-    //         {children}
-    //         <button
-    //             type="button"
-    //             className={kcClsx("kcFormPasswordVisibilityButtonClass")}
-    //             aria-label={msgStr(isPasswordRevealed ? "hidePassword" : "showPassword")}
-    //             aria-controls={passwordInputId}
-    //             onClick={toggleIsPasswordRevealed}
-    //         >
-    //             <i className={kcClsx(isPasswordRevealed ? "kcFormPasswordVisibilityIconHide" : "kcFormPasswordVisibilityIconShow")} aria-hidden />
-    //         </button>
-    //     </div>
-    // );
 }
+
 
 function InputTag(props: InputFieldByTypeProps & { fieldIndex: number | undefined }) {
     const { attribute, fieldIndex, kcClsx, dispatchFormAction, valueOrValues, i18n, displayableErrors } = props;
