@@ -43,6 +43,9 @@ export const templateName = "Email Test";
 
 const { exp } = createVariablesHelper("email-test.ftl");
 
+
+
+
 const formattedDate = new Intl.DateTimeFormat('en', {
   dateStyle: 'medium',
   timeStyle: 'medium',
@@ -86,7 +89,7 @@ export const Template = ({ locale, t }: TemplateProps) => {
       <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
         {t('email-test.thanks')},
         <br />
-        {t('email-test.supportTeam', { realmName: exp("realmName") })}
+        {t('email-test.supportTeam', { realmName: exp("realmName")})}
       </Text>
     </EmailLayout>
   );

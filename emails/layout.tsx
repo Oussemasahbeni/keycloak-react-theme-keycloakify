@@ -80,7 +80,7 @@ export const EmailLayout = ({
   locale,
   children,
   preview,
-}: PropsWithChildren<{ preview: ReactNode; locale: string; }>) => {
+}: PropsWithChildren<{ preview: ReactNode; locale: string }>) => {
   const t = i18n.getFixedT(locale);
 
 

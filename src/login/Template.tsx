@@ -36,6 +36,8 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 
     const { auth, url, message, isAppInitiatedAction } = kcContext;
 
+
+
     useEffect(() => {
         document.title = documentTitle ?? msgStr("loginTitle", kcContext.realm.displayName);
     }, []);
