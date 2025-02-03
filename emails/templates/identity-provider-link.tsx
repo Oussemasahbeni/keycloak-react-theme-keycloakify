@@ -77,5 +77,5 @@ export const getTemplate: GetTemplate = async (props) => {
 
 export const getSubject: GetSubject = async (props) => {
   const t = i18n.getFixedT(props.locale);
-  return t('identity-provider-link.subject');
+  return t('identity-provider-link.subject',{ identityProviderDisplayName: exp("identityProviderDisplayName")});
 };

@@ -1,3 +1,4 @@
+import { ModeToggle } from "@/components/mode-toggle";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,9 +10,14 @@ import type { TemplateProps } from "keycloakify/login/TemplateProps";
 import { clsx } from "keycloakify/tools/clsx";
 import { useSetClassName } from "keycloakify/tools/useSetClassName";
 import { useEffect } from "react";
+import { FiArrowLeft } from "react-icons/fi";
+import { IoLanguage } from "react-icons/io5";
 import companylogo from "./assets/img/companylogo.svg";
 import type { I18n } from "./i18n";
 import type { KcContext } from "./KcContext";
+import { redirectUrlOrigin } from "./shared/redirectUrlOrigin";
+
+
 
 export default function Template(props: TemplateProps<KcContext, I18n>) {
     const {
@@ -59,7 +65,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
     }
 
     return (
-        <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-muted p-6 md:p-16">
+        <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-muted dark:bg-slate-950 p-6 md:p-16">
             <div className="flex w-full max-w-sm flex-col gap-6">
                 {/* <a href="#" className="flex items-center gap-2 self-center font-medium text-lg">
                     <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
@@ -68,21 +74,33 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                     Inspark
                 </a> */}
 
-                <div className="absolute top-5 right-10">
+
+                <Button variant="outline" size="sm" className="absolute top-5 left-10 border-gray-400 self-center font-medium text-base ">
+                    <a className="flex items-center gap-1 hover:no-underline no-hover-color" href={kcContext.client.baseUrl ?? redirectUrlOrigin}>
+                        <FiArrowLeft /> {msg("home")}
+                    </a>
+                </Button>
+
+
+
+
+                <div className="absolute top-5 right-10 flex items-center gap-2">
+                    <ModeToggle />
                     {enabledLanguages.length > 1 && (
                         <div className={kcClsx("kcLocaleMainClass")} id="kc-locale">
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
                                     <Button
                                         tabIndex={1}
-                                        variant="secondary"
+                                        variant="outline"
                                         size="sm"
                                         aria-label={msgStr("languages")}
                                         aria-haspopup="true"
                                         aria-expanded="false"
                                         aria-controls="language-switch1"
-                                        className="px-3 py-0 border-gray-400 hover:border-gray-500 focus-visible:border-gray-400   border-2"
+                                        className="px-3 py-0 border-gray-400 text-base hover:border-gray-500  flex items-center"
                                     >
+                                        <IoLanguage />
                                         {currentLanguage.label}
                                     </Button>
                                 </DropdownMenuTrigger>

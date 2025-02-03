@@ -5,6 +5,10 @@ import type { KcEnvName, ThemeName } from "../kc.gen";
 export type KcContextExtension = {
     themeName: ThemeName;
     properties: Record<KcEnvName, string> & {};
+    client: {
+        baseUrl?: string;
+    };
+
 };
 
 export type KcContextExtensionPerPage = {};

@@ -6,12 +6,14 @@
 
 body.kcBodyClass {
     @apply bg-none bg-no-repeat bg-center bg-fixed;
-    @apply bg-gray-100;
     font-family: "Inter var", sans-serif;
 }
 
 a:hover {
     @apply text-violet-800 !important;
+}
+.no-hover-color:hover {
+    @apply text-current !important; /* Ensure the text color remains the same on hover */
 }
 
 .kcHeaderWrapperClass {

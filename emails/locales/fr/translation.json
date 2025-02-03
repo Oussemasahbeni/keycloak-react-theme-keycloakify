@@ -74,7 +74,7 @@
         "updateAccountButton": "Mettre à jour le compte"
     },
     "identity-provider-link": {
-        "subject": "Lier {{0}}",
+        "subject": "Lier {{identityProviderDisplayName}}",
         "message": "Quelqu'un veut lier votre compte {{identityProviderDisplayName}} avec le compte {{realmName}} de l'utilisateur {{username}}.",
         "clickLink": "Si c'était vous, cliquez sur le lien ci-dessous pour lier les comptes",
         "linkExpiration": "Ce lien expirera dans {{expiration}}.",
@@ -83,7 +83,7 @@
         "loginInfo": "Si vous liez les comptes, vous pourrez vous connecter à {{identityProviderDisplayName}} via {{realmName}}."
     },
     "org-invite": {
-        "subject": "Invitation à rejoindre l'organisation {{0}}",
+        "subject": "Invitation à rejoindre l'organisation {{organizationName}}",
         "greeting": "Bonjour, {{firstName}} {{lastName}}.",
         "message": "Vous avez été invité à rejoindre l'organisation {{organizationName}}. Cliquez sur le lien ci-dessous pour rejoindre.",
         "linkExpiration": "Ce lien expirera dans {{expiration}}.",
