@@ -5,6 +5,7 @@ import { getKcClsx, KcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
+import { Label } from "@/components/ui/label";
 
 export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pageId: "login-config-totp.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
@@ -97,9 +98,9 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                 <form action={url.loginAction} className={kcClsx("kcFormClass")} id="kc-totp-settings-form" method="post">
                     <div className={kcClsx("kcFormGroupClass")}>
                         <div className={kcClsx("kcInputWrapperClass")}>
-                            <label htmlFor="totp" className={kcClsx("kcLabelClass")}>
+                            <Label htmlFor="totp" className={kcClsx("kcLabelClass")}>
                                 {msg("authenticatorCode")}
-                            </label>{" "}
+                            </Label>{" "}
                             <span className="required">*</span>
                         </div>
                         <div className={kcClsx("kcInputWrapperClass")}>
@@ -129,9 +130,9 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
 
                     <div className={kcClsx("kcFormGroupClass")}>
                         <div className={kcClsx("kcInputWrapperClass")}>
-                            <label htmlFor="userLabel" className={kcClsx("kcLabelClass")}>
+                            <Label htmlFor="userLabel" className={kcClsx("kcLabelClass")}>
                                 {msg("loginTotpDeviceName")}
-                            </label>{" "}
+                            </Label>{" "}
                             {totp.otpCredentials.length >= 1 && <span className="required">*</span>}
                         </div>
                         <div className={kcClsx("kcInputWrapperClass")}>
@@ -214,10 +215,10 @@ function LogoutOtherSessions(props: { kcClsx: KcClsx; i18n: I18n }) {
         <div id="kc-form-options" className={kcClsx("kcFormOptionsClass")}>
             <div className={kcClsx("kcFormOptionsWrapperClass")}>
                 <div className="checkbox">
-                    <label>
+                    <Label>
                         <input type="checkbox" id="logout-sessions" name="logout-sessions" value="on" defaultChecked={true} />
                         {msg("logoutOtherSessions")}
-                    </label>
+                    </Label>
                 </div>
             </div>
         </div>

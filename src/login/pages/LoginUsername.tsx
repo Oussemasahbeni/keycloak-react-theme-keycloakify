@@ -134,7 +134,7 @@ export default function LoginUsername(props: PageProps<Extract<KcContext, { page
                                 <div id="kc-form-options">
                                     {realm.rememberMe && !usernameHidden && (
                                         <div className="checkbox">
-                                            <label>
+                                            <Label>
                                                 <input
                                                     tabIndex={3}
                                                     id="rememberMe"
@@ -143,7 +143,7 @@ export default function LoginUsername(props: PageProps<Extract<KcContext, { page
                                                     defaultChecked={!!login.rememberMe}
                                                 />{" "}
                                                 {msg("rememberMe")}
-                                            </label>
+                                            </Label>
                                         </div>
                                     )}
                                 </div>

@@ -15,6 +15,7 @@ import { Fragment, useEffect } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import type { I18n } from "./i18n";
 import type { KcContext } from "./KcContext";
+import { Label } from "@/components/ui/label";
 
 export default function UserProfileFormFields(props: UserProfileFormFieldsProps<KcContext, I18n>) {
     const { kcContext, i18n, kcClsx, onIsFormSubmittableValueChange, doMakeUserConfirmPassword, BeforeField, AfterField } = props;
@@ -62,9 +63,9 @@ export default function UserProfileFormFields(props: UserProfileFormFieldsProps<
                             }}
                         >
                             <div className={kcClsx("kcLabelWrapperClass")}>
-                                <label htmlFor={attribute.name} className={kcClsx("kcLabelClass")}>
+                                <Label htmlFor={attribute.name} className={kcClsx("kcLabelClass")}>
                                     {advancedMsg(attribute.displayName ?? "")}
-                                </label>
+                                </Label>
                                 {attribute.required && <> *</>}
                             </div>
                             <div className={kcClsx("kcInputWrapperClass")}>

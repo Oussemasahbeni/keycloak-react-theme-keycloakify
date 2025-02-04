@@ -5,6 +5,7 @@ import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
+import { Label } from "@/components/ui/label";
 
 export default function LoginResetPassword(props: PageProps<Extract<KcContext, { pageId: "login-reset-password.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
@@ -32,13 +33,13 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
             <form id="kc-reset-password-form" className={kcClsx("kcFormClass")} action={url.loginAction} method="post">
                 <div className={kcClsx("kcFormGroupClass")}>
                     <div className={kcClsx("kcLabelWrapperClass")}>
-                        <label htmlFor="username" className={kcClsx("kcLabelClass")}>
+                        <Label htmlFor="username" className={kcClsx("kcLabelClass")}>
                             {!realm.loginWithEmailAllowed
                                 ? msg("username")
                                 : !realm.registrationEmailAsUsername
                                   ? msg("usernameOrEmail")
                                   : msg("email")}
-                        </label>
+                        </Label>
                     </div>
                     <div className={kcClsx("kcInputWrapperClass")}>
                         <Input

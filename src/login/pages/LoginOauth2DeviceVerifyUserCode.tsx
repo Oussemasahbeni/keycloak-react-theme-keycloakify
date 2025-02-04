@@ -2,6 +2,7 @@ import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import { PageProps } from "keycloakify/login/pages/PageProps";
 import { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
+import { Label } from "@/components/ui/label";
 
 export default function LoginOauth2DeviceVerifyUserCode(
     props: PageProps<Extract<KcContext, { pageId: "login-oauth2-device-verify-user-code.ftl" }>, I18n>
@@ -32,9 +33,9 @@ export default function LoginOauth2DeviceVerifyUserCode(
             >
                 <div className={kcClsx("kcFormGroupClass")}>
                     <div className={kcClsx("kcLabelWrapperClass")}>
-                        <label htmlFor="device-user-code" className={kcClsx("kcLabelClass")}>
+                        <Label htmlFor="device-user-code" className={kcClsx("kcLabelClass")}>
                             {msg("verifyOAuth2DeviceUserCode")}
-                        </label>
+                        </Label>
                     </div>
 
                     <div className={kcClsx("kcInputWrapperClass")}>
