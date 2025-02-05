@@ -1,4 +1,3 @@
-import { ModeToggle } from "@/components/mode-toggle";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,12 +7,25 @@ import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import { useInitialize } from "keycloakify/login/Template.useInitialize";
 import type { TemplateProps } from "keycloakify/login/TemplateProps";
 import { useSetClassName } from "keycloakify/tools/useSetClassName";
+import { Moon, Sun } from "lucide-react";
 import { useEffect } from "react";
 import { FiArrowLeft } from "react-icons/fi";
 import background from "./assets/img/background.svg";
 import type { I18n } from "./i18n";
 import type { KcContext } from "./KcContext";
 import { redirectUrlOrigin } from "./shared/redirectUrlOrigin";
+
+import { useTheme } from "@/components/theme-provider";
+
+
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { IoLanguage } from "react-icons/io5";
+
 
 
 
@@ -74,8 +86,8 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                             <FiArrowLeft /> {msg("home")}
                         </a>
                     </Button>
-                        {/* {enabledLanguages.length > 1 && (
-                            <div className={kcClsx("kcLocaleMainClass")} id="kc-locale">
+                        {enabledLanguages.length > 1 && (
+                            <div className={kcClsx("kcLocaleMainClass")} >
                                 <DropdownMenu>
                                     <DropdownMenuTrigger asChild>
                                         <Button
@@ -103,8 +115,8 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                     </DropdownMenuContent>
                                 </DropdownMenu>
                             </div>
-                        )} */}
-                         <ModeToggle />
+                        )}
+                         <ModeToggle i18n={i18n} />
                     </div>
 
                 </div>
@@ -201,7 +213,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                     </div>
                 </div>
             </div>
-            <div className="relative bg-muted md:block">
+            <div className="relative hidden bg-muted lg:!block">
                 <img
                     src={background}
                     alt="Background"
@@ -211,6 +223,35 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
         </div>
     );
 }
+export function ModeToggle(props: Readonly<{ i18n: I18n }>) {
+    const { setTheme } = useTheme()
+  
+    const { msg } = props.i18n;
+
+    return (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="outline" size="icon">
+            <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+            <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            <span className="sr-only">Toggle theme</span>
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem onClick={() => setTheme("light")}>
+            {msg("light")}
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setTheme("dark")}>
+            {msg("dark")}
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setTheme("system")}>
+            {msg("system")}
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    )
+  }
+  
 
 const getAlertVariant = (type: string) => {
     switch (type) {

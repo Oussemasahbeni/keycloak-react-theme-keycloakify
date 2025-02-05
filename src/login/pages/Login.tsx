@@ -16,7 +16,6 @@ import { SiInstagram } from "react-icons/si";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 
-import { IoLogoMicrosoft } from "react-icons/io5";
 
 
 
@@ -48,9 +47,18 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
             classes={classes}
             displayMessage={!messagesPerField.existsError("username", "password")}
             headerNode={
-                <div className={clsx("text-left text-2xl  font-bold  gap-2", locale?.rtl && "text-right")}>
-                          {msg("loginAccountTitle")}
+                <div className={clsx("text-left ", locale?.rtl && "text-right")}>
+                    <p className=" text-2xl  font-bold  gap-2">
+                        {msg("loginAccountTitle")}
+                    </p>
+                    <p className="text-balance font-normal text-sm text-muted-foreground">
+                         {msg("enterCredentials")}
+                    </p>
+                    <hr/>
                 </div>
+               
+
+
             }
             displayInfo={realm.password && realm.registrationAllowed && !registrationDisabled}
             infoNode={
@@ -99,7 +107,9 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                                             return <FaFacebook color="#1877F2" />
 
                                                         case "microsoft":
-                                                            return <IoLogoMicrosoft color="#1877F2" />
+                                                            return <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
+                                                            <path fill="#ff5722" d="M6 6H22V22H6z" transform="rotate(-180 14 14)"></path><path fill="#4caf50" d="M26 6H42V22H26z" transform="rotate(-180 34 14)"></path><path fill="#ffc107" d="M26 26H42V42H26z" transform="rotate(-180 34 34)"></path><path fill="#03a9f4" d="M6 26H22V42H6z" transform="rotate(-180 14 34)"></path>
+                                                            </svg>
 
 
                                                         case "twitter":
@@ -148,8 +158,10 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                 </>
             }
         >
+
             <div id="kc-form">
                 <div id="kc-form-wrapper">
+
                     {realm.password && (
                         <form
                             id="kc-form-login"
@@ -177,7 +189,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                         name="username"
                                         autoFocus
                                         autoComplete="username"
-                                        placeholder="youremail@example.com"
+                                        placeholder="m@example.com"
                                         aria-invalid={messagesPerField.existsError("username", "password")}
                                     />
 
@@ -201,7 +213,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                 <Label className="flex justify-between" htmlFor="password">
                                     {msg("password")}
 
-                                    
+
                                 </Label>
 
                                 <PasswordWrapper kcClsx={kcClsx} i18n={i18n} locale={locale} passwordInputId="password">
@@ -246,18 +258,18 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                         </div>
                                     )}
                                 </div>
-                                
+
                                 {realm.resetPasswordAllowed && (
-                                        <span className="mb-3">
-                                            <a
-                                                className="text-primary hover:text-violet-600 focus:text-violet-600 "
-                                                tabIndex={6}
-                                                href={url.loginResetCredentialsUrl}
-                                            >
-                                                {msg("doForgotPassword")}
-                                            </a>
-                                        </span>
-                                    )}
+                                    <span className="mb-3">
+                                        <a
+                                            className="text-primary hover:text-violet-600 focus:text-violet-600 "
+                                            tabIndex={6}
+                                            href={url.loginResetCredentialsUrl}
+                                        >
+                                            {msg("doForgotPassword")}
+                                        </a>
+                                    </span>
+                                )}
                             </div>
 
                             <div className={kcClsx("kcFormGroupClass")}>
