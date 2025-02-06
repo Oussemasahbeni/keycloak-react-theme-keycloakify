@@ -9,6 +9,11 @@ body.kcBodyClass {
     font-family: "Inter var", sans-serif;
 }
 
+body.oauth{
+    @apply bg-none bg-no-repeat bg-center bg-fixed;
+}
+
+
 a:hover {
     @apply text-violet-800 !important;
 }
