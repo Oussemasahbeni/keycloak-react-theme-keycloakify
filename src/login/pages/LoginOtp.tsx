@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { Fragment } from "react";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
-import { Label } from "@/components/ui/label";
 
 export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "login-otp.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
@@ -59,9 +59,9 @@ export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "
 
                 <div className={kcClsx("kcFormGroupClass")}>
                     <div className={kcClsx("kcLabelWrapperClass")}>
-                        <Label htmlFor="otp" className={kcClsx("kcLabelClass")}>
+                        <label htmlFor="otp" className={kcClsx("kcLabelClass")}>
                             {msg("loginOtpOneTime")}
-                        </Label>
+                        </label>
                     </div>
                     <div className={kcClsx("kcInputWrapperClass")}>
                         <Input

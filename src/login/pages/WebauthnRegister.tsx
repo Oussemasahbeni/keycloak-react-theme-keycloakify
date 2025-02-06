@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
+import { checkboxVariants } from "@/components/ui/checkbox";
+import clsx from "clsx";
 import { getKcClsx, type KcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { useScript } from "keycloakify/login/pages/WebauthnRegister.useScript";
@@ -70,12 +71,14 @@ function LogoutOtherSessions(props: { kcClsx: KcClsx; i18n: I18n }) {
     return (
         <div id="kc-form-options" className={kcClsx("kcFormOptionsClass")}>
             <div className={kcClsx("kcFormOptionsWrapperClass")}>
-                <div className="checkbox">
-                    <Label>
-                        <input type="checkbox" id="logout-sessions" name="logout-sessions" value="on" defaultChecked={true} />
-                        {msg("logoutOtherSessions")}
-                    </Label>
+
+                <div className="flex items-center space-x-2 ">
+                    <input type="checkbox" id="logout-sessions" className={clsx(checkboxVariants({}), "")}
+                        name="logout-sessions" value="on" defaultChecked={true} />
+
+                    <span> {msg("logoutOtherSessions")}</span>
                 </div>
+
             </div>
         </div>
     );

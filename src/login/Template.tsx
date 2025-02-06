@@ -17,6 +17,7 @@ import { redirectUrlOrigin } from "./shared/redirectUrlOrigin";
 
 import { useTheme } from "@/components/theme-provider";
 
+import companylogo from "./assets/img/companylogo.svg";
 
 import {
     DropdownMenu,
@@ -51,7 +52,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 
     const { msg, msgStr, currentLanguage, enabledLanguages } = i18n;
 
-    const { auth, url, message, isAppInitiatedAction } = kcContext;
+    const { auth, url, message, locale, isAppInitiatedAction } = kcContext;
 
 
 
@@ -77,15 +78,15 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 
     return (
 
-        <div  className="grid min-h-svh lg:grid-cols-2 dark:bg-slate-950">
+        <div className="grid min-h-svh lg:grid-cols-2 dark:bg-slate-950">
             <div className="flex flex-col gap-4 p-6 md:p-10">
                 <div className="flex justify-center gap-2 md:justify-start">
                     <div className="flex items-center gap-2 font-medium">
-                    <Button variant="outline" size="sm" className=" border-gray-400 self-center font-medium text-base ">
-                        <a className="flex items-center gap-1 hover:no-underline no-hover-color" href={kcContext.client.baseUrl ?? redirectUrlOrigin}>
-                            <FiArrowLeft /> {msg("home")}
-                        </a>
-                    </Button>
+                        <Button variant="outline" size="sm" className=" border-gray-400 self-center font-medium text-base ">
+                            <a className="flex items-center gap-1 hover:no-underline no-hover-color" href={kcContext.client.baseUrl ?? redirectUrlOrigin}>
+                                <FiArrowLeft /> {msg("home")}
+                            </a>
+                        </Button>
                         {enabledLanguages.length > 1 && (
                             <div className={kcClsx("kcLocaleMainClass")} >
                                 <DropdownMenu>
@@ -116,18 +117,22 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                 </DropdownMenu>
                             </div>
                         )}
-                         <ModeToggle i18n={i18n} />
+                        <ModeToggle i18n={i18n} />
                     </div>
 
                 </div>
-                <div  className="flex flex-1 items-center justify-center">
+                <div className="flex flex-1 items-center justify-center">
                     <div className="w-full max-w-md">
+
                         <Card>
                             <CardHeader className="text-center px-6 pt-6">
+                                <div className="flex items-center mx-auto mb-2  justify-between gap-2 lg:hidden">
+                                    <img src={companylogo} className="h-12 w-36" alt="" />
+                                </div>
                                 <CardTitle>
                                     {(() => {
                                         const node = !(auth !== undefined && auth.showUsername && !auth.showResetCredentials) ? (
-                                            <h1 className="text-left text-xl">{headerNode}</h1>
+                                            <h1 className="text-xl">{headerNode}</h1>
                                         ) : (
                                             <div id="kc-username" className={kcClsx("kcFormGroupClass")}>
                                                 <label id="kc-attempted-username">{auth.attemptedUsername}</label>
@@ -161,7 +166,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                             <CardContent >
                                 <div id="kc-content" >
                                     <div id="kc-content-wrapper">
-                                        
+
                                         {displayMessage && message !== undefined && (message.type !== "warning" || !isAppInitiatedAction) && (
                                             <Alert variant={getAlertVariant(message.type)} className="flex  gap-2 justify-center">
                                                 <div>
@@ -171,9 +176,9 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                                     {message.type === "info" && <span className={kcClsx("kcFeedbackInfoIcon")}></span>}
                                                 </div>
                                                 <AlertDescription>
+
                                                     <div
                                                         className={clsx(
-                                                            `alert-${message.type}`,
                                                             `pf-m-${message?.type === "error" ? "danger" : message.type}`
                                                         )}
                                                     >
@@ -186,7 +191,9 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                                 </AlertDescription>
                                             </Alert>
                                         )}
-                                        {children}
+                                        <div className={clsx("text-left ", locale?.rtl && "text-right")}>
+                                            {children}
+                                        </div>
                                         {socialProvidersNode}
                                         {auth !== undefined && auth.showTryAnotherWayLink && (
                                             <form id="kc-select-try-another-way-form" action={url.loginAction} method="post">
@@ -225,33 +232,33 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 }
 export function ModeToggle(props: Readonly<{ i18n: I18n }>) {
     const { setTheme } = useTheme()
-  
+
     const { msg } = props.i18n;
 
     return (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="icon">
-            <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-            <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            <span className="sr-only">Toggle theme</span>
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <DropdownMenuItem onClick={() => setTheme("light")}>
-            {msg("light")}
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setTheme("dark")}>
-            {msg("dark")}
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setTheme("system")}>
-            {msg("system")}
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="icon">
+                    <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                    <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                    <span className="sr-only">Toggle theme</span>
+                </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={() => setTheme("light")}>
+                    {msg("light")}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTheme("dark")}>
+                    {msg("dark")}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTheme("system")}>
+                    {msg("system")}
+                </DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
     )
-  }
-  
+}
+
 
 const getAlertVariant = (type: string) => {
     switch (type) {

@@ -16,6 +16,26 @@ export const Default: Story = {
     render: () => <KcPageStory />
 };
 
+export const Arabic: Story = {
+    render: () => <KcPageStory 
+        kcContext={{
+            locale: {
+                currentLanguageTag: "ar",
+                rtl: true
+            }
+        }}
+    />
+};
+export const French: Story = {
+    render: () => <KcPageStory 
+        kcContext={{
+            locale: {
+                currentLanguageTag: "fr",
+            }
+        }}
+    />
+};
+
 /**
  * WithCustomLogoutMessage:
  * - Purpose: Tests when a custom message is displayed for the logout confirmation.

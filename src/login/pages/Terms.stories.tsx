@@ -26,6 +26,24 @@ export const Default: Story = {
     )
 };
 
+export const Arabic: Story = {
+    render: () => <KcPageStory 
+        kcContext={{
+            locale: {
+                currentLanguageTag: "ar",
+                rtl: true
+            },
+            "x-keycloakify": {
+                messages: {
+                    termsText: "<p>بلدي الشروط باللغة <strong>العربية</strong></p>"
+                }
+            }
+            
+        }}
+    />
+};
+
+
 export const French: Story = {
     render: () => (
         <KcPageStory

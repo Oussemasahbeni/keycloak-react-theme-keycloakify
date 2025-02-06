@@ -8,7 +8,7 @@ export default function LoginVerifyEmail(props: PageProps<Extract<KcContext, { p
     const { msg } = i18n;
 
     const { url, user } = kcContext;
-
+    
     return (
         <Template
             kcContext={kcContext}
@@ -29,6 +29,8 @@ export default function LoginVerifyEmail(props: PageProps<Extract<KcContext, { p
                 </p>
             }
         >
+
+               
             <p className="instruction">{msg("emailVerifyInstruction1", user?.email ?? "")}</p>
         </Template>
     );

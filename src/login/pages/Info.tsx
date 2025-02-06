@@ -1,5 +1,7 @@
-import type { PageProps } from "keycloakify/login/pages/PageProps";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
+import { getKcClsx } from "keycloakify/login/lib/kcClsx";
+import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 
@@ -9,6 +11,8 @@ export default function Info(props: PageProps<Extract<KcContext, { pageId: "info
     const { advancedMsgStr, msg } = i18n;
 
     const { messageHeader, message, requiredActions, skipLink, pageRedirectUri, actionUri, client } = kcContext;
+    const { kcClsx } = getKcClsx({ doUseDefaultCss, classes });
+
 
     return (
         <Template
@@ -25,56 +29,66 @@ export default function Info(props: PageProps<Extract<KcContext, { pageId: "info
                 />
             }
         >
-            <div id="kc-info-message">
-                <p
-                    className="instruction"
-                    dangerouslySetInnerHTML={{
-                        __html: kcSanitize(
-                            (() => {
-                                let html = message.summary;
 
-                                if (requiredActions) {
-                                    html += "<b>";
+            <Alert variant="default" className="flex  gap-2 justify-center">
+                <div>
+                    <span className={kcClsx("kcFeedbackInfoIcon")}></span>
+                </div>
+                <AlertDescription>
+                    <div id="kc-info-message">
+                        <p
 
-                                    html += requiredActions.map(requiredAction => advancedMsgStr(`requiredAction.${requiredAction}`)).join(", ");
+                            dangerouslySetInnerHTML={{
+                                __html: kcSanitize(
+                                    (() => {
+                                        let html = message.summary;
 
-                                    html += "</b>";
-                                }
+                                        if (requiredActions) {
+                                            html += "<b>";
 
-                                return html;
-                            })()
-                        )
-                    }}
-                />
-                {(() => {
-                    if (skipLink) {
-                        return null;
-                    }
+                                            html += requiredActions.map(requiredAction => advancedMsgStr(`requiredAction.${requiredAction}`)).join(", ");
 
-                    if (pageRedirectUri) {
-                        return (
-                            <p>
-                                <a href={pageRedirectUri}>{msg("backToApplication")}</a>
-                            </p>
-                        );
-                    }
-                    if (actionUri) {
-                        return (
-                            <p>
-                                <a href={actionUri}>{msg("proceedWithAction")}</a>
-                            </p>
-                        );
-                    }
+                                            html += "</b>";
+                                        }
 
-                    if (client.baseUrl) {
-                        return (
-                            <p>
-                                <a href={client.baseUrl}>{msg("backToApplication")}</a>
-                            </p>
-                        );
-                    }
-                })()}
-            </div>
+                                        return html;
+                                    })()
+                                )
+                            }}
+                        />
+
+                    </div>
+                </AlertDescription>
+            </Alert>
+
+            {(() => {
+                if (skipLink) {
+                    return null;
+                }
+
+                if (pageRedirectUri) {
+                    return (
+                        <p>
+                            <a href={pageRedirectUri}>{msg("backToApplication")}</a>
+                        </p>
+                    );
+                }
+                if (actionUri) {
+                    return (
+                        <p>
+                            <a href={actionUri}>{msg("proceedWithAction")}</a>
+                        </p>
+                    );
+                }
+
+                if (client.baseUrl) {
+                    return (
+                        <p>
+                            <a href={client.baseUrl}>{msg("backToApplication")}</a>
+                        </p>
+                    );
+                }
+            })()}
         </Template>
     );
 }

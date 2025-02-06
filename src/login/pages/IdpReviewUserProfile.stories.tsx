@@ -15,6 +15,25 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
     render: () => <KcPageStory />
 };
+export const Arabic: Story = {
+    render: () => <KcPageStory 
+        kcContext={{
+            locale: {
+                currentLanguageTag: "ar",
+                rtl: true
+            }
+        }}
+    />
+};
+export const French: Story = {
+    render: () => <KcPageStory 
+        kcContext={{
+            locale: {
+                currentLanguageTag: "fr",
+            }
+        }}
+    />
+};
 export const WithFormValidationErrors: Story = {
     render: () => (
         <KcPageStory

@@ -16,6 +16,27 @@ export const Default: Story = {
     render: () => <KcPageStory />
 };
 
+export const Arabic: Story = {
+    render: () => <KcPageStory 
+        kcContext={{
+            locale: {
+                currentLanguageTag: "ar",
+                rtl: true
+            }
+        }}
+    />
+};
+export const French: Story = {
+    render: () => <KcPageStory 
+        kcContext={{
+            locale: {
+                currentLanguageTag: "fr",
+            }
+        }}
+    />
+};
+
+
 /**
  * WithPasswordError:
  * - Purpose: Tests when there is an error in the password input (e.g., invalid password).
@@ -37,16 +58,6 @@ export const WithPasswordError: Story = {
             }}
         />
     )
-};
-export const Arabic: Story = {
-    render: () => <KcPageStory 
-        kcContext={{
-            locale: {
-                currentLanguageTag: "ar",
-                rtl: true
-            }
-        }}
-    />
 };
 
 

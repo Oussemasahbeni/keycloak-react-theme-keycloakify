@@ -16,6 +16,26 @@ export const Default: Story = {
     render: () => <KcPageStory />
 };
 
+export const Arabic: Story = {
+    render: () => <KcPageStory 
+        kcContext={{
+            locale: {
+                currentLanguageTag: "ar",
+                rtl: true
+            }
+        }}
+    />
+};
+export const French: Story = {
+    render: () => <KcPageStory 
+        kcContext={{
+            locale: {
+                currentLanguageTag: "fr",
+            }
+        }}
+    />
+};
+
 /**
  * WithErrorMessage:
  * - Purpose: Tests behavior when an error message is displayed along with the page expiration message.

@@ -1,11 +1,13 @@
 import { Button } from "@/components/ui/button";
+import { checkboxVariants } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import clsx from "clsx";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { getKcClsx, KcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
-import { Label } from "@/components/ui/label";
 
 export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pageId: "login-config-totp.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
@@ -142,7 +144,7 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                                 name="userLabel"
                                 autoComplete="off"
                                 className={kcClsx("kcInputClass")}
-                                aria-invalid={messagesPerField.existsError("userLabel")}
+                                isError={messagesPerField.existsError("userLabel")}
                             />
                             {messagesPerField.existsError("userLabel") && (
                                 <span
@@ -214,12 +216,17 @@ function LogoutOtherSessions(props: { kcClsx: KcClsx; i18n: I18n }) {
     return (
         <div id="kc-form-options" className={kcClsx("kcFormOptionsClass")}>
             <div className={kcClsx("kcFormOptionsWrapperClass")}>
-                <div className="checkbox">
-                    <Label>
+                <div className="flex items-center space-x-2 ">
+                    <input type="checkbox" id="logout-sessions" className={clsx(checkboxVariants({}), "")}
+                        name="logout-sessions" value="on" defaultChecked={true} />
+                    <span> {msg("logoutOtherSessions")}</span>
+                </div>
+                {/* <div className="checkbox">
+                    <label>
                         <input type="checkbox" id="logout-sessions" name="logout-sessions" value="on" defaultChecked={true} />
                         {msg("logoutOtherSessions")}
-                    </Label>
-                </div>
+                    </label>
+                </div> */}
             </div>
         </div>
     );

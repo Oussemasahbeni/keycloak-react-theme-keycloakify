@@ -30,6 +30,26 @@ export const Default: Story = {
     render: () => <KcPageStory kcContext={mockKcContext} />
 };
 
+export const Arabic: Story = {
+    render: () => <KcPageStory 
+        kcContext={{
+            locale: {
+                currentLanguageTag: "ar",
+                rtl: true
+            }
+        }}
+    />
+};
+export const French: Story = {
+    render: () => <KcPageStory 
+        kcContext={{
+            locale: {
+                currentLanguageTag: "fr",
+            }
+        }}
+    />
+};
+
 /**
  * WithFormSubmissionError:
  * - Purpose: Tests how the component handles form submission errors.

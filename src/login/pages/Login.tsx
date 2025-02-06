@@ -16,10 +16,7 @@ import { SiInstagram } from "react-icons/si";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 
-
-
-
-
+import { checkboxVariants } from "@/components/ui/checkbox";
 
 
 
@@ -56,9 +53,6 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                     </p>
                     <hr/>
                 </div>
-               
-
-
             }
             displayInfo={realm.password && realm.registrationAllowed && !registrationDisabled}
             infoNode={
@@ -118,7 +112,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                                         case "instagram":
                                                             return <SiInstagram color="#E4405F" />
 
-                                                        case "linkedin":
+                                                        case "linkedin-openid-connect":
                                                             return <FaLinkedin color="#0077B5" />
 
                                                         case "stackoverflow":
@@ -174,7 +168,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                         >
                             {!usernameHidden && (
                                 <div className={kcClsx("kcFormGroupClass")}>
-                                    <Label className="flex justify-between" htmlFor="username">
+                                    <Label  htmlFor="username">
                                         {!realm.loginWithEmailAllowed
                                             ? msg("email")
                                             : !realm.registrationEmailAsUsername
@@ -190,7 +184,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                         autoFocus
                                         autoComplete="username"
                                         placeholder="m@example.com"
-                                        aria-invalid={messagesPerField.existsError("username", "password")}
+                                        isError={messagesPerField.existsError("username", "password")}
                                     />
 
                                     {messagesPerField.existsError("username", "password") && (
@@ -210,10 +204,8 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                 {/* <label htmlFor="password" className={kcClsx("kcLabelClass")}>
                                     {msg("password")}
                                 </label> */}
-                                <Label className="flex justify-between" htmlFor="password">
+                                <Label  htmlFor="password">
                                     {msg("password")}
-
-
                                 </Label>
 
                                 <PasswordWrapper kcClsx={kcClsx} i18n={i18n} locale={locale} passwordInputId="password">
@@ -226,7 +218,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                         autoFocus
                                         placeholder={msgStr("passwordPlaceholder")}
                                         autoComplete="current-password"
-                                        aria-invalid={messagesPerField.existsError("username", "password")}
+                                        isError={messagesPerField.existsError("username", "password")}
                                     />
                                 </PasswordWrapper>
                                 {usernameHidden && messagesPerField.existsError("username", "password") && (
@@ -241,35 +233,32 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                 )}
                             </div>
 
-                            <div className="flex items-center justify-between">
-                                <div id="kc-form-options">
+                        
+                            <div className="space-y-2 md:space-y-0 mb-3 md:flex md:justify-between text-xs  ">
+                                <div>
                                     {realm.rememberMe && !usernameHidden && (
-                                        <div className="checkbox">
-                                            <label>
-                                                <input
-                                                    tabIndex={5}
-                                                    id="rememberMe"
-                                                    name="rememberMe"
-                                                    type="checkbox"
-                                                    defaultChecked={!!login.rememberMe}
-                                                />{" "}
-                                                {msg("rememberMe")}
-                                            </label>
+                                        <div className="flex items-center space-x-2 ">
+                                            <input
+                                                tabIndex={5}
+                                                id="rememberMe"
+                                                className={clsx(checkboxVariants({}), "")}
+                                                name="rememberMe"
+                                                type="checkbox"
+                                                defaultChecked={!!login.rememberMe}
+                                            />
+                                            <span>{msgStr("rememberMe")}</span>
                                         </div>
                                     )}
                                 </div>
-
-                                {realm.resetPasswordAllowed && (
-                                    <span className="mb-3">
-                                        <a
-                                            className="text-primary hover:text-violet-600 focus:text-violet-600 "
-                                            tabIndex={6}
-                                            href={url.loginResetCredentialsUrl}
-                                        >
-                                            {msg("doForgotPassword")}
-                                        </a>
-                                    </span>
-                                )}
+                                <div className=" link-style">
+                                    {realm.resetPasswordAllowed && (
+                                        <span>
+                                            <a tabIndex={6} href={url.loginResetCredentialsUrl}>
+                                                {msgStr("doForgotPassword")}
+                                            </a>
+                                        </span>
+                                    )}
+                                </div>
                             </div>
 
                             <div className={kcClsx("kcFormGroupClass")}>

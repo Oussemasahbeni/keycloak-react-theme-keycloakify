@@ -62,7 +62,7 @@ export default function LoginPassword(props: PageProps<Extract<KcContext, { page
                                     name="password"
                                     autoFocus
                                     autoComplete="on"
-                                    aria-invalid={messagesPerField.existsError("username", "password")}
+                                    isError={messagesPerField.existsError("password")}
                                 />
                                 {/* <input
                                     tabIndex={2}

@@ -64,6 +64,16 @@ export const Arabic: Story = {
         }}
     />
 };
+export const French: Story = {
+    render: () => <KcPageStory 
+        kcContext={{
+            locale: {
+                currentLanguageTag: "fr",
+            }
+        }}
+    />
+};
+
 
 export const WithoutRememberMe: Story = {
     render: args => (
@@ -164,12 +174,12 @@ export const WithTwoSocialProviders: Story = {
                             iconClasses: "fa fa-google"
                         },
                         {
-                            loginUrl: "microsoft",
-                            alias: "microsoft",
-                            providerId: "microsoft",
-                            displayName: "Microsoft",
-                            iconClasses: "fa fa-windows"
-                        }
+                            loginUrl: "linkedin",
+                            alias: "linkedin",
+                            providerId: "linkedin-openid-connect",
+                            displayName: "LinkedIn",
+                            iconClasses: "fa fa-linkedin"
+                        },
                     ]
                 }
             }}
@@ -222,7 +232,7 @@ export const WithSocialProviders: Story = {
                         {
                             loginUrl: "linkedin",
                             alias: "linkedin",
-                            providerId: "linkedin",
+                            providerId: "linkedin-openid-connect",
                             displayName: "LinkedIn",
                             iconClasses: "fa fa-linkedin"
                         },

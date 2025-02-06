@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { checkboxVariants } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-dropdown-menu";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
@@ -90,8 +91,8 @@ export default function LoginUsername(props: PageProps<Extract<KcContext, { page
                                         {!realm.loginWithEmailAllowed
                                             ? msg("username")
                                             : !realm.registrationEmailAsUsername
-                                              ? msg("usernameOrEmail")
-                                              : msg("email")}
+                                                ? msg("usernameOrEmail")
+                                                : msg("email")}
                                     </Label>
                                     <Input
                                         tabIndex={2}
@@ -101,7 +102,7 @@ export default function LoginUsername(props: PageProps<Extract<KcContext, { page
                                         name="username"
                                         autoFocus
                                         autoComplete="username"
-                                        aria-invalid={messagesPerField.existsError("username", "password")}
+                                        isError={messagesPerField.existsError("username")}
                                     />
 
                                     {/* <label htmlFor="username" className={kcClsx("kcLabelClass")}>
@@ -133,18 +134,24 @@ export default function LoginUsername(props: PageProps<Extract<KcContext, { page
                             <div className={kcClsx("kcFormGroupClass", "kcFormSettingClass")}>
                                 <div id="kc-form-options">
                                     {realm.rememberMe && !usernameHidden && (
-                                        <div className="checkbox">
-                                            <Label>
-                                                <input
-                                                    tabIndex={3}
-                                                    id="rememberMe"
-                                                    name="rememberMe"
-                                                    type="checkbox"
-                                                    defaultChecked={!!login.rememberMe}
-                                                />{" "}
-                                                {msg("rememberMe")}
-                                            </Label>
+
+                                        <div className="flex items-center space-x-2 ">
+                                            <input tabIndex={3} type="checkbox" id="rememberMe" className={clsx(checkboxVariants({}), "")}
+                                                name="rememberMe" value="on" defaultChecked={!!login.rememberMe} />
+                                            <span> {msg("rememberMe")}</span>
                                         </div>
+                                        // <div className="checkbox">
+                                        //     <label>
+                                        //         <input
+                                        //             tabIndex={3}
+                                        //             id="rememberMe"
+                                        //             name="rememberMe"
+                                        //             type="checkbox"
+                                        //             defaultChecked={!!login.rememberMe}
+                                        //         />{" "}
+                                        //         {msg("rememberMe")}
+                                        //     </label>
+                                        // </div>
                                     )}
                                 </div>
                             </div>

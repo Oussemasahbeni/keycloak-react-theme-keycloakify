@@ -54,6 +54,7 @@ const LoginIdpLinkConfirmOverride = lazy(
 const DeleteAccountConfirm = lazy(() => import("./pages/DeleteAccountConfirm"));
 const LoginUpdatePassword = lazy(() => import("./pages/LoginUpdatePassword"));
 const LoginVerifyEmail = lazy(() => import("./pages/LoginVerifyEmail"));
+const Code = lazy(() => import("./pages/Code"));
 
 const doMakeUserConfirmPassword = true;
 
@@ -63,11 +64,17 @@ export default function KcPage(props: { kcContext: KcContext }) {
     const { i18n } = useI18n({ kcContext });
 
     return (
-        <ThemeProvider defaultTheme={getIsDarkMode()? "dark": "light"} storageKey="isDarkMode">
-
+        <ThemeProvider defaultTheme={getIsDarkMode() ? "dark" : "light"} storageKey="isDarkMode">
             <Suspense>
                 {(() => {
                     switch (kcContext.pageId) {
+                        case "code.ftl": return (
+                            <Code
+                                {...{ kcContext, i18n, classes }}
+                                Template={Template}
+                                doUseDefaultCss={true}
+                            />
+                        );
                         case "login.ftl":
                             return (
                                 <Login

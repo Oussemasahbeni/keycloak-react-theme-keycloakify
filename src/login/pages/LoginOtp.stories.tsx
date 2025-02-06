@@ -16,6 +16,26 @@ export const Default: Story = {
     render: () => <KcPageStory />
 };
 
+export const Arabic: Story = {
+    render: () => <KcPageStory 
+        kcContext={{
+            locale: {
+                currentLanguageTag: "ar",
+                rtl: true
+            }
+        }}
+    />
+};
+export const French: Story = {
+    render: () => <KcPageStory 
+        kcContext={{
+            locale: {
+                currentLanguageTag: "fr",
+            }
+        }}
+    />
+};
+
 /**
  * MultipleOtpCredentials:
  * - Purpose: Tests the behavior when the user has multiple OTP credentials to choose from.

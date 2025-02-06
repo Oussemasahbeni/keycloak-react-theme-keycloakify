@@ -35,8 +35,8 @@ export default function DeleteAccountConfirm(props: PageProps<Extract<KcContext,
                     <li>{msg("errasingData")}</li>
                 </ul>
                 <p className="delete-account-text">{msg("finalDeletionConfirmation")}</p>
-                <div id="kc-form-buttons">
-                    <Button className={"bg-blue-600 hover:bg-blue-700"} type="submit">
+                <div className="flex justify-between mt-4">
+                    <Button type="submit">
                         {msgStr("doConfirmDelete")}
                     </Button>
                     {triggered_from_aia && (

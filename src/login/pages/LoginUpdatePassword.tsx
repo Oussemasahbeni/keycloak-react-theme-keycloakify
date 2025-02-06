@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
+import { checkboxVariants } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
+import clsx from "clsx";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { getKcClsx, type KcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
@@ -8,7 +10,6 @@ import { useIsPasswordRevealed } from "keycloakify/tools/useIsPasswordRevealed";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
-import { Label } from "@/components/ui/label";
 
 export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, { pageId: "login-update-password.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
@@ -34,9 +35,9 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
             <form id="kc-passwd-update-form" className={kcClsx("kcFormClass")} action={url.loginAction} method="post">
                 <div className={kcClsx("kcFormGroupClass")}>
                     <div className={kcClsx("kcLabelWrapperClass")}>
-                        <Label htmlFor="password-new" className={kcClsx("kcLabelClass")}>
+                        <label htmlFor="password-new" className={kcClsx("kcLabelClass")}>
                             {msg("passwordNew")}
-                        </Label>
+                        </label>
                     </div>
                     <div className={kcClsx("kcInputWrapperClass")}>
                         <PasswordWrapper kcClsx={kcClsx} i18n={i18n} locale={locale} passwordInputId="password-new">
@@ -47,6 +48,7 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
                                 className={kcClsx("kcInputClass")}
                                 autoFocus
                                 autoComplete="new-password"
+                                isError={messagesPerField.existsError("password")}
                             />
                         </PasswordWrapper>
 
@@ -65,9 +67,9 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
 
                 <div className={kcClsx("kcFormGroupClass")}>
                     <div className={kcClsx("kcLabelWrapperClass")}>
-                        <Label htmlFor="password-confirm" className={kcClsx("kcLabelClass")}>
+                        <label htmlFor="password-confirm" className={kcClsx("kcLabelClass")}>
                             {msg("passwordConfirm")}
-                        </Label>
+                        </label>
                     </div>
                     <div className={kcClsx("kcInputWrapperClass")}>
                         <PasswordWrapper kcClsx={kcClsx} i18n={i18n} locale={locale} passwordInputId="password-confirm">
@@ -119,12 +121,17 @@ function LogoutOtherSessions(props: { kcClsx: KcClsx; i18n: I18n }) {
     return (
         <div id="kc-form-options" className={kcClsx("kcFormOptionsClass")}>
             <div className={kcClsx("kcFormOptionsWrapperClass")}>
-                <div className="checkbox">
-                    <Label>
+                 <div className="flex items-center space-x-2 ">
+                                    <input type="checkbox" id="logout-sessions" className={clsx(checkboxVariants({}), "")}
+                                        name="logout-sessions" value="on" defaultChecked={true} />
+                                    <span> {msg("logoutOtherSessions")}</span>
+                                </div>
+                {/* <div className="checkbox">
+                    <label>
                         <input type="checkbox" id="logout-sessions" name="logout-sessions" value="on" defaultChecked={true} />
                         {msg("logoutOtherSessions")}
-                    </Label>
-                </div>
+                    </label>
+                </div> */}
             </div>
         </div>
     );

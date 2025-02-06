@@ -5,7 +5,6 @@ import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import { useScript } from "keycloakify/login/pages/LoginPasskeysConditionalAuthenticate.useScript";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
-import { Label } from "@/components/ui/label";
 
 export default function LoginPasskeysConditionalAuthenticate(
     props: PageProps<Extract<KcContext, { pageId: "login-passkeys-conditional-authenticate.ftl" }>, I18n>
@@ -137,9 +136,9 @@ export default function LoginPasskeysConditionalAuthenticate(
                             >
                                 {!usernameHidden && (
                                     <div className={kcClsx("kcFormGroupClass")}>
-                                        <Label htmlFor="username" className={kcClsx("kcLabelClass")}>
+                                        <label htmlFor="username" className={kcClsx("kcLabelClass")}>
                                             {msg("passkey-autofill-select")}
-                                        </Label>
+                                        </label>
                                         <input
                                             tabIndex={1}
                                             id="username"

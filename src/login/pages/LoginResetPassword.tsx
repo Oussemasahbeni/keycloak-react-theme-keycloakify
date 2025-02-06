@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
-import { Label } from "@/components/ui/label";
 
 export default function LoginResetPassword(props: PageProps<Extract<KcContext, { pageId: "login-reset-password.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
@@ -49,7 +49,7 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
                             className={kcClsx("kcInputClass")}
                             autoFocus
                             defaultValue={auth.attemptedUsername ?? ""}
-                            aria-invalid={messagesPerField.existsError("username")}
+                            isError={messagesPerField.existsError("username")}
                         />
                         {messagesPerField.existsError("username") && (
                             <span

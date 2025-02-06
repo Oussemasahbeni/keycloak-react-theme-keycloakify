@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
+import { checkboxVariants } from "@/components/ui/checkbox";
 import { getKcClsx, type KcClsx } from "keycloakify/login/lib/kcClsx";
 import { useScript } from "keycloakify/login/pages/LoginRecoveryAuthnCodeConfig.useScript";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
@@ -66,9 +66,9 @@ export default function LoginRecoveryAuthnCodeConfig(props: PageProps<Extract<Kc
             </div>
 
             {/* confirmation checkbox */}
-            <div className={`space-x-2`}>
+            <div className={`mb-2 space-x-2`}>
                 <input
-                    className={kcClsx("kcCheckInputClass")}
+                    className={clsx(checkboxVariants({}), "")}
                     type="checkbox"
                     id="kcRecoveryCodesConfirmationCheck"
                     name="kcRecoveryCodesConfirmationCheck"
@@ -77,7 +77,8 @@ export default function LoginRecoveryAuthnCodeConfig(props: PageProps<Extract<Kc
                         document.getElementById("saveRecoveryAuthnCodesBtn").disabled = !event.target.checked;
                     }}
                 />
-                <Label htmlFor="kcRecoveryCodesConfirmationCheck">{msg("recovery-codes-confirmation-message")}</Label>
+                <label htmlFor="kcRecoveryCodesConfirmationCheck"> {msg("recovery-codes-confirmation-message")}</label>
+                {/* <Label htmlFor="kcRecoveryCodesConfirmationCheck">{msg("recovery-codes-confirmation-message")}</Label> */}
             </div>
 
             <form action={kcContext.url.loginAction} className={kcClsx("kcFormGroupClass")} id="kc-recovery-codes-settings-form" method="post">
@@ -122,14 +123,22 @@ function LogoutOtherSessions(props: { kcClsx: KcClsx; i18n: I18n }) {
     const { msg } = i18n;
 
     return (
-        <div id="kc-form-options">
+        <div id="kc-form-options" className={`mb-2`}>
             <div className={kcClsx("kcFormOptionsWrapperClass")}>
-                <div className="checkbox">
-                    <Label>
+
+                <div className="flex items-center space-x-2 ">
+                    <input type="checkbox" id="logout-sessions" className={clsx(checkboxVariants({}), "")}
+                        name="logout-sessions" value="on" defaultChecked={true} />
+                    <label > {msg("logoutOtherSessions")}</label>
+
+                    {/* <span> {msg("logoutOtherSessions")}</span> */}
+                </div>
+                {/* <div className="checkbox">
+                    <label>
                         <input type="checkbox" id="logout-sessions" name="logout-sessions" value="on" defaultChecked={true} />
                         {msg("logoutOtherSessions")}
-                    </Label>
-                </div>
+                    </label>
+                </div> */}
             </div>
         </div>
     );

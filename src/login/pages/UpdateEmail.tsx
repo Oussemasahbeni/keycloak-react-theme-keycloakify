@@ -1,13 +1,14 @@
 import { Button } from "@/components/ui/button";
+import { checkboxVariants } from "@/components/ui/checkbox";
 import type { UserProfileFormFieldsProps } from "keycloakify/login/UserProfileFormFieldsProps";
 import { getKcClsx, type KcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { JSX } from "keycloakify/tools/JSX";
 import type { LazyOrNot } from "keycloakify/tools/LazyOrNot";
+import { clsx } from "keycloakify/tools/clsx";
 import { useState } from "react";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
-import { Label } from "@/components/ui/label";
 
 type UpdateEmailProps = PageProps<Extract<KcContext, { pageId: "update-email.ftl" }>, I18n> & {
     UserProfileFormFields: LazyOrNot<(props: UserProfileFormFieldsProps) => JSX.Element>;
@@ -78,11 +79,11 @@ function LogoutOtherSessions(props: { kcClsx: KcClsx; i18n: I18n }) {
     return (
         <div id="kc-form-options" className={kcClsx("kcFormOptionsClass")}>
             <div className={kcClsx("kcFormOptionsWrapperClass")}>
-                <div className="checkbox">
-                    <Label>
-                        <input type="checkbox" id="logout-sessions" name="logout-sessions" value="on" defaultChecked={true} />
-                        {msg("logoutOtherSessions")}
-                    </Label>
+
+                <div className="flex items-center space-x-2 ">
+                    <input type="checkbox" id="logout-sessions" className={clsx(checkboxVariants({}), "")}
+                        name="logout-sessions" value="on" defaultChecked={true} />
+                    <span> {msg("logoutOtherSessions")}</span>
                 </div>
             </div>
         </div>

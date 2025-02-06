@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import type { UserProfileFormFieldsProps } from "keycloakify/login/UserProfileFormFieldsProps";
 import { getKcClsx, type KcClsx } from "keycloakify/login/lib/kcClsx";
@@ -9,7 +10,6 @@ import { clsx } from "keycloakify/tools/clsx";
 import { useState } from "react";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
-import { Label } from "@/components/ui/label";
 
 type RegisterProps = PageProps<Extract<KcContext, { pageId: "register.ftl" }>, I18n> & {
     UserProfileFormFields: LazyOrNot<(props: UserProfileFormFieldsProps) => JSX.Element>;

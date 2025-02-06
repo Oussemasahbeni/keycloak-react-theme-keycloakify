@@ -1,4 +1,6 @@
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import clsx from "clsx";
 import type { Attribute } from "keycloakify/login/KcContext";
 import type { KcClsx } from "keycloakify/login/lib/kcClsx";
 import {
@@ -15,7 +17,6 @@ import { Fragment, useEffect } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import type { I18n } from "./i18n";
 import type { KcContext } from "./KcContext";
-import { Label } from "@/components/ui/label";
 
 export default function UserProfileFormFields(props: UserProfileFormFieldsProps<KcContext, I18n>) {
     const { kcContext, i18n, kcClsx, onIsFormSubmittableValueChange, doMakeUserConfirmPassword, BeforeField, AfterField } = props;
@@ -63,7 +64,7 @@ export default function UserProfileFormFields(props: UserProfileFormFieldsProps<
                             }}
                         >
                             <div className={kcClsx("kcLabelWrapperClass")}>
-                                <Label htmlFor={attribute.name} className={kcClsx("kcLabelClass")}>
+                                <Label htmlFor={attribute.name} className={clsx("text-left  gap-2", locale?.rtl && "text-right")}>
                                     {advancedMsg(attribute.displayName ?? "")}
                                 </Label>
                                 {attribute.required && <> *</>}
@@ -216,7 +217,7 @@ type InputFieldByTypeProps = {
 };
 
 function InputFieldByType(props: InputFieldByTypeProps) {
-    const { attribute, valueOrValues,locale } = props;
+    const { attribute, valueOrValues, locale } = props;
 
     switch (attribute.annotations.inputType) {
         case "textarea":
@@ -307,7 +308,7 @@ function InputTag(props: InputFieldByTypeProps & { fieldIndex: number | undefine
                     return valueOrValues;
                 })()}
                 className={kcClsx("kcInputClass")}
-                aria-invalid={displayableErrors.find(error => error.fieldIndex === fieldIndex) !== undefined}
+                isError={displayableErrors.length !== 0}
                 disabled={attribute.readOnly}
                 autoComplete={attribute.autocomplete}
                 placeholder={

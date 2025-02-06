@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
-import { Label } from "@/components/ui/label";
 
 export default function LoginX509Info(props: PageProps<Extract<KcContext, { pageId: "login-x509-info.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
@@ -34,9 +34,9 @@ export default function LoginX509Info(props: PageProps<Extract<KcContext, { page
                         </div>
                     ) : (
                         <div className={kcClsx("kcLabelWrapperClass")}>
-                            <Label id="certificate_subjectDN" className={kcClsx("kcLabelClass")}>
+                            <label id="certificate_subjectDN" className={kcClsx("kcLabelClass")}>
                                 {msg("noCertificate")}
-                            </Label>
+                            </label>
                         </div>
                     )}
                 </div>
@@ -44,14 +44,14 @@ export default function LoginX509Info(props: PageProps<Extract<KcContext, { page
                     {x509.formData.isUserEnabled && (
                         <>
                             <div className={kcClsx("kcLabelWrapperClass")}>
-                                <Label htmlFor="username" className={kcClsx("kcLabelClass")}>
+                                <label htmlFor="username" className={kcClsx("kcLabelClass")}>
                                     {msg("doX509Login")}
-                                </Label>
+                                </label>
                             </div>
                             <div className={kcClsx("kcLabelWrapperClass")}>
-                                <Label id="username" className={kcClsx("kcLabelClass")}>
+                                <label id="username" className={kcClsx("kcLabelClass")}>
                                     {x509.formData.username}
-                                </Label>
+                                </label>
                             </div>
                         </>
                     )}

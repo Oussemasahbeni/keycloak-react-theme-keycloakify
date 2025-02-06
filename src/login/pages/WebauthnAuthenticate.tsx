@@ -1,8 +1,9 @@
-import { Fragment } from "react";
-import { clsx } from "keycloakify/tools/clsx";
+import { Input } from "@/components/ui/input";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
-import { useScript } from "keycloakify/login/pages/WebauthnAuthenticate.useScript";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
+import { useScript } from "keycloakify/login/pages/WebauthnAuthenticate.useScript";
+import { clsx } from "keycloakify/tools/clsx";
+import { Fragment } from "react";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 
@@ -56,7 +57,7 @@ export default function WebauthnAuthenticate(props: PageProps<Extract<KcContext,
                         <>
                             <form id="authn_select" className={kcClsx("kcFormClass")}>
                                 {authenticators.authenticators.map(authenticator => (
-                                    <input type="hidden" name="authn_use_chk" value={authenticator.credentialId} />
+                                    <Input key={authenticator.credentialId} type="hidden" name="authn_use_chk" value={authenticator.credentialId} />
                                 ))}
                             </form>
 

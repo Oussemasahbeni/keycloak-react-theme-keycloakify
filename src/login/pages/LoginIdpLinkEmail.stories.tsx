@@ -36,6 +36,26 @@ export const Default: Story = {
     render: () => <KcPageStory kcContext={mockKcContext} />
 };
 
+export const Arabic: Story = {
+    render: () => <KcPageStory 
+        kcContext={{
+            locale: {
+                currentLanguageTag: "ar",
+                rtl: true
+            }
+        }}
+    />
+};
+export const French: Story = {
+    render: () => <KcPageStory 
+        kcContext={{
+            locale: {
+                currentLanguageTag: "fr",
+            }
+        }}
+    />
+};
+
 /**
  * WithIdpAlias:
  * - Purpose: Tests behavior when the idpAlias is set to "Google".
