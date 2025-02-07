@@ -49,9 +49,9 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                         {msg("loginAccountTitle")}
                     </p>
                     <p className="text-balance font-normal text-sm text-muted-foreground">
-                         {msg("enterCredentials")}
+                        {msg("enterCredentials")}
                     </p>
-                    <hr/>
+                    <hr />
                 </div>
             }
             displayInfo={realm.password && realm.registrationAllowed && !registrationDisabled}
@@ -85,7 +85,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                                 id={`social-${p.alias}`}
                                                 className={clsx(
                                                     kcClsx(providers.length > 3 && "kcFormSocialAccountGridItem"),
-                                                    "flex items-center justify-center gap-5"
+                                                    "flex items-center justify-center gap-2"
                                                 )}
                                                 type="button"
                                                 href={p.loginUrl}
@@ -102,7 +102,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
 
                                                         case "microsoft":
                                                             return <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
-                                                            <path fill="#ff5722" d="M6 6H22V22H6z" transform="rotate(-180 14 14)"></path><path fill="#4caf50" d="M26 6H42V22H26z" transform="rotate(-180 34 14)"></path><path fill="#ffc107" d="M26 26H42V42H26z" transform="rotate(-180 34 34)"></path><path fill="#03a9f4" d="M6 26H22V42H6z" transform="rotate(-180 14 34)"></path>
+                                                                <path fill="#ff5722" d="M6 6H22V22H6z" transform="rotate(-180 14 14)"></path><path fill="#4caf50" d="M26 6H42V22H26z" transform="rotate(-180 34 14)"></path><path fill="#ffc107" d="M26 26H42V42H26z" transform="rotate(-180 34 34)"></path><path fill="#03a9f4" d="M6 26H22V42H6z" transform="rotate(-180 14 34)"></path>
                                                             </svg>
 
 
@@ -136,7 +136,6 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
 
                                                 {/* {p.iconClasses && <i className={clsx(kcClsx("kcCommonLogoIdP"), p.iconClasses)} aria-hidden="true"></i>} */}
                                                 <span
-                                                    className={clsx(kcClsx("kcFormSocialAccountNameClass"), p.iconClasses && "kc-social-icon-text")}
                                                     dangerouslySetInnerHTML={{ __html: kcSanitize(p.displayName) }}
                                                 ></span>
                                             </a>
@@ -168,7 +167,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                         >
                             {!usernameHidden && (
                                 <div className={kcClsx("kcFormGroupClass")}>
-                                    <Label  htmlFor="username">
+                                    <Label htmlFor="username">
                                         {!realm.loginWithEmailAllowed
                                             ? msg("email")
                                             : !realm.registrationEmailAsUsername
@@ -204,7 +203,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                 {/* <label htmlFor="password" className={kcClsx("kcLabelClass")}>
                                     {msg("password")}
                                 </label> */}
-                                <Label  htmlFor="password">
+                                <Label htmlFor="password">
                                     {msg("password")}
                                 </Label>
 
@@ -233,7 +232,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                 )}
                             </div>
 
-                        
+
                             <div className="space-y-2 md:space-y-0 mb-3 md:flex md:justify-between text-xs  ">
                                 <div>
                                     {realm.rememberMe && !usernameHidden && (
