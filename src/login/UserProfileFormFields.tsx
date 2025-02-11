@@ -307,7 +307,6 @@ function InputTag(props: InputFieldByTypeProps & { fieldIndex: number | undefine
 
                     return valueOrValues;
                 })()}
-                className={kcClsx("kcInputClass")}
                 isError={displayableErrors.length !== 0}
                 disabled={attribute.readOnly}
                 autoComplete={attribute.autocomplete}

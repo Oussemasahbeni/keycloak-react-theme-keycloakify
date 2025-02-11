@@ -55,7 +55,7 @@ export const WithoutRegistration: Story = {
 };
 
 export const Arabic: Story = {
-    render: () => <KcPageStory 
+    render: () => <KcPageStory
         kcContext={{
             locale: {
                 currentLanguageTag: "ar",
@@ -65,7 +65,7 @@ export const Arabic: Story = {
     />
 };
 export const French: Story = {
-    render: () => <KcPageStory 
+    render: () => <KcPageStory
         kcContext={{
             locale: {
                 currentLanguageTag: "fr",
@@ -175,7 +175,41 @@ export const WithTwoSocialProviders: Story = {
                         },
                         {
                             loginUrl: "linkedin",
-                            alias: "linkedin",
+                            alias: "linkedin-openid-connect",
+                            providerId: "linkedin-openid-connect",
+                            displayName: "LinkedIn",
+                            iconClasses: "fa fa-linkedin"
+                        },
+                    ]
+                }
+            }}
+        />
+    )
+};
+
+
+export const WithTwoSocialProvidersArabic: Story = {
+    render: args => (
+        <KcPageStory
+            {...args}
+            kcContext={{
+                locale: {
+                    currentLanguageTag: "ar",
+                    rtl: true
+                },
+                social: {
+                    displayInfo: true,
+                    providers: [
+                        {
+                            loginUrl: "google",
+                            alias: "google",
+                            providerId: "google",
+                            displayName: "Google",
+                            iconClasses: "fa fa-google"
+                        },
+                        {
+                            loginUrl: "linkedin",
+                            alias: "linkedin-openid-connect",
                             providerId: "linkedin-openid-connect",
                             displayName: "LinkedIn",
                             iconClasses: "fa fa-linkedin"
@@ -231,7 +265,7 @@ export const WithSocialProviders: Story = {
                         },
                         {
                             loginUrl: "linkedin",
-                            alias: "linkedin",
+                            alias: "linkedin-openid-connect",
                             providerId: "linkedin-openid-connect",
                             displayName: "LinkedIn",
                             iconClasses: "fa fa-linkedin"
@@ -273,8 +307,8 @@ export const WithSocialProviders: Story = {
                         },
                         {
                             loginUrl: "openshift",
-                            alias: "openshift",
-                            providerId: "openshift",
+                            alias: "openshift-v4",
+                            providerId: "openshift-v4",
                             displayName: "OpenShift",
                             iconClasses: "fa fa-cloud"
                         }

@@ -11,14 +11,14 @@ body.kcBodyClass {
 
 body.oauth{
     @apply bg-none bg-no-repeat bg-center bg-fixed;
-}
 
+}
 
 a:hover {
-    @apply text-violet-800 !important;
+    @apply text-primary !important;
 }
 .no-hover-color:hover {
-    @apply text-current !important; /* Ensure the text color remains the same on hover */
+    @apply text-current !important; 
 }
 
 .kcHeaderWrapperClass {
@@ -36,6 +36,10 @@ input[type="radio"]:checked {
     @apply accent-primary;
 }
 
+.required {
+    @apply text-red-600;
+}
+
 @layer base {
     :root {
         --background: 0 0% 100%;
@@ -44,9 +48,9 @@ input[type="radio"]:checked {
         --card-foreground: 224 71.4% 4.1%;
         --popover: 0 0% 100%;
         --popover-foreground: 224 71.4% 4.1%;
-        --primary: 262.1 83.3% 57.8%;
+        --primary: 242 50% 33%;
         --primary-foreground: 210 20% 98%;
-        --secondary: 220 14.3% 95.9%;
+        --secondary: 14 79% 66%;
         --secondary-foreground: 220.9 39.3% 11%;
         --muted: 220 14.3% 95.9%;
         --muted-foreground: 220 8.9% 46.1%;
@@ -56,7 +60,7 @@ input[type="radio"]:checked {
         --destructive-foreground: 210 20% 98%;
         --border: 220 13% 91%;
         --input: 220 13% 91%;
-        --ring: 262.1 83.3% 57.8%;
+        --ring: 242 50% 33%;
         --radius: 0.75rem;
         --chart-1: 12 76% 61%;
         --chart-2: 173 58% 39%;
@@ -72,9 +76,9 @@ input[type="radio"]:checked {
         --card-foreground: 210 20% 98%;
         --popover: 224 71.4% 4.1%;
         --popover-foreground: 210 20% 98%;
-        --primary: 263.4 70% 50.4%;
+        --primary: 242 50% 33%;
         --primary-foreground: 210 20% 98%;
-        --secondary: 215 27.9% 16.9%;
+        --secondary: 14 79% 66%;
         --secondary-foreground: 210 20% 98%;
         --muted: 215 27.9% 16.9%;
         --muted-foreground: 217.9 10.6% 64.9%;
@@ -84,7 +88,7 @@ input[type="radio"]:checked {
         --destructive-foreground: 210 20% 98%;
         --border: 215 27.9% 16.9%;
         --input: 215 27.9% 16.9%;
-        --ring: 263.4 70% 50.4%;
+        --ring: 242 50% 33%;
         --chart-1: 220 70% 50%;
         --chart-2: 160 60% 45%;
         --chart-3: 30 80% 55%;
@@ -92,6 +96,7 @@ input[type="radio"]:checked {
         --chart-5: 340 75% 55%;
     }
 }
+
 
 @layer base {
     * {

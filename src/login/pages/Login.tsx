@@ -7,16 +7,12 @@ import { getKcClsx, type KcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { useIsPasswordRevealed } from "keycloakify/tools/useIsPasswordRevealed";
 import { useState } from "react";
-import { FaBitbucket, FaFacebook, FaGithub, FaLinkedin, FaStackOverflow } from "react-icons/fa";
-import { FaPaypal, FaSquareXTwitter } from "react-icons/fa6";
-import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { IoIosLink } from "react-icons/io";
-import { SiInstagram } from "react-icons/si";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 
 import { checkboxVariants } from "@/components/ui/checkbox";
+import useProviderLogos from "../useProviderLogos";
 
 
 
@@ -33,6 +29,9 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
     const { social, realm, url, usernameHidden, login, auth, locale, registrationDisabled, messagesPerField } = kcContext;
 
     const { msg, msgStr } = i18n;
+
+    const providerLogos = useProviderLogos();
+
 
     const [isLoginButtonDisabled, setIsLoginButtonDisabled] = useState(false);
 
@@ -51,7 +50,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                     <p className="text-balance font-normal text-sm text-muted-foreground">
                         {msg("enterCredentials")}
                     </p>
-                    <hr />
+                    <hr className="mt-1" />
                 </div>
             }
             displayInfo={realm.password && realm.registrationAllowed && !registrationDisabled}
@@ -80,62 +79,33 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                             <ul className={clsx(kcClsx("kcFormSocialAccountListClass", social.providers.length > 3 && "kcFormSocialAccountListGridClass"), " gap-2")}>
                                 {social.providers.map((...[p, , providers]) => (
                                     <li key={p.alias}>
-                                        <Button variant="outline" className="w-full">
+                                        <Button variant="outline" className="w-full dark:bg-slate-200 hover:text-current">
                                             <a
                                                 id={`social-${p.alias}`}
                                                 className={clsx(
                                                     kcClsx(providers.length > 3 && "kcFormSocialAccountGridItem"),
-                                                    "flex items-center justify-center gap-2"
+                                                    "flex items-center justify-center gap-2 "
                                                 )}
                                                 type="button"
                                                 href={p.loginUrl}
                                             >
-                                                {(() => {
-                                                    switch (p.providerId) {
-                                                        case "github":
-                                                            return <FaGithub color="black" />
-
-                                                        case "google":
-                                                            return <FcGoogle />
-                                                        case "facebook":
-                                                            return <FaFacebook color="#1877F2" />
-
-                                                        case "microsoft":
-                                                            return <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
-                                                                <path fill="#ff5722" d="M6 6H22V22H6z" transform="rotate(-180 14 14)"></path><path fill="#4caf50" d="M26 6H42V22H26z" transform="rotate(-180 34 14)"></path><path fill="#ffc107" d="M26 26H42V42H26z" transform="rotate(-180 34 34)"></path><path fill="#03a9f4" d="M6 26H22V42H6z" transform="rotate(-180 14 34)"></path>
-                                                            </svg>
-
-
-                                                        case "twitter":
-                                                            return <FaSquareXTwitter color="black" />
-
-                                                        case "instagram":
-                                                            return <SiInstagram color="#E4405F" />
-
-                                                        case "linkedin-openid-connect":
-                                                            return <FaLinkedin color="#0077B5" />
-
-                                                        case "stackoverflow":
-                                                            return <FaStackOverflow color="#F48024" />
-
-                                                        case "bitbucket":
-                                                            return <FaBitbucket color="#0052CC" />
-
-                                                        case "paypal":
-                                                            return <FaPaypal color="#003087" />
-
-
-                                                        case "gitlab":
-                                                            return <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
-                                                                <path fill="#e53935" d="M24 43L16 20 32 20z"></path><path fill="#ff7043" d="M24 43L42 20 32 20z"></path><path fill="#e53935" d="M37 5L42 20 32 20z"></path><path fill="#ffa726" d="M24 43L42 20 45 28z"></path><path fill="#ff7043" d="M24 43L6 20 16 20z"></path><path fill="#e53935" d="M11 5L6 20 16 20z"></path><path fill="#ffa726" d="M24 43L6 20 3 28z"></path>
-                                                            </svg>
-                                                    }
-                                                    return <IoIosLink />
-
-                                                })()}
+                                                <div className={"h-5 w-5"}>
+                                                    {providerLogos[p.alias] ? (
+                                                        <img src={providerLogos[p.alias]} alt={`${p.displayName} logo`} className={"h-full w-auto"} />
+                                                    ) : (
+                                                        // Fallback to the original iconClasses if the logo is not defined
+                                                        p.iconClasses && (
+                                                            <i
+                                                                className={clsx(kcClsx("kcCommonLogoIdP"), p.iconClasses, `text-provider-${p.alias}`)}
+                                                                aria-hidden="true"
+                                                            ></i>
+                                                        )
+                                                    )}
+                                                </div>
 
                                                 {/* {p.iconClasses && <i className={clsx(kcClsx("kcCommonLogoIdP"), p.iconClasses)} aria-hidden="true"></i>} */}
                                                 <span
+
                                                     dangerouslySetInnerHTML={{ __html: kcSanitize(p.displayName) }}
                                                 ></span>
                                             </a>
@@ -233,7 +203,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                             </div>
 
 
-                            <div className="space-y-2 md:space-y-0 mb-3 md:flex md:justify-between text-xs  ">
+                            <div className=" space-y-1 mb-3 flex justify-between text-xs  ">
                                 <div>
                                     {realm.rememberMe && !usernameHidden && (
                                         <div className="flex items-center space-x-2 ">
