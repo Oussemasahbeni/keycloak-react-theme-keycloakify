@@ -63,7 +63,7 @@ export const Template = ({ locale, t }: TemplateProps) => {
         {t('email-test.passwordAdvice')}
       </Text>
         <Button
-          width={isRTL ? 220 : 152}
+          width={200}
           height={40}
           align={isRTL ? "right" : "left"}
           backgroundColor="#5e6ad2"

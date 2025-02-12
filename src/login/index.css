@@ -14,6 +14,12 @@ body.oauth{
 
 }
 
+/* Change the text to right for RTL languages*/
+html[dir="rtl"] .children {
+    @apply text-right 
+  } 
+  
+
 a:hover {
     @apply text-primary !important;
 }

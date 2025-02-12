@@ -52,7 +52,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 
     const { msg, msgStr, currentLanguage, enabledLanguages } = i18n;
 
-    const { auth, url, message, locale, isAppInitiatedAction } = kcContext;
+    const { auth, url, message, isAppInitiatedAction } = kcContext;
 
 
 
@@ -191,7 +191,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                                 </AlertDescription>
                                             </Alert>
                                         )}
-                                        <div className={clsx("text-left ", locale?.rtl && "text-right")}>
+                                        <div className="children">
                                             {children}
                                         </div>
                                         {socialProvidersNode}
