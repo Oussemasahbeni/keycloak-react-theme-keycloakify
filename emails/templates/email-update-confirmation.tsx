@@ -1,3 +1,4 @@
+import { previewLocale } from 'emails/utils/previewLocale';
 import { applyRTL } from 'emails/utils/RTL';
 import i18n, { TFunction } from 'i18next';
 import { Button, Text, render } from "jsx-email";
@@ -23,8 +24,8 @@ const rtlStyle = {
 };
 
 export const previewProps: TemplateProps = {
-  t: i18n.getFixedT('en'),
-  locale: "en",
+  t: i18n.getFixedT(previewLocale),
+  locale: previewLocale,
   themeName: "vanilla",
 };
 
@@ -45,18 +46,18 @@ export const Template = ({ locale, t }: TemplateProps) => {
         {t('email-update-confirmation.clickLinkBelow')}
       </Text>
 
-        <Button
-          width={200}
-          height={40}
-          backgroundColor="#5e6ad2"
-          borderRadius={3}
-          textColor="#fff"
-          align={isRTL ? "right" : "left"}
-          fontSize={15}
-          href={exp("link")}
-        >
-          {t('email-update-confirmation.updateEmail')}
-        </Button>
+      <Button
+        width={200}
+        height={40}
+        backgroundColor="#5e6ad2"
+        borderRadius={3}
+        textColor="#fff"
+        align={isRTL ? "right" : "left"}
+        fontSize={15}
+        href={exp("link")}
+      >
+        {t('email-update-confirmation.updateEmail')}
+      </Button>
       <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
         {t('email-update-confirmation.linkExpiration', { expiration: exp("linkExpirationFormatter(linkExpiration)") })}
       </Text>

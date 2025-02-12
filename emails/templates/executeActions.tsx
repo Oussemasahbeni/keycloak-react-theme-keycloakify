@@ -1,3 +1,4 @@
+import { previewLocale } from 'emails/utils/previewLocale';
 import { applyRTL } from 'emails/utils/RTL';
 import i18n, { TFunction } from 'i18next';
 import { Button, Raw, Text, render } from "jsx-email";
@@ -23,8 +24,8 @@ const rtlStyle = {
 };
 
 export const previewProps: TemplateProps = {
-  t: i18n.getFixedT('en'),
-  locale: "en",
+  t: i18n.getFixedT(previewLocale),
+  locale: previewLocale,
   themeName: "vanilla",
 };
 
@@ -39,7 +40,7 @@ export const Template = ({ locale, t }: TemplateProps) => {
     <EmailLayout preview={t('executeActions.subject')} locale={locale}>
       <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
         {t('executeActions.message', { realmName: exp("realmName") })}
-        <Raw 
+        <Raw
           content="<#assign requiredActionsText><#if requiredActions??><#list requiredActions><#items as reqActionItem>${msg('requiredAction.${reqActionItem}')}<#sep>, </#sep></#items></#list></#if></#assign>"
         />
       </Text>
@@ -48,19 +49,19 @@ export const Template = ({ locale, t }: TemplateProps) => {
         {t('executeActions.clickLink')}
       </Text>
 
-        <Button
-          width={200}
-          height={40}
-          backgroundColor="#5e6ad2"
-          align={isRTL ? "right" : "left"}
+      <Button
+        width={200}
+        height={40}
+        backgroundColor="#5e6ad2"
+        align={isRTL ? "right" : "left"}
 
-          borderRadius={3}
-          textColor="#fff"
-          fontSize={15}
-          href={exp("link")}
-        >
-          {t('executeActions.updateAccountButton')}
-        </Button>
+        borderRadius={3}
+        textColor="#fff"
+        fontSize={15}
+        href={exp("link")}
+      >
+        {t('executeActions.updateAccountButton')}
+      </Button>
 
       <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
         {t('executeActions.linkExpiration', { expiration: exp("linkExpirationFormatter(linkExpiration)") })}

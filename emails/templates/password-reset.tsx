@@ -1,3 +1,4 @@
+import { previewLocale } from 'emails/utils/previewLocale';
 import { applyRTL } from 'emails/utils/RTL';
 import i18n, { TFunction } from 'i18next';
 import { Button, Text, render } from "jsx-email";
@@ -23,8 +24,8 @@ const rtlStyle = {
 };
 
 export const previewProps: TemplateProps = {
-  t: i18n.getFixedT('en'),
-  locale: "en",
+  t: i18n.getFixedT(previewLocale),
+  locale: previewLocale,
   themeName: "vanilla",
 };
 
