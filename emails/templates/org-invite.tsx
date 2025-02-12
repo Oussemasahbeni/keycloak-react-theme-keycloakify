@@ -40,7 +40,7 @@ export const Template = ({ locale, t }: TemplateProps) => {
     <EmailLayout preview={t('org-invite.subject')} locale={locale}>
       <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
         <Fm.If condition={`${v("firstName")}?? && ${v("lastName")}??`}>
-          <p>
+          <p style={applyRTL(paragraph, isRTL, rtlStyle)}>
             {t('org-invite.greeting', { firstName: exp("firstName"), lastName: exp("lastName") })}
           </p>
         </Fm.If>
@@ -50,18 +50,18 @@ export const Template = ({ locale, t }: TemplateProps) => {
         {t('org-invite.message', { organizationName: exp("organization.name") })}
       </Text>
 
-        <Button
-          width={200}
-          align={isRTL ? "right" : "left"}
-          height={40}
-          backgroundColor="#5e6ad2"
-          borderRadius={3}
-          textColor="#fff"
-          fontSize={15}
-          href={exp("link")}
-        >
-          {t('org-invite.joinButton')}
-        </Button>
+      <Button
+        width={200}
+        align={isRTL ? "right" : "left"}
+        height={40}
+        backgroundColor="#5e6ad2"
+        borderRadius={3}
+        textColor="#fff"
+        fontSize={15}
+        href={exp("link")}
+      >
+        {t('org-invite.joinButton')}
+      </Button>
 
       <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
         {t('org-invite.linkExpiration', { expiration: exp("linkExpirationFormatter(linkExpiration)") })}

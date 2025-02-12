@@ -95,7 +95,7 @@
         "message": "Quelqu'un a demandé à changer les informations d'identification de votre compte {{realmName}}. Si c'était vous, cliquez sur le lien ci-dessous pour les réinitialiser.",
         "linkExpiration": "Ce lien expirera dans {{expiration}}.",
         "ignoreMessage": "Si vous ne souhaitez pas réinitialiser vos informations d'identification, ignorez simplement ce message et rien ne changera.",
-        "resetButton": "Réinitialiser les informations d'identification"
+        "resetButton": "Réinitialiser le mot de passe"
     },
     "footer": {
         "allRightsReserved": "© {{currentYear}} {{realmName}}, Tous droits réservés",

@@ -62,25 +62,25 @@ export const Template = ({ locale, t }: TemplateProps) => {
       <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
         {t('email-test.passwordAdvice')}
       </Text>
-        <Button
-          width={200}
-          height={40}
-          align={isRTL ? "right" : "left"}
-          backgroundColor="#5e6ad2"
-          borderRadius={3}
-          textColor="#fff"
-          fontSize={15}
-          href="https://linear.app"
-        >
-          {t('email-test.loginButton')}
-        </Button>
+      <Button
+        width={200}
+        height={40}
+        align={isRTL ? "right" : "left"}
+        backgroundColor="#5e6ad2"
+        borderRadius={3}
+        textColor="#fff"
+        fontSize={15}
+        href="https://linear.app"
+      >
+        {t('email-test.loginButton')}
+      </Button>
       <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
         {t('email-test.contactSupport', { realmName: exp("realmName") })}
       </Text>
       <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
         {t('email-test.thanks')},
         <br />
-        {t('email-test.supportTeam', { realmName: exp("realmName")})}
+        {t('email-test.supportTeam', { realmName: exp("realmName") })}
       </Text>
     </EmailLayout>
   );

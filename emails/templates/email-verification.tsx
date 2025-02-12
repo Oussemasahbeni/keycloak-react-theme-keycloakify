@@ -41,18 +41,18 @@ export const Template = ({ locale, t }: TemplateProps) => {
         {t('email-verification.message', { firstName: exp("user.firstName") })}
       </Text>
 
-        <Button
-          width={isRTL ? 220 : 152}
-          align={isRTL ? "right" : "left"}
-          height={40}
-          backgroundColor="#5e6ad2"
-          borderRadius={3}
-          textColor="#fff"
-          fontSize={15}
-          href={exp("link")}
-        >
-          {t('email-verification.verifyButton')}
-        </Button>
+      <Button
+        width={200}
+        align={isRTL ? "right" : "left"}
+        height={40}
+        backgroundColor="#5e6ad2"
+        borderRadius={3}
+        textColor="#fff"
+        fontSize={15}
+        href={exp("link")}
+      >
+        {t('email-verification.verifyButton')}
+      </Button>
       <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
         {t('email-verification.linkExpiration', { expiration: exp("linkExpirationFormatter(linkExpiration)") })}
       </Text>
