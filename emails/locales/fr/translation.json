@@ -74,7 +74,7 @@
         "updateAccountButton": "Mettre à jour le compte"
     },
     "identity-provider-link": {
-        "subject": "Lier {{identityProviderDisplayName}}",
+        "subject": "Lier {0} avec votre compte",
         "message": "Quelqu'un veut lier votre compte {{identityProviderDisplayName}} avec le compte {{realmName}} de l'utilisateur {{username}}.",
         "clickLink": "Si c'était vous, cliquez sur le lien ci-dessous pour lier les comptes",
         "linkExpiration": "Ce lien expirera dans {{expiration}}.",
@@ -83,7 +83,7 @@
         "loginInfo": "Si vous liez les comptes, vous pourrez vous connecter à {{identityProviderDisplayName}} via {{realmName}}."
     },
     "org-invite": {
-        "subject": "Invitation à rejoindre l'organisation {{organizationName}}",
+        "subject": "Invitation à rejoindre l'organisation {0}",
         "greeting": "Bonjour, {{firstName}} {{lastName}}.",
         "message": "Vous avez été invité à rejoindre l'organisation {{organizationName}}. Cliquez sur le lien ci-dessous pour rejoindre.",
         "linkExpiration": "Ce lien expirera dans {{expiration}}.",
@@ -99,6 +99,6 @@
     },
     "footer": {
         "allRightsReserved": "© {{currentYear}} {{realmName}}, Tous droits réservés",
-        "address": "Pôle Tech. Ghazela, 2036 Ariana, Tunisie"
+        "address": "7 rue de l'île de Bizerte, 1053, Tunis, Tunisie"
     }
 }

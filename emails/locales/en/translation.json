@@ -74,7 +74,7 @@
         "updateAccountButton": "Update Account"
     },
     "identity-provider-link": {
-        "subject": "Link {{identityProviderDisplayName}}",
+        "subject": "Link {0} with your account",
         "message": "Someone wants to link your {{identityProviderDisplayName}} account with {{realmName}} account of user {{username}}.",
         "clickLink": "If this was you, click the link below to link accounts",
         "linkExpiration": "This link will expire within {{expiration}}.",
@@ -83,7 +83,7 @@
         "loginInfo": "If you link accounts, you will be able to login to {{identityProviderDisplayName}} through {{realmName}}."
     },
     "org-invite": {
-        "subject": "Invitation to join the {{organizationName}} organization",
+        "subject": "Invitation to join the {0} organization",
         "greeting": "Hi, {{firstName}} {{lastName}}.",
         "message": "You were invited to join the {{organizationName}} organization. Click the link below to join.",
         "linkExpiration": "This link will expire within {{expiration}}.",
@@ -99,6 +99,6 @@
     },
     "footer": {
         "allRightsReserved": "© {{currentYear}} {{realmName}}, All Rights Reserved",
-        "address": "Pole Tech. Ghazela, 2036 Ariana, Tunisia"
+        "address": "7 Bizerte Island Street, 1053, Tunis, Tunisia"
     }
 }

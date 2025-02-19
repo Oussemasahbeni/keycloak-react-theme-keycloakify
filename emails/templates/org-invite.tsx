@@ -81,5 +81,5 @@ export const getTemplate: GetTemplate = async (props) => {
 
 export const getSubject: GetSubject = async (props) => {
   const t = i18n.getFixedT(props.locale);
-  return t('org-invite.subject', { organizationName: exp("organization.name") });
+  return t('org-invite.subject');
 };
