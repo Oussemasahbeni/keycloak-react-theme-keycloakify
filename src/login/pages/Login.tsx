@@ -182,9 +182,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                         tabIndex={3}
                                         type="password"
                                         id="password"
-                                        defaultValue={login.username ?? ""}
                                         name="password"
-                                        autoFocus
                                         placeholder={msgStr("passwordPlaceholder")}
                                         autoComplete="current-password"
                                         isError={messagesPerField.existsError("username", "password")}

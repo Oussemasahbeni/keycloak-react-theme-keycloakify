@@ -74,7 +74,7 @@
         "updateAccountButton": "تحديث الحساب"
     },
     "identity-provider-link": {
-        "subject": "{{identityProviderDisplayName}} ربط ",
+        "subject": "مع حسابك {0} ربط",
         "message": "يريد شخص ما ربط حساب {{identityProviderDisplayName}} الخاص بك بحساب {{realmName}} الخاص بالمستخدم {{username}}.",
         "clickLink": "إذا كنت أنت من قام بذلك، انقر على الرابط أدناه لربط الحسابات",
         "linkExpiration": "ستنتهي صلاحية هذا الرابط خلال {{expiration}}.",
@@ -83,7 +83,7 @@
         "loginInfo": "إذا قمت بربط الحسابات، ستتمكن من تسجيل الدخول إلى {{identityProviderDisplayName}} من خلال {{realmName}}."
     },
     "org-invite": {
-        "subject": "{{organizationName}} دعوة للانضمام إلى منظمة ",
+        "subject": "{0} دعوة للانضمام إلى منظمة",
         "greeting": "مرحبًا، {{firstName}} {{lastName}}.",
         "message": "لقد تمت دعوتك للانضمام إلى منظمة {{organizationName}}. انقر على الرابط أدناه للانضمام.",
         "linkExpiration": "ستنتهي صلاحية هذا الرابط خلال {{expiration}}.",
@@ -99,6 +99,6 @@
     },
     "footer": {
         "allRightsReserved": "© {{currentYear}} {{realmName}}، جميع الحقوق محفوظة",
-        "address": "قطب التكنولوجيا. غزالة، 2036 أريانة، تونس"
+        "address": "7 نهج ليل بنزرت، 1053، تونس، تونس"
     }
 }
