@@ -7,25 +7,18 @@ import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import { useInitialize } from "keycloakify/login/Template.useInitialize";
 import type { TemplateProps } from "keycloakify/login/TemplateProps";
 import { useSetClassName } from "keycloakify/tools/useSetClassName";
-import { Moon, Sun } from "lucide-react";
 import { useEffect } from "react";
 import { FiArrowLeft } from "react-icons/fi";
-import background from "./assets/img/background.svg";
 import type { I18n } from "./i18n";
 import type { KcContext } from "./KcContext";
 import { redirectUrlOrigin } from "./shared/redirectUrlOrigin";
 
-import { useTheme } from "@/components/theme-provider";
 
-import companylogo from "./assets/img/companylogo.svg";
+import companylogo from "./assets/img/auth-logo.svg";
+import shape from "./assets/img/shape.svg";
 
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { IoLanguage } from "react-icons/io5";
+import { Languages } from '@/components/langauges';
+import { ModeToggle } from '@/components/theme-toggle';
 
 
 
@@ -88,34 +81,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                             </a>
                         </Button>
                         {enabledLanguages.length > 1 && (
-                            <div className={kcClsx("kcLocaleMainClass")} >
-                                <DropdownMenu>
-                                    <DropdownMenuTrigger asChild>
-                                        <Button
-                                            tabIndex={1}
-                                            variant="outline"
-                                            size="sm"
-                                            aria-label={msgStr("languages")}
-                                            aria-haspopup="true"
-                                            aria-expanded="false"
-                                            aria-controls="language-switch1"
-                                            className="px-3 py-0 border-gray-400 text-base hover:border-gray-500  flex items-center"
-                                        >
-                                            <IoLanguage />
-                                            {currentLanguage.label}
-                                        </Button>
-                                    </DropdownMenuTrigger>
-                                    <DropdownMenuContent id="language-switch1" role="menu">
-                                        {enabledLanguages.map(({ languageTag, label, href }, i) => (
-                                            <DropdownMenuItem key={languageTag} role="none">
-                                                <a role="menuitem" id={`language-${i + 1}`} className={kcClsx("kcLocaleItemClass")} href={href}>
-                                                    {label}{" "}
-                                                </a>
-                                            </DropdownMenuItem>
-                                        ))}
-                                    </DropdownMenuContent>
-                                </DropdownMenu>
-                            </div>
+                            <Languages i18n={i18n} />
                         )}
                         <ModeToggle i18n={i18n} />
                     </div>
@@ -220,43 +186,41 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                     </div>
                 </div>
             </div>
-            <div className="relative hidden bg-muted lg:!block">
-                <img
-                    src={background}
-                    alt="Background"
-                    className="absolute inset-0 h-full w-full object-cover "
-                />
+
+            <div className="bg-primary  relative lg:block! dark:bg-white/5">
+                <div className="flex items-center pt-20 h-full justify-center z-1">
+                    <div className="absolute right-0 top-0 w-full max-w-[250px] xl:max-w-[450px]">
+                        <img
+                            src={shape}
+                            alt="grid"
+                        />
+                    </div>
+                    <div className="absolute bottom-0 left-0 w-full max-w-[250px] rotate-180 xl:max-w-[450px]">
+                        <img
+                            src={shape}
+                            alt="grid"
+                        />
+                    </div>
+
+                    <div className="flex justify-center my-auto flex-col items-center max-w-xs">
+                        <a className="block mb-4">
+                            <img
+                                width="231"
+                                height="48"
+                                src={companylogo}
+                                alt="Logo"
+                            />
+                        </a>
+                        <p className="text-center  text-gray-400 dark:text-white/60">
+                            {msg("welcomeMessage")}
+                        </p>
+                    </div>
+                </div>
             </div>
+
+
         </div>
     );
-}
-export function ModeToggle(props: Readonly<{ i18n: I18n }>) {
-    const { setTheme } = useTheme()
-
-    const { msg } = props.i18n;
-
-    return (
-        <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="icon">
-                    <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                    <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-                    <span className="sr-only">Toggle theme</span>
-                </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setTheme("light")}>
-                    {msg("light")}
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("dark")}>
-                    {msg("dark")}
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("system")}>
-                    {msg("system")}
-                </DropdownMenuItem>
-            </DropdownMenuContent>
-        </DropdownMenu>
-    )
 }
 
 

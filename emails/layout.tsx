@@ -1,6 +1,7 @@
 import { Body, Column, Container, Head, Html, Img, Preview, Row, Section, Text } from "jsx-email";
 import { createVariablesHelper } from "keycloakify-emails/variables";
 import { PropsWithChildren, ReactNode } from "react";
+import { companyLogo, primaryColor } from './constants';
 import i18n from "./i18n";
 
 
@@ -11,19 +12,6 @@ const main = {
 };
 
 
-// const fontFamily = 'HelveticaNeue,Helvetica,Arial,sans-serif';
-
-// const main = {
-//   backgroundColor: '#efeef1',
-//   fontFamily
-// };
-
-// const container = {
-//   backgroundColor: "#ffffff",
-//   margin: "0 auto",
-//   marginBottom: "64px",
-//   padding: "20px 0 48px",
-// };
 
 const container = {
   width: '580px',
@@ -59,7 +47,7 @@ const sectionBorder = {
 };
 
 const sectionCenter = {
-  borderBottom: '1px solid rgb(145,71,255)',
+  borderBottom: `1px solid ${primaryColor}`,
   width: '102px'
 };
 
@@ -68,7 +56,6 @@ const footer = {
   margin: '0 auto'
 };
 
-// const baseUrl = import.meta.isJsxEmailPreview ? "/assets" : "${url.resourcesUrl}";
 const currentYear = new Date().getFullYear();
 
 const { exp } = createVariablesHelper("email-test.ftl");
@@ -85,13 +72,13 @@ export const EmailLayout = ({
 
 
   return (
-    <Html lang={locale} >
+    <Html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} >
       <Head />
       <Preview>{preview}</Preview>
       <Body style={main}>
         <Container style={container}>
           <Section style={logo}>
-            <Img width={200} src="https://res.cloudinary.com/dyo9yeeck/image/upload/v1738352235/plutj3dm2hposbgpy4i6.png" />
+            <Img width={200} src={companyLogo} />
           </Section>
 
           <Section style={sectionsBorders}>

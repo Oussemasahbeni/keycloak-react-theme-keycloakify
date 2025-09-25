@@ -1,3 +1,4 @@
+import { btnTextColor, primaryColor } from 'emails/constants';
 import { previewLocale } from 'emails/utils/previewLocale';
 import { applyRTL } from 'emails/utils/RTL';
 import i18n, { TFunction } from 'i18next';
@@ -52,11 +53,10 @@ export const Template = ({ locale, t }: TemplateProps) => {
       <Button
         width={200}
         height={40}
-        backgroundColor="#5e6ad2"
+        backgroundColor={primaryColor}
+        textColor={btnTextColor}
         align={isRTL ? "right" : "left"}
-
         borderRadius={3}
-        textColor="#fff"
         fontSize={15}
         href={exp("link")}
       >

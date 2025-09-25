@@ -9,22 +9,22 @@ body.kcBodyClass {
     font-family: "Inter var", sans-serif;
 }
 
-body.oauth{
+body.oauth {
     @apply bg-none bg-no-repeat bg-center bg-fixed;
-
 }
 
 /* Change the text to right for RTL languages*/
 html[dir="rtl"] .children {
-    @apply text-right 
-  } 
-  
-
-a:hover {
-    @apply text-primary !important;
+    @apply text-right;
 }
+
+/* a:hover {
+    @apply text-primary !important;
+} */
+
+
 .no-hover-color:hover {
-    @apply text-current !important; 
+    @apply text-current !important;
 }
 
 .kcHeaderWrapperClass {
@@ -102,7 +102,6 @@ input[type="radio"]:checked {
         --chart-5: 340 75% 55%;
     }
 }
-
 
 @layer base {
     * {
