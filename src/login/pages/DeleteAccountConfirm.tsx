@@ -1,3 +1,4 @@
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from "@/components/ui/button";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
@@ -18,29 +19,33 @@ export default function DeleteAccountConfirm(props: PageProps<Extract<KcContext,
 
     return (
         <Template kcContext={kcContext} i18n={i18n} doUseDefaultCss={doUseDefaultCss} classes={classes} headerNode={msg("deleteAccountConfirm")}>
-            <form action={url.loginAction} className="form-vertical" method="post">
-                <div className="alert alert-warning" style={{ marginTop: "0", marginBottom: "30px" }}>
-                    <span className="pficon pficon-warning-triangle-o"></span>
-                    {msg("irreversibleAction")}
+            <form action={url.loginAction} className="space-y-6" method="post">
+
+                <Alert type="warning" className="my-3">
+                    <AlertDescription>
+                        <span>{msg("irreversibleAction")}</span>
+                    </AlertDescription>
+                </Alert>
+
+                <div className="space-y-4">
+                    <p className="text-foreground">{msg("deletingImplies")}</p>
+
+                    <ul className="list-disc list-inside space-y-2 text-muted-foreground pl-4">
+                        <li>{msg("loggingOutImmediately")}</li>
+                        <li>{msg("errasingData")}</li>
+                    </ul>
+
+                    <p className="text-foreground font-medium mt-6">
+                        {msg("finalDeletionConfirmation")}
+                    </p>
                 </div>
-                <p>{msg("deletingImplies")}</p>
-                <ul
-                    style={{
-                        color: "#72767b",
-                        listStyle: "disc",
-                        listStylePosition: "inside"
-                    }}
-                >
-                    <li>{msg("loggingOutImmediately")}</li>
-                    <li>{msg("errasingData")}</li>
-                </ul>
-                <p className="delete-account-text">{msg("finalDeletionConfirmation")}</p>
-                <div className="flex justify-between mt-4">
-                    <Button type="submit">
+
+                <div className="flex flex-col sm:flex-row gap-3 sm:justify-between mt-6">
+                    <Button type="submit" variant="destructive" className="sm:flex-1">
                         {msgStr("doConfirmDelete")}
                     </Button>
                     {triggered_from_aia && (
-                        <Button variant="secondary" type="submit" name="cancel-aia" value="true">
+                        <Button variant="outline" type="submit" name="cancel-aia" value="true" className="sm:flex-1">
                             {msgStr("doCancel")}
                         </Button>
                     )}

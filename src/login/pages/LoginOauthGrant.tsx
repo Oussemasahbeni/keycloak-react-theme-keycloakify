@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+import { CardDescription } from "@/components/ui/card";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import { PageProps } from "keycloakify/login/pages/PageProps";
 import { KcContext } from "../KcContext";
@@ -9,7 +11,7 @@ export default function LoginOauthGrant(props: PageProps<Extract<KcContext, { pa
 
     const { msg, msgStr, advancedMsg, advancedMsgStr } = i18n;
 
-    const { kcClsx } = getKcClsx({
+    getKcClsx({
         doUseDefaultCss,
         classes
     });
@@ -22,80 +24,98 @@ export default function LoginOauthGrant(props: PageProps<Extract<KcContext, { pa
             classes={classes}
             bodyClassName="oauth"
             headerNode={
-                <>
-                    {client.attributes.logoUri && <img src={client.attributes.logoUri} />}
-                    <p>{client.name ? msg("oauthGrantTitle", advancedMsgStr(client.name)) : msg("oauthGrantTitle", client.clientId)}</p>
-                </>
+                <div className="flex flex-col items-center space-y-3">
+                    {client.attributes.logoUri && (
+                        <img
+                            src={client.attributes.logoUri}
+                            alt="Client logo"
+                            className="h-12 w-auto object-contain"
+                        />
+                    )}
+                    <p className="text-lg font-medium text-center">
+                        {client.name ? msg("oauthGrantTitle", advancedMsgStr(client.name)) : msg("oauthGrantTitle", client.clientId)}
+                    </p>
+                </div>
             }
         >
-            <div id="kc-oauth" className="content-area">
-                <h3>{msg("oauthGrantRequest")}</h3>
-                <ul>
-                    {oauth.clientScopesRequested.map(clientScope => (
-                        <li key={clientScope.consentScreenText}>
-                            <span>
-                                {advancedMsg(clientScope.consentScreenText)}
-                                {clientScope.dynamicScopeParameter && (
-                                    <>
-                                        : <b>{clientScope.dynamicScopeParameter}</b>
-                                    </>
-                                )}
-                            </span>
-                        </li>
-                    ))}
-                </ul>
+            <div className='space-y-6'>
+                <div className="text-base">{msg("oauthGrantRequest")}</div>
 
-                {client.attributes.policyUri ||
-                    (client.attributes.tosUri && (
-                        <h3>
-                            {client.name ? msg("oauthGrantInformation", advancedMsgStr(client.name)) : msg("oauthGrantInformation", client.clientId)}
-                            {client.attributes.tosUri && (
-                                <>
-                                    {msg("oauthGrantReview")}
-                                    <a href={client.attributes.tosUri} target="_blank">
-                                        {msg("oauthGrantTos")}
-                                    </a>
-                                </>
-                            )}
-                            {client.attributes.policyUri && (
-                                <>
-                                    {msg("oauthGrantReview")}
-                                    <a href={client.attributes.policyUri} target="_blank">
-                                        {msg("oauthGrantPolicy")}
-                                    </a>
-                                </>
-                            )}
-                        </h3>
-                    ))}
-
-                <form className="form-actions" action={url.oauthAction} method="POST">
-                    <input type="hidden" name="code" value={oauth.code} />
-                    <div className={kcClsx("kcFormGroupClass")}>
-                        <div id="kc-form-options">
-                            <div className={kcClsx("kcFormOptionsWrapperClass")}></div>
-                        </div>
-
-                        <div id="kc-form-buttons">
-                            <div className={kcClsx("kcFormButtonsWrapperClass")}>
-                                <input
-                                    className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonLargeClass")}
-                                    name="accept"
-                                    id="kc-login"
-                                    type="submit"
-                                    value={msgStr("doYes")}
-                                />
-                                <input
-                                    className={kcClsx("kcButtonClass", "kcButtonDefaultClass", "kcButtonLargeClass")}
-                                    name="cancel"
-                                    id="kc-cancel"
-                                    type="submit"
-                                    value={msgStr("doNo")}
-                                />
+                <div className="space-y-4">
+                    <div className="space-y-2">
+                        {oauth.clientScopesRequested.map(clientScope => (
+                            <div key={clientScope.consentScreenText} className="flex items-start space-x-2">
+                                <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
+                                <span className="text-sm text-muted-foreground">
+                                    {advancedMsg(clientScope.consentScreenText)}
+                                    {clientScope.dynamicScopeParameter && (
+                                        <>
+                                            : <span className="font-medium text-foreground">{clientScope.dynamicScopeParameter}</span>
+                                        </>
+                                    )}
+                                </span>
                             </div>
-                        </div>
+                        ))}
                     </div>
-                </form>
-                <div className="clearfix"></div>
+
+                    {(client.attributes.policyUri || client.attributes.tosUri) && (
+                        <>
+                            {/* <Separator /> */}
+                            <div className="space-y-2">
+                                <CardDescription className="text-xs">
+                                    {client.name ? msg("oauthGrantInformation", advancedMsgStr(client.name)) : msg("oauthGrantInformation", client.clientId)}
+                                </CardDescription>
+                                <div className="flex flex-wrap gap-2 text-xs">
+                                    {client.attributes.tosUri && (
+                                        <a
+                                            href={client.attributes.tosUri}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-primary dark:text-white hover:text-primary/80 underline underline-offset-4"
+                                        >
+                                            {msg("oauthGrantTos")}
+                                        </a>
+                                    )}
+                                    {client.attributes.policyUri && (
+                                        <a
+                                            href={client.attributes.policyUri}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-primary dark:text-white hover:text-primary/80 underline underline-offset-4"
+                                        >
+                                            {msg("oauthGrantPolicy")}
+                                        </a>
+                                    )}
+                                </div>
+                            </div>
+                        </>
+                    )}
+                </div>
+
+                <div>
+                    <form className="w-full" action={url.oauthAction} method="POST">
+                        <input type="hidden" name="code" value={oauth.code} />
+                        <div className="flex flex-col sm:flex-row gap-3 w-full">
+                            <Button
+                                type="submit"
+                                name="accept"
+                                id="kc-login"
+                                className="flex-1"
+                            >
+                                {msgStr("doYes")}
+                            </Button>
+                            <Button
+                                type="submit"
+                                name="cancel"
+                                id="kc-cancel"
+                                variant="outline"
+                                className="flex-1"
+                            >
+                                {msgStr("doNo")}
+                            </Button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </Template>
     );

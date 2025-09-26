@@ -13,13 +13,16 @@ export default function LoginIdpLinkConfirmOverride(props: PageProps<Extract<KcC
 
     return (
         <Template kcContext={kcContext} i18n={i18n} doUseDefaultCss={doUseDefaultCss} classes={classes} headerNode={msg("confirmOverrideIdpTitle")}>
-            <form id="kc-register-form" action={url.loginAction} method="post">
-                {msg("pageExpiredMsg1")}{" "}
-                <a id="loginRestartLink" href={url.loginRestartFlowUrl}>
-                    {msg("doClickHere")}
-                </a>
-                <br />
-                <br />
+            <form id="kc-register-form" action={url.loginAction} className='flex flex-col gap-5' method="post">
+
+                <span>
+                    {msg("pageExpiredMsg1")}{" "}
+                    <a className='text-primary dark:text-white underline underline-offset-2' id="loginRestartLink" href={url.loginRestartFlowUrl}>
+                        {msg("doClickHere")}
+                    </a>
+
+                </span>
+
                 <Button
                     type="submit"
                     className="w-full"

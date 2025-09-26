@@ -10,7 +10,7 @@ const { useI18n, ofTypeI18n } = i18nBuilder
             welcomeMessage:
                 "Welcome to Planingo - Your gateway to seamless planning and organization.",
 
-            loginAccountTitle: "<span class='text-primary'>Login to </span> your account",
+            loginAccountTitle: "Login to your account",
             registerTitle: "<span class='text-primary'>Register</span> a new account",
             email: "Email Address",
             enterCredentials: "Enter your credentials below to login",
@@ -20,13 +20,14 @@ const { useI18n, ofTypeI18n } = i18nBuilder
             home: "Home",
             dark: "Dark",
             light: "Light",
-            system: "System"
+            system: "System",
+            copySuccessTitle: "Code copied to clipboard",
+            copyErrorTitle: "Failed to copy code"
         },
         ar: {
             welcomeMessage: "مرحبًا بك في Planingo - بوابتك إلى التخطيط والتنظيم السلس.",
 
-            loginAccountTitle:
-                "<span class='text-primary'> تسجيل الدخول</span>   إلى حسابك",
+            loginAccountTitle: "تسجيل الدخول  إلى حسابك",
             registerTitle: "<span class='text-primary'>تسجيل</span> حساب جديد",
             email: "عنوان البريد الإلكتروني",
             enterCredentials: "أدخل بيانات الاعتماد الخاصة بك أدناه لتسجيل الدخول",
@@ -36,13 +37,14 @@ const { useI18n, ofTypeI18n } = i18nBuilder
             home: "الصفحة الرئيسية",
             dark: "داكن",
             light: "نور",
-            system: "النظام"
+            system: "النظام",
+            copySuccessTitle: "تم نسخ الرمز إلى الحافظة",
+            copyErrorTitle: "فشل في نسخ الرمز"
         },
         fr: {
             welcomeMessage:
                 "Bienvenue sur Planingo Votre passerelle vers une planification et une organisation sans faille.",
-            loginAccountTitle:
-                "<span class='text-primary'>Connectez-vous</span> à votre compte",
+            loginAccountTitle: "Connectez-vous à votre compte",
             registerTitle: "<span class='text-primary'>Créer</span> un nouveau compte",
             email: "Adresse e-mail",
             enterCredentials:
@@ -53,7 +55,9 @@ const { useI18n, ofTypeI18n } = i18nBuilder
             home: "Accueil",
             dark: "Sombre",
             light: "Lumière",
-            system: "Système"
+            system: "Système",
+            copySuccessTitle: "Code copié dans le presse-papiers",
+            copyErrorTitle: "Échec de la copie du code"
         }
     })
     .build();

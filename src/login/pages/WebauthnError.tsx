@@ -11,7 +11,7 @@ export default function WebauthnError(props: PageProps<Extract<KcContext, { page
 
     const { msg, msgStr } = i18n;
 
-    const { kcClsx } = getKcClsx({
+    getKcClsx({
         doUseDefaultCss,
         classes
     });
@@ -25,34 +25,45 @@ export default function WebauthnError(props: PageProps<Extract<KcContext, { page
             displayMessage
             headerNode={msg("webauthn-error-title")}
         >
-            <form id="kc-error-credential-form" className={kcClsx("kcFormClass")} action={url.loginAction} method="post">
-                <input type="hidden" id="executionValue" name="authenticationExecution" />
-                <input type="hidden" id="isSetRetry" name="isSetRetry" />
-            </form>
-            <Button
-                tabIndex={4}
-                onClick={() => {
-                    // @ts-expect-error: Trusted Keycloak's code
-                    document.getElementById("isSetRetry").value = "retry";
-                    // @ts-expect-error: Trusted Keycloak's code
-                    document.getElementById("executionValue").value = "${execution}";
-                    // @ts-expect-error: Trusted Keycloak's code
-                    document.getElementById("kc-error-credential-form").submit();
-                }}
-                type="button"
-                className={"bg-blue-600 hover:bg-blue-700 w-full"}
-                name="try-again"
-                id="kc-try-again"
-            >
-                {msgStr("doTryAgain")}
-            </Button>
-            {isAppInitiatedAction && (
-                <form action={url.loginAction} className={kcClsx("kcFormClass")} id="kc-webauthn-settings-form" method="post">
-                    <Button type="submit" variant={"secondary"} className=" w-full " id="cancelWebAuthnAIA" name="cancel-aia" value="true">
-                        {msgStr("doCancel")}
-                    </Button>
+            <div className="space-y-4">
+                <form id="kc-error-credential-form" action={url.loginAction} method="post">
+                    <input type="hidden" id="executionValue" name="authenticationExecution" />
+                    <input type="hidden" id="isSetRetry" name="isSetRetry" />
                 </form>
-            )}
+
+                <Button
+                    tabIndex={4}
+                    onClick={() => {
+                        // @ts-expect-error: Trusted Keycloak's code
+                        document.getElementById("isSetRetry").value = "retry";
+                        // @ts-expect-error: Trusted Keycloak's code
+                        document.getElementById("executionValue").value = "${execution}";
+                        // @ts-expect-error: Trusted Keycloak's code
+                        document.getElementById("kc-error-credential-form").submit();
+                    }}
+                    type="button"
+                    className="w-full"
+                    name="try-again"
+                    id="kc-try-again"
+                >
+                    {msgStr("doTryAgain")}
+                </Button>
+
+                {isAppInitiatedAction && (
+                    <form action={url.loginAction} id="kc-webauthn-settings-form" method="post">
+                        <Button
+                            type="submit"
+                            variant="outline"
+                            className="w-full"
+                            id="cancelWebAuthnAIA"
+                            name="cancel-aia"
+                            value="true"
+                        >
+                            {msgStr("doCancel")}
+                        </Button>
+                    </form>
+                )}
+            </div>
         </Template>
     );
 }

@@ -1,3 +1,4 @@
+import { PasswordWrapper } from '@/components/password-wrapper';
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import clsx from "clsx";
@@ -11,10 +12,7 @@ import {
 } from "keycloakify/login/lib/useUserProfileForm";
 import type { UserProfileFormFieldsProps } from "keycloakify/login/UserProfileFormFieldsProps";
 import { assert } from "keycloakify/tools/assert";
-import type { JSX } from "keycloakify/tools/JSX";
-import { useIsPasswordRevealed } from "keycloakify/tools/useIsPasswordRevealed";
 import { Fragment, useEffect } from "react";
-import { FiEye, FiEyeOff } from "react-icons/fi";
 import type { I18n } from "./i18n";
 import type { KcContext } from "./KcContext";
 
@@ -254,28 +252,7 @@ function InputFieldByType(props: InputFieldByTypeProps) {
     }
 }
 
-function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: string; locale: KcContext["locale"], children: JSX.Element }) {
-    const { i18n, passwordInputId, locale, children } = props;
 
-    const { msgStr } = i18n;
-
-    const { isPasswordRevealed, toggleIsPasswordRevealed } = useIsPasswordRevealed({ passwordInputId });
-
-    return (
-        <div className="relative">
-            {children}
-            <button
-                type="button"
-                className={`absolute inset-y-0 ${locale?.rtl ? 'left-0 pl-3' : 'right-0 pr-3'} flex items-center text-sm leading-5`}
-                aria-label={msgStr(isPasswordRevealed ? "hidePassword" : "showPassword")}
-                aria-controls={passwordInputId}
-                onClick={toggleIsPasswordRevealed}
-            >
-                {isPasswordRevealed ? <FiEye /> : <FiEyeOff />}
-            </button>
-        </div>
-    );
-}
 
 
 function InputTag(props: InputFieldByTypeProps & { fieldIndex: number | undefined }) {
@@ -307,7 +284,7 @@ function InputTag(props: InputFieldByTypeProps & { fieldIndex: number | undefine
 
                     return valueOrValues;
                 })()}
-                isError={displayableErrors.length !== 0}
+                error={displayableErrors.length !== 0}
                 disabled={attribute.readOnly}
                 autoComplete={attribute.autocomplete}
                 placeholder={

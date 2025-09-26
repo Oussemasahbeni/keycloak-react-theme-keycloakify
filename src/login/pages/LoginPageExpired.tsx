@@ -1,3 +1,4 @@
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
@@ -10,19 +11,41 @@ export default function LoginPageExpired(props: PageProps<Extract<KcContext, { p
     const { msg } = i18n;
 
     return (
-        <Template kcContext={kcContext} i18n={i18n} doUseDefaultCss={doUseDefaultCss} classes={classes} headerNode={msg("pageExpiredTitle")}>
-            <p id="instruction1" className="instruction">
-                {msg("pageExpiredMsg1")}
-                <a id="loginRestartLink" href={url.loginRestartFlowUrl}>
-                    {msg("doClickHere")}
-                </a>{" "}
-                .<br />
-                {msg("pageExpiredMsg2")}{" "}
-                <a id="loginContinueLink" href={url.loginAction}>
-                    {msg("doClickHere")}
-                </a>{" "}
-                .
-            </p>
+        <Template
+            kcContext={kcContext}
+            i18n={i18n}
+            doUseDefaultCss={doUseDefaultCss}
+            classes={classes}
+            headerNode={msg("pageExpiredTitle")}
+        >
+            <Alert type="warning" className="my-6">
+                <AlertDescription>
+                    <div className="space-y-3 text-sm leading-relaxed">
+                        <p>
+                            {msg("pageExpiredMsg1")}{" "}
+                            <a
+                                id="loginRestartLink"
+                                href={url.loginRestartFlowUrl}
+                                className="text-primary dark:text-white hover:text-primary/80 underline underline-offset-2 font-medium"
+                            >
+                                {msg("doClickHere")}
+                            </a>
+                            .
+                        </p>
+                        <p>
+                            {msg("pageExpiredMsg2")}{" "}
+                            <a
+                                id="loginContinueLink"
+                                href={url.loginAction}
+                                className="text-primary dark:text-white hover:text-primary/80 underline underline-offset-2 font-medium"
+                            >
+                                {msg("doClickHere")}
+                            </a>
+                            .
+                        </p>
+                    </div>
+                </AlertDescription>
+            </Alert>
         </Template>
     );
 }

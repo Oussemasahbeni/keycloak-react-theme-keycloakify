@@ -394,7 +394,7 @@ const classes = {
     to increase the specificity and avoid using `!important`.  
     */
     //kcBodyClass: twMerge(
-    //    "!bg-[url(./assets/img/background.jpg)] bg-no-repeat bg-center bg-fixed",
+    //    "bg-[url(./assets/img/background.jpg)]! bg-no-repeat bg-center bg-fixed",
     //    "font-geist"
     //),
     //kcHeaderWrapperClass: twMerge("text-3xl font-bold underline")

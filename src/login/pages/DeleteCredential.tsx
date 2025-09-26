@@ -1,3 +1,4 @@
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from "@/components/ui/button";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
@@ -25,14 +26,20 @@ export default function DeleteCredential(props: PageProps<Extract<KcContext, { p
             displayMessage={false}
             headerNode={msg("deleteCredentialTitle", credentialLabel)}
         >
-            <div id="kc-delete-text">{msg("deleteCredentialMessage", credentialLabel)}</div>
+
+            <Alert type="warning" className=" my-3">
+                <AlertDescription>
+                    <span>{msg("deleteCredentialMessage", credentialLabel)}</span>
+                </AlertDescription>
+            </Alert>
+
             <form className="form-actions" action={url.loginAction} method="POST">
                 <div className="flex justify-between mt-4">
-                    <Button className={"bg-blue-600 hover:bg-blue-700"} name="accept" id="kc-accept" type="submit" value={msgStr("doConfirmDelete")}>
+                    <Button name="accept" id="kc-accept" type="submit" value={msgStr("doConfirmDelete")}>
                         {msgStr("doConfirmDelete")}
                     </Button>
 
-                    <Button variant="secondary" name="cancel-aia" id="kc-decline" type="submit">
+                    <Button variant="outline" name="cancel-aia" id="kc-decline" type="submit">
                         {msgStr("doCancel")}
                     </Button>
                 </div>

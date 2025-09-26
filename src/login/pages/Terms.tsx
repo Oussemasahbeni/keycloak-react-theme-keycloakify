@@ -25,18 +25,36 @@ export default function Terms(props: PageProps<Extract<KcContext, { pageId: "ter
             displayMessage={false}
             headerNode={msg("termsTitle")}
         >
-            <div id="kc-terms-text">{msg("termsText")}</div>
-            <form className="form-actions" action={url.loginAction} method="POST">
-                <div className="flex justify-between">
-                    <Button name="accept" id="kc-accept" type="submit">
-                        {msgStr("doAccept")}
-                    </Button>
-                    <Button variant="secondary" name="cancel" id="kc-decline" type="submit" value={msgStr("doDecline")}>
-                        {msgStr("doDecline")}
-                    </Button>
+            <div className="space-y-6">
+                <div
+                    id="kc-terms-text"
+                    className="p-4 bg-muted/50 rounded-lg max-h-64 overflow-y-auto text-sm leading-relaxed"
+                >
+                    {msg("termsText")}
                 </div>
-            </form>
-            <div className="clearfix" />
+
+                <form className="space-y-4" action={url.loginAction} method="POST">
+                    <div className="flex flex-col sm:flex-row gap-3 sm:justify-between">
+                        <Button
+                            name="accept"
+                            id="kc-accept"
+                            type="submit"
+                            className="sm:flex-1"
+                        >
+                            {msgStr("doAccept")}
+                        </Button>
+                        <Button
+                            variant="outline"
+                            name="cancel"
+                            id="kc-decline"
+                            type="submit"
+                            className="sm:flex-1"
+                        >
+                            {msgStr("doDecline")}
+                        </Button>
+                    </div>
+                </form>
+            </div>
         </Template>
     );
 }

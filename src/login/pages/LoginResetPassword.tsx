@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { InputError } from "@/components/ui/input-error";
 import { Label } from "@/components/ui/label";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
@@ -10,7 +11,7 @@ import type { I18n } from "../i18n";
 export default function LoginResetPassword(props: PageProps<Extract<KcContext, { pageId: "login-reset-password.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
-    const { kcClsx } = getKcClsx({
+    getKcClsx({
         doUseDefaultCss,
         classes
     });
@@ -30,54 +31,51 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
             infoNode={realm.duplicateEmailsAllowed ? msg("emailInstructionUsername") : msg("emailInstruction")}
             headerNode={msg("emailForgotTitle")}
         >
-            <form id="kc-reset-password-form" className={kcClsx("kcFormClass")} action={url.loginAction} method="post">
-                <div className={kcClsx("kcFormGroupClass")}>
-                    <div className={kcClsx("kcLabelWrapperClass")}>
-                        <Label htmlFor="username" className={kcClsx("kcLabelClass")}>
-                            {!realm.loginWithEmailAllowed
-                                ? msg("username")
-                                : !realm.registrationEmailAsUsername
-                                  ? msg("usernameOrEmail")
-                                  : msg("email")}
-                        </Label>
-                    </div>
-                    <div className={kcClsx("kcInputWrapperClass")}>
-                        <Input
-                            type="text"
-                            id="username"
-                            name="username"
-                            className={kcClsx("kcInputClass")}
-                            autoFocus
-                            defaultValue={auth.attemptedUsername ?? ""}
-                            isError={messagesPerField.existsError("username")}
-                        />
-                        {messagesPerField.existsError("username") && (
+            <form id="kc-reset-password-form" className="space-y-2" action={url.loginAction} method="post">
+                <div className="space-y-2">
+                    <Label htmlFor="username" className="text-sm font-medium">
+                        {!realm.loginWithEmailAllowed
+                            ? msg("username")
+                            : !realm.registrationEmailAsUsername
+                                ? msg("usernameOrEmail")
+                                : msg("email")}
+                    </Label>
+                    <Input
+                        type="text"
+                        id="username"
+                        name="username"
+                        autoFocus
+                        defaultValue={auth.attemptedUsername ?? ""}
+                        error={messagesPerField.existsError("username")}
+                    />
+                    {messagesPerField.existsError("username") && (
+                        <InputError id="input-error-username">
                             <span
-                                id="input-error-username"
-                                className={kcClsx("kcInputErrorMessageClass")}
-                                aria-live="polite"
                                 dangerouslySetInnerHTML={{
                                     __html: kcSanitize(messagesPerField.get("username"))
                                 }}
                             />
-                        )}
-                    </div>
+                        </InputError>
+                    )}
                 </div>
-                <div className={kcClsx("kcFormGroupClass", "kcFormSettingClass")}>
-                    <div id="kc-form-options" className={kcClsx("kcFormOptionsClass")}>
-                        <div className={kcClsx("kcFormOptionsWrapperClass")}>
-                            <span>
-                                <a href={url.loginUrl}>{msg("backToLogin")}</a>
-                            </span>
-                        </div>
-                    </div>
 
-                    <div id="kc-form-buttons" className={kcClsx("kcFormButtonsClass")}>
-                        <Button className={"w-full"} type="submit">
-                            {msgStr("doSubmit")}
-                        </Button>
-                    </div>
+
+
+                <div className="flex justify-end">
+                    <Button variant="link">
+                        <a
+                            id="backToApplication"
+                            className='dark:text-white'
+                            href={url.loginUrl}                        >
+                            {msg("backToApplication")}
+                        </a>
+                    </Button>
                 </div>
+
+
+                <Button className="w-full" type="submit">
+                    {msgStr("doSubmit")}
+                </Button>
             </form>
         </Template>
     );

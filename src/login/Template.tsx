@@ -1,8 +1,5 @@
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import clsx from "clsx";
-import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import { useInitialize } from "keycloakify/login/Template.useInitialize";
 import type { TemplateProps } from "keycloakify/login/TemplateProps";
@@ -19,6 +16,8 @@ import shape from "./assets/img/shape.svg";
 
 import { Languages } from '@/components/langauges';
 import { ModeToggle } from '@/components/theme-toggle';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { kcSanitize } from 'keycloakify/lib/kcSanitize';
 
 
 
@@ -43,7 +42,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 
     const { kcClsx } = getKcClsx({ doUseDefaultCss, classes });
 
-    const { msg, msgStr, currentLanguage, enabledLanguages } = i18n;
+    const { msg, msgStr, enabledLanguages } = i18n;
 
     const { auth, url, message, isAppInitiatedAction } = kcContext;
 
@@ -70,13 +69,12 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
     }
 
     return (
-
-        <div className="grid min-h-svh lg:grid-cols-2 dark:bg-slate-950">
+        <div className="grid min-h-svh lg:grid-cols-2 ">
             <div className="flex flex-col gap-4 p-6 md:p-10">
                 <div className="flex justify-center gap-2 md:justify-start">
                     <div className="flex items-center gap-2 font-medium">
                         <Button variant="outline" size="sm" className=" border-gray-400 self-center font-medium text-base ">
-                            <a className="flex items-center gap-1 hover:no-underline no-hover-color" href={kcContext.client.baseUrl ?? redirectUrlOrigin}>
+                            <a className="flex items-center gap-1 hover:no-" href={kcContext.client.baseUrl ?? redirectUrlOrigin}>
                                 <FiArrowLeft /> {msg("home")}
                             </a>
                         </Button>
@@ -88,13 +86,13 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 
                 </div>
                 <div className="flex flex-1 items-center justify-center">
-                    <div className="w-full max-w-md">
-
-                        <Card>
-                            <CardHeader className="text-center px-6 pt-6">
-                                <div className="flex items-center mx-auto mb-2  justify-between gap-2 lg:hidden">
+                    <div className="w-full max-w-xl">
+                        <Card >
+                            <CardHeader className="text-center mb-3 px-6 pt-6">
+                                {/* TODO: update this */}
+                                {/* <div className="flex items-center mx-auto mb-2  justify-between gap-2 lg:hidden">
                                     <img src={companylogo} className="h-12 w-36" alt="" />
-                                </div>
+                                </div> */}
                                 <CardTitle>
                                     {(() => {
                                         const node = !(auth !== undefined && auth.showUsername && !auth.showResetCredentials) ? (
@@ -134,19 +132,10 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                     <div id="kc-content-wrapper">
 
                                         {displayMessage && message !== undefined && (message.type !== "warning" || !isAppInitiatedAction) && (
-                                            <Alert variant={getAlertVariant(message.type)} className="flex  gap-2 justify-center">
-                                                <div>
-                                                    {message.type === "success" && <span className={kcClsx("kcFeedbackSuccessIcon")}></span>}
-                                                    {message.type === "warning" && <span className={kcClsx("kcFeedbackWarningIcon")}></span>}
-                                                    {message.type === "error" && <span className={kcClsx("kcFeedbackErrorIcon")}></span>}
-                                                    {message.type === "info" && <span className={kcClsx("kcFeedbackInfoIcon")}></span>}
-                                                </div>
-                                                <AlertDescription>
 
+                                            <Alert type={message.type} className="flex  gap-2 justify-center my-3">
+                                                <AlertDescription>
                                                     <div
-                                                        className={clsx(
-                                                            `pf-m-${message?.type === "error" ? "danger" : message.type}`
-                                                        )}
                                                     >
                                                         <span
                                                             dangerouslySetInnerHTML={{
@@ -187,7 +176,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                 </div>
             </div>
 
-            <div className="bg-primary  relative lg:block! dark:bg-white/5">
+            <div className="bg-blue-950 relative hidden lg:block dark:bg-white/5">
                 <div className="flex items-center pt-20 h-full justify-center z-1">
                     <div className="absolute right-0 top-0 w-full max-w-[250px] xl:max-w-[450px]">
                         <img
@@ -219,20 +208,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
             </div>
 
 
-        </div>
+        </div >
     );
 }
 
-
-const getAlertVariant = (type: string) => {
-    switch (type) {
-        case "error":
-            return "destructive";
-        case "warning":
-            return "warning";
-        case "success":
-            return "success";
-        default:
-            return "default";
-    }
-};

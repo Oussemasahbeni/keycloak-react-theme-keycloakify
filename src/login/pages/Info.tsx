@@ -1,4 +1,5 @@
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
@@ -29,35 +30,28 @@ export default function Info(props: PageProps<Extract<KcContext, { pageId: "info
                 />
             }
         >
-
-            <Alert variant="default" className="flex  gap-2 justify-center">
-                <div>
-                    <span className={kcClsx("kcFeedbackInfoIcon")}></span>
-                </div>
+            <Alert type="info" className='my-3' >
                 <AlertDescription>
-                    <div id="kc-info-message">
-                        <p
+                    <p
+                        dangerouslySetInnerHTML={{
+                            __html: kcSanitize(
+                                (() => {
+                                    let html = message.summary;
 
-                            dangerouslySetInnerHTML={{
-                                __html: kcSanitize(
-                                    (() => {
-                                        let html = message.summary;
+                                    if (requiredActions) {
+                                        html += "<b>";
 
-                                        if (requiredActions) {
-                                            html += "<b>";
+                                        html += requiredActions.map(requiredAction => advancedMsgStr(`requiredAction.${requiredAction}`)).join(", ");
 
-                                            html += requiredActions.map(requiredAction => advancedMsgStr(`requiredAction.${requiredAction}`)).join(", ");
+                                        html += "</b>";
+                                    }
 
-                                            html += "</b>";
-                                        }
+                                    return html;
+                                })()
+                            )
+                        }}
+                    />
 
-                                        return html;
-                                    })()
-                                )
-                            }}
-                        />
-
-                    </div>
                 </AlertDescription>
             </Alert>
 
@@ -68,24 +62,25 @@ export default function Info(props: PageProps<Extract<KcContext, { pageId: "info
 
                 if (pageRedirectUri) {
                     return (
-                        <p>
+                        <Button className="mt-2 flex justify-end">
                             <a href={pageRedirectUri}>{msg("backToApplication")}</a>
-                        </p>
+                        </Button>
                     );
                 }
                 if (actionUri) {
                     return (
-                        <p>
+
+                        <Button className="mt-2 flex justify-end">
                             <a href={actionUri}>{msg("proceedWithAction")}</a>
-                        </p>
+                        </Button>
                     );
                 }
 
                 if (client.baseUrl) {
                     return (
-                        <p>
+                        <Button className="mt-2 flex justify-end">
                             <a href={client.baseUrl}>{msg("backToApplication")}</a>
-                        </p>
+                        </Button>
                     );
                 }
             })()}

@@ -1,5 +1,5 @@
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import clsx from "clsx";
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
@@ -11,7 +11,7 @@ export default function Error(props: PageProps<Extract<KcContext, { pageId: "err
 
     const { message, client, skipLink } = kcContext;
 
-    const { kcClsx } = getKcClsx({ doUseDefaultCss, classes });
+    getKcClsx({ doUseDefaultCss, classes });
 
 
     const { msg } = i18n;
@@ -27,36 +27,31 @@ export default function Error(props: PageProps<Extract<KcContext, { pageId: "err
         >
 
             <div id="kc-error-message" >
-                <Alert variant="destructive" className="flex  gap-2 justify-center">
-                    <div>
-
-                        {message.type === "error" && <span className={kcClsx("kcFeedbackErrorIcon")}></span>}
-                    </div>
+                <Alert type="error" className="my-3">
                     <AlertDescription>
-                        <div
-                            className={clsx(
-                                `alert-${message.type}`,
-                                `pf-m-${message?.type === "error" ? "danger" : message.type}`
-                            )}
-                        >
-                            <span
-                                className="instruction"
-                                dangerouslySetInnerHTML={{
-                                    __html: kcSanitize(message.summary)
-                                }}
-                            />
-                        </div>
+                        <span
+                            className="instruction"
+                            dangerouslySetInnerHTML={{
+                                __html: kcSanitize(message.summary)
+                            }}
+                        />
                     </AlertDescription>
                 </Alert>
 
                 {!skipLink && client !== undefined && client.baseUrl !== undefined && (
-                    <p className="mt-2">
-                        <a id="backToApplication" href={client.baseUrl}>
-                            {msg("backToApplication")}
-                        </a>
-                    </p>
+                    <div className="mt-2 flex justify-end">
+                        <Button >
+                            <a
+                                id="backToApplication"
+                                href={client.baseUrl}
+                            >
+                                {msg("backToApplication")}
+                            </a>
+                        </Button>
+                    </div>
+
                 )}
             </div>
-        </Template>
+        </Template >
     );
 }

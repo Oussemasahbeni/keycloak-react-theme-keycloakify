@@ -29,7 +29,7 @@ export default function LoginOauth2DeviceVerifyUserCode(
         >
             <form
                 id="kc-user-verify-device-user-code-form"
-                className={kcClsx("kcFormClass")}
+                className="space-y-5"
                 action={url.oauth2DeviceVerificationAction}
                 method="post"
             >
@@ -63,11 +63,7 @@ export default function LoginOauth2DeviceVerifyUserCode(
                             <Button className="w-full" type="submit" >
                                 {msgStr("doSubmit")}
                             </Button>
-                            {/* <input
-                                className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonLargeClass")}
-                                type="submit"
-                                value={msgStr("doSubmit")}
-                            /> */}
+
                         </div>
                     </div>
                 </div>
