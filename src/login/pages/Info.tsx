@@ -12,7 +12,7 @@ export default function Info(props: PageProps<Extract<KcContext, { pageId: "info
     const { advancedMsgStr, msg } = i18n;
 
     const { messageHeader, message, requiredActions, skipLink, pageRedirectUri, actionUri, client } = kcContext;
-    const { kcClsx } = getKcClsx({ doUseDefaultCss, classes });
+    getKcClsx({ doUseDefaultCss, classes });
 
 
     return (
