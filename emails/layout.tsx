@@ -102,14 +102,6 @@ export const EmailLayout = ({
           </Section>
           <Section style={footer}>
             <Row>
-              <Column align="right" style={{ width: '32px', height: '48px', paddingRight: '8px' }}>
-                <Img src="https://img.icons8.com/color/48/facebook-new.png" />
-              </Column>
-              <Column align="left" style={{ width: '32px', height: '48px', paddingLeft: '8px' }}>
-                <Img src="https://img.icons8.com/ios-filled/50/twitterx--v1.png" />
-              </Column>
-            </Row>
-            <Row>
               <Text style={{ textAlign: 'center', color: '#706a7b' }}>
                 {t('footer.allRightsReserved', { currentYear, realmName: exp("realmName") })} <br />
                 {t('footer.address')}
