@@ -1,10 +1,9 @@
+import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { buildEmailTheme } from "keycloakify-emails";
 import { keycloakify } from "keycloakify/vite-plugin";
 import path from "path";
 import { defineConfig } from "vite";
-import tailwindcss from "@tailwindcss/vite"
-
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -13,11 +12,12 @@ export default defineConfig({
         tailwindcss(),
         keycloakify({
             accountThemeImplementation: "none",
-            themeName: "keylearn-theme",
+            themeName: "planingo-theme",
             keycloakVersionTargets: {
                 "22-to-25": false,
-                "all-other-versions": "keylearn-theme.jar"
+                "all-other-versions": "planingo-theme.jar"
             },
+            environmentVariables: [{ name: "ENABLE_THEME_TOGGLE", default: "true" }],
             postBuild: async buildContext => {
                 await buildEmailTheme({
                     templatesSrcDirPath: import.meta.dirname + "/emails/templates",

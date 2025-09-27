@@ -81,18 +81,22 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                         {enabledLanguages.length > 1 && (
                             <Languages i18n={i18n} />
                         )}
-                        <ModeToggle i18n={i18n} />
+
+
+                        {kcContext.properties.ENABLE_THEME_TOGGLE == "true" && <ModeToggle i18n={i18n} />}
                     </div>
 
                 </div>
+
                 <div className="flex flex-1 items-center justify-center">
+
                     <div className="w-full max-w-xl">
+                        <div className="flex items-center mx-auto mb-2 w-full  justify-between gap-2 lg:hidden">
+                            <img src={companylogo} className="h-12 w-36" alt="logo" />
+                        </div>
                         <Card >
                             <CardHeader className="text-center mb-3 px-6 pt-6">
-                                {/* TODO: update this */}
-                                {/* <div className="flex items-center mx-auto mb-2  justify-between gap-2 lg:hidden">
-                                    <img src={companylogo} className="h-12 w-36" alt="" />
-                                </div> */}
+
                                 <CardTitle>
                                     {(() => {
                                         const node = !(auth !== undefined && auth.showUsername && !auth.showResetCredentials) ? (

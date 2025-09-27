@@ -6,7 +6,6 @@ import type { KcContext } from "./KcContext";
 import Template from "./Template";
 import { useI18n } from "./i18n";
 import "./index.css";
-import { getIsDarkMode } from "./shared/isDarkMode";
 
 const UserProfileFormFields = lazy(() => import("./UserProfileFormFields"));
 const Login = lazy(() => import("./pages/Login"));
@@ -64,8 +63,17 @@ export default function KcPage(props: { kcContext: KcContext }) {
 
     const { i18n } = useI18n({ kcContext });
 
+    const defaultTheme = (): "light" | "dark" | "system" => {
+        if (kcContext.properties.ENABLE_THEME_TOGGLE !== "true") {
+            // If theme toggle is disabled, use the default os theme setting
+            return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        return "system";
+    }
+
+
     return (
-        <ThemeProvider defaultTheme={getIsDarkMode() ? "dark" : "light"} storageKey="isDarkMode">
+        <ThemeProvider defaultTheme={defaultTheme()} storageKey="theme">
             <Suspense>
                 {(() => {
                     switch (kcContext.pageId) {

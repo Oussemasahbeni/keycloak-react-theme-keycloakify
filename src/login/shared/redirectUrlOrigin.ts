@@ -1,6 +1,6 @@
-const SESSION_STORAGE_KEY = "keylearn-theme:redirectUrlOrigin";
+const SESSION_STORAGE_KEY = "redirectUrlOrigin";
 
-export const redirectUrlOrigin = ((): string =>{
+export const redirectUrlOrigin = ((): string => {
     from_url: {
         const url = new URL(window.location.href);
 
@@ -9,7 +9,6 @@ export const redirectUrlOrigin = ((): string =>{
         if (value === null) {
             break from_url;
         }
-
 
         const redirectUrlOrigin = new URL(value).origin;
 

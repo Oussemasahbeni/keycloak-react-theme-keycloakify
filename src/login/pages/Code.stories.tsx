@@ -13,8 +13,30 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-    render: () => <KcPageStory />
+    render: () => <KcPageStory
+    />
 };
+
+export const WithDarkModeDisabled: Story = {
+    render: () => <KcPageStory
+        kcContext={{
+            properties: {
+                ENABLE_THEME_TOGGLE: "false",
+            }
+        }}
+    />
+};
+
+export const WithDarkModeEnabled: Story = {
+    render: () => <KcPageStory
+        kcContext={{
+            properties: {
+                ENABLE_THEME_TOGGLE: "true"
+            }
+        }}
+    />
+};
+
 export const WithErrorCode: Story = {
     render: () => (
         <KcPageStory
@@ -22,13 +44,14 @@ export const WithErrorCode: Story = {
                 code: {
                     success: false,
                     error: "Failed to generate code"
-                }
+                },
+
             }}
         />
     )
 };
 export const Arabic: Story = {
-    render: () => <KcPageStory 
+    render: () => <KcPageStory
         kcContext={{
             locale: {
                 currentLanguageTag: "ar",
@@ -38,7 +61,7 @@ export const Arabic: Story = {
     />
 };
 export const French: Story = {
-    render: () => <KcPageStory 
+    render: () => <KcPageStory
         kcContext={{
             locale: {
                 currentLanguageTag: "fr",
