@@ -1,8 +1,8 @@
-import { Fragment } from "react";
-import { clsx } from "keycloakify/tools/clsx";
-import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import { useScript } from "keycloakify/login/pages/LoginPasskeysConditionalAuthenticate.useScript";
+import type { PageProps } from "keycloakify/login/pages/PageProps";
+import { clsx } from "keycloakify/tools/clsx";
+import { Fragment } from "react";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 
@@ -54,7 +54,7 @@ export default function LoginPasskeysConditionalAuthenticate(
                 <input type="hidden" id="error" name="error" />
             </form>
 
-            <div className={kcClsx("kcFormGroupClass")} no-bottom-margin="true" style={{ marginBottom: 0 }}>
+            <div className={kcClsx("kcFormGroupClass")} style={{ marginBottom: 0 }}>
                 {authenticators !== undefined && Object.keys(authenticators).length !== 0 && (
                     <>
                         <form id="authn_select" className={kcClsx("kcFormClass")}>
@@ -129,7 +129,7 @@ export default function LoginPasskeysConditionalAuthenticate(
                                     try {
                                         // @ts-expect-error
                                         event.target.login.disabled = true;
-                                    } catch {}
+                                    } catch { /* empty */ }
 
                                     return true;
                                 }}
