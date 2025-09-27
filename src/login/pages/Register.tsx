@@ -79,6 +79,8 @@ export default function Register(props: RegisterProps) {
                                     "g-recaptcha"
                                 )}
                                 data-sitekey={recaptchaSiteKey}
+                                style={{ width: '100%' }}
+
                                 data-callback={() => {
                                     (document.getElementById("kc-register-form") as HTMLFormElement).submit();
                                 }}
@@ -100,13 +102,16 @@ export default function Register(props: RegisterProps) {
                     </div>
                 </form>
 
-                <div className="text-center">
-                    <a
-                        href={url.loginUrl}
-                        className="text-sm text-primary hover:text-primary/80 underline underline-offset-4"
-                    >
-                        {msg("backToLogin")}
-                    </a>
+
+
+                <div className="mt-2 flex justify-end">
+                    <Button variant="ghost" >
+                        <a
+                            href={url.loginUrl}
+                        >
+                            {msg("backToLogin")}
+                        </a>
+                    </Button>
                 </div>
             </div>
         </Template>

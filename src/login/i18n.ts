@@ -11,7 +11,7 @@ const { useI18n, ofTypeI18n } = i18nBuilder
                 "Welcome to Planingo - Your gateway to seamless planning and organization.",
 
             loginAccountTitle: "Login to your account",
-            registerTitle: "<span class='text-primary'>Register</span> a new account",
+            registerTitle: "Register a new account",
             email: "Email Address",
             enterCredentials: "Enter your credentials below to login",
             passwordPlaceholder: "Enter your password",
@@ -28,7 +28,7 @@ const { useI18n, ofTypeI18n } = i18nBuilder
             welcomeMessage: "مرحبًا بك في Planingo - بوابتك إلى التخطيط والتنظيم السلس.",
 
             loginAccountTitle: "تسجيل الدخول  إلى حسابك",
-            registerTitle: "<span class='text-primary'>تسجيل</span> حساب جديد",
+            registerTitle: "تسجيل حساب جديد",
             email: "عنوان البريد الإلكتروني",
             enterCredentials: "أدخل بيانات الاعتماد الخاصة بك أدناه لتسجيل الدخول",
             passwordPlaceholder: "أدخل كلمة المرور الخاصة بك",
@@ -45,7 +45,7 @@ const { useI18n, ofTypeI18n } = i18nBuilder
             welcomeMessage:
                 "Bienvenue sur Planingo Votre passerelle vers une planification et une organisation sans faille.",
             loginAccountTitle: "Connectez-vous à votre compte",
-            registerTitle: "<span class='text-primary'>Créer</span> un nouveau compte",
+            registerTitle: "Créer    un nouveau compte",
             email: "Adresse e-mail",
             enterCredentials:
                 "Entrez vos informations d'identification ci-dessous pour vous connecter",
