@@ -34,11 +34,7 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
             <form id="kc-reset-password-form" className="space-y-2" action={url.loginAction} method="post">
                 <div className="space-y-2">
                     <Label htmlFor="username" className="text-sm font-medium">
-                        {!realm.loginWithEmailAllowed
-                            ? msg("username")
-                            : !realm.registrationEmailAsUsername
-                                ? msg("usernameOrEmail")
-                                : msg("email")}
+                        {!realm.loginWithEmailAllowed ? msg("username") : !realm.registrationEmailAsUsername ? msg("usernameOrEmail") : msg("email")}
                     </Label>
                     <Input
                         type="text"
@@ -47,6 +43,7 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
                         autoFocus
                         defaultValue={auth.attemptedUsername ?? ""}
                         error={messagesPerField.existsError("username")}
+                        aria-invalid={messagesPerField.existsError("username")}
                     />
                     {messagesPerField.existsError("username") && (
                         <InputError id="input-error-username">
@@ -59,19 +56,13 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
                     )}
                 </div>
 
-
-
                 <div className="flex justify-end">
-                    <Button variant="link">
-                        <a
-                            id="backToApplication"
-                            className='dark:text-white'
-                            href={url.loginUrl}                        >
+                    <Button variant="link" type="button">
+                        <a id="backToApplication" className="dark:text-white" href={url.loginUrl}>
                             {msg("backToApplication")}
                         </a>
                     </Button>
                 </div>
-
 
                 <Button className="w-full" type="submit">
                     {msgStr("doSubmit")}

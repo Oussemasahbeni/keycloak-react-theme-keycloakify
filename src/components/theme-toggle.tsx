@@ -1,17 +1,17 @@
-import { I18n } from '@/login/i18n';
-import { useTheme } from './theme-provider';
+import { I18n } from "@/login/i18n";
+import { useTheme } from "./theme-provider";
 
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuTrigger,
+    DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import { Moon, Sun } from 'lucide-react';
-import { Button } from './ui/button';
+import { Moon, Sun } from "lucide-react";
+import { Button } from "./ui/button";
 
 export function ModeToggle(props: Readonly<{ i18n: I18n }>) {
-    const { setTheme } = useTheme()
+    const { setTheme } = useTheme();
 
     const { msg } = props.i18n;
 
@@ -36,5 +36,5 @@ export function ModeToggle(props: Readonly<{ i18n: I18n }>) {
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
-    )
+    );
 }

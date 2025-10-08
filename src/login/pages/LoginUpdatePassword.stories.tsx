@@ -17,25 +17,28 @@ export const Default: Story = {
 };
 
 export const Arabic: Story = {
-    render: () => <KcPageStory 
-        kcContext={{
-            locale: {
-                currentLanguageTag: "ar",
-                rtl: true
-            }
-        }}
-    />
+    render: () => (
+        <KcPageStory
+            kcContext={{
+                locale: {
+                    currentLanguageTag: "ar",
+                    rtl: true
+                }
+            }}
+        />
+    )
 };
 export const French: Story = {
-    render: () => <KcPageStory 
-        kcContext={{
-            locale: {
-                currentLanguageTag: "fr",
-            }
-        }}
-    />
+    render: () => (
+        <KcPageStory
+            kcContext={{
+                locale: {
+                    currentLanguageTag: "fr"
+                }
+            }}
+        />
+    )
 };
-
 
 /**
  * WithPasswordError:
@@ -59,8 +62,6 @@ export const WithPasswordError: Story = {
         />
     )
 };
-
-
 
 /**
  * WithPasswordConfirmError:

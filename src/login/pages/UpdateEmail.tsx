@@ -1,4 +1,4 @@
-import { LogoutOtherSessions } from '@/components/logout-other-sessions';
+import { LogoutOtherSessions } from "@/components/logout-other-sessions";
 import { Button } from "@/components/ui/button";
 import type { UserProfileFormFieldsProps } from "keycloakify/login/UserProfileFormFieldsProps";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
@@ -63,4 +63,3 @@ export default function UpdateEmail(props: UpdateEmailProps) {
         </Template>
     );
 }
-

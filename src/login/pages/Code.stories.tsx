@@ -13,28 +13,31 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-    render: () => <KcPageStory
-    />
+    render: () => <KcPageStory />
 };
 
 export const WithDarkModeDisabled: Story = {
-    render: () => <KcPageStory
-        kcContext={{
-            properties: {
-                ENABLE_THEME_TOGGLE: "false",
-            }
-        }}
-    />
+    render: () => (
+        <KcPageStory
+            kcContext={{
+                properties: {
+                    ENABLE_THEME_TOGGLE: "false"
+                }
+            }}
+        />
+    )
 };
 
 export const WithDarkModeEnabled: Story = {
-    render: () => <KcPageStory
-        kcContext={{
-            properties: {
-                ENABLE_THEME_TOGGLE: "true"
-            }
-        }}
-    />
+    render: () => (
+        <KcPageStory
+            kcContext={{
+                properties: {
+                    ENABLE_THEME_TOGGLE: "true"
+                }
+            }}
+        />
+    )
 };
 
 export const WithErrorCode: Story = {
@@ -44,30 +47,33 @@ export const WithErrorCode: Story = {
                 code: {
                     success: false,
                     error: "Failed to generate code"
-                },
-
+                }
             }}
         />
     )
 };
 export const Arabic: Story = {
-    render: () => <KcPageStory
-        kcContext={{
-            locale: {
-                currentLanguageTag: "ar",
-                rtl: true
-            }
-        }}
-    />
+    render: () => (
+        <KcPageStory
+            kcContext={{
+                locale: {
+                    currentLanguageTag: "ar",
+                    rtl: true
+                }
+            }}
+        />
+    )
 };
 export const French: Story = {
-    render: () => <KcPageStory
-        kcContext={{
-            locale: {
-                currentLanguageTag: "fr",
-            }
-        }}
-    />
+    render: () => (
+        <KcPageStory
+            kcContext={{
+                locale: {
+                    currentLanguageTag: "fr"
+                }
+            }}
+        />
+    )
 };
 export const WithFrenchLanguage: Story = {
     render: () => (

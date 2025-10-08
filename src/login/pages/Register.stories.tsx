@@ -49,16 +49,17 @@ export const WithEmailAlreadyExists: Story = {
 };
 
 export const Arabic: Story = {
-    render: () => <KcPageStory 
-        kcContext={{
-            locale: {
-                currentLanguageTag: "ar",
-                rtl: true
-            }
-        }}
-    />
+    render: () => (
+        <KcPageStory
+            kcContext={{
+                locale: {
+                    currentLanguageTag: "ar",
+                    rtl: true
+                }
+            }}
+        />
+    )
 };
-
 
 export const WithRestrictedToMITStudents: Story = {
     render: () => (

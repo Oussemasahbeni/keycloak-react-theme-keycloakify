@@ -24,23 +24,14 @@ export default function LogoutConfirm(props: PageProps<Extract<KcContext, { page
                 <form className="space-y-6" action={url.logoutConfirmAction} method="POST">
                     <input type="hidden" name="session_code" value={logoutConfirm.code} />
 
-                    <Button
-                        tabIndex={4}
-                        className="w-full"
-                        name="confirmLogout"
-                        id="kc-logout"
-                        type="submit"
-                    >
+                    <Button tabIndex={4} className="w-full" name="confirmLogout" id="kc-logout" type="submit">
                         {msgStr("doLogout")}
                     </Button>
                 </form>
 
                 {!logoutConfirm.skipLink && client.baseUrl && (
-                    <div className='flex justify-end'>
-                        <a
-                            href={client.baseUrl}
-                            className="text-sm text-primary dark:text-white hover:text-primary/80 underline underline-offset-4"
-                        >
+                    <div className="flex justify-end">
+                        <a href={client.baseUrl} className="text-sm text-primary dark:text-white hover:text-primary/80 underline underline-offset-4">
                             {msg("backToApplication")}
                         </a>
                     </div>

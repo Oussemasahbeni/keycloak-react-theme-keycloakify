@@ -1,5 +1,5 @@
-import { LogoutOtherSessions } from '@/components/logout-other-sessions';
-import { PasswordWrapper } from '@/components/password-wrapper';
+import { LogoutOtherSessions } from "@/components/logout-other-sessions";
+import { PasswordWrapper } from "@/components/password-wrapper";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { InputError } from "@/components/ui/input-error";
@@ -97,4 +97,3 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
         </Template>
     );
 }
-

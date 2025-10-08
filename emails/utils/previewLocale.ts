@@ -1,1 +1,1 @@
-export const previewLocale ="en"
+export const previewLocale = "en";

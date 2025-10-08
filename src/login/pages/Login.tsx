@@ -9,7 +9,7 @@ import { useState } from "react";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 
-import { PasswordWrapper } from '@/components/password-wrapper';
+import { PasswordWrapper } from "@/components/password-wrapper";
 import { Checkbox } from "@/components/ui/checkbox";
 import { InputError } from "@/components/ui/input-error";
 import useProviderLogos from "../useProviderLogos";
@@ -50,7 +50,11 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                     <div id="kc-registration">
                         <span className="space-x-2">
                             {msg("noAccount")}
-                            <a className="text-primary dark:text-primary-foreground underline underline-offset-4 " tabIndex={8} href={url.registrationUrl}>
+                            <a
+                                className="text-primary dark:text-primary-foreground underline underline-offset-4 "
+                                tabIndex={8}
+                                href={url.registrationUrl}
+                            >
                                 {msg("doRegister")}
                             </a>
                         </span>
@@ -61,16 +65,12 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                 <>
                     {realm.password && social?.providers !== undefined && social.providers.length !== 0 && (
                         <div id="kc-social-providers" className={kcClsx("kcFormSocialAccountSectionClass")}>
-
                             <div className="mt-4 flex items-center text-sm">
                                 <div className="mt-px flex-auto border-t"></div>
                                 <div className="text-muted-foreground mx-2">{msg("identity-provider-login-label")}</div>
                                 <div className="mt-px flex-auto border-t"></div>
                             </div>
-                            <ul
-                                className={`mt-4! grid gap-2 sm:grid-cols-1 ${(social?.providers?.length ?? 0) > 3 ? 'sm:grid-cols-2' : ''}`}
-
-                            >
+                            <ul className={`mt-4! grid gap-2 sm:grid-cols-1 ${(social?.providers?.length ?? 0) > 3 ? "sm:grid-cols-2" : ""}`}>
                                 {social.providers.map((...[p, , providers]) => (
                                     <li key={p.alias}>
                                         <Button variant="outline" className="w-full hover:text-current">
@@ -104,7 +104,6 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                     </li>
                                 ))}
                             </ul>
-
                         </div>
                     )}
                 </>
@@ -124,13 +123,13 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                             className={messagesPerField.existsError("username", "password") ? "space-y-1" : "space-y-4"}
                         >
                             {!usernameHidden && (
-                                <div >
+                                <div>
                                     <Label htmlFor="username">
                                         {!realm.loginWithEmailAllowed
                                             ? msg("email")
                                             : !realm.registrationEmailAsUsername
-                                                ? msg("usernameOrEmail")
-                                                : msg("username")}
+                                              ? msg("usernameOrEmail")
+                                              : msg("username")}
                                     </Label>
                                     <Input
                                         tabIndex={2}
@@ -151,7 +150,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                 </div>
                             )}
 
-                            <div >
+                            <div>
                                 <Label htmlFor="password">{msg("password")}</Label>
 
                                 <PasswordWrapper kcClsx={kcClsx} i18n={i18n} locale={locale} passwordInputId="password">
@@ -187,9 +186,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                     {realm.resetPasswordAllowed && (
                                         <span className="text-primary dark:text-primary-foreground underline-offset-4 hover:underline">
                                             <a tabIndex={6} href={url.loginResetCredentialsUrl}>
-                                                <Label className="text-sm font-medium">
-                                                    {msg("doForgotPassword")}
-                                                </Label>
+                                                <Label className="text-sm font-medium cursor-pointer">{msg("doForgotPassword")}</Label>
                                             </a>
                                         </span>
                                     )}
@@ -218,4 +215,3 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
         </Template>
     );
 }
-

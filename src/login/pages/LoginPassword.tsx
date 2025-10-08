@@ -1,4 +1,4 @@
-import { PasswordWrapper } from '@/components/password-wrapper';
+import { PasswordWrapper } from "@/components/password-wrapper";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { InputError } from "@/components/ui/input-error";
@@ -76,23 +76,17 @@ export default function LoginPassword(props: PageProps<Extract<KcContext, { page
                         <a
                             tabIndex={5}
                             href={url.loginResetCredentialsUrl}
-                            className="text-primary dark:text-primary-foreground underline-offset-4 hover:underline"                        >
+                            className="text-primary dark:text-primary-foreground underline-offset-4 hover:underline"
+                        >
                             {msg("doForgotPassword")}
                         </a>
                     )}
                 </div>
 
-                <Button
-                    disabled={isLoginButtonDisabled}
-                    className="w-full"
-                    name="login"
-                    type="submit"
-                    tabIndex={4}
-                >
+                <Button disabled={isLoginButtonDisabled} className="w-full" name="login" type="submit" tabIndex={4}>
                     {msgStr("doLogIn")}
                 </Button>
             </form>
         </Template>
     );
 }
-

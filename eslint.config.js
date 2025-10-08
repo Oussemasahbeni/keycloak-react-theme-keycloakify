@@ -8,41 +8,44 @@ import js from "@eslint/js";
 import storybook from "eslint-plugin-storybook";
 
 export default typescriptEslint.config(
-  js.configs.recommended,
-  ...typescriptEslint.configs.recommended,
-  react.configs.flat.recommended,
-  react.configs.flat["jsx-runtime"],
-  eslintConfigPrettier,
-  ...storybook.configs["flat/recommended"],
-  {
-    ignores: ["dist/**", "public/**"],
-  },
-  {
-    plugins: {
-      "react-refresh": reactRefresh,
-      "react-hooks": reactHooks,
+    js.configs.recommended,
+    ...typescriptEslint.configs.recommended,
+    react.configs.flat.recommended,
+    react.configs.flat["jsx-runtime"],
+    eslintConfigPrettier,
+    ...storybook.configs["flat/recommended"],
+    {
+        ignores: ["dist/**", "public/**"]
     },
-    languageOptions: {
-      globals: {
-        ...globals.browser,
-      },
+    {
+        plugins: {
+            "react-refresh": reactRefresh,
+            "react-hooks": reactHooks
+        },
+        languageOptions: {
+            globals: {
+                ...globals.browser
+            }
+        },
+        settings: {
+            react: {
+                version: "detect"
+            }
+        },
+        rules: {
+            "react-refresh/only-export-components": [
+                "warn",
+                { allowConstantExport: true }
+            ],
+            "react-hooks/exhaustive-deps": "off",
+            "@typescript-eslint/no-redeclare": "off",
+            "no-labels": "off"
+        }
     },
-    settings: {
-      react: {
-        version: "detect",
-      },
-    },
-    rules: {
-      "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
-      "react-hooks/exhaustive-deps": "off",
-      "@typescript-eslint/no-redeclare": "off",
-      "no-labels": "off",
-    },
-  },
-  {
-    files: ["**/*.stories.*"],
-    rules: {
-      "import/no-anonymous-default-export": "off",
-    },
-  },
+    {
+        files: ["**/*.stories.*"],
+        rules: {
+            "import/no-anonymous-default-export": "off"
+        }
+    }
 );

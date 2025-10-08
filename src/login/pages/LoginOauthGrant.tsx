@@ -25,20 +25,14 @@ export default function LoginOauthGrant(props: PageProps<Extract<KcContext, { pa
             bodyClassName="oauth"
             headerNode={
                 <div className="flex flex-col items-center space-y-3">
-                    {client.attributes.logoUri && (
-                        <img
-                            src={client.attributes.logoUri}
-                            alt="Client logo"
-                            className="h-12 w-auto object-contain"
-                        />
-                    )}
+                    {client.attributes.logoUri && <img src={client.attributes.logoUri} alt="Client logo" className="h-12 w-auto object-contain" />}
                     <p className="text-lg font-medium text-center">
                         {client.name ? msg("oauthGrantTitle", advancedMsgStr(client.name)) : msg("oauthGrantTitle", client.clientId)}
                     </p>
                 </div>
             }
         >
-            <div className='space-y-6'>
+            <div className="space-y-6">
                 <div className="text-base">{msg("oauthGrantRequest")}</div>
 
                 <div className="space-y-4">
@@ -63,7 +57,9 @@ export default function LoginOauthGrant(props: PageProps<Extract<KcContext, { pa
                             {/* <Separator /> */}
                             <div className="space-y-2">
                                 <CardDescription className="text-xs">
-                                    {client.name ? msg("oauthGrantInformation", advancedMsgStr(client.name)) : msg("oauthGrantInformation", client.clientId)}
+                                    {client.name
+                                        ? msg("oauthGrantInformation", advancedMsgStr(client.name))
+                                        : msg("oauthGrantInformation", client.clientId)}
                                 </CardDescription>
                                 <div className="flex flex-wrap gap-2 text-xs">
                                     {client.attributes.tosUri && (
@@ -96,21 +92,10 @@ export default function LoginOauthGrant(props: PageProps<Extract<KcContext, { pa
                     <form className="w-full" action={url.oauthAction} method="POST">
                         <input type="hidden" name="code" value={oauth.code} />
                         <div className="flex flex-col sm:flex-row gap-3 w-full">
-                            <Button
-                                type="submit"
-                                name="accept"
-                                id="kc-login"
-                                className="flex-1"
-                            >
+                            <Button type="submit" name="accept" id="kc-login" className="flex-1">
                                 {msgStr("doYes")}
                             </Button>
-                            <Button
-                                type="submit"
-                                name="cancel"
-                                id="kc-cancel"
-                                variant="outline"
-                                className="flex-1"
-                            >
+                            <Button type="submit" name="cancel" id="kc-cancel" variant="outline" className="flex-1">
                                 {msgStr("doNo")}
                             </Button>
                         </div>

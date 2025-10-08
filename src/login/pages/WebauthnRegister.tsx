@@ -1,4 +1,4 @@
-import { LogoutOtherSessions } from '@/components/logout-other-sessions';
+import { LogoutOtherSessions } from "@/components/logout-other-sessions";
 import { Button } from "@/components/ui/button";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
@@ -31,7 +31,6 @@ export default function WebauthnRegister(props: PageProps<Extract<KcContext, { p
             classes={classes}
             headerNode={
                 <div className="flex items-center justify-center gap-2">
-
                     <span>{msg("webauthn-registration-title")}</span>
                 </div>
             }
@@ -49,24 +48,13 @@ export default function WebauthnRegister(props: PageProps<Extract<KcContext, { p
                 <LogoutOtherSessions i18n={i18n} />
 
                 <div className="space-y-3">
-                    <Button
-                        type="button"
-                        className="w-full"
-                        id={authButtonId}
-                    >
+                    <Button type="button" className="w-full" id={authButtonId}>
                         {msgStr("doRegisterSecurityKey")}
                     </Button>
 
                     {!isSetRetry && isAppInitiatedAction && (
                         <form action={url.loginAction} id="kc-webauthn-settings-form" method="post">
-                            <Button
-                                type="submit"
-                                variant="outline"
-                                className="w-full"
-                                id="cancelWebAuthnAIA"
-                                name="cancel-aia"
-                                value="true"
-                            >
+                            <Button type="submit" variant="outline" className="w-full" id="cancelWebAuthnAIA" name="cancel-aia" value="true">
                                 {msgStr("doCancel")}
                             </Button>
                         </form>
@@ -76,4 +64,3 @@ export default function WebauthnRegister(props: PageProps<Extract<KcContext, { p
         </Template>
     );
 }
-

@@ -1,4 +1,4 @@
-import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
@@ -20,7 +20,6 @@ export default function DeleteAccountConfirm(props: PageProps<Extract<KcContext,
     return (
         <Template kcContext={kcContext} i18n={i18n} doUseDefaultCss={doUseDefaultCss} classes={classes} headerNode={msg("deleteAccountConfirm")}>
             <form action={url.loginAction} className="space-y-6" method="post">
-
                 <Alert type="warning" className="my-3">
                     <AlertDescription>
                         <span>{msg("irreversibleAction")}</span>
@@ -35,9 +34,7 @@ export default function DeleteAccountConfirm(props: PageProps<Extract<KcContext,
                         <li>{msg("errasingData")}</li>
                     </ul>
 
-                    <p className="text-foreground font-medium mt-6">
-                        {msg("finalDeletionConfirmation")}
-                    </p>
+                    <p className="text-foreground font-medium mt-6">{msg("finalDeletionConfirmation")}</p>
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-3 sm:justify-between mt-6">

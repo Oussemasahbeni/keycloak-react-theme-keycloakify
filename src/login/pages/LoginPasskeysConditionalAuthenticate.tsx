@@ -129,7 +129,9 @@ export default function LoginPasskeysConditionalAuthenticate(
                                     try {
                                         // @ts-expect-error
                                         event.target.login.disabled = true;
-                                    } catch { /* empty */ }
+                                    } catch {
+                                        /* empty */
+                                    }
 
                                     return true;
                                 }}

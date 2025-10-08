@@ -1,7 +1,7 @@
-import { LogoutOtherSessions } from '@/components/logout-other-sessions';
+import { LogoutOtherSessions } from "@/components/logout-other-sessions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { InputError } from '@/components/ui/input-error';
+import { InputError } from "@/components/ui/input-error";
 import { Label } from "@/components/ui/label";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
@@ -31,24 +31,15 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
             displayMessage={!messagesPerField.existsError("totp", "userLabel")}
         >
             <>
-                <ol id="kc-totp-settings"
-                    className="list-decimal space-y-4 text-sm text-gray-700 dark:text-gray-300"
-
-                >
-
-
+                <ol id="kc-totp-settings" className="list-decimal space-y-4 text-sm text-gray-700 dark:text-gray-300">
                     <li className="space-y-2">
                         <p>{msg("loginTotpStep1")}</p>
-                        <ul
-                            className="list-disc list-inside ml-4 space-y-1"
-                            id="kc-totp-supported-apps"
-                        >
-
-                            {
-                                totp.supportedApplications.map(app => (
-                                    <li className="text-blue-600 dark:text-blue-400" key={app}>{advancedMsg(app)}</li>
-                                ))
-                            }
+                        <ul className="list-disc list-inside ml-4 space-y-1" id="kc-totp-supported-apps">
+                            {totp.supportedApplications.map(app => (
+                                <li className="text-blue-600 dark:text-blue-400" key={app}>
+                                    {advancedMsg(app)}
+                                </li>
+                            ))}
                         </ul>
                     </li>
 
@@ -58,22 +49,16 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                                 <p className="mb-3">{msg("loginTotpManualStep2")}</p>
                                 <div className="bg-muted/30 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
                                     <div>
-                                        <span
-                                            id="kc-totp-secret-key"
-                                            className="font-mono text-lg bg-secondary px-3 py-2 rounded border break-all">
+                                        <span id="kc-totp-secret-key" className="font-mono text-lg bg-secondary px-3 py-2 rounded border break-all">
                                             {totp.totpSecretEncoded}
                                         </span>
                                     </div>
                                     <div className="mt-4">
                                         <Button variant="outline" asChild>
-                                            <a
-                                                href={totp.qrUrl}
-                                                className="text-sm"
-                                            >
+                                            <a href={totp.qrUrl} className="text-sm">
                                                 {msg("loginTotpScanBarcode")}
                                             </a>
                                         </Button>
-
                                     </div>
                                 </div>
                             </li>
@@ -89,15 +74,11 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                                         </div>
                                         <div className="flex justify-between">
                                             <span className="text-muted-foreground">{msg("loginTotpAlgorithm")}:</span>
-                                            <span className="font-mono bg-secondary px-2 py-1 rounded text-xs">
-                                                {totp.policy.getAlgorithmKey()}
-                                            </span>
+                                            <span className="font-mono bg-secondary px-2 py-1 rounded text-xs">{totp.policy.getAlgorithmKey()}</span>
                                         </div>
                                         <div className="flex justify-between">
                                             <span className="text-muted-foreground">{msg("loginTotpDigits")}:</span>
-                                            <span className="font-mono bg-secondary px-2 py-1 rounded text-xs">
-                                                {totp.policy.digits}
-                                            </span>
+                                            <span className="font-mono bg-secondary px-2 py-1 rounded text-xs">{totp.policy.digits}</span>
                                         </div>
                                         <div className="flex justify-between">
                                             <span className="text-muted-foreground">
@@ -112,9 +93,14 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                             </li>
                         </>
                     ) : (
-                        <li className='space-y-2'>
+                        <li className="space-y-2">
                             <p>{msg("loginTotpStep2")}</p>
-                            <img id="kc-totp-secret-qr-code" className='mt-2 dark:mt-0' src={`data:image/png;base64, ${totp.totpSecretQrCode}`} alt="Figure: Barcode" />
+                            <img
+                                id="kc-totp-secret-qr-code"
+                                className="mt-2 dark:mt-0"
+                                src={`data:image/png;base64, ${totp.totpSecretQrCode}`}
+                                alt="Figure: Barcode"
+                            />
 
                             <Button variant="outline" asChild>
                                 <a href={totp.manualUrl} id="mode-manual">
@@ -132,9 +118,7 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                 <form action={url.loginAction} className="space-y-4 mt-2" id="kc-totp-settings-form" method="post">
                     <div className={kcClsx("kcFormGroupClass")}>
                         <div className={kcClsx("kcInputWrapperClass")}>
-                            <Label htmlFor="totp" >
-                                {msg("authenticatorCode")}
-                            </Label>
+                            <Label htmlFor="totp">{msg("authenticatorCode")}</Label>
                             <span className="required">*</span>
                         </div>
                         <div className={kcClsx("kcInputWrapperClass")}>
@@ -148,7 +132,6 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                             />
 
                             {messagesPerField.existsError("totp") && (
-
                                 <InputError id="input-error-otp-code">
                                     <span
                                         dangerouslySetInnerHTML={{
@@ -157,7 +140,6 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                                     />
                                 </InputError>
                             )}
-
                         </div>
                         <input type="hidden" id="totpSecret" name="totpSecret" value={totp.totpSecret} />
                         {mode && <input type="hidden" id="mode" value={mode} />}
@@ -180,9 +162,7 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                                 error={messagesPerField.existsError("userLabel")}
                             />
                             {messagesPerField.existsError("userLabel") && (
-
-                                <InputError id="input-error-otp-label"
-                                >
+                                <InputError id="input-error-otp-label">
                                     <span
                                         dangerouslySetInnerHTML={{
                                             __html: kcSanitize(messagesPerField.get("userLabel"))
@@ -212,11 +192,9 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                         <Button id="saveTOTPBtn" className="w-full" type="submit">
                             {msgStr("doSubmit")}
                         </Button>
-
                     )}
                 </form>
             </>
-        </Template >
+        </Template>
     );
 }
-

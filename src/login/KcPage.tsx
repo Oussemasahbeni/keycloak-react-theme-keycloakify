@@ -66,24 +66,27 @@ export default function KcPage(props: { kcContext: KcContext }) {
     const defaultTheme = (): "light" | "dark" | "system" => {
         if (kcContext.properties.ENABLE_THEME_TOGGLE !== "true") {
             // If theme toggle is disabled, use the default os theme setting
-            return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+            return window.matchMedia &&
+                window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light";
         }
         return "system";
-    }
-
+    };
 
     return (
         <ThemeProvider defaultTheme={defaultTheme()} storageKey="theme">
             <Suspense>
                 {(() => {
                     switch (kcContext.pageId) {
-                        case "code.ftl": return (
-                            <Code
-                                {...{ kcContext, i18n, classes }}
-                                Template={Template}
-                                doUseDefaultCss={doUseDefaultCss}
-                            />
-                        );
+                        case "code.ftl":
+                            return (
+                                <Code
+                                    {...{ kcContext, i18n, classes }}
+                                    Template={Template}
+                                    doUseDefaultCss={doUseDefaultCss}
+                                />
+                            );
                         case "login.ftl":
                             return (
                                 <Login
@@ -388,22 +391,7 @@ export default function KcPage(props: { kcContext: KcContext }) {
                 })()}
             </Suspense>
         </ThemeProvider>
-
     );
 }
 
-const classes = {
-    /* 
-    This is commended out because the same rules are applied in the index.css file
-    and applying the tailwind utility classes in the CSS file is recommended over applying them here.
-    This is because here you're limited in how precisely you can target the DOM elements and manage the specificity. 
-    As you can see here I need to use `!` witch is shorthand for `!important` and this should be avoided if possible.
-    In the index.css I can simply use `body.kcBodyClass` or `.kcBodyClass.kcBodyClass` instead of just `.kcBodyClass` 
-    to increase the specificity and avoid using `!important`.  
-    */
-    //kcBodyClass: twMerge(
-    //    "bg-[url(./assets/img/background.jpg)]! bg-no-repeat bg-center bg-fixed",
-    //    "font-geist"
-    //),
-    //kcHeaderWrapperClass: twMerge("text-3xl font-bold underline")
-} satisfies { [key in ClassKey]?: string };
+const classes = {} satisfies { [key in ClassKey]?: string };

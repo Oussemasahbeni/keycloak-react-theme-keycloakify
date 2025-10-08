@@ -1,4 +1,4 @@
-import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
@@ -26,7 +26,6 @@ export default function DeleteCredential(props: PageProps<Extract<KcContext, { p
             displayMessage={false}
             headerNode={msg("deleteCredentialTitle", credentialLabel)}
         >
-
             <Alert type="warning" className=" my-3">
                 <AlertDescription>
                     <span>{msg("deleteCredentialMessage", credentialLabel)}</span>

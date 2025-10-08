@@ -1,8 +1,8 @@
-import { PasswordWrapper } from '@/components/password-wrapper';
+import { PasswordWrapper } from "@/components/password-wrapper";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
-import { InputError } from '@/components/ui/input-error';
+import { InputError } from "@/components/ui/input-error";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { cn } from "@/lib/utils";
@@ -26,7 +26,6 @@ export default function UserProfileFormFields(props: UserProfileFormFieldsProps<
     const { advancedMsg } = i18n;
 
     const { locale } = kcContext;
-
 
     const {
         formState: { formFieldStates, isFormSubmittable },
@@ -164,7 +163,10 @@ function GroupLabel(props: {
 
                             return (
                                 <div className={cn("", kcClsx("kcLabelWrapperClass"))}>
-                                    <p id={`description-${attribute.group.name}`} className={cn("text-sm text-muted-foreground", kcClsx("kcLabelClass"))}>
+                                    <p
+                                        id={`description-${attribute.group.name}`}
+                                        className={cn("text-sm text-muted-foreground", kcClsx("kcLabelClass"))}
+                                    >
                                         {groupDescriptionText}
                                     </p>
                                 </div>
@@ -191,13 +193,14 @@ function FieldErrors(props: { attribute: Attribute; displayableErrors: FormField
     }
 
     return (
-        <InputError id={`input-error-${attribute.name}${fieldIndex === undefined ? "" : `-${fieldIndex}`}`}
-        >{displayableErrors.map(({ errorMessage }, i, arr) => (
-            <Fragment key={i}>
-                {errorMessage}
-                {arr.length - 1 !== i && <br />}
-            </Fragment>
-        ))}</InputError>
+        <InputError id={`input-error-${attribute.name}${fieldIndex === undefined ? "" : `-${fieldIndex}`}`}>
+            {displayableErrors.map(({ errorMessage }, i, arr) => (
+                <Fragment key={i}>
+                    {errorMessage}
+                    {arr.length - 1 !== i && <br />}
+                </Fragment>
+            ))}
+        </InputError>
     );
 }
 
@@ -248,9 +251,6 @@ function InputFieldByType(props: InputFieldByTypeProps) {
         }
     }
 }
-
-
-
 
 function InputTag(props: InputFieldByTypeProps & { fieldIndex: number | undefined }) {
     const { attribute, fieldIndex, kcClsx, dispatchFormAction, valueOrValues, i18n, displayableErrors } = props;
@@ -448,7 +448,7 @@ function InputTagSelects(props: InputFieldByTypeProps) {
         return (
             <RadioGroup
                 value={typeof valueOrValues === "string" ? valueOrValues : ""}
-                onValueChange={(value) =>
+                onValueChange={value =>
                     dispatchFormAction({
                         action: "update",
                         name: attribute.name,
@@ -492,7 +492,7 @@ function InputTagSelects(props: InputFieldByTypeProps) {
                         id={`${attribute.name}-${option}`}
                         checked={valueOrValues instanceof Array ? valueOrValues.includes(option) : valueOrValues === option}
                         disabled={attribute.readOnly}
-                        onCheckedChange={(checked) =>
+                        onCheckedChange={checked =>
                             dispatchFormAction({
                                 action: "update",
                                 name: attribute.name,

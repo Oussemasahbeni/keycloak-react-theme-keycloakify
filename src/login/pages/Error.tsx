@@ -1,5 +1,5 @@
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Button } from '@/components/ui/button';
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
@@ -13,7 +13,6 @@ export default function Error(props: PageProps<Extract<KcContext, { pageId: "err
 
     getKcClsx({ doUseDefaultCss, classes });
 
-
     const { msg } = i18n;
 
     return (
@@ -25,8 +24,7 @@ export default function Error(props: PageProps<Extract<KcContext, { pageId: "err
             displayMessage={false}
             headerNode={msg("errorTitle")}
         >
-
-            <div id="kc-error-message" >
+            <div id="kc-error-message">
                 <Alert type="error" className="my-3">
                     <AlertDescription>
                         <span
@@ -40,18 +38,14 @@ export default function Error(props: PageProps<Extract<KcContext, { pageId: "err
 
                 {!skipLink && client !== undefined && client.baseUrl !== undefined && (
                     <div className="mt-2 flex justify-end">
-                        <Button >
-                            <a
-                                id="backToApplication"
-                                href={client.baseUrl}
-                            >
+                        <Button type="button">
+                            <a id="backToApplication" href={client.baseUrl}>
                                 {msg("backToApplication")}
                             </a>
                         </Button>
                     </div>
-
                 )}
             </div>
-        </Template >
+        </Template>
     );
 }

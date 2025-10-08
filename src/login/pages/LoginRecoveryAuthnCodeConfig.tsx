@@ -1,4 +1,4 @@
-import { LogoutOtherSessions } from '@/components/logout-other-sessions';
+import { LogoutOtherSessions } from "@/components/logout-other-sessions";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -49,40 +49,24 @@ export default function LoginRecoveryAuthnCodeConfig(props: PageProps<Extract<Kc
                         {recoveryAuthnCodesConfigBean.generatedRecoveryAuthnCodesList.map((code, index) => (
                             <li key={index} className="flex items-center space-x-2">
                                 <span className="text-muted-foreground min-w-[2rem]">{index + 1}:</span>
-                                <span className="font-medium">{code.slice(0, 4)}-{code.slice(4, 8)}-{code.slice(8)}</span>
+                                <span className="font-medium">
+                                    {code.slice(0, 4)}-{code.slice(4, 8)}-{code.slice(8)}
+                                </span>
                             </li>
                         ))}
                     </ol>
                 </div>
 
                 <div className="flex flex-wrap  gap-2">
-                    <Button
-                        id="printRecoveryCodes"
-                        variant="outline"
-                        size="sm"
-                        type="button"
-                        className="flex items-center gap-2"
-                    >
+                    <Button id="printRecoveryCodes" variant="outline" size="sm" type="button" className="flex items-center gap-2">
                         <Printer className="w-4 h-4" />
                         {msg("recovery-codes-print")}
                     </Button>
-                    <Button
-                        id="downloadRecoveryCodes"
-                        variant="outline"
-                        size="sm"
-                        type="button"
-                        className="flex items-center gap-2"
-                    >
+                    <Button id="downloadRecoveryCodes" variant="outline" size="sm" type="button" className="flex items-center gap-2">
                         <Download className="w-4 h-4" />
                         {msg("recovery-codes-download")}
                     </Button>
-                    <Button
-                        id="copyRecoveryCodes"
-                        variant="outline"
-                        size="sm"
-                        type="button"
-                        className="flex items-center gap-2"
-                    >
+                    <Button id="copyRecoveryCodes" variant="outline" size="sm" type="button" className="flex items-center gap-2">
                         <Copy className="w-4 h-4" />
                         {msg("recovery-codes-copy")}
                     </Button>
@@ -92,7 +76,7 @@ export default function LoginRecoveryAuthnCodeConfig(props: PageProps<Extract<Kc
                     <Checkbox
                         id="kcRecoveryCodesConfirmationCheck"
                         name="kcRecoveryCodesConfirmationCheck"
-                        onCheckedChange={(checked) => {
+                        onCheckedChange={checked => {
                             //@ts-expect-error: This is inherited from the original code
                             document.getElementById("saveRecoveryAuthnCodesBtn").disabled = !checked;
                         }}
@@ -103,7 +87,11 @@ export default function LoginRecoveryAuthnCodeConfig(props: PageProps<Extract<Kc
                 </div>
 
                 <form action={kcContext.url.loginAction} className="space-y-4" id="kc-recovery-codes-settings-form" method="post">
-                    <input type="hidden" name="generatedRecoveryAuthnCodes" value={recoveryAuthnCodesConfigBean.generatedRecoveryAuthnCodesAsString} />
+                    <input
+                        type="hidden"
+                        name="generatedRecoveryAuthnCodes"
+                        value={recoveryAuthnCodesConfigBean.generatedRecoveryAuthnCodesAsString}
+                    />
                     <input type="hidden" name="generatedAt" value={recoveryAuthnCodesConfigBean.generatedAt} />
                     <input type="hidden" id="userLabel" name="userLabel" value={msgStr("recovery-codes-label-default")} />
 
@@ -111,12 +99,7 @@ export default function LoginRecoveryAuthnCodeConfig(props: PageProps<Extract<Kc
 
                     {isAppInitiatedAction ? (
                         <div className="flex flex-col sm:flex-row gap-3">
-                            <Button
-                                type="submit"
-                                id="saveRecoveryAuthnCodesBtn"
-                                disabled
-                                className="sm:flex-1"
-                            >
+                            <Button type="submit" id="saveRecoveryAuthnCodesBtn" disabled className="sm:flex-1">
                                 {msgStr("recovery-codes-action-complete")}
                             </Button>
                             <Button

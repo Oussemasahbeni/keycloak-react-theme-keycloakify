@@ -14,26 +14,14 @@ export default function LoginIdpLinkConfirm(props: PageProps<Extract<KcContext, 
         <Template kcContext={kcContext} i18n={i18n} doUseDefaultCss={doUseDefaultCss} classes={classes} headerNode={msg("confirmLinkIdpTitle")}>
             <form id="kc-register-form" action={url.loginAction} method="post">
                 <div className="flex flex-col gap-4">
-                    <Button
-                        type="submit"
-                        className="w-full"
-                        name="submitAction"
-                        id="updateProfile"
-                        value="updateProfile"
-                    >
+                    <Button type="submit" className="w-full" name="submitAction" id="updateProfile" value="updateProfile">
                         {msg("confirmLinkIdpReviewProfile")}
                     </Button>
-                    <Button
-                        type="submit"
-                        className="w-full"
-                        name="submitAction"
-                        id="linkAccount"
-                        value="linkAccount"
-                    >
+                    <Button type="submit" className="w-full" name="submitAction" id="linkAccount" value="linkAccount">
                         {msg("confirmLinkIdpContinue", idpAlias)}
                     </Button>
                 </div>
             </form>
-        </Template >
+        </Template>
     );
 }

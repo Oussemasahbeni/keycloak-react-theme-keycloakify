@@ -55,25 +55,28 @@ export const WithoutRegistration: Story = {
 };
 
 export const Arabic: Story = {
-    render: () => <KcPageStory
-        kcContext={{
-            locale: {
-                currentLanguageTag: "ar",
-                rtl: true
-            }
-        }}
-    />
+    render: () => (
+        <KcPageStory
+            kcContext={{
+                locale: {
+                    currentLanguageTag: "ar",
+                    rtl: true
+                }
+            }}
+        />
+    )
 };
 export const French: Story = {
-    render: () => <KcPageStory
-        kcContext={{
-            locale: {
-                currentLanguageTag: "fr",
-            }
-        }}
-    />
+    render: () => (
+        <KcPageStory
+            kcContext={{
+                locale: {
+                    currentLanguageTag: "fr"
+                }
+            }}
+        />
+    )
 };
-
 
 export const WithoutRememberMe: Story = {
     render: args => (
@@ -179,14 +182,13 @@ export const WithTwoSocialProviders: Story = {
                             providerId: "linkedin-openid-connect",
                             displayName: "LinkedIn",
                             iconClasses: "fa fa-linkedin"
-                        },
+                        }
                     ]
                 }
             }}
         />
     )
 };
-
 
 export const WithTwoSocialProvidersArabic: Story = {
     render: args => (
@@ -213,7 +215,7 @@ export const WithTwoSocialProvidersArabic: Story = {
                             providerId: "linkedin-openid-connect",
                             displayName: "LinkedIn",
                             iconClasses: "fa fa-linkedin"
-                        },
+                        }
                     ]
                 }
             }}

@@ -79,8 +79,7 @@ export default function Register(props: RegisterProps) {
                                     "g-recaptcha"
                                 )}
                                 data-sitekey={recaptchaSiteKey}
-                                style={{ width: '100%' }}
-
+                                style={{ width: "100%" }}
                                 data-callback={() => {
                                     (document.getElementById("kc-register-form") as HTMLFormElement).submit();
                                 }}
@@ -102,15 +101,9 @@ export default function Register(props: RegisterProps) {
                     </div>
                 </form>
 
-
-
                 <div className="mt-2 flex justify-end">
-                    <Button variant="ghost" >
-                        <a
-                            href={url.loginUrl}
-                        >
-                            {msg("backToLogin")}
-                        </a>
+                    <Button variant="ghost">
+                        <a href={url.loginUrl}>{msg("backToLogin")}</a>
                     </Button>
                 </div>
             </div>
@@ -141,7 +134,7 @@ function TermsAcceptance(props: {
                         id="termsAccepted"
                         name="termsAccepted"
                         checked={areTermsAccepted}
-                        onCheckedChange={(checked) => onAreTermsAcceptedValueChange(!!checked)}
+                        onCheckedChange={checked => onAreTermsAcceptedValueChange(!!checked)}
                         aria-invalid={messagesPerField.existsError("termsAccepted")}
                     />
                     <Label htmlFor="termsAccepted" className="text-sm font-medium cursor-pointer">

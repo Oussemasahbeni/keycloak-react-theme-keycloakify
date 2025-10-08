@@ -63,21 +63,14 @@ export default function WebauthnAuthenticate(props: PageProps<Extract<KcContext,
                     <>
                         <form id="authn_select">
                             {authenticators.authenticators.map(authenticator => (
-                                <Input
-                                    key={authenticator.credentialId}
-                                    type="hidden"
-                                    name="authn_use_chk"
-                                    value={authenticator.credentialId}
-                                />
+                                <Input key={authenticator.credentialId} type="hidden" name="authn_use_chk" value={authenticator.credentialId} />
                             ))}
                         </form>
 
                         {shouldDisplayAuthenticators && (
                             <div className="space-y-4">
                                 {authenticators.authenticators.length > 1 && (
-                                    <h3 className="text-sm font-medium text-center">
-                                        {msg("webauthn-available-authenticators")}
-                                    </h3>
+                                    <h3 className="text-sm font-medium text-center">{msg("webauthn-available-authenticators")}</h3>
                                 )}
 
                                 <div className="space-y-2">
@@ -96,17 +89,12 @@ export default function WebauthnAuthenticate(props: PageProps<Extract<KcContext,
                                                         return <Shield className="w-5 h-5 text-muted-foreground" />;
                                                     }
 
-                                                    return (
-                                                        <i className={clsx(className, "text-muted-foreground")} />
-                                                    );
+                                                    return <i className={clsx(className, "text-muted-foreground")} />;
                                                 })()}
                                             </div>
 
                                             <div className="flex-1 min-w-0">
-                                                <div
-                                                    id={`kc-webauthn-authenticator-label-${i}`}
-                                                    className="font-medium text-sm"
-                                                >
+                                                <div id={`kc-webauthn-authenticator-label-${i}`} className="font-medium text-sm">
                                                     {advancedMsg(authenticator.label)}
                                                 </div>
 
@@ -130,12 +118,8 @@ export default function WebauthnAuthenticate(props: PageProps<Extract<KcContext,
                                                 )}
 
                                                 <div className="text-xs text-muted-foreground mt-1">
-                                                    <span id={`kc-webauthn-authenticator-createdlabel-${i}`}>
-                                                        {msg("webauthn-createdAt-label")}
-                                                    </span>{" "}
-                                                    <span id={`kc-webauthn-authenticator-created-${i}`}>
-                                                        {authenticator.createdAt}
-                                                    </span>
+                                                    <span id={`kc-webauthn-authenticator-createdlabel-${i}`}>{msg("webauthn-createdAt-label")}</span>{" "}
+                                                    <span id={`kc-webauthn-authenticator-created-${i}`}>{authenticator.createdAt}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -146,12 +130,7 @@ export default function WebauthnAuthenticate(props: PageProps<Extract<KcContext,
                     </>
                 )}
 
-                <Button
-                    id={authButtonId}
-                    type="button"
-                    autoFocus
-                    className="w-full"
-                >
+                <Button id={authButtonId} type="button" autoFocus className="w-full">
                     {msgStr("webauthn-doAuthenticate")}
                 </Button>
             </div>

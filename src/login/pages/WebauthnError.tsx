@@ -51,14 +51,7 @@ export default function WebauthnError(props: PageProps<Extract<KcContext, { page
 
                 {isAppInitiatedAction && (
                     <form action={url.loginAction} id="kc-webauthn-settings-form" method="post">
-                        <Button
-                            type="submit"
-                            variant="outline"
-                            className="w-full"
-                            id="cancelWebAuthnAIA"
-                            name="cancel-aia"
-                            value="true"
-                        >
+                        <Button type="submit" variant="outline" className="w-full" id="cancelWebAuthnAIA" name="cancel-aia" value="true">
                             {msgStr("doCancel")}
                         </Button>
                     </form>

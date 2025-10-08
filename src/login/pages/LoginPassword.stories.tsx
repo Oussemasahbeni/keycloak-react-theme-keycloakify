@@ -42,19 +42,18 @@ export const WithPasswordError: Story = {
     )
 };
 
-
-
 export const Arabic: Story = {
-    render: () => <KcPageStory 
-        kcContext={{
-            locale: {
-                currentLanguageTag: "ar",
-                rtl: true
-            }
-        }}
-    />
+    render: () => (
+        <KcPageStory
+            kcContext={{
+                locale: {
+                    currentLanguageTag: "ar",
+                    rtl: true
+                }
+            }}
+        />
+    )
 };
-
 
 /**
  * WithoutResetPasswordOption:

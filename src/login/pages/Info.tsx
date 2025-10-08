@@ -1,5 +1,5 @@
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Button } from '@/components/ui/button';
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
@@ -13,7 +13,6 @@ export default function Info(props: PageProps<Extract<KcContext, { pageId: "info
 
     const { messageHeader, message, requiredActions, skipLink, pageRedirectUri, actionUri, client } = kcContext;
     getKcClsx({ doUseDefaultCss, classes });
-
 
     return (
         <Template
@@ -30,7 +29,7 @@ export default function Info(props: PageProps<Extract<KcContext, { pageId: "info
                 />
             }
         >
-            <Alert type="info" className='my-3' >
+            <Alert type="info" className="my-3">
                 <AlertDescription>
                     <p
                         dangerouslySetInnerHTML={{
@@ -51,7 +50,6 @@ export default function Info(props: PageProps<Extract<KcContext, { pageId: "info
                             )
                         }}
                     />
-
                 </AlertDescription>
             </Alert>
 
@@ -62,15 +60,14 @@ export default function Info(props: PageProps<Extract<KcContext, { pageId: "info
 
                 if (pageRedirectUri) {
                     return (
-                        <Button className="mt-2 flex justify-end">
+                        <Button type="button" className="mt-2 flex justify-end">
                             <a href={pageRedirectUri}>{msg("backToApplication")}</a>
                         </Button>
                     );
                 }
                 if (actionUri) {
                     return (
-
-                        <Button className="mt-2 flex justify-end">
+                        <Button type="button" className="mt-2 flex justify-end">
                             <a href={actionUri}>{msg("proceedWithAction")}</a>
                         </Button>
                     );
@@ -78,7 +75,7 @@ export default function Info(props: PageProps<Extract<KcContext, { pageId: "info
 
                 if (client.baseUrl) {
                     return (
-                        <Button className="mt-2 flex justify-end">
+                        <Button type="button" className="mt-2 flex justify-end">
                             <a href={client.baseUrl}>{msg("backToApplication")}</a>
                         </Button>
                     );

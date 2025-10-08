@@ -10,18 +10,13 @@ import type { I18n } from "./i18n";
 import type { KcContext } from "./KcContext";
 import { redirectUrlOrigin } from "./shared/redirectUrlOrigin";
 
-
 import companylogo from "./assets/img/auth-logo.svg";
 import shape from "./assets/img/shape.svg";
 
-import { Languages } from '@/components/langauges';
-import { ModeToggle } from '@/components/theme-toggle';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { kcSanitize } from 'keycloakify/lib/kcSanitize';
-
-
-
-
+import { Languages } from "@/components/langauges";
+import { ModeToggle } from "@/components/theme-toggle";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { kcSanitize } from "keycloakify/lib/kcSanitize";
 
 export default function Template(props: TemplateProps<KcContext, I18n>) {
     const {
@@ -45,8 +40,6 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
     const { msg, msgStr, enabledLanguages } = i18n;
 
     const { auth, url, message, isAppInitiatedAction } = kcContext;
-
-
 
     useEffect(() => {
         document.title = documentTitle ?? msgStr("loginTitle", kcContext.realm.displayName);
@@ -78,25 +71,19 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                 <FiArrowLeft /> {msg("home")}
                             </a>
                         </Button>
-                        {enabledLanguages.length > 1 && (
-                            <Languages i18n={i18n} />
-                        )}
-
+                        {enabledLanguages.length > 1 && <Languages i18n={i18n} />}
 
                         {kcContext.properties.ENABLE_THEME_TOGGLE == "true" && <ModeToggle i18n={i18n} />}
                     </div>
-
                 </div>
 
                 <div className="flex flex-1 items-center justify-center">
-
                     <div className="w-full max-w-xl">
                         <div className="flex items-center mx-auto mb-2 w-full  justify-between gap-2 lg:hidden">
                             <img src={companylogo} className="h-12 w-36" alt="logo" />
                         </div>
-                        <Card >
+                        <Card>
                             <CardHeader className="text-center mb-3 px-6 pt-6">
-
                                 <CardTitle>
                                     {(() => {
                                         const node = !(auth !== undefined && auth.showUsername && !auth.showResetCredentials) ? (
@@ -131,16 +118,13 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                     })()}
                                 </CardTitle>
                             </CardHeader>
-                            <CardContent >
-                                <div id="kc-content" >
+                            <CardContent>
+                                <div id="kc-content">
                                     <div id="kc-content-wrapper">
-
                                         {displayMessage && message !== undefined && (message.type !== "warning" || !isAppInitiatedAction) && (
-
                                             <Alert type={message.type} className="flex  gap-2 justify-center my-3">
                                                 <AlertDescription>
-                                                    <div
-                                                    >
+                                                    <div>
                                                         <span
                                                             dangerouslySetInnerHTML={{
                                                                 __html: kcSanitize(message.summary)
@@ -150,9 +134,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                                 </AlertDescription>
                                             </Alert>
                                         )}
-                                        <div className="children">
-                                            {children}
-                                        </div>
+                                        <div className="children">{children}</div>
                                         {socialProvidersNode}
                                         {auth !== undefined && auth.showTryAnotherWayLink && (
                                             <form id="kc-select-try-another-way-form" action={url.loginAction} method="post">
@@ -183,36 +165,20 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
             <div className="bg-blue-950 relative hidden lg:block dark:bg-white/5">
                 <div className="flex items-center pt-20 h-full justify-center z-1">
                     <div className="absolute right-0 top-0 w-full max-w-[250px] xl:max-w-[450px]">
-                        <img
-                            src={shape}
-                            alt="grid"
-                        />
+                        <img src={shape} alt="grid" />
                     </div>
                     <div className="absolute bottom-0 left-0 w-full max-w-[250px] rotate-180 xl:max-w-[450px]">
-                        <img
-                            src={shape}
-                            alt="grid"
-                        />
+                        <img src={shape} alt="grid" />
                     </div>
 
                     <div className="flex justify-center my-auto flex-col items-center max-w-xs">
                         <a className="block mb-4">
-                            <img
-                                width="231"
-                                height="48"
-                                src={companylogo}
-                                alt="Logo"
-                            />
+                            <img width="231" height="48" src={companylogo} alt="Logo" />
                         </a>
-                        <p className="text-center  text-gray-400 dark:text-white/60">
-                            {msg("welcomeMessage")}
-                        </p>
+                        <p className="text-center  text-gray-400 dark:text-white/60">{msg("welcomeMessage")}</p>
                     </div>
                 </div>
             </div>
-
-
-        </div >
+        </div>
     );
 }
-

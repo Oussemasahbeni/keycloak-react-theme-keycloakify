@@ -27,12 +27,7 @@ export default function LoginOauth2DeviceVerifyUserCode(
             classes={classes}
             headerNode={msg("oauth2DeviceVerificationTitle")}
         >
-            <form
-                id="kc-user-verify-device-user-code-form"
-                className="space-y-5"
-                action={url.oauth2DeviceVerificationAction}
-                method="post"
-            >
+            <form id="kc-user-verify-device-user-code-form" className="space-y-5" action={url.oauth2DeviceVerificationAction} method="post">
                 <div className={kcClsx("kcFormGroupClass")}>
                     <div className={kcClsx("kcLabelWrapperClass")}>
                         <Label htmlFor="device-user-code" className={kcClsx("kcLabelClass")}>
@@ -59,11 +54,9 @@ export default function LoginOauth2DeviceVerifyUserCode(
 
                     <div id="kc-form-buttons" className={kcClsx("kcFormButtonsClass")}>
                         <div className={kcClsx("kcFormButtonsWrapperClass")}>
-
-                            <Button className="w-full" type="submit" >
+                            <Button className="w-full" type="submit">
                                 {msgStr("doSubmit")}
                             </Button>
-
                         </div>
                     </div>
                 </div>
