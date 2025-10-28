@@ -54,6 +54,7 @@ const DeleteAccountConfirm = lazy(() => import("./pages/DeleteAccountConfirm"));
 const LoginUpdatePassword = lazy(() => import("./pages/LoginUpdatePassword"));
 const LoginVerifyEmail = lazy(() => import("./pages/LoginVerifyEmail"));
 const Code = lazy(() => import("./pages/Code"));
+const SelectOrganization = lazy(() => import("./pages/SelectOrganization"));
 
 const doMakeUserConfirmPassword = true;
 const doUseDefaultCss = false;
@@ -375,6 +376,13 @@ export default function KcPage(props: { kcContext: KcContext }) {
                                     doUseDefaultCss={doUseDefaultCss}
                                 />
                             );
+                        case "select-organization.ftl": return (
+                            <SelectOrganization
+                                {...{ kcContext, i18n, classes }}
+                                Template={Template}
+                                doUseDefaultCss={doUseDefaultCss}
+                            />
+                        );
                         default:
                             return (
                                 <DefaultPage
