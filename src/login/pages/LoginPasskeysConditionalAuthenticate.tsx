@@ -73,8 +73,9 @@ export default function LoginPasskeysConditionalAuthenticate(
                                             <i
                                                 className={clsx(
                                                     (() => {
-                                                        const className = kcClsx(authenticator.transports.iconClass as any);
-                                                        if (className === authenticator.transports.iconClass) {
+                                                        const className = kcClsx(authenticator.transports?.iconClass as any);
+
+                                                        if (className === authenticator.transports?.iconClass) {
                                                             return kcClsx("kcWebAuthnDefaultIcon");
                                                         }
                                                         return className;
