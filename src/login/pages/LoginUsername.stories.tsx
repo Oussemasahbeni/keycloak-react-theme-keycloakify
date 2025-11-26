@@ -40,6 +40,17 @@ export const French: Story = {
     )
 };
 
+
+export const WithWebauthn: Story = {
+    render: () => (
+        <KcPageStory
+            kcContext={{
+                enableWebAuthnConditionalUI: true,
+            }}
+        />
+    )
+};
+
 export const WithEmailAsUsername: Story = {
     render: () => (
         <KcPageStory

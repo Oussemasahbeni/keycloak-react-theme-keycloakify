@@ -332,6 +332,17 @@ export const WithoutPasswordField: Story = {
     )
 };
 
+
+export const WithWebauthn: Story = {
+    render: () => (
+        <KcPageStory
+            kcContext={{
+                enableWebAuthnConditionalUI: true,
+            }}
+        />
+    )
+};
+
 export const WithErrorMessage: Story = {
     render: args => (
         <KcPageStory

@@ -16,12 +16,7 @@ export const Default: Story = {
     render: () => <KcPageStory />
 };
 
-/**
- * WithPasswordError:
- * - Purpose: Tests the behavior when an error occurs in the password field (e.g., incorrect password).
- * - Scenario: Simulates a scenario where an invalid password is entered, and an error message is displayed.
- * - Key Aspect: Ensures that the password input field displays error messages correctly.
- */
+
 export const WithPasswordError: Story = {
     render: () => (
         <KcPageStory
@@ -55,12 +50,17 @@ export const Arabic: Story = {
     )
 };
 
-/**
- * WithoutResetPasswordOption:
- * - Purpose: Tests the behavior when the reset password option is disabled.
- * - Scenario: Simulates a scenario where the `resetPasswordAllowed` is set to `false`, and the "Forgot Password" link is not rendered.
- * - Key Aspect: Ensures that the component handles cases where resetting the password is not allowed.
- */
+
+export const WithWebauthn: Story = {
+    render: () => (
+        <KcPageStory
+            kcContext={{
+                enableWebAuthnConditionalUI: true,
+            }}
+        />
+    )
+};
+
 export const WithoutResetPasswordOption: Story = {
     render: () => (
         <KcPageStory

@@ -36,7 +36,7 @@ export default function LoginPasskeysConditionalAuthenticate(
                 !registrationDisabled && (
                     <div id="kc-registration">
                         <span>
-                            ${msg("noAccount")}{" "}
+                            {msg("noAccount")}{" "}
                             <a tabIndex={6} href={url.registrationUrl}>
                                 {msg("doRegister")}
                             </a>

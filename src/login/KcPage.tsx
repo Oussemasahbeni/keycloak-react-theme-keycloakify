@@ -55,6 +55,7 @@ const LoginUpdatePassword = lazy(() => import("./pages/LoginUpdatePassword"));
 const LoginVerifyEmail = lazy(() => import("./pages/LoginVerifyEmail"));
 const Code = lazy(() => import("./pages/Code"));
 const SelectOrganization = lazy(() => import("./pages/SelectOrganization"));
+const LinkIdpAction = lazy(() => import("./pages/LinkIdpAction"));
 
 const doMakeUserConfirmPassword = true;
 const doUseDefaultCss = false;
@@ -383,6 +384,14 @@ export default function KcPage(props: { kcContext: KcContext }) {
                                 doUseDefaultCss={doUseDefaultCss}
                             />
                         );
+                        case "link-idp-action.ftl": return (
+                            <LinkIdpAction
+                                {...{ kcContext, i18n, classes }}
+                                Template={Template}
+                                doUseDefaultCss={doUseDefaultCss}
+                            />
+                        );
+
                         default:
                             return (
                                 <DefaultPage
