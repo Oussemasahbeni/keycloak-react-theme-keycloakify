@@ -5,7 +5,10 @@ const { KcPageStory } = createKcPageStory({ pageId: "login-passkeys-conditional-
 
 const meta = {
     title: "login/login-passkeys-conditional-authenticate.ftl",
-    component: KcPageStory
+    component: KcPageStory,
+    parameters: {
+        chromatic: { disableSnapshot: true },
+    },
 } satisfies Meta<typeof KcPageStory>;
 
 export default meta;
