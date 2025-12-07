@@ -1,5 +1,5 @@
+import { createKcPageStory } from '@/login/KcPageStory';
 import type { Meta, StoryObj } from "@storybook/react";
-import { createKcPageStory } from '../../KcPageStory';
 
 const { KcPageStory } = createKcPageStory({ pageId: "link-idp-action.ftl" });
 

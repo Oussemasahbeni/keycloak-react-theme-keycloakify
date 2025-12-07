@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
+import { KcContext } from '@/login/KcContext';
 import type { PageProps } from "keycloakify/login/pages/PageProps";
-import type { KcContext } from "../../KcContext";
 import type { I18n } from "../../i18n";
 
 export default function LinkIdpAction(props: PageProps<Extract<KcContext, { pageId: "link-idp-action.ftl" }>, I18n>) {

@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
+import { KcContext } from '@/login/KcContext';
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { MouseEvent, useRef, useState } from "react";
-import type { KcContext } from "../../KcContext";
 import type { I18n } from "../../i18n";
 
 export default function SelectOrganization(props: PageProps<Extract<KcContext, { pageId: "select-organization.ftl" }>, I18n>) {

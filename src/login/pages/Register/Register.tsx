@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { InputError } from "@/components/ui/input-error";
 import { Label } from "@/components/ui/label";
+import { KcContext } from '@/login/KcContext';
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import type { UserProfileFormFieldsProps } from "keycloakify/login/UserProfileFormFieldsProps";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
@@ -10,7 +11,6 @@ import type { JSX } from "keycloakify/tools/JSX";
 import type { LazyOrNot } from "keycloakify/tools/LazyOrNot";
 import { clsx } from "keycloakify/tools/clsx";
 import { useState } from "react";
-import type { KcContext } from "../../KcContext";
 import type { I18n } from "../../i18n";
 
 type RegisterProps = PageProps<Extract<KcContext, { pageId: "register.ftl" }>, I18n> & {

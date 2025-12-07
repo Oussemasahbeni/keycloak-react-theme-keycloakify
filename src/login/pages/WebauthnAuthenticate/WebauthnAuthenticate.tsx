@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { KcContext } from '@/login/KcContext';
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { useScript } from "keycloakify/login/pages/WebauthnAuthenticate.useScript";
 import { clsx } from "keycloakify/tools/clsx";
 import { Shield } from "lucide-react";
 import { Fragment } from "react";
-import type { KcContext } from "../../KcContext";
 import type { I18n } from "../../i18n";
 
 export default function WebauthnAuthenticate(props: PageProps<Extract<KcContext, { pageId: "webauthn-authenticate.ftl" }>, I18n>) {

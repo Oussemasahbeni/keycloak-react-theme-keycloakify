@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { KcContext } from '@/login/KcContext';
 import clsx from "clsx";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { Fragment } from "react";
-import type { KcContext } from "../../KcContext";
 import type { I18n } from "../../i18n";
 
 export default function LoginResetOtp(props: PageProps<Extract<KcContext, { pageId: "login-reset-otp.ftl" }>, I18n>) {

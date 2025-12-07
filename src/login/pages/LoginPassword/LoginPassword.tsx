@@ -3,12 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { InputError } from "@/components/ui/input-error";
 import { Label } from "@/components/ui/label";
+import { KcContext } from '@/login/KcContext';
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import { useScript } from 'keycloakify/login/pages/LoginUsername.useScript';
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { useState } from "react";
-import type { KcContext } from "../../KcContext";
 import type { I18n } from "../../i18n";
 
 export default function LoginPassword(props: PageProps<Extract<KcContext, { pageId: "login-password.ftl" }>, I18n>) {

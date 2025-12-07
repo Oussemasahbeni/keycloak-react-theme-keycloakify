@@ -1,19 +1,19 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { KcContext } from '@/login/KcContext';
 import clsx from "clsx";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { useState } from "react";
-import type { KcContext } from "../KcContext";
-import type { I18n } from "../i18n";
 
 import { PasswordWrapper } from "@/components/password-wrapper";
 import { Checkbox } from "@/components/ui/checkbox";
 import { InputError } from "@/components/ui/input-error";
+import { I18n } from '@/login/i18n';
 import { useScript } from 'keycloakify/login/pages/LoginUsername.useScript';
-import useProviderLogos from "../useProviderLogos";
+import useProviderLogos from "./useProviderLogos";
 
 export default function Login(props: PageProps<Extract<KcContext, { pageId: "login.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;

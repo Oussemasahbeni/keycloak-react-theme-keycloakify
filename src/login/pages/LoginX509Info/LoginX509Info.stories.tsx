@@ -1,5 +1,5 @@
+import { createKcPageStory } from '@/login/KcPageStory';
 import type { Meta, StoryObj } from "@storybook/react";
-import { createKcPageStory } from '../../KcPageStory';
 
 const { KcPageStory } = createKcPageStory({ pageId: "login-x509-info.ftl" });
 

@@ -3,11 +3,11 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { KcContext } from '@/login/KcContext';
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import { useScript } from "keycloakify/login/pages/LoginRecoveryAuthnCodeConfig.useScript";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { Copy, Download, Printer } from "lucide-react";
-import type { KcContext } from "../../KcContext";
 import type { I18n } from "../../i18n";
 
 export default function LoginRecoveryAuthnCodeConfig(props: PageProps<Extract<KcContext, { pageId: "login-recovery-authn-code-config.ftl" }>, I18n>) {

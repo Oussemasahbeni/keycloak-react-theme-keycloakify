@@ -3,8 +3,8 @@ import { Input } from "@/components/ui/input";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { useState } from "react";
-import type { KcContext } from "../KcContext";
-import type { I18n } from "../i18n";
+import { KcContext } from '@/login/KcContext';
+import { I18n } from '@/login/i18n';
 
 import { Button } from "@/components/ui/button";
 import toast, { Toaster } from "react-hot-toast";

@@ -1,6 +1,6 @@
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { KcContext } from '@/login/KcContext';
 import type { PageProps } from "keycloakify/login/pages/PageProps";
-import type { KcContext } from "../../KcContext";
 import type { I18n } from "../../i18n";
 
 export default function LoginPageExpired(props: PageProps<Extract<KcContext, { pageId: "login-page-expired.ftl" }>, I18n>) {

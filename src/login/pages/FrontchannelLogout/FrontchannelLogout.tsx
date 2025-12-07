@@ -1,10 +1,10 @@
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
+import { I18n } from '@/login/i18n';
+import { KcContext } from '@/login/KcContext';
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { useEffect } from "react";
 import { FiCheck, FiExternalLink } from "react-icons/fi";
-import type { KcContext } from "../KcContext";
-import type { I18n } from "../i18n";
 
 export default function FrontchannelLogout(props: PageProps<Extract<KcContext, { pageId: "frontchannel-logout.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;

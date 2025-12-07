@@ -3,11 +3,11 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { InputError } from "@/components/ui/input-error";
 import { Label } from "@/components/ui/label";
+import { KcContext } from '@/login/KcContext';
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { clsx } from "keycloakify/tools/clsx";
 import { useState } from "react";
-import type { KcContext } from "../../KcContext";
 import type { I18n } from "../../i18n";
 
 import { useScript } from "keycloakify/login/pages/LoginUsername.useScript";
