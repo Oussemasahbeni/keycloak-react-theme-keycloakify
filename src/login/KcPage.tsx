@@ -8,54 +8,54 @@ import { useI18n } from "./i18n";
 import "./index.css";
 
 const UserProfileFormFields = lazy(() => import("./UserProfileFormFields"));
-const Login = lazy(() => import("./pages/Login"));
-const LoginPassword = lazy(() => import("./pages/LoginPassword"));
-const LoginUsername = lazy(() => import("./pages/LoginUsername"));
-const Register = lazy(() => import("./pages/Register"));
-const Terms = lazy(() => import("./pages/Terms"));
+const Login = lazy(() => import("./pages/Login/Login"));
+const LoginPassword = lazy(() => import("./pages/LoginPassword/LoginPassword"));
+const LoginUsername = lazy(() => import("./pages/LoginUsername/LoginUsername"));
+const Register = lazy(() => import("./pages/Register/Register"));
+const Terms = lazy(() => import("./pages/Terms/Terms"));
 const LoginOauth2DeviceVerifyUserCode = lazy(
-    () => import("./pages/LoginOauth2DeviceVerifyUserCode")
+    () => import("./pages/LoginOauth2DeviceVerifyUserCode/LoginOauth2DeviceVerifyUserCode")
 );
-const LoginOauthGrant = lazy(() => import("./pages/LoginOauthGrant"));
-const LoginOtp = lazy(() => import("./pages/LoginOtp"));
-const LoginUpdateProfile = lazy(() => import("./pages/LoginUpdateProfile"));
-const LoginIdpLinkConfirm = lazy(() => import("./pages/LoginIdpLinkConfirm"));
-const LoginIdpLinkEmail = lazy(() => import("./pages/LoginIdpLinkEmail"));
-const LoginPageExpired = lazy(() => import("./pages/LoginPageExpired"));
-const LoginConfigTotp = lazy(() => import("./pages/LoginConfigTotp"));
-const LogoutConfirm = lazy(() => import("./pages/LogoutConfirm"));
-const LoginResetPassword = lazy(() => import("./pages/LoginResetPassword"));
-const Info = lazy(() => import("./pages/Info"));
-const Error = lazy(() => import("./pages/Error"));
-const WebauthnAuthenticate = lazy(() => import("./pages/WebauthnAuthenticate"));
-const WebauthnRegister = lazy(() => import("./pages/WebauthnRegister"));
-const IdpReviewUserProfile = lazy(() => import("./pages/IdpReviewUserProfile"));
-const UpdateEmail = lazy(() => import("./pages/UpdateEmail"));
-const SelectAuthenticator = lazy(() => import("./pages/SelectAuthenticator"));
-const SamlPostForm = lazy(() => import("./pages/SamlPostForm"));
-const DeleteCredential = lazy(() => import("./pages/DeleteCredential"));
-const FrontchannelLogout = lazy(() => import("./pages/FrontchannelLogout"));
+const LoginOauthGrant = lazy(() => import("./pages/LoginOauthGrant/LoginOauthGrant"));
+const LoginOtp = lazy(() => import("./pages/LoginOtp/LoginOtp"));
+const LoginUpdateProfile = lazy(() => import("./pages/LoginUpdateProfile/LoginUpdateProfile"));
+const LoginIdpLinkConfirm = lazy(() => import("./pages/LoginIdpLinkConfirm/LoginIdpLinkConfirm"));
+const LoginIdpLinkEmail = lazy(() => import("./pages/LoginIdpLinkEmail/LoginIdpLinkEmail"));
+const LoginPageExpired = lazy(() => import("./pages/LoginPageExpired/LoginPageExpired"));
+const LoginConfigTotp = lazy(() => import("./pages/LoginConfigTotp/LoginConfigTotp"));
+const LogoutConfirm = lazy(() => import("./pages/LogoutConfirm/LogoutConfirm"));
+const LoginResetPassword = lazy(() => import("./pages/LoginResetPassword/LoginResetPassword"));
+const Info = lazy(() => import("./pages/Info/Info"));
+const Error = lazy(() => import("./pages/Error/Error"));
+const WebauthnAuthenticate = lazy(() => import("./pages/WebauthnAuthenticate/WebauthnAuthenticate"));
+const WebauthnRegister = lazy(() => import("./pages/WebauthnRegister/WebauthnRegister"));
+const IdpReviewUserProfile = lazy(() => import("./pages/IdpReviewUserProfile/IdpReviewUserProfile"));
+const UpdateEmail = lazy(() => import("./pages/UpdateEmail/UpdateEmail"));
+const SelectAuthenticator = lazy(() => import("./pages/SelectAuthenticator/SelectAuthenticator"));
+const SamlPostForm = lazy(() => import("./pages/SamlPostForm/SamlPostForm"));
+const DeleteCredential = lazy(() => import("./pages/DeleteCredential/DeleteCredential"));
+const FrontchannelLogout = lazy(() => import("./pages/FrontchannelLogout/FrontchannelLogout"));
 const LoginRecoveryAuthnCodeConfig = lazy(
-    () => import("./pages/LoginRecoveryAuthnCodeConfig")
+    () => import("./pages/LoginRecoveryAuthnCodeConfig/LoginRecoveryAuthnCodeConfig")
 );
 const LoginRecoveryAuthnCodeInput = lazy(
-    () => import("./pages/LoginRecoveryAuthnCodeInput")
+    () => import("./pages/LoginRecoveryAuthnCodeInput/LoginRecoveryAuthnCodeInput")
 );
-const LoginResetOtp = lazy(() => import("./pages/LoginResetOtp"));
-const LoginX509Info = lazy(() => import("./pages/LoginX509Info"));
-const WebauthnError = lazy(() => import("./pages/WebauthnError"));
+const LoginResetOtp = lazy(() => import("./pages/LoginResetOtp/LoginResetOtp"));
+const LoginX509Info = lazy(() => import("./pages/LoginX509Info/LoginX509Info"));
+const WebauthnError = lazy(() => import("./pages/WebauthnError/WebauthnError"));
 const LoginPasskeysConditionalAuthenticate = lazy(
-    () => import("./pages/LoginPasskeysConditionalAuthenticate")
+    () => import("./pages/LoginPasskeysConditionalAuthenticate/LoginPasskeysConditionalAuthenticate")
 );
 const LoginIdpLinkConfirmOverride = lazy(
-    () => import("./pages/LoginIdpLinkConfirmOverride")
+    () => import("./pages/LoginIdpLinkConfirmOverride/LoginIdpLinkConfirmOverride")
 );
-const DeleteAccountConfirm = lazy(() => import("./pages/DeleteAccountConfirm"));
-const LoginUpdatePassword = lazy(() => import("./pages/LoginUpdatePassword"));
-const LoginVerifyEmail = lazy(() => import("./pages/LoginVerifyEmail"));
-const Code = lazy(() => import("./pages/Code"));
-const SelectOrganization = lazy(() => import("./pages/SelectOrganization"));
-const LinkIdpAction = lazy(() => import("./pages/LinkIdpAction"));
+const DeleteAccountConfirm = lazy(() => import("./pages/DeleteAccountConfirm/DeleteAccountConfirm"));
+const LoginUpdatePassword = lazy(() => import("./pages/LoginUpdatePassword/LoginUpdatePassword"));
+const LoginVerifyEmail = lazy(() => import("./pages/LoginVerifyEmail/LoginVerifyEmail"));
+const Code = lazy(() => import("./pages/Code/Code"));
+const SelectOrganization = lazy(() => import("./pages/SelectOrganization/SelectOrganization"));
+const LinkIdpAction = lazy(() => import("./pages/LinkIdpAction/LinkIdpAction"));
 
 const doMakeUserConfirmPassword = true;
 const doUseDefaultCss = false;
