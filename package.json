@@ -36,6 +36,7 @@
         "clsx": "^2.1.1",
         "cmdk": "^1.0.0",
         "i18next": "^24.2.2",
+        "input-otp": "^1.4.2",
         "keycloakify": "^11.13.3",
         "lucide-react": "^0.473.0",
         "postcss": "^8.4.39",
