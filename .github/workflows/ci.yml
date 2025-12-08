@@ -94,7 +94,7 @@ jobs:
 
             - run: pnpm install --frozen-lockfile
 
-            - run: build-storybook
+            - run: pnpm build-storybook
 
             - name: Upload artifact
               uses: actions/upload-pages-artifact@v3
