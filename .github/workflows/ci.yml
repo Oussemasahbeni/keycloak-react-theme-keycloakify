@@ -94,12 +94,12 @@ jobs:
 
             - run: pnpm install --frozen-lockfile
 
-            - run: pnpm build
+            - run: build-storybook
 
             - name: Upload artifact
               uses: actions/upload-pages-artifact@v3
               with:
-                  path: dist
+                  path: storybook-static
 
     deploy_gh_pages:
         needs: gh_pages
