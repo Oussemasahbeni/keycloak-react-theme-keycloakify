@@ -38,14 +38,15 @@ export default function DeleteAccountConfirm(props: PageProps<Extract<KcContext,
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-3 sm:justify-between mt-6">
-                    <Button type="submit" variant="destructive" className="sm:flex-1">
-                        {msgStr("doConfirmDelete")}
-                    </Button>
                     {triggered_from_aia && (
                         <Button variant="outline" type="submit" name="cancel-aia" value="true" className="sm:flex-1">
                             {msgStr("doCancel")}
                         </Button>
                     )}
+
+                    <Button type="submit" variant="destructive" className="sm:flex-1">
+                        {msgStr("doConfirmDelete")}
+                    </Button>
                 </div>
             </form>
         </Template>
