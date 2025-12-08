@@ -99,7 +99,7 @@ jobs:
             - name: Upload artifact
               uses: actions/upload-pages-artifact@v3
               with:
-                  path: build
+                  path: dist
 
     deploy_gh_pages:
         needs: gh_pages
