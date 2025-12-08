@@ -170,7 +170,7 @@ export default function LoginUsername(props: PageProps<Extract<KcContext, { page
                             variant="outline"
 
                         >
-                            <Fingerprint className="w-4 h-4 mr-2" />
+                            <Fingerprint className="w-4 h-4" />
                             {msgStr("passkey-doAuthenticate")}
                         </Button>
                     </>

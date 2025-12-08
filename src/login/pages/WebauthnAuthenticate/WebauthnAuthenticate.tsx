@@ -131,7 +131,7 @@ export default function WebauthnAuthenticate(props: PageProps<Extract<KcContext,
                 )}
 
                 <Button id={authButtonId} type="button" autoFocus className="w-full">
-                    <Fingerprint className="w-4 h-4 mr-2" />
+                    <Fingerprint className="w-4 h-4" />
                     {msgStr("webauthn-doAuthenticate")}
                 </Button>
             </div>
