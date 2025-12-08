@@ -13,10 +13,24 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
+
+            # 1. Setup pnpm
+            - uses: pnpm/action-setup@v4
+              with:
+                  version: 9
+
+            # 2. Setup Node with pnpm caching
             - uses: actions/setup-node@v4
-            - uses: bahmutov/npm-install@v1
-            - run: npm run build
-            - run: npx keycloakify
+              with:
+                  node-version: 20
+                  cache: "pnpm"
+
+            # 3. Install dependencies using pnpm
+            - run: pnpm install --frozen-lockfile
+
+            # 4. Run build and keycloakify using pnpm commands
+            - run: pnpm build
+            - run: pnpm dlx keycloakify
 
     check_if_version_upgraded:
         name: Check if version upgraded
@@ -36,16 +50,24 @@ jobs:
     create_github_release:
         runs-on: ubuntu-latest
         needs: check_if_version_upgraded
-        # We create a release only if the version in package.json has been updated
         if: needs.check_if_version_upgraded.outputs.is_upgraded_version == 'true'
         permissions:
             contents: write
         steps:
             - uses: actions/checkout@v4
+
+            - uses: pnpm/action-setup@v4
+              with:
+                  version: 9
+
             - uses: actions/setup-node@v4
-            - uses: bahmutov/npm-install@v1
-            - run: npm run build
-            - run: npx keycloakify
+              with:
+                  node-version: 20
+                  cache: "pnpm"
+
+            - run: pnpm install --frozen-lockfile
+            - run: pnpm build
+            - run: pnpm dlx keycloakify
 
             - name: Create Release
               uses: softprops/action-gh-release@v1
@@ -64,10 +86,20 @@ jobs:
             contents: write
         steps:
             - uses: actions/checkout@v4
+
+            - uses: pnpm/action-setup@v4
+              with:
+                  version: 9
+
             - uses: actions/setup-node@v4
-            - uses: bahmutov/npm-install@v1
-            - run: npm run build
-              # This builds the Storybook/React app part
+              with:
+                  node-version: 20
+                  cache: "pnpm"
+
+            - run: pnpm install --frozen-lockfile
+
+            # This builds the Storybook/React app part
+            - run: pnpm build
 
             - name: Upload artifact
               uses: actions/upload-pages-artifact@v3
