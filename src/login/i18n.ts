@@ -22,7 +22,9 @@ const { useI18n, ofTypeI18n } = i18nBuilder
             light: "Light",
             system: "System",
             copySuccessTitle: "Code copied to clipboard",
-            copyErrorTitle: "Failed to copy code"
+            copyErrorTitle: "Failed to copy code",
+            "organization.selectTitle": "Choose Your Organization",
+            "organization.pickPlaceholder": "Pick an organization to continue"
         },
         ar: {
             welcomeMessage: "مرحبًا بك في Planingo - بوابتك إلى التخطيط والتنظيم السلس.",
@@ -39,7 +41,9 @@ const { useI18n, ofTypeI18n } = i18nBuilder
             light: "نور",
             system: "النظام",
             copySuccessTitle: "تم نسخ الرمز إلى الحافظة",
-            copyErrorTitle: "فشل في نسخ الرمز"
+            copyErrorTitle: "فشل في نسخ الرمز",
+            "organization.selectTitle": "اختر مؤسستك",
+            "organization.pickPlaceholder": "اختر مؤسسة للمتابعة"
         },
         fr: {
             welcomeMessage:
@@ -57,7 +61,9 @@ const { useI18n, ofTypeI18n } = i18nBuilder
             light: "Lumière",
             system: "Système",
             copySuccessTitle: "Code copié dans le presse-papiers",
-            copyErrorTitle: "Échec de la copie du code"
+            copyErrorTitle: "Échec de la copie du code",
+            "organization.selectTitle": "Choisissez Votre Organisation",
+            "organization.pickPlaceholder": "Sélectionnez une organisation pour continuer"
         }
     })
     .build();

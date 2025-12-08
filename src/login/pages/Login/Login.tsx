@@ -14,6 +14,7 @@ import { InputError } from "@/components/ui/input-error";
 import { I18n } from '@/login/i18n';
 import { useScript } from 'keycloakify/login/pages/LoginUsername.useScript';
 import useProviderLogos from "./useProviderLogos";
+import { Fingerprint } from "lucide-react";
 
 export default function Login(props: PageProps<Extract<KcContext, { pageId: "login.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
@@ -249,6 +250,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                             variant="outline"
 
                         >
+                            <Fingerprint className="w-4 h-4 mr-2" />
                             {msgStr("passkey-doAuthenticate")}
                         </Button>
                     </>
