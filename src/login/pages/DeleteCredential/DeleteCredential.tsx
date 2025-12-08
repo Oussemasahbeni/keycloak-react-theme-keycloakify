@@ -33,13 +33,13 @@ export default function DeleteCredential(props: PageProps<Extract<KcContext, { p
             </Alert>
 
             <form className="form-actions" action={url.loginAction} method="POST">
-                <div className="flex justify-between mt-4">
-                    <Button name="accept" id="kc-accept" type="submit" >
-                        {msgStr("doConfirmDelete")}
+                <div className="flex flex-col sm:flex-row gap-3 sm:justify-between mt-6">
+                    <Button variant="outline" name="cancel-aia" id="kc-decline" type="submit" className="sm:flex-1">
+                        {msgStr("doCancel")}
                     </Button>
 
-                    <Button variant="outline" name="cancel-aia" id="kc-decline" type="submit">
-                        {msgStr("doCancel")}
+                    <Button name="accept" id="kc-accept" type="submit" variant="destructive" className="sm:flex-1">
+                        {msgStr("doConfirmDelete")}
                     </Button>
                 </div>
             </form>

@@ -5,7 +5,7 @@ import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { useScript } from "keycloakify/login/pages/WebauthnAuthenticate.useScript";
 import { clsx } from "keycloakify/tools/clsx";
-import { Shield } from "lucide-react";
+import { Shield, Fingerprint } from "lucide-react";
 import { Fragment } from "react";
 import type { I18n } from "../../i18n";
 
@@ -131,6 +131,7 @@ export default function WebauthnAuthenticate(props: PageProps<Extract<KcContext,
                 )}
 
                 <Button id={authButtonId} type="button" autoFocus className="w-full">
+                    <Fingerprint className="w-4 h-4 mr-2" />
                     {msgStr("webauthn-doAuthenticate")}
                 </Button>
             </div>

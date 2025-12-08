@@ -11,6 +11,7 @@ import { useState } from "react";
 import type { I18n } from "../../i18n";
 
 import { useScript } from "keycloakify/login/pages/LoginUsername.useScript";
+import { Fingerprint } from "lucide-react";
 
 
 export default function LoginUsername(props: PageProps<Extract<KcContext, { pageId: "login-username.ftl" }>, I18n>) {
@@ -169,6 +170,7 @@ export default function LoginUsername(props: PageProps<Extract<KcContext, { page
                             variant="outline"
 
                         >
+                            <Fingerprint className="w-4 h-4 mr-2" />
                             {msgStr("passkey-doAuthenticate")}
                         </Button>
                     </>

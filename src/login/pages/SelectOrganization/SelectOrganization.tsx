@@ -1,74 +1,104 @@
-import { Button } from '@/components/ui/button';
-import { KcContext } from '@/login/KcContext';
-import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { MouseEvent, useRef, useState } from "react";
-import type { I18n } from "../../i18n";
+import { Building2 } from "lucide-react";
+import type { PageProps } from "keycloakify/login/pages/PageProps";
+import type { KcContext } from "@/login/KcContext";
+import type { I18n } from "@/login/i18n";
+import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export default function SelectOrganization(props: PageProps<Extract<KcContext, { pageId: "select-organization.ftl" }>, I18n>) {
-    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
+  const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
+  const { url, user } = kcContext;
+  const { msg } = i18n;
 
-    const { url, user } = kcContext;
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedOrg, setSelectedOrg] = useState<string>("");
+  const formRef = useRef<HTMLFormElement>(null);
+  const organizationInputRef = useRef<HTMLInputElement>(null);
 
-    const { msg } = i18n;
+  const onOrganizationClick = (organizationAlias: string) => (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
 
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const formRef = useRef<HTMLFormElement>(null);
-    const organizationInputRef = useRef<HTMLInputElement>(null);
+    if (!organizationInputRef.current || !formRef.current) {
+      return;
+    }
 
-    const onOrganizationClick = (organizationAlias: string) => (event: MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
+    organizationInputRef.current.value = organizationAlias;
+    setIsSubmitting(true);
 
-        if (!organizationInputRef.current || !formRef.current) {
-            return;
-        }
+    if (typeof formRef.current.requestSubmit === "function") {
+      formRef.current.requestSubmit();
+      return;
+    }
 
-        organizationInputRef.current.value = organizationAlias;
-        setIsSubmitting(true);
+    formRef.current.submit();
+  };
 
-        if (typeof formRef.current.requestSubmit === "function") {
-            formRef.current.requestSubmit();
-            return;
-        }
+  const onSelectChange = (value: string) => {
+    setSelectedOrg(value);
+    if (!organizationInputRef.current || !formRef.current) {
+      return;
+    }
 
-        formRef.current.submit();
-    };
+    organizationInputRef.current.value = value;
+    setIsSubmitting(true);
 
-    const organizations = user.organizations ?? [];
-    const shouldDisplayGrid = organizations.length > 3;
+    if (typeof formRef.current.requestSubmit === "function") {
+      formRef.current.requestSubmit();
+      return;
+    }
 
-    return (
-        <Template
-            kcContext={kcContext}
-            i18n={i18n}
-            doUseDefaultCss={doUseDefaultCss}
-            classes={classes}
-            headerNode={null}
-        >
-            <form ref={formRef} action={url.loginAction} method="post">
-                <div className="space-y-4">
-                    <p className="text-md ">
-                        {msg("organization.select")}
-                    </p>
+    formRef.current.submit();
+  };
 
-                    <div className={shouldDisplayGrid ? "grid grid-cols-1 md:grid-cols-2 gap-4" : "space-y-3"}>
-                        {organizations.map(({ alias, name }) => (
-                            <Button
-                                key={alias}
-                                id={`organization-${alias}`}
-                                className="w-full justify-start"
-                                variant="outline"
-                                type="button"
-                                onClick={onOrganizationClick(alias)}
-                                disabled={isSubmitting}
-                            >
-                                <span className="text-left font-medium">{name ?? alias}</span>
-                            </Button>
-                        ))}
-                    </div>
-                </div>
-                <input ref={organizationInputRef} type="hidden" name="kc.org" />
-            </form>
+  const organizations = user.organizations ?? [];
+  const useSelect = organizations.length > 3;
 
-        </Template>
-    );
+  return (
+    <Template kcContext={kcContext} i18n={i18n} doUseDefaultCss={doUseDefaultCss} classes={classes} headerNode={null}>
+      <form ref={formRef} action={url.loginAction} method="post" className="space-y-6">
+        <div id="kc-user-organizations" className="space-y-4">
+          <h2 className="text-2xl font-semibold">{msg("organization.selectTitle")}</h2>
+          {useSelect ? (
+            <div className="space-y-2">
+              <Select value={selectedOrg} onValueChange={onSelectChange} disabled={isSubmitting}>
+                <SelectTrigger className="w-full mt-2">
+                  <SelectValue placeholder={msg("organization.pickPlaceholder")} />
+                </SelectTrigger>
+                <SelectContent>
+                  {organizations.map(({ alias, name }) => (
+                    <SelectItem key={alias} value={alias}>
+                      <div className="flex items-center gap-2">
+                        <Building2 className="w-4 h-4 text-muted-foreground" />
+                        {name ?? alias}
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          ) : (
+            <ul className="space-y-3">
+              {organizations.map(({ alias, name }) => (
+                <li key={alias}>
+                  <Button
+                    id={`organization-${alias}`}
+                    type="button"
+                    variant="outline"
+                    onClick={onOrganizationClick(alias)}
+                    disabled={isSubmitting}
+                    className="w-full h-auto p-4 flex items-center gap-3 justify-start hover:bg-accent hover:border-primary transition-colors"
+                  >
+                    <Building2 className="w-5 h-5 text-muted-foreground flex-shrink-0" />
+                    <span className="font-medium text-sm">{name ?? alias}</span>
+                  </Button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+        <input ref={organizationInputRef} type="hidden" name="kc.org" />
+      </form>
+    </Template>
+  );
 }

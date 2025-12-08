@@ -2,9 +2,36 @@ import { Button } from "@/components/ui/button";
 import { KcContext } from '@/login/KcContext';
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Fingerprint, Globe, KeyRound, Shield } from "lucide-react";
 import { FaKey } from "react-icons/fa";
 import type { I18n } from "../../i18n";
+
+const getAuthenticatorIcon = (authSelection: { displayName: string; iconCssClass?: string }) => {
+    const displayName = authSelection.displayName.toLowerCase();
+    const iconClass = authSelection.iconCssClass?.toLowerCase() || "";
+
+    if (displayName.includes("webauthn") || displayName.includes("passwordless") || 
+        iconClass.includes("webauthn") || displayName.includes("passkey")) {
+        return <Fingerprint className="w-5 h-5" />;
+    }
+
+    if (displayName.includes("otp") || displayName.includes("totp") || 
+        displayName.includes("authenticator")) {
+        return <Shield className="w-5 h-5" />;
+    }
+
+    if (displayName.includes("identity-provider") || displayName.includes("idp") || 
+        displayName.includes("sso") || iconClass.includes("identityprovider")) {
+        return <Globe className="w-5 h-5" />;
+    }
+
+    if (displayName.includes("password") || displayName.includes("username") || 
+        iconClass.includes("password")) {
+        return <KeyRound className="w-5 h-5" />;
+    }
+
+    return <FaKey className="w-5 h-5" />;
+};
 
 export default function SelectAuthenticator(props: PageProps<Extract<KcContext, { pageId: "select-authenticator.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
@@ -34,7 +61,7 @@ export default function SelectAuthenticator(props: PageProps<Extract<KcContext, 
                             value={authenticationSelection.authExecId}
                         >
                             <div className="flex items-center gap-3 flex-1">
-                                <FaKey />
+                                {getAuthenticatorIcon(authenticationSelection)}
 
                                 <div className="flex-1 min-w-0">
                                     <div className="font-medium text-sm">{advancedMsg(authenticationSelection.displayName)}</div>
