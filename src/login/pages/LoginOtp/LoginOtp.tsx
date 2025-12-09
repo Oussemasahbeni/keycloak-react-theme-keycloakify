@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { InputError } from "@/components/ui/input-error";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
-import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
 import { KcContext } from '@/login/KcContext';
+import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
@@ -50,10 +50,10 @@ export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "
                 )}
 
                 <div className="space-y-2">
-                    <Label htmlFor="otp" className="text-sm font-medium text-center block">
+                    <Label htmlFor="otp" className="text-sm font-medium  block">
                         {msg("loginOtpOneTime")}
                     </Label>
-                    <div className="flex justify-center">
+                    <div className="flex w-72 ">
                         <InputOTP maxLength={6} pattern={REGEXP_ONLY_DIGITS_AND_CHARS} name="otp" autoFocus>
                             <InputOTPGroup>
                                 <InputOTPSlot index={0} className="h-12 w-12 text-lg" />

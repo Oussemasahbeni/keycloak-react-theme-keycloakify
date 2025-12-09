@@ -60,14 +60,14 @@ export default function Info(props: PageProps<Extract<KcContext, { pageId: "info
 
                 if (pageRedirectUri) {
                     return (
-                        <Button type="button" className="mt-2 flex justify-end">
+                        <Button type="button" className="mt-2 flex ms-auto">
                             <a href={pageRedirectUri}>{msg("backToApplication")}</a>
                         </Button>
                     );
                 }
                 if (actionUri) {
                     return (
-                        <Button type="button" className="mt-2 flex justify-end">
+                        <Button type="button" className="mt-2 flex ms-auto ">
                             <a href={actionUri}>{msg("proceedWithAction")}</a>
                         </Button>
                     );
@@ -75,7 +75,7 @@ export default function Info(props: PageProps<Extract<KcContext, { pageId: "info
 
                 if (client.baseUrl) {
                     return (
-                        <Button type="button" className="mt-2 flex justify-end">
+                        <Button type="button" className="mt-2 flex  ms-auto-end">
                             <a href={client.baseUrl}>{msg("backToApplication")}</a>
                         </Button>
                     );

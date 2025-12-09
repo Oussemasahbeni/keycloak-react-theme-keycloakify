@@ -24,24 +24,28 @@ export default function LinkIdpAction(props: PageProps<Extract<KcContext, { page
                 {msg("linkIdpActionMessage", idpDisplayName)}
             </div>
             <form action={url.loginAction} method="post">
-                <div >
-                    <div id="kc-form-buttons" className="flex  gap-3 mt-4">
+                {/* <div className='flex justify-end w-full'>
+                    <div id="kc-form-buttons" className="flex  gap-3 mt-4"> */}
+                <div className="flex flex-col sm:flex-row gap-3 sm:justify-between mt-6">
+                    <Button
+                        name="cancel-aia"
+                        variant="outline"
+                        className='flex-1'
+                        id="kc-cancel"
+                        type="submit" >
+                        {msgStr("doCancel")}
+                    </Button>
+                    <Button name="continue" id="kc-continue" type="submit" className="flex-1">
+                        {msgStr("doContinue")}
+                    </Button>
 
-                        <Button name="continue" id="kc-continue" type="submit" >
-                            {msgStr("doContinue")}
-                        </Button>
-
-                        <Button
-                            name="cancel-aia"
-                            variant="outline"
-                            id="kc-cancel"
-                            type="submit" >
-                            {msgStr("doCancel")}
-                        </Button>
-
-
-                    </div>
                 </div>
+
+
+
+
+                {/* </div>
+                </div> */}
             </form>
             <div className="clearfix" />
         </Template>

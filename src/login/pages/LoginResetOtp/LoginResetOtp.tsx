@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
+import { Label } from '@/components/ui/label';
+import { RadioGroupItem } from '@/components/ui/radio-group';
 import { KcContext } from '@/login/KcContext';
-import clsx from "clsx";
+import { RadioGroup } from '@radix-ui/react-radio-group';
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
-import { Fragment } from "react";
+import { Smartphone } from 'lucide-react';
 import type { I18n } from "../../i18n";
 
 export default function LoginResetOtp(props: PageProps<Extract<KcContext, { pageId: "login-reset-otp.ftl" }>, I18n>) {
@@ -31,32 +32,20 @@ export default function LoginResetOtp(props: PageProps<Extract<KcContext, { page
             <form id="kc-otp-reset-form" className={kcClsx("kcFormClass")} action={url.loginAction} method="post">
                 <div className="flex flex-col gap-2 w-full">
                     <p id="kc-otp-reset-form-description">{msg("otp-reset-description")}</p>
-                    {configuredOtpCredentials.userOtpCredentials.map((otpCredential, index) => (
-                        <Fragment key={otpCredential.id}>
-                            <div className="flex items-center gap-2">
-                                <input
-                                    id={`kc-otp-credential-${index}`}
-                                    className={kcClsx("kcLoginOTPListInputClass")}
-                                    type="radio"
-                                    name="selectedCredentialId"
-                                    value={otpCredential.id}
-                                    defaultChecked={otpCredential.id === configuredOtpCredentials.selectedCredentialId}
-                                />
-                                <Label
-                                    htmlFor={`kc-otp-credential-${index}`}
-                                    className={clsx(kcClsx("kcLoginOTPListClass"), "w-full")}
-                                    tabIndex={index}
-                                >
-                                    <span className={kcClsx("kcLoginOTPListItemHeaderClass")}>
-                                        <span className={kcClsx("kcLoginOTPListItemIconBodyClass")}>
-                                            <i className={kcClsx("kcLoginOTPListItemIconClass")} aria-hidden="true"></i>
-                                        </span>
-                                        <span className={kcClsx("kcLoginOTPListItemTitleClass")}>{otpCredential.userLabel}</span>
-                                    </span>
+
+                    <RadioGroup name="selectedCredentialId" defaultValue={configuredOtpCredentials.selectedCredentialId} className="space-y-2">
+                        {configuredOtpCredentials.userOtpCredentials.map((otpCredential, index) => (
+                            <div key={otpCredential.id} className="flex items-center space-x-3 p-3 border rounded-lg">
+                                <Label htmlFor={`kc-otp-credential-${index}`} className="flex items-center space-x-2 cursor-pointer flex-1">
+                                    <Smartphone className="w-5 h-5 text-muted-foreground flex-shrink-0" />
+                                    <span className="text-sm font-medium">{otpCredential.userLabel}</span>
                                 </Label>
+                                <RadioGroupItem value={otpCredential.id} id={`kc-otp-credential-${index}`} />
+
                             </div>
-                        </Fragment>
-                    ))}
+                        ))}
+                    </RadioGroup>
+
                     <div className={kcClsx("kcFormGroupClass")}>
                         <div id="kc-form-buttons" className={kcClsx("kcFormButtonsClass")}>
                             <Button id="kc-otp-reset-form-submit" className={"w-full"} type="submit">

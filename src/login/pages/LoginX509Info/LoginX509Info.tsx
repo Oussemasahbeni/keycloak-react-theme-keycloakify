@@ -37,14 +37,15 @@ export default function LoginX509Info(props: PageProps<Extract<KcContext, { page
                 )}
 
                 <div className="flex flex-col sm:flex-row gap-3">
-                    <Button name="login" id="kc-login" type="submit" className="sm:flex-1">
-                        {msgStr("doContinue")}
-                    </Button>
                     {x509.formData.isUserEnabled && (
                         <Button variant="outline" name="cancel" id="kc-cancel" type="submit" className="sm:flex-1">
                             {msgStr("doIgnore")}
                         </Button>
                     )}
+                    <Button name="login" id="kc-login" type="submit" className="sm:flex-1">
+                        {msgStr("doContinue")}
+                    </Button>
+
                 </div>
             </form>
         </Template>

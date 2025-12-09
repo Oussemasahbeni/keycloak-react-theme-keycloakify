@@ -1,10 +1,10 @@
-import { MouseEvent, useRef, useState } from "react";
-import { Building2 } from "lucide-react";
-import type { PageProps } from "keycloakify/login/pages/PageProps";
-import type { KcContext } from "@/login/KcContext";
-import type { I18n } from "@/login/i18n";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import type { KcContext } from "@/login/KcContext";
+import type { I18n } from "@/login/i18n";
+import type { PageProps } from "keycloakify/login/pages/PageProps";
+import { Building2 } from "lucide-react";
+import { MouseEvent, useRef, useState } from "react";
 
 export default function SelectOrganization(props: PageProps<Extract<KcContext, { pageId: "select-organization.ftl" }>, I18n>) {
   const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
@@ -55,14 +55,14 @@ export default function SelectOrganization(props: PageProps<Extract<KcContext, {
   const useSelect = organizations.length > 3;
 
   return (
-    <Template kcContext={kcContext} i18n={i18n} doUseDefaultCss={doUseDefaultCss} classes={classes} headerNode={null}>
-      <form ref={formRef} action={url.loginAction} method="post" className="space-y-6">
-        <div id="kc-user-organizations" className="space-y-4">
-          <h2 className="text-2xl font-semibold">{msg("organization.selectTitle")}</h2>
+    <Template kcContext={kcContext} i18n={i18n} doUseDefaultCss={doUseDefaultCss} classes={classes} headerNode={msg("organization.selectTitle")}>
+      <form ref={formRef} action={url.loginAction} method="post" >
+        <div id="kc-user-organizations" className="space-y-2">
+          <h2 className="text-md font-semibold">{msg("organization.select")}</h2>
           {useSelect ? (
             <div className="space-y-2">
               <Select value={selectedOrg} onValueChange={onSelectChange} disabled={isSubmitting}>
-                <SelectTrigger className="w-full mt-2">
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder={msg("organization.pickPlaceholder")} />
                 </SelectTrigger>
                 <SelectContent>

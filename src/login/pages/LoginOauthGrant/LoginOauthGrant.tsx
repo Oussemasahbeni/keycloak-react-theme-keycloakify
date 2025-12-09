@@ -54,7 +54,6 @@ export default function LoginOauthGrant(props: PageProps<Extract<KcContext, { pa
 
                     {(client.attributes.policyUri || client.attributes.tosUri) && (
                         <>
-                            {/* <Separator /> */}
                             <div className="space-y-2">
                                 <CardDescription className="text-xs">
                                     {client.name
@@ -92,12 +91,13 @@ export default function LoginOauthGrant(props: PageProps<Extract<KcContext, { pa
                     <form className="w-full" action={url.oauthAction} method="POST">
                         <input type="hidden" name="code" value={oauth.code} />
                         <div className="flex flex-col sm:flex-row gap-3 w-full">
-                            <Button type="submit" name="accept" id="kc-login" className="flex-1">
-                                {msgStr("doYes")}
-                            </Button>
                             <Button type="submit" name="cancel" id="kc-cancel" variant="outline" className="flex-1">
                                 {msgStr("doNo")}
                             </Button>
+                            <Button type="submit" name="accept" id="kc-login" className="flex-1">
+                                {msgStr("doYes")}
+                            </Button>
+
                         </div>
                     </form>
                 </div>

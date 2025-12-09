@@ -44,68 +44,66 @@ export default function Register(props: RegisterProps) {
             displayMessage={messagesPerField.exists("global")}
             displayRequiredFields
         >
-            <div className="space-y-6">
-                <form id="kc-register-form" className="space-y-6" action={url.registrationAction} method="post">
-                    <UserProfileFormFields
-                        kcContext={kcContext}
+            <form id="kc-register-form" className="space-y-3" action={url.registrationAction} method="post">
+                <UserProfileFormFields
+                    kcContext={kcContext}
+                    i18n={i18n}
+                    kcClsx={kcClsx}
+                    onIsFormSubmittableValueChange={setIsFormSubmittable}
+                    doMakeUserConfirmPassword={doMakeUserConfirmPassword}
+                />
+
+                {termsAcceptanceRequired && (
+                    <TermsAcceptance
                         i18n={i18n}
-                        kcClsx={kcClsx}
-                        onIsFormSubmittableValueChange={setIsFormSubmittable}
-                        doMakeUserConfirmPassword={doMakeUserConfirmPassword}
+                        messagesPerField={messagesPerField}
+                        areTermsAccepted={areTermsAccepted}
+                        onAreTermsAcceptedValueChange={setAreTermsAccepted}
                     />
+                )}
 
-                    {termsAcceptanceRequired && (
-                        <TermsAcceptance
-                            i18n={i18n}
-                            messagesPerField={messagesPerField}
-                            areTermsAccepted={areTermsAccepted}
-                            onAreTermsAcceptedValueChange={setAreTermsAccepted}
-                        />
-                    )}
-
-                    {recaptchaRequired && (recaptchaVisible || recaptchaAction === undefined) && (
-                        <div className="space-y-2">
-                            <div className="flex justify-center">
-                                <div className="g-recaptcha" data-size="compact" data-sitekey={recaptchaSiteKey} data-action={recaptchaAction}></div>
-                            </div>
+                {recaptchaRequired && (recaptchaVisible || recaptchaAction === undefined) && (
+                    <div className="space-y-2">
+                        <div className="flex justify-center">
+                            <div className="g-recaptcha" data-size="compact" data-sitekey={recaptchaSiteKey} data-action={recaptchaAction}></div>
                         </div>
-                    )}
-
-                    <div className="space-y-4">
-                        {recaptchaRequired && !recaptchaVisible && recaptchaAction !== undefined ? (
-                            <button
-                                className={clsx(
-                                    "w-full px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors",
-                                    "g-recaptcha"
-                                )}
-                                data-sitekey={recaptchaSiteKey}
-                                style={{ width: "100%" }}
-                                data-callback={() => {
-                                    (document.getElementById("kc-register-form") as HTMLFormElement).submit();
-                                }}
-                                data-action={recaptchaAction}
-                                type="submit"
-                            >
-                                {msg("doRegister")}
-                            </button>
-                        ) : (
-                            <Button
-                                disabled={!isFormSubmittable || (termsAcceptanceRequired && !areTermsAccepted)}
-                                className="w-full"
-                                name="register"
-                                type="submit"
-                            >
-                                {msgStr("doRegister")}
-                            </Button>
-                        )}
                     </div>
-                </form>
+                )}
 
-                <div className="mt-2 flex justify-end">
-                    <Button variant="ghost">
-                        <a href={url.loginUrl}>{msg("backToLogin")}</a>
-                    </Button>
+                <div className="space-y-4">
+                    {recaptchaRequired && !recaptchaVisible && recaptchaAction !== undefined ? (
+                        <button
+                            className={clsx(
+                                "w-full px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors",
+                                "g-recaptcha"
+                            )}
+                            data-sitekey={recaptchaSiteKey}
+                            style={{ width: "100%" }}
+                            data-callback={() => {
+                                (document.getElementById("kc-register-form") as HTMLFormElement).submit();
+                            }}
+                            data-action={recaptchaAction}
+                            type="submit"
+                        >
+                            {msg("doRegister")}
+                        </button>
+                    ) : (
+                        <Button
+                            disabled={!isFormSubmittable || (termsAcceptanceRequired && !areTermsAccepted)}
+                            className="w-full"
+                            name="register"
+                            type="submit"
+                        >
+                            {msgStr("doRegister")}
+                        </Button>
+                    )}
                 </div>
+            </form>
+
+            <div className="mt-2 flex justify-end">
+                <Button variant="ghost">
+                    <a href={url.loginUrl}>{msg("backToLogin")}</a>
+                </Button>
             </div>
         </Template>
     );

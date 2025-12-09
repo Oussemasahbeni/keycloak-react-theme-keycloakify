@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { InputError } from "@/components/ui/input-error";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import type { Attribute } from "keycloakify/login/KcContext";
 import type { KcClsx } from "keycloakify/login/lib/kcClsx";
@@ -59,18 +60,22 @@ export default function UserProfileFormFields(props: UserProfileFormFieldsProps<
                             />
                         )}
                         <div
-                            className={cn("space-y-2", kcClsx("kcFormGroupClass"))}
+
                             style={{
-                                display: attribute.name === "password-confirm" && !doMakeUserConfirmPassword ? "none" : undefined
+                                display:
+                                    attribute.annotations.inputType === "hidden" ||
+                                        (attribute.name === "password-confirm" && !doMakeUserConfirmPassword)
+                                        ? "none"
+                                        : undefined
                             }}
                         >
-                            <div className={cn("space-y-1", kcClsx("kcLabelWrapperClass"))}>
+                            <div >
                                 <Label htmlFor={attribute.name} className={cn("text-sm font-medium text-end")}>
                                     {advancedMsg(attribute.displayName ?? "")}
                                     {attribute.required && <span className="text-destructive ml-1">*</span>}
                                 </Label>
                             </div>
-                            <div className={cn("space-y-2", kcClsx("kcInputWrapperClass"))}>
+                            <div >
                                 {attribute.annotations.inputHelperTextBefore !== undefined && (
                                     <div
                                         className={cn("text-sm text-muted-foreground", kcClsx("kcInputHelperTextBeforeClass"))}
@@ -218,6 +223,15 @@ function InputFieldByType(props: InputFieldByTypeProps) {
     const { attribute, valueOrValues, locale } = props;
 
     switch (attribute.annotations.inputType) {
+        case "hidden":
+            return (
+                <input
+                    type="hidden"
+                    id={attribute.name}
+                    name={attribute.name}
+                    value={valueOrValues as string}
+                />
+            );
         case "textarea":
             return <TextareaTag {...props} />;
         case "select":
@@ -579,76 +593,108 @@ function SelectTag(props: InputFieldByTypeProps) {
 
     const isMultiple = attribute.annotations.inputType === "multiselect";
 
-    return (
-        <select
-            id={attribute.name}
-            name={attribute.name}
-            className={cn(
-                "flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
-                displayableErrors.length !== 0 && "border-destructive ring-destructive/20 focus:ring-destructive",
-                isMultiple && "min-h-[100px] h-auto"
-            )}
-            aria-invalid={displayableErrors.length !== 0}
-            disabled={attribute.readOnly}
-            multiple={isMultiple}
-            size={attribute.annotations.inputTypeSize === undefined ? undefined : parseInt(`${attribute.annotations.inputTypeSize}`)}
-            value={valueOrValues}
-            onChange={event =>
-                dispatchFormAction({
-                    action: "update",
-                    name: attribute.name,
-                    valueOrValues: (() => {
-                        if (isMultiple) {
-                            return Array.from(event.target.selectedOptions).map(option => option.value);
-                        }
+    const options = (() => {
+        walk: {
+            const { inputOptionsFromValidation } = attribute.annotations;
 
-                        return event.target.value;
-                    })()
-                })
+            if (inputOptionsFromValidation === undefined) {
+                break walk;
             }
-            onBlur={() =>
-                dispatchFormAction({
-                    action: "focus lost",
-                    name: attribute.name,
-                    fieldIndex: undefined
-                })
+
+            assert(typeof inputOptionsFromValidation === "string");
+
+            const validator = (attribute.validators as Record<string, { options?: string[] }>)[inputOptionsFromValidation];
+
+            if (validator === undefined) {
+                break walk;
             }
-        >
-            {!isMultiple && <option value=""></option>}
-            {(() => {
-                const options = (() => {
-                    walk: {
-                        const { inputOptionsFromValidation } = attribute.annotations;
 
-                        if (inputOptionsFromValidation === undefined) {
-                            break walk;
-                        }
+            if (validator.options === undefined) {
+                break walk;
+            }
 
-                        assert(typeof inputOptionsFromValidation === "string");
+            return validator.options;
+        }
 
-                        const validator = (attribute.validators as Record<string, { options?: string[] }>)[inputOptionsFromValidation];
+        return attribute.validators.options?.options ?? [];
+    })();
 
-                        if (validator === undefined) {
-                            break walk;
-                        }
-
-                        if (validator.options === undefined) {
-                            break walk;
-                        }
-
-                        return validator.options;
-                    }
-
-                    return attribute.validators.options?.options ?? [];
-                })();
-
-                return options.map(option => (
+    // For multiselect, fall back to native select as shadcn doesn't support multi-select
+    if (isMultiple) {
+        return (
+            <select
+                id={attribute.name}
+                name={attribute.name}
+                className={cn(
+                    "flex min-h-[100px] h-auto w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+                    displayableErrors.length !== 0 && "border-destructive ring-destructive/20 focus:ring-destructive"
+                )}
+                aria-invalid={displayableErrors.length !== 0}
+                disabled={attribute.readOnly}
+                multiple={true}
+                size={attribute.annotations.inputTypeSize === undefined ? undefined : parseInt(`${attribute.annotations.inputTypeSize}`)}
+                value={valueOrValues}
+                onChange={event =>
+                    dispatchFormAction({
+                        action: "update",
+                        name: attribute.name,
+                        valueOrValues: Array.from(event.target.selectedOptions).map(option => option.value)
+                    })
+                }
+                onBlur={() =>
+                    dispatchFormAction({
+                        action: "focus lost",
+                        name: attribute.name,
+                        fieldIndex: undefined
+                    })
+                }
+            >
+                {options.map(option => (
                     <option key={option} value={option}>
                         {inputLabel(i18n, attribute, option)}
                     </option>
-                ));
-            })()}
-        </select>
+                ))}
+            </select>
+        );
+    }
+
+    return (
+        <Select
+            value={typeof valueOrValues === "string" && valueOrValues !== "" ? valueOrValues : undefined}
+            onValueChange={value =>
+                dispatchFormAction({
+                    action: "update",
+                    name: attribute.name,
+                    valueOrValues: value
+                })
+            }
+            disabled={attribute.readOnly}
+        >
+            <SelectTrigger
+                id={attribute.name}
+                className={cn(
+                    "w-full",
+                    displayableErrors.length !== 0 && "border-destructive ring-destructive/20 focus-visible:ring-destructive"
+                )}
+                aria-invalid={displayableErrors.length !== 0}
+                onBlur={() =>
+                    dispatchFormAction({
+                        action: "focus lost",
+                        name: attribute.name,
+                        fieldIndex: undefined
+                    })
+                }
+            >
+                <SelectValue placeholder="Select an option" />
+            </SelectTrigger>
+            <SelectContent>
+                {options.map(option => (
+                    <SelectItem key={option} value={option}>
+                        {inputLabel(i18n, attribute, option)}
+                    </SelectItem>
+                ))}
+            </SelectContent>
+        </Select>
     );
 }
 

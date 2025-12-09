@@ -43,7 +43,6 @@ export default function DeleteCredential(props: PageProps<Extract<KcContext, { p
                     </Button>
                 </div>
             </form>
-            <div className="clearfix" />
         </Template>
     );
 }
