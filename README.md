@@ -10,15 +10,15 @@ A modern, customizable Keycloak login theme built with React, Tailwind CSS, and 
 
 ## ✨ Features
 
-- 🎨 **Modern UI** - Beautiful, responsive design using Tailwind CSS v4 and shadcn/ui components
-- 🌙 **Dark Mode** - Built-in dark/light/system theme toggle with persistent preferences
-- 🌍 **Multi-language Support** - i18n ready with English, French, and Arabic translations (RTL supported)
-- 📧 **Custom Email Templates** - Styled email templates using jsx-email for all Keycloak events
-- 🔐 **Complete Login Flow** - All 35+ Keycloak login pages fully customized
-- 🎭 **Social Login Providers** - Pre-styled icons for 16+ OAuth providers (Google, GitHub, Microsoft, etc.)
-- 📖 **Storybook Integration** - Visual testing and documentation for all components
-- ⚡ **Vite Powered** - Fast development with HMR and optimized builds
-- 🔧 **Type-Safe** - Full TypeScript support throughout the codebase
+-   🎨 **Modern UI** - Beautiful, responsive design using Tailwind CSS v4 and shadcn/ui components
+-   🌙 **Dark Mode** - Built-in dark/light/system theme toggle with persistent preferences
+-   🌍 **Multi-language Support** - i18n ready with English, French, and Arabic translations (RTL supported)
+-   📧 **Custom Email Templates** - Styled email templates using jsx-email for all Keycloak events
+-   🔐 **Complete Login Flow** - All 35+ Keycloak login pages fully customized
+-   🎭 **Social Login Providers** - Pre-styled icons for 16+ OAuth providers (Google, GitHub, Microsoft, etc.)
+-   📖 **Storybook Integration** - Visual testing and documentation for all components
+-   ⚡ **Vite Powered** - Fast development with HMR and optimized builds
+-   🔧 **Type-Safe** - Full TypeScript support throughout the codebase
 
 ## 🖼️ Supported Pages
 
@@ -38,9 +38,9 @@ This theme includes custom implementations for all Keycloak login pages:
 
 ### Prerequisites
 
-- Node.js 18+
-- npm, yarn, or pnpm
-- [Maven](https://maven.apache.org/) (for building the theme JAR)
+-   Node.js 18+
+-   npm, yarn, or pnpm
+-   [Maven](https://maven.apache.org/) (for building the theme JAR)
 
 ### Installation
 
@@ -50,20 +50,20 @@ git clone https://github.com/Oussemasahbeni/keycloak-react-theme-keycloakify.git
 cd keycloak-react-theme-keycloakify
 
 # Install dependencies
-npm install
+pnpm  install
 ```
 
 ### Development
 
 ```bash
 # Start development server with hot reload
-npm run dev
+pnpm  dev
 
 # Run Storybook for component development
-npm run storybook
+npm  storybook
 
 # Preview email templates
-npm run emails:preview
+pnpm emails:preview
 ```
 
 ## 🎨 Customization
@@ -110,15 +110,15 @@ Add or modify translations in `src/login/i18n.ts`:
 
 The theme uses shadcn/ui components located in `src/components/ui/`:
 
-- `alert.tsx` - Alert messages
-- `button.tsx` - Buttons with variants
-- `card.tsx` - Card containers
-- `checkbox.tsx` - Checkbox inputs
-- `input.tsx` - Text inputs
-- `label.tsx` - Form labels
-- `dropdown-menu.tsx` - Dropdown menus
-- `radio-group.tsx` - Radio button groups
-- `tooltip.tsx` - Tooltips
+-   `alert.tsx` - Alert messages
+-   `button.tsx` - Buttons with variants
+-   `card.tsx` - Card containers
+-   `checkbox.tsx` - Checkbox inputs
+-   `input.tsx` - Text inputs
+-   `label.tsx` - Form labels
+-   `dropdown-menu.tsx` - Dropdown menus
+-   `radio-group.tsx` - Radio button groups
+-   `tooltip.tsx` - Tooltips
 
 ## 📧 Email Templates
 
@@ -148,23 +148,23 @@ npm run emails:preview
 
 Translations are in `emails/locales/{locale}/translation.json`:
 
-- `en/` - English
-- `fr/` - French
-- `ar/` - Arabic
+-   `en/` - English
+-   `fr/` - French
+-   `ar/` - Arabic
 
 ## 🔨 Building
 
 ### Install Maven
 
-- **macOS**: `brew install maven`
-- **Ubuntu/Debian**: `sudo apt-get install maven`
-- **Windows**: `choco install openjdk && choco install maven`
+-   **macOS**: `brew install maven`
+-   **Ubuntu/Debian**: `sudo apt-get install maven`
+-   **Windows**: `choco install openjdk && choco install maven`
 
 ### Build the Theme
 
 ```bash
 # Build the Keycloak theme JAR
-npm run build-keycloak-theme
+pnpm  build-keycloak-theme
 ```
 
 The built theme will be output as `planingo-theme.jar` in the `dist_keycloak` directory.
@@ -181,10 +181,10 @@ The built theme will be output as `planingo-theme.jar` in the `dist_keycloak` di
 
 ```bash
 # Run Storybook for visual testing
-npm run storybook
+pnpm  storybook
 
 # Build static Storybook
-npm run build-storybook
+pnpm  build-storybook
 ```
 
 ### Local Keycloak Testing
@@ -218,10 +218,9 @@ See the [Keycloakify documentation](https://docs.keycloakify.dev/testing-your-th
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-
 ## 🙏 Acknowledgments
 
-- [Keycloakify](https://keycloakify.dev) - For making Keycloak theming with React possible
-- [shadcn/ui](https://ui.shadcn.com) - For the beautiful UI components
-- [Tailwind CSS](https://tailwindcss.com) - For the utility-first CSS framework
-- [jsx-email](https://jsx.email) - For React email templates
+-   [Keycloakify](https://keycloakify.dev) - For making Keycloak theming with React possible
+-   [shadcn/ui](https://ui.shadcn.com) - For the beautiful UI components
+-   [Tailwind CSS](https://tailwindcss.com) - For the utility-first CSS framework
+-   [jsx-email](https://jsx.email) - For React email templates
