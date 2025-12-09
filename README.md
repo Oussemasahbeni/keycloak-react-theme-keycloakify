@@ -60,7 +60,7 @@ pnpm  install
 pnpm  dev
 
 # Run Storybook for component development
-npm  storybook
+pnpm  storybook
 
 # Preview email templates
 pnpm emails:preview
@@ -141,7 +141,7 @@ Custom email templates are built with [jsx-email](https://jsx.email/) and suppor
 ### Preview Emails
 
 ```bash
-npm run emails:preview
+pnpm run emails:preview
 ```
 
 ### Email Locales
