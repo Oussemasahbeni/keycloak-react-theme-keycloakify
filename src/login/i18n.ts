@@ -8,8 +8,7 @@ const { useI18n, ofTypeI18n } = i18nBuilder
     .withCustomTranslations({
         en: {
             welcomeMessage:
-                "Welcome to Planingo - Your gateway to seamless planning and organization.",
-
+                "Welcome to Acme inc - Your gateway to seamless planning and organization.",
             loginAccountTitle: "Login to your account",
             registerTitle: "Register a new account",
             email: "Email Address",
@@ -27,8 +26,7 @@ const { useI18n, ofTypeI18n } = i18nBuilder
             "organization.pickPlaceholder": "Pick an organization to continue"
         },
         ar: {
-            welcomeMessage: "مرحبًا بك في Planingo - بوابتك إلى التخطيط والتنظيم السلس.",
-
+            welcomeMessage: "مرحبًا بك في Acme inc - بوابتك إلى التخطيط والتنظيم السلس.",
             loginAccountTitle: "تسجيل الدخول  إلى حسابك",
             registerTitle: "تسجيل حساب جديد",
             email: "عنوان البريد الإلكتروني",
@@ -47,7 +45,7 @@ const { useI18n, ofTypeI18n } = i18nBuilder
         },
         fr: {
             welcomeMessage:
-                "Bienvenue sur Planingo Votre passerelle vers une planification et une organisation sans faille.",
+                "Bienvenue sur Acme inc Votre passerelle vers une planification et une organisation sans faille.",
             loginAccountTitle: "Connectez-vous à votre compte",
             registerTitle: "Créer    un nouveau compte",
             email: "Adresse e-mail",

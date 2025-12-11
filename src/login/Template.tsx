@@ -18,6 +18,8 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@radix
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { RotateCcw } from 'lucide-react';
 
+const APP_NAME = 'Acme Inc.';
+
 export default function Template(props: TemplateProps<KcContext, I18n>) {
     const {
         displayInfo = false,
@@ -65,10 +67,9 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
         <div className="grid min-h-svh lg:grid-cols-2 bg-white dark:bg-background lg:bg-transparent">
 
 
+
             {/* Main content */}
             <div className="flex flex-col gap-4 px-0 py-0 pb-6 lg:p-6 lg:md:p-10 lg:pt-10 min-h-screen lg:min-h-0">
-
-
 
                 {/*  navigation */}
                 <div className="absolute top-4 right-4 lg:left-4  z-20 flex gap-2">
@@ -94,8 +95,9 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                 <div className="lg:hidden bg-blue-950 dark:bg-white/5 relative pt-8 pb-6 px-6">
                     {/* Logo and welcome message */}
                     <div className="flex flex-col items-center justify-center gap-3 mt-4">
-                        <div className="w-32">
-                            <img src={companylogo} alt="Logo" className="w-full h-auto" />
+                        <div className=" mb-4 flex items-center gap-3">
+                            <img src={companylogo} alt="Logo" />
+                            <span className='text-white text-xl'> {APP_NAME}</span>
                         </div>
 
                     </div>
@@ -192,7 +194,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                 </div>
             </div>
 
-            <div className="bg-blue-950 relative hidden lg:block dark:bg-white/5">
+            <div className="bg-slate-950 relative hidden lg:block dark:bg-white/5">
                 <div className="flex items-center pt-20 h-full justify-center z-1">
                     <div className="absolute right-0 top-0 w-full max-w-[250px] xl:max-w-[450px]">
                         <img src={shape} alt="grid" />
@@ -202,9 +204,11 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                     </div>
 
                     <div className="flex justify-center my-auto flex-col items-center max-w-xs">
-                        <a className="block mb-4">
+                        <div className=" mb-4 flex items-center gap-3">
                             <img src={companylogo} alt="Logo" />
-                        </a>
+                            <span className='text-white text-xl'> {APP_NAME}</span>
+                        </div>
+
                         <p className="text-center  text-gray-400 dark:text-white/60">{msg("welcomeMessage")}</p>
                     </div>
                 </div>

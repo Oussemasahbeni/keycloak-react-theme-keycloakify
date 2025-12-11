@@ -1,10 +1,10 @@
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Input } from "@/components/ui/input";
+import { KcContext } from '@/login/KcContext';
+import { I18n } from '@/login/i18n';
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { useState } from "react";
-import { KcContext } from '@/login/KcContext';
-import { I18n } from '@/login/i18n';
 
 import { Button } from "@/components/ui/button";
 import toast, { Toaster } from "react-hot-toast";
@@ -59,7 +59,7 @@ export default function Code(props: PageProps<Extract<KcContext, { pageId: "code
                                 onClick={handleCopy}
                                 variant="secondary"
                                 size="icon"
-                                className="size-6 absolute end-2 top-1/2 transform -translate-y-1/2"
+                                className="size-4 absolute end-2 top-1/2 transform -translate-y-1/2"
                             >
                                 {copied ? <MdCheck /> : <MdContentCopy />}
                             </Button>

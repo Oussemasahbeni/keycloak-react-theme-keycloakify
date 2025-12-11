@@ -1,6 +1,6 @@
 {
     "name": "keycloakify-starter",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "description": "Starter for Keycloakify 11",
     "repository": {
         "type": "git",
@@ -41,8 +41,8 @@
         "keycloakify": "^11.13.3",
         "lucide-react": "^0.473.0",
         "postcss": "^8.4.39",
-        "react": "^18.0.0",
-        "react-dom": "^18.0.0",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0",
         "react-hot-toast": "^2.6.0",
         "react-i18next": "^15.4.0",
         "react-icons": "^5.4.0",
