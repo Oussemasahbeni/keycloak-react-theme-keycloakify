@@ -18,7 +18,6 @@ import { useInitializeTemplate } from "./useInitializeTemplate";
 
 const APP_NAME = "Acme Inc.";
 
-
 export function Template(props: {
     displayInfo?: boolean;
     displayMessage?: boolean;
