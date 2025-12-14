@@ -1,4 +1,4 @@
-import { I18n } from "@/login/i18n";
+import { useI18n } from "@/login/i18n";
 import { useTheme } from "./theme-provider";
 
 import {
@@ -10,10 +10,10 @@ import {
 import { Moon, Sun } from "lucide-react";
 import { Button } from "./ui/button";
 
-export function ModeToggle(props: Readonly<{ i18n: I18n }>) {
+export function ModeToggle() {
     const { setTheme } = useTheme();
 
-    const { msg } = props.i18n;
+    const { msg } = useI18n();
 
     return (
         <DropdownMenu>

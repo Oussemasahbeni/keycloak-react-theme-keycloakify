@@ -1,0 +1,149 @@
+import { Button } from "@/components/ui/button";
+import { Field, FieldError, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { Label } from '@/components/ui/label';
+import { PasswordWrapper } from '@/login/components/PasswordWrapper';
+import { useI18n } from '@/login/i18n';
+import { useKcContext } from '@/login/KcContext';
+import { useKcClsx } from '@keycloakify/login-ui/useKcClsx';
+import { kcSanitize } from "keycloakify/lib/kcSanitize";
+import { Fingerprint } from "lucide-react";
+import { useState } from "react";
+import { assert } from "tsafe/assert";
+import { Template } from "../../components/Template";
+import { useScript } from './useScript';
+
+export function Page() {
+    const { kcContext } = useKcContext();
+    assert(kcContext.pageId === "login-password.ftl");
+
+    const { kcClsx } = useKcClsx();
+
+    const { msg, msgStr } = useI18n();
+
+    const [isLoginButtonDisabled, setIsLoginButtonDisabled] = useState(false);
+
+    const webAuthnButtonId = "authenticateWebAuthnButton";
+
+    useScript({ webAuthnButtonId });
+
+    return (
+        <Template
+            headerNode={msg("doLogIn")}
+            displayMessage={!kcContext.messagesPerField.existsError("password")}
+        >
+            <form
+                id="kc-form-login"
+                onSubmit={() => {
+                    setIsLoginButtonDisabled(true);
+                    return true;
+                }}
+                action={kcContext.url.loginAction}
+                className="flex flex-col gap-4"
+                method="post"
+            >
+                <Field>
+                    <FieldLabel htmlFor="password">{msg("password")}</FieldLabel>
+                    <PasswordWrapper
+                        passwordInputId="password"
+                    >
+                        <Input
+                            tabIndex={2}
+                            type="password"
+                            id="password"
+                            name="password"
+                            autoComplete="current-password"
+                            aria-invalid={kcContext.messagesPerField.existsError("password")}
+                        />
+                    </PasswordWrapper>
+                    {kcContext.messagesPerField.existsError("password") && (
+                        <FieldError>
+                            <span
+                                id="input-error"
+                                aria-live="polite"
+                                dangerouslySetInnerHTML={{
+                                    __html: kcSanitize(
+                                        kcContext.messagesPerField.getFirstError("password")
+                                    )
+                                }}
+                            />
+                        </FieldError>
+                    )}
+                </Field>
+
+                <div className="flex justify-end">
+                    {kcContext.realm.resetPasswordAllowed && (
+                        <span className=" underline-offset-4 hover:underline">
+                            <a
+                                tabIndex={5}
+                                href={kcContext.url.loginResetCredentialsUrl}
+                            >
+                                <Label className="text-sm font-medium cursor-pointer">
+                                    {msg("doForgotPassword")}
+                                </Label>
+                            </a>
+                        </span>
+                    )}
+                </div>
+
+                <div className="flex justify-end ">
+                    <Button
+                        disabled={isLoginButtonDisabled}
+                        className="w-full"
+                        name="login"
+                        type="submit"
+                        tabIndex={4}
+                    >
+                        {msgStr("doLogIn")}
+                    </Button>
+                </div>
+            </form>
+            {kcContext.enableWebAuthnConditionalUI && (
+                <>
+                    <form id="webauth" action={kcContext.url.loginAction} method="post">
+                        <input type="hidden" id="clientDataJSON" name="clientDataJSON" />
+                        <input
+                            type="hidden"
+                            id="authenticatorData"
+                            name="authenticatorData"
+                        />
+                        <input type="hidden" id="signature" name="signature" />
+                        <input type="hidden" id="credentialId" name="credentialId" />
+                        <input type="hidden" id="userHandle" name="userHandle" />
+                        <input type="hidden" id="error" name="error" />
+                    </form>
+
+                    {kcContext.authenticators !== undefined &&
+                        kcContext.authenticators.authenticators.length !== 0 && (
+                            <>
+                                <form id="authn_select" className={kcClsx("kcFormClass")}>
+                                    {kcContext.authenticators.authenticators.map(
+                                        (authenticator, i) => (
+                                            <input
+                                                key={i}
+                                                type="hidden"
+                                                name="authn_use_chk"
+                                                readOnly
+                                                value={authenticator.credentialId}
+                                            />
+                                        )
+                                    )}
+                                </form>
+                            </>
+                        )}
+                    <br />
+
+                    <Button
+                        id={webAuthnButtonId}
+                        type="button"
+                        className="w-full"
+                        variant="outline"
+                    >
+                        <Fingerprint className="w-4 h-4" />
+                        {msgStr("passkey-doAuthenticate")}
+                    </Button>
+                </>
+            )}
+        </Template>
+    );
+}

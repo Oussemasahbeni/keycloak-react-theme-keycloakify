@@ -4,12 +4,12 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import { I18n } from "@/login/i18n";
+import { useI18n } from '@/login/i18n';
 import { IoCheckmark, IoLanguage } from "react-icons/io5";
 import { Button } from "./ui/button";
 
-export function Languages(props: Readonly<{ i18n: I18n }>) {
-    const { msgStr, currentLanguage, enabledLanguages } = props.i18n;
+export function Languages() {
+    const { msgStr, currentLanguage, enabledLanguages } = useI18n();
 
     return (
         <div>

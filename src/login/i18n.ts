@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { i18nBuilder } from "keycloakify/login";
+import { i18nBuilder } from "@keycloakify/login-ui/i18n";
 import type { ThemeName } from "../kc.gen";
 
 /** @see: https://docs.keycloakify.dev/features/i18n */
-const { useI18n, ofTypeI18n } = i18nBuilder
+const { I18nProvider, useI18n } = i18nBuilder
     .withThemeName<ThemeName>()
     .withCustomTranslations({
         en: {
@@ -57,6 +56,4 @@ const { useI18n, ofTypeI18n } = i18nBuilder
     })
     .build();
 
-type I18n = typeof ofTypeI18n;
-
-export { useI18n, type I18n };
+export { I18nProvider, useI18n };
