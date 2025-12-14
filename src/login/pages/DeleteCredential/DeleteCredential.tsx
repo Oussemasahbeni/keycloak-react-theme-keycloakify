@@ -1,11 +1,13 @@
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { I18n } from '@/login/i18n';
-import { KcContext } from '@/login/KcContext';
+import { I18n } from "@/login/i18n";
+import { KcContext } from "@/login/KcContext";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 
-export default function DeleteCredential(props: PageProps<Extract<KcContext, { pageId: "delete-credential.ftl" }>, I18n>) {
+export default function DeleteCredential(
+    props: PageProps<Extract<KcContext, { pageId: "delete-credential.ftl" }>, I18n>
+) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
     const { msgStr, msg } = i18n;
@@ -34,11 +36,23 @@ export default function DeleteCredential(props: PageProps<Extract<KcContext, { p
 
             <form className="form-actions" action={url.loginAction} method="POST">
                 <div className="flex flex-col sm:flex-row gap-3 sm:justify-between mt-6">
-                    <Button variant="outline" name="cancel-aia" id="kc-decline" type="submit" className="sm:flex-1">
+                    <Button
+                        variant="outline"
+                        name="cancel-aia"
+                        id="kc-decline"
+                        type="submit"
+                        className="sm:flex-1"
+                    >
                         {msgStr("doCancel")}
                     </Button>
 
-                    <Button name="accept" id="kc-accept" type="submit" variant="destructive" className="sm:flex-1 text-white">
+                    <Button
+                        name="accept"
+                        id="kc-accept"
+                        type="submit"
+                        variant="destructive"
+                        className="sm:flex-1 text-white"
+                    >
                         {msgStr("doConfirmDelete")}
                     </Button>
                 </div>

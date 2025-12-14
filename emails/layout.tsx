@@ -43,9 +43,8 @@ const logoImage = {
     border: "0",
     outline: "none",
     textDecoration: "none",
-    maxWidth: "100%",
+    maxWidth: "100%"
 };
-
 
 const sectionsBorders = {
     width: "100%",

@@ -1,4 +1,4 @@
-import { createKcPageStory } from '@/login/KcPageStory';
+import { createKcPageStory } from "@/login/KcPageStory";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const { KcPageStory } = createKcPageStory({ pageId: "login-password.ftl" });
@@ -15,7 +15,6 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
     render: () => <KcPageStory />
 };
-
 
 export const WithPasswordError: Story = {
     render: () => (
@@ -50,7 +49,6 @@ export const Arabic: Story = {
     )
 };
 
-
 export const WithWebauthn: Story = {
     render: () => (
         <KcPageStory
@@ -58,7 +56,7 @@ export const WithWebauthn: Story = {
                 url: {
                     loginAction: "/mock-login-action"
                 },
-                enableWebAuthnConditionalUI: true,
+                enableWebAuthnConditionalUI: true
             }}
         />
     )

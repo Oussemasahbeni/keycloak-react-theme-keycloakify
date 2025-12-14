@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { InputError } from "@/components/ui/input-error";
+import { FieldError } from '@/components/ui/field';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { KcContext } from '@/login/KcContext';
+import { KcContext } from "@/login/KcContext";
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
@@ -11,7 +11,9 @@ import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { MdOutlineDevices } from "react-icons/md";
 import type { I18n } from "../../i18n";
 
-export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "login-otp.ftl" }>, I18n>) {
+export default function LoginOtp(
+    props: PageProps<Extract<KcContext, { pageId: "login-otp.ftl" }>, I18n>
+) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
     getKcClsx({
@@ -32,16 +34,36 @@ export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "
             displayMessage={!messagesPerField.existsError("totp")}
             headerNode={msg("doLogIn")}
         >
-            <form id="kc-otp-login-form" className="space-y-6" action={url.loginAction} method="post">
+            <form
+                id="kc-otp-login-form"
+                className="space-y-6"
+                action={url.loginAction}
+                method="post"
+            >
                 {otpLogin.userOtpCredentials.length > 1 && (
                     <div className="space-y-3">
-                        <RadioGroup name="selectedCredentialId" defaultValue={otpLogin.selectedCredentialId} className="space-y-2">
+                        <RadioGroup
+                            name="selectedCredentialId"
+                            defaultValue={otpLogin.selectedCredentialId}
+                            className="space-y-2"
+                        >
                             {otpLogin.userOtpCredentials.map((otpCredential, index) => (
-                                <div key={otpCredential.id} className="flex items-center space-x-3 p-3 border rounded-lg">
-                                    <RadioGroupItem value={otpCredential.id} id={`kc-otp-credential-${index}`} />
-                                    <Label htmlFor={`kc-otp-credential-${index}`} className="flex items-center space-x-2 cursor-pointer flex-1">
+                                <div
+                                    key={otpCredential.id}
+                                    className="flex items-center space-x-3 p-3 border rounded-lg"
+                                >
+                                    <RadioGroupItem
+                                        value={otpCredential.id}
+                                        id={`kc-otp-credential-${index}`}
+                                    />
+                                    <Label
+                                        htmlFor={`kc-otp-credential-${index}`}
+                                        className="flex items-center space-x-2 cursor-pointer flex-1"
+                                    >
                                         <MdOutlineDevices />
-                                        <span className="text-sm font-medium">{otpCredential.userLabel}</span>
+                                        <span className="text-sm font-medium">
+                                            {otpCredential.userLabel}
+                                        </span>
                                     </Label>
                                 </div>
                             ))}
@@ -54,7 +76,12 @@ export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "
                         {msg("loginOtpOneTime")}
                     </Label>
                     <div className="flex w-72 ">
-                        <InputOTP maxLength={6} pattern={REGEXP_ONLY_DIGITS_AND_CHARS} name="otp" autoFocus>
+                        <InputOTP
+                            maxLength={6}
+                            pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
+                            name="otp"
+                            autoFocus
+                        >
                             <InputOTPGroup>
                                 <InputOTPSlot index={0} className="h-12 w-12 text-lg" />
                                 <InputOTPSlot index={1} className="h-12 w-12 text-lg" />
@@ -66,13 +93,13 @@ export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "
                         </InputOTP>
                     </div>
                     {messagesPerField.existsError("totp") && (
-                        <InputError id="input-error-otp-code">
+                        <FieldError id="input-error-otp-code">
                             <span
                                 dangerouslySetInnerHTML={{
                                     __html: kcSanitize(messagesPerField.get("totp"))
                                 }}
                             />
-                        </InputError>
+                        </FieldError>
                     )}
                 </div>
 

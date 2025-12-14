@@ -1,8 +1,8 @@
 import { PasswordWrapper } from "@/components/password-wrapper";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Field, FieldContent, FieldDescription, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { InputError } from "@/components/ui/input-error";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -59,31 +59,24 @@ export default function UserProfileFormFields(props: UserProfileFormFieldsProps<
                                 i18n={i18n}
                             />
                         )}
-                        <div
-
+                        <Field
                             style={{
                                 display:
                                     attribute.annotations.inputType === "hidden" ||
-                                        (attribute.name === "password-confirm" && !doMakeUserConfirmPassword)
+                                    (attribute.name === "password-confirm" && !doMakeUserConfirmPassword)
                                         ? "none"
                                         : undefined
                             }}
                         >
-                            <div >
-                                <Label htmlFor={attribute.name} className={cn("text-sm font-medium text-end")}>
-                                    {advancedMsg(attribute.displayName ?? "")}
-                                    {attribute.required && <span className="text-destructive ml-1">*</span>}
-                                </Label>
-                            </div>
-                            <div >
+                            <FieldLabel htmlFor={attribute.name}>
+                                {advancedMsg(attribute.displayName ?? "")}
+                                {attribute.required && <span className="text-destructive ml-1">*</span>}
+                            </FieldLabel>
+                            <FieldContent>
                                 {attribute.annotations.inputHelperTextBefore !== undefined && (
-                                    <div
-                                        className={cn("text-sm text-muted-foreground", kcClsx("kcInputHelperTextBeforeClass"))}
-                                        id={`form-help-text-before-${attribute.name}`}
-                                        aria-live="polite"
-                                    >
+                                    <FieldDescription id={`form-help-text-before-${attribute.name}`}>
                                         {advancedMsg(attribute.annotations.inputHelperTextBefore)}
-                                    </div>
+                                    </FieldDescription>
                                 )}
                                 <InputFieldByType
                                     attribute={attribute}
@@ -96,13 +89,9 @@ export default function UserProfileFormFields(props: UserProfileFormFieldsProps<
                                 />
                                 <FieldErrors attribute={attribute} displayableErrors={displayableErrors} kcClsx={kcClsx} fieldIndex={undefined} />
                                 {attribute.annotations.inputHelperTextAfter !== undefined && (
-                                    <div
-                                        className={cn("text-sm text-muted-foreground", kcClsx("kcInputHelperTextAfterClass"))}
-                                        id={`form-help-text-after-${attribute.name}`}
-                                        aria-live="polite"
-                                    >
+                                    <FieldDescription id={`form-help-text-after-${attribute.name}`}>
                                         {advancedMsg(attribute.annotations.inputHelperTextAfter)}
-                                    </div>
+                                    </FieldDescription>
                                 )}
 
                                 {AfterField !== undefined && (
@@ -116,8 +105,8 @@ export default function UserProfileFormFields(props: UserProfileFormFieldsProps<
                                     />
                                 )}
                                 {/* NOTE: Downloading of html5DataAnnotations scripts is done in the useUserProfileForm hook */}
-                            </div>
-                        </div>
+                            </FieldContent>
+                        </Field>
                     </Fragment>
                 );
             })}
@@ -198,14 +187,14 @@ function FieldErrors(props: { attribute: Attribute; displayableErrors: FormField
     }
 
     return (
-        <InputError id={`input-error-${attribute.name}${fieldIndex === undefined ? "" : `-${fieldIndex}`}`}>
+        <FieldError id={`input-error-${attribute.name}${fieldIndex === undefined ? "" : `-${fieldIndex}`}`}>
             {displayableErrors.map(({ errorMessage }, i, arr) => (
                 <Fragment key={i}>
                     {errorMessage}
                     {arr.length - 1 !== i && <br />}
                 </Fragment>
             ))}
-        </InputError>
+        </FieldError>
     );
 }
 
@@ -224,14 +213,7 @@ function InputFieldByType(props: InputFieldByTypeProps) {
 
     switch (attribute.annotations.inputType) {
         case "hidden":
-            return (
-                <input
-                    type="hidden"
-                    id={attribute.name}
-                    name={attribute.name}
-                    value={valueOrValues as string}
-                />
-            );
+            return <input type="hidden" id={attribute.name} name={attribute.name} value={valueOrValues as string} />;
         case "textarea":
             return <TextareaTag {...props} />;
         case "select":
@@ -672,10 +654,7 @@ function SelectTag(props: InputFieldByTypeProps) {
         >
             <SelectTrigger
                 id={attribute.name}
-                className={cn(
-                    "w-full",
-                    displayableErrors.length !== 0 && "border-destructive ring-destructive/20 focus-visible:ring-destructive"
-                )}
+                className={cn("w-full", displayableErrors.length !== 0 && "border-destructive ring-destructive/20 focus-visible:ring-destructive")}
                 aria-invalid={displayableErrors.length !== 0}
                 onBlur={() =>
                     dispatchFormAction({

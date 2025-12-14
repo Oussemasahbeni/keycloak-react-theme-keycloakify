@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { createKcPageStory } from "../../KcPageStory";
 
-const { KcPageStory } = createKcPageStory({ pageId: "login-idp-link-confirm-override.ftl" });
+const { KcPageStory } = createKcPageStory({
+    pageId: "login-idp-link-confirm-override.ftl"
+});
 
 const meta = {
     title: "login/login-idp-link-confirm-override.ftl",

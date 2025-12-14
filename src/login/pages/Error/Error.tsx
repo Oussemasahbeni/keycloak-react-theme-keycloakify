@@ -1,12 +1,14 @@
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { I18n } from '@/login/i18n';
-import { KcContext } from '@/login/KcContext';
+import { I18n } from "@/login/i18n";
+import { KcContext } from "@/login/KcContext";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 
-export default function Error(props: PageProps<Extract<KcContext, { pageId: "error.ftl" }>, I18n>) {
+export default function Error(
+    props: PageProps<Extract<KcContext, { pageId: "error.ftl" }>, I18n>
+) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
     const { message, client, skipLink } = kcContext;

@@ -1,11 +1,12 @@
-import { Button } from '@/components/ui/button';
-import { KcContext } from '@/login/KcContext';
+import { Button } from "@/components/ui/button";
+import { KcContext } from "@/login/KcContext";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { I18n } from "../../i18n";
 
-export default function LinkIdpAction(props: PageProps<Extract<KcContext, { pageId: "link-idp-action.ftl" }>, I18n>) {
+export default function LinkIdpAction(
+    props: PageProps<Extract<KcContext, { pageId: "link-idp-action.ftl" }>, I18n>
+) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
-
 
     const { idpDisplayName, url } = kcContext;
 
@@ -20,32 +21,27 @@ export default function LinkIdpAction(props: PageProps<Extract<KcContext, { page
             headerNode={msg("linkIdpActionTitle", idpDisplayName)}
             displayMessage={false}
         >
-            <div id="kc-link-text" >
-                {msg("linkIdpActionMessage", idpDisplayName)}
-            </div>
+            <div id="kc-link-text">{msg("linkIdpActionMessage", idpDisplayName)}</div>
             <form action={url.loginAction} method="post">
-                {/* <div className='flex justify-end w-full'>
-                    <div id="kc-form-buttons" className="flex  gap-3 mt-4"> */}
                 <div className="flex flex-col sm:flex-row gap-3 sm:justify-between mt-6">
                     <Button
                         name="cancel-aia"
                         variant="outline"
-                        className='flex-1'
+                        className="flex-1"
                         id="kc-cancel"
-                        type="submit" >
+                        type="submit"
+                    >
                         {msgStr("doCancel")}
                     </Button>
-                    <Button name="continue" id="kc-continue" type="submit" className="flex-1">
+                    <Button
+                        name="continue"
+                        id="kc-continue"
+                        type="submit"
+                        className="flex-1"
+                    >
                         {msgStr("doContinue")}
                     </Button>
-
                 </div>
-
-
-
-
-                {/* </div>
-                </div> */}
             </form>
             <div className="clearfix" />
         </Template>

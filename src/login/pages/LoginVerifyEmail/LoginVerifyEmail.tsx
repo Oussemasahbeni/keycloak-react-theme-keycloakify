@@ -1,8 +1,10 @@
-import { KcContext } from '@/login/KcContext';
+import { KcContext } from "@/login/KcContext";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { I18n } from "../../i18n";
 
-export default function LoginVerifyEmail(props: PageProps<Extract<KcContext, { pageId: "login-verify-email.ftl" }>, I18n>) {
+export default function LoginVerifyEmail(
+    props: PageProps<Extract<KcContext, { pageId: "login-verify-email.ftl" }>, I18n>
+) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
     const { msg } = i18n;
@@ -21,7 +23,10 @@ export default function LoginVerifyEmail(props: PageProps<Extract<KcContext, { p
                 <p className="instruction">
                     {msg("emailVerifyInstruction2")}
                     <br />
-                    <a className="text-primary dark:text-white underline" href={url.loginAction}>
+                    <a
+                        className="text-primary dark:text-white underline"
+                        href={url.loginAction}
+                    >
                         {msg("doClickHere")}
                     </a>
                     &nbsp;
@@ -29,7 +34,9 @@ export default function LoginVerifyEmail(props: PageProps<Extract<KcContext, { p
                 </p>
             }
         >
-            <p className="instruction">{msg("emailVerifyInstruction1", user?.email ?? "")}</p>
+            <p className="instruction">
+                {msg("emailVerifyInstruction1", user?.email ?? "")}
+            </p>
         </Template>
     );
 }

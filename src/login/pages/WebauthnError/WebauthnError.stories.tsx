@@ -1,4 +1,4 @@
-import { createKcPageStory } from '@/login/KcPageStory';
+import { createKcPageStory } from "@/login/KcPageStory";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const { KcPageStory } = createKcPageStory({ pageId: "webauthn-error.ftl" });
@@ -78,7 +78,8 @@ export const WithAppInitiatedAction: Story = {
                 },
                 isAppInitiatedAction: true,
                 message: {
-                    summary: "WebAuthn authentication failed. You can try again or cancel.",
+                    summary:
+                        "WebAuthn authentication failed. You can try again or cancel.",
                     type: "error"
                 }
             }}
@@ -101,7 +102,8 @@ export const WithJavaScriptDisabled: Story = {
                 },
                 isAppInitiatedAction: false,
                 message: {
-                    summary: "JavaScript is disabled or not working. Please retry manually.",
+                    summary:
+                        "JavaScript is disabled or not working. Please retry manually.",
                     type: "warning"
                 }
             }}

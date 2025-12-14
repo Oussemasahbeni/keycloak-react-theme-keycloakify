@@ -1,4 +1,4 @@
-import { createKcPageStory } from '@/login/KcPageStory';
+import { createKcPageStory } from "@/login/KcPageStory";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const { KcPageStory } = createKcPageStory({ pageId: "info.ftl" });
@@ -70,7 +70,12 @@ export const WithRequiredActions: Story = {
                 message: {
                     summary: "Required actions: "
                 },
-                requiredActions: ["CONFIGURE_TOTP", "UPDATE_PROFILE", "VERIFY_EMAIL", "CUSTOM_ACTION"],
+                requiredActions: [
+                    "CONFIGURE_TOTP",
+                    "UPDATE_PROFILE",
+                    "VERIFY_EMAIL",
+                    "CUSTOM_ACTION"
+                ],
                 "x-keycloakify": {
                     messages: {
                         "requiredAction.CUSTOM_ACTION": "Custom action"

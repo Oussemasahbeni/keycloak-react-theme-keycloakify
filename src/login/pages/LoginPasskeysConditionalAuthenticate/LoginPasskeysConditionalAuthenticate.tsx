@@ -1,4 +1,4 @@
-import { KcContext } from '@/login/KcContext';
+import { KcContext } from "@/login/KcContext";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import { useScript } from "keycloakify/login/pages/LoginPasskeysConditionalAuthenticate.useScript";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
@@ -7,11 +7,23 @@ import { Fragment } from "react";
 import type { I18n } from "../../i18n";
 
 export default function LoginPasskeysConditionalAuthenticate(
-    props: PageProps<Extract<KcContext, { pageId: "login-passkeys-conditional-authenticate.ftl" }>, I18n>
+    props: PageProps<
+        Extract<KcContext, { pageId: "login-passkeys-conditional-authenticate.ftl" }>,
+        I18n
+    >
 ) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
-    const { messagesPerField, login, url, usernameHidden, shouldDisplayAuthenticators, authenticators, registrationDisabled, realm } = kcContext;
+    const {
+        messagesPerField,
+        login,
+        url,
+        usernameHidden,
+        shouldDisplayAuthenticators,
+        authenticators,
+        registrationDisabled,
+        realm
+    } = kcContext;
 
     const { msg, msgStr, advancedMsg } = i18n;
 
@@ -54,69 +66,163 @@ export default function LoginPasskeysConditionalAuthenticate(
                 <input type="hidden" id="error" name="error" />
             </form>
 
-            <div className={kcClsx("kcFormGroupClass")} no-bottom-margin="true" style={{ marginBottom: 0 }}>
-                {authenticators !== undefined && Object.keys(authenticators).length !== 0 && (
-                    <>
-                        <form id="authn_select" className={kcClsx("kcFormClass")}>
-                            {authenticators.authenticators.map((authenticator, i) => (
-                                <input key={i} type="hidden" name="authn_use_chk" readOnly value={authenticator.credentialId} />
-                            ))}
-                        </form>
-                        {shouldDisplayAuthenticators && (
-                            <>
-                                {authenticators.authenticators.length > 1 && (
-                                    <p className={kcClsx("kcSelectAuthListItemTitle")}>{msg("passkey-available-authenticators")}</p>
-                                )}
-                                <div className={kcClsx("kcFormClass")}>
-                                    {authenticators.authenticators.map((authenticator, i) => (
-                                        <div key={i} id={`kc-webauthn-authenticator-item-${i}`} className={kcClsx("kcSelectAuthListItemClass")}>
-                                            <i
-                                                className={clsx(
-                                                    (() => {
-                                                        const className = kcClsx(authenticator.transports.iconClass as any);
-                                                        if (className === authenticator.transports.iconClass) {
-                                                            return kcClsx("kcWebAuthnDefaultIcon");
-                                                        }
-                                                        return className;
-                                                    })(),
-                                                    kcClsx("kcSelectAuthListItemIconPropertyClass")
-                                                )}
-                                            />
-                                            <div className={kcClsx("kcSelectAuthListItemBodyClass")}>
+            <div
+                className={kcClsx("kcFormGroupClass")}
+                no-bottom-margin="true"
+                style={{ marginBottom: 0 }}
+            >
+                {authenticators !== undefined &&
+                    Object.keys(authenticators).length !== 0 && (
+                        <>
+                            <form id="authn_select" className={kcClsx("kcFormClass")}>
+                                {authenticators.authenticators.map((authenticator, i) => (
+                                    <input
+                                        key={i}
+                                        type="hidden"
+                                        name="authn_use_chk"
+                                        readOnly
+                                        value={authenticator.credentialId}
+                                    />
+                                ))}
+                            </form>
+                            {shouldDisplayAuthenticators && (
+                                <>
+                                    {authenticators.authenticators.length > 1 && (
+                                        <p
+                                            className={kcClsx(
+                                                "kcSelectAuthListItemTitle"
+                                            )}
+                                        >
+                                            {msg("passkey-available-authenticators")}
+                                        </p>
+                                    )}
+                                    <div className={kcClsx("kcFormClass")}>
+                                        {authenticators.authenticators.map(
+                                            (authenticator, i) => (
                                                 <div
-                                                    id={`kc-webauthn-authenticator-label-${i}`}
-                                                    className={kcClsx("kcSelectAuthListItemHeadingClass")}
-                                                >
-                                                    {advancedMsg(authenticator.label)}
-                                                </div>
-                                                {authenticator.transports !== undefined &&
-                                                    authenticator.transports.displayNameProperties !== undefined &&
-                                                    authenticator.transports.displayNameProperties.length !== 0 && (
-                                                        <div
-                                                            id={`kc-webauthn-authenticator-transport-${i}`}
-                                                            className={kcClsx("kcSelectAuthListItemDescriptionClass")}
-                                                        >
-                                                            {authenticator.transports.displayNameProperties.map((nameProperty, i, arr) => (
-                                                                <Fragment key={i}>
-                                                                    <span key={i}> {advancedMsg(nameProperty)} </span>
-                                                                    {i !== arr.length - 1 && <span>, </span>}
-                                                                </Fragment>
-                                                            ))}
-                                                        </div>
+                                                    key={i}
+                                                    id={`kc-webauthn-authenticator-item-${i}`}
+                                                    className={kcClsx(
+                                                        "kcSelectAuthListItemClass"
                                                     )}
-                                                <div className={kcClsx("kcSelectAuthListItemDescriptionClass")}>
-                                                    <span id={`kc-webauthn-authenticator-createdlabel-${i}`}>{msg("passkey-createdAt-label")}</span>
-                                                    <span id={`kc-webauthn-authenticator-created-${i}`}>{authenticator.createdAt}</span>
+                                                >
+                                                    <i
+                                                        className={clsx(
+                                                            (() => {
+                                                                const className = kcClsx(
+                                                                    authenticator
+                                                                        .transports
+                                                                        .iconClass as any
+                                                                );
+                                                                if (
+                                                                    className ===
+                                                                    authenticator
+                                                                        .transports
+                                                                        .iconClass
+                                                                ) {
+                                                                    return kcClsx(
+                                                                        "kcWebAuthnDefaultIcon"
+                                                                    );
+                                                                }
+                                                                return className;
+                                                            })(),
+                                                            kcClsx(
+                                                                "kcSelectAuthListItemIconPropertyClass"
+                                                            )
+                                                        )}
+                                                    />
+                                                    <div
+                                                        className={kcClsx(
+                                                            "kcSelectAuthListItemBodyClass"
+                                                        )}
+                                                    >
+                                                        <div
+                                                            id={`kc-webauthn-authenticator-label-${i}`}
+                                                            className={kcClsx(
+                                                                "kcSelectAuthListItemHeadingClass"
+                                                            )}
+                                                        >
+                                                            {advancedMsg(
+                                                                authenticator.label
+                                                            )}
+                                                        </div>
+                                                        {authenticator.transports !==
+                                                            undefined &&
+                                                            authenticator.transports
+                                                                .displayNameProperties !==
+                                                                undefined &&
+                                                            authenticator.transports
+                                                                .displayNameProperties
+                                                                .length !== 0 && (
+                                                                <div
+                                                                    id={`kc-webauthn-authenticator-transport-${i}`}
+                                                                    className={kcClsx(
+                                                                        "kcSelectAuthListItemDescriptionClass"
+                                                                    )}
+                                                                >
+                                                                    {authenticator.transports.displayNameProperties.map(
+                                                                        (
+                                                                            nameProperty,
+                                                                            i,
+                                                                            arr
+                                                                        ) => (
+                                                                            <Fragment
+                                                                                key={i}
+                                                                            >
+                                                                                <span
+                                                                                    key={
+                                                                                        i
+                                                                                    }
+                                                                                >
+                                                                                    {" "}
+                                                                                    {advancedMsg(
+                                                                                        nameProperty
+                                                                                    )}{" "}
+                                                                                </span>
+                                                                                {i !==
+                                                                                    arr.length -
+                                                                                        1 && (
+                                                                                    <span>
+                                                                                        ,{" "}
+                                                                                    </span>
+                                                                                )}
+                                                                            </Fragment>
+                                                                        )
+                                                                    )}
+                                                                </div>
+                                                            )}
+                                                        <div
+                                                            className={kcClsx(
+                                                                "kcSelectAuthListItemDescriptionClass"
+                                                            )}
+                                                        >
+                                                            <span
+                                                                id={`kc-webauthn-authenticator-createdlabel-${i}`}
+                                                            >
+                                                                {msg(
+                                                                    "passkey-createdAt-label"
+                                                                )}
+                                                            </span>
+                                                            <span
+                                                                id={`kc-webauthn-authenticator-created-${i}`}
+                                                            >
+                                                                {authenticator.createdAt}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        className={kcClsx(
+                                                            "kcSelectAuthListItemFillClass"
+                                                        )}
+                                                    />
                                                 </div>
-                                            </div>
-                                            <div className={kcClsx("kcSelectAuthListItemFillClass")} />
-                                        </div>
-                                    ))}
-                                </div>
-                            </>
-                        )}
-                    </>
-                )}
+                                            )
+                                        )}
+                                    </div>
+                                </>
+                            )}
+                        </>
+                    )}
                 <div id="kc-form">
                     <div id="kc-form-wrapper">
                         {realm.password && (
@@ -129,20 +235,25 @@ export default function LoginPasskeysConditionalAuthenticate(
                                     try {
                                         // @ts-expect-error
                                         event.target.login.disabled = true;
-                                    } catch { }
+                                    } catch {}
 
                                     return true;
                                 }}
                             >
                                 {!usernameHidden && (
                                     <div className={kcClsx("kcFormGroupClass")}>
-                                        <label htmlFor="username" className={kcClsx("kcLabelClass")}>
+                                        <label
+                                            htmlFor="username"
+                                            className={kcClsx("kcLabelClass")}
+                                        >
                                             {msg("passkey-autofill-select")}
                                         </label>
                                         <input
                                             tabIndex={1}
                                             id="username"
-                                            aria-invalid={messagesPerField.existsError("username")}
+                                            aria-invalid={messagesPerField.existsError(
+                                                "username"
+                                            )}
                                             className={kcClsx("kcInputClass")}
                                             name="username"
                                             defaultValue={login.username ?? ""}
@@ -151,7 +262,13 @@ export default function LoginPasskeysConditionalAuthenticate(
                                             autoFocus
                                         />
                                         {messagesPerField.existsError("username") && (
-                                            <span id="input-error-username" className={kcClsx("kcInputErrorMessageClass")} aria-live="polite">
+                                            <span
+                                                id="input-error-username"
+                                                className={kcClsx(
+                                                    "kcInputErrorMessageClass"
+                                                )}
+                                                aria-live="polite"
+                                            >
                                                 {messagesPerField.get("username")}
                                             </span>
                                         )}
@@ -159,13 +276,22 @@ export default function LoginPasskeysConditionalAuthenticate(
                                 )}
                             </form>
                         )}
-                        <div id="kc-form-passkey-button" className={kcClsx("kcFormButtonsClass")} style={{ display: "none" }}>
+                        <div
+                            id="kc-form-passkey-button"
+                            className={kcClsx("kcFormButtonsClass")}
+                            style={{ display: "none" }}
+                        >
                             <input
                                 id={authButtonId}
                                 type="button"
                                 autoFocus
                                 value={msgStr("passkey-doAuthenticate")}
-                                className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonBlockClass", "kcButtonLargeClass")}
+                                className={kcClsx(
+                                    "kcButtonClass",
+                                    "kcButtonPrimaryClass",
+                                    "kcButtonBlockClass",
+                                    "kcButtonLargeClass"
+                                )}
                             />
                         </div>
                     </div>

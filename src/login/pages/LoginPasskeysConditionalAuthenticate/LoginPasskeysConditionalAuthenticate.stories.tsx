@@ -1,14 +1,16 @@
-import { createKcPageStory } from '@/login/KcPageStory';
+import { createKcPageStory } from "@/login/KcPageStory";
 import type { Meta, StoryObj } from "@storybook/react";
 
-const { KcPageStory } = createKcPageStory({ pageId: "login-passkeys-conditional-authenticate.ftl" });
+const { KcPageStory } = createKcPageStory({
+    pageId: "login-passkeys-conditional-authenticate.ftl"
+});
 
 const meta = {
     title: "login/login-passkeys-conditional-authenticate.ftl",
     component: KcPageStory,
     parameters: {
-        chromatic: { disableSnapshot: true },
-    },
+        chromatic: { disableSnapshot: true }
+    }
 } satisfies Meta<typeof KcPageStory>;
 
 export default meta;

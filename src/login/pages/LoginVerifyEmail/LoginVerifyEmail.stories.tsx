@@ -1,4 +1,4 @@
-import { createKcPageStory } from '@/login/KcPageStory';
+import { createKcPageStory } from "@/login/KcPageStory";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const { KcPageStory } = createKcPageStory({ pageId: "login-verify-email.ftl" });

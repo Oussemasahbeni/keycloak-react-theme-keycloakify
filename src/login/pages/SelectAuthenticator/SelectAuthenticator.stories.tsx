@@ -1,4 +1,4 @@
-import { createKcPageStory } from '@/login/KcPageStory';
+import { createKcPageStory } from "@/login/KcPageStory";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const { KcPageStory } = createKcPageStory({ pageId: "select-authenticator.ftl" });
@@ -96,9 +96,12 @@ export const WithRealmTranslations: Story = {
                         "home-idp-discovery-display-name": "Home identity provider",
                         "home-idp-discovery-help-text":
                             "Sign in via your home identity provider which will be automatically determined based on your provided email address.",
-                        "identity-provider-redirctor-display-name": "Identity Provider Redirector",
-                        "identity-provider-redirctor-help-text": "Sign in via your identity provider.",
-                        "auth-username-password-help-text": "Sign in via your username and password."
+                        "identity-provider-redirctor-display-name":
+                            "Identity Provider Redirector",
+                        "identity-provider-redirctor-help-text":
+                            "Sign in via your identity provider.",
+                        "auth-username-password-help-text":
+                            "Sign in via your username and password."
                     }
                 }
             }}

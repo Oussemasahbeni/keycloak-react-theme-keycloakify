@@ -1,4 +1,4 @@
-import { createKcPageStory } from '@/login/KcPageStory';
+import { createKcPageStory } from "@/login/KcPageStory";
 import type { Meta, StoryObj } from "@storybook/react";
 import type { Attribute } from "keycloakify/login";
 
@@ -40,8 +40,10 @@ export const WithEmailAlreadyExists: Story = {
                 messagesPerField: {
                     // NOTE: The other functions of messagesPerField are derived from get() and
                     // existsError() so they are the only ones that need to mock.
-                    existsError: (fieldName: string, ...otherFieldNames: string[]) => [fieldName, ...otherFieldNames].includes("email"),
-                    get: (fieldName: string) => (fieldName === "email" ? "Email already exists." : undefined)
+                    existsError: (fieldName: string, ...otherFieldNames: string[]) =>
+                        [fieldName, ...otherFieldNames].includes("email"),
+                    get: (fieldName: string) =>
+                        fieldName === "email" ? "Email already exists." : undefined
                 }
             }}
         />
@@ -70,19 +72,23 @@ export const WithRestrictedToMITStudents: Story = {
                         email: {
                             validators: {
                                 pattern: {
-                                    pattern: "^[^@]+@([^.]+\\.)*((mit\\.edu)|(berkeley\\.edu))$",
-                                    "error-message": "${profile.attributes.email.pattern.error}"
+                                    pattern:
+                                        "^[^@]+@([^.]+\\.)*((mit\\.edu)|(berkeley\\.edu))$",
+                                    "error-message":
+                                        "${profile.attributes.email.pattern.error}"
                                 }
                             },
                             annotations: {
-                                inputHelperTextBefore: "${profile.attributes.email.inputHelperTextBefore}"
+                                inputHelperTextBefore:
+                                    "${profile.attributes.email.inputHelperTextBefore}"
                             }
                         }
                     }
                 },
                 "x-keycloakify": {
                     messages: {
-                        "profile.attributes.email.inputHelperTextBefore": "Please use your MIT or Berkeley email.",
+                        "profile.attributes.email.inputHelperTextBefore":
+                            "Please use your MIT or Berkeley email.",
                         "profile.attributes.email.pattern.error":
                             "This is not an MIT (<strong>@mit.edu</strong>) nor a Berkeley (<strong>@berkeley.edu</strong>) email."
                     }
@@ -107,7 +113,8 @@ export const WithFavoritePet: Story = {
                                 }
                             },
                             annotations: {
-                                inputOptionLabelsI18nPrefix: "profile.attributes.favoritePet.options"
+                                inputOptionLabelsI18nPrefix:
+                                    "profile.attributes.favoritePet.options"
                             },
                             required: false,
                             readOnly: false
@@ -220,7 +227,8 @@ export const WithTermsAcceptance: Story = {
                 termsAcceptanceRequired: true,
                 "x-keycloakify": {
                     messages: {
-                        termsText: "<a href='https://example.com/terms'>Service Terms of Use</a>"
+                        termsText:
+                            "<a href='https://example.com/terms'>Service Terms of Use</a>"
                     }
                 }
             }}
@@ -235,7 +243,10 @@ export const WithTermsNotAccepted: Story = {
                 termsAcceptanceRequired: true,
                 messagesPerField: {
                     existsError: (fieldName: string) => fieldName === "termsAccepted",
-                    get: (fieldName: string) => (fieldName === "termsAccepted" ? "You must accept the terms." : undefined)
+                    get: (fieldName: string) =>
+                        fieldName === "termsAccepted"
+                            ? "You must accept the terms."
+                            : undefined
                 }
             }}
         />
@@ -252,7 +263,8 @@ export const WithFieldErrors: Story = {
                     }
                 },
                 messagesPerField: {
-                    existsError: (fieldName: string) => ["username", "email"].includes(fieldName),
+                    existsError: (fieldName: string) =>
+                        ["username", "email"].includes(fieldName),
                     get: (fieldName: string) => {
                         if (fieldName === "username") return "Username is required.";
                         if (fieldName === "email") return "Invalid email format.";

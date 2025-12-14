@@ -1,17 +1,27 @@
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { I18n } from '@/login/i18n';
-import { KcContext } from '@/login/KcContext';
+import { I18n } from "@/login/i18n";
+import { KcContext } from "@/login/KcContext";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 
-export default function Info(props: PageProps<Extract<KcContext, { pageId: "info.ftl" }>, I18n>) {
+export default function Info(
+    props: PageProps<Extract<KcContext, { pageId: "info.ftl" }>, I18n>
+) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
     const { advancedMsgStr, msg } = i18n;
 
-    const { messageHeader, message, requiredActions, skipLink, pageRedirectUri, actionUri, client } = kcContext;
+    const {
+        messageHeader,
+        message,
+        requiredActions,
+        skipLink,
+        pageRedirectUri,
+        actionUri,
+        client
+    } = kcContext;
     getKcClsx({ doUseDefaultCss, classes });
 
     return (
@@ -24,7 +34,11 @@ export default function Info(props: PageProps<Extract<KcContext, { pageId: "info
             headerNode={
                 <span
                     dangerouslySetInnerHTML={{
-                        __html: kcSanitize(messageHeader ? advancedMsgStr(messageHeader) : message.summary)
+                        __html: kcSanitize(
+                            messageHeader
+                                ? advancedMsgStr(messageHeader)
+                                : message.summary
+                        )
                     }}
                 />
             }
@@ -40,7 +54,13 @@ export default function Info(props: PageProps<Extract<KcContext, { pageId: "info
                                     if (requiredActions) {
                                         html += "<b>";
 
-                                        html += requiredActions.map(requiredAction => advancedMsgStr(`requiredAction.${requiredAction}`)).join(", ");
+                                        html += requiredActions
+                                            .map(requiredAction =>
+                                                advancedMsgStr(
+                                                    `requiredAction.${requiredAction}`
+                                                )
+                                            )
+                                            .join(", ");
 
                                         html += "</b>";
                                     }

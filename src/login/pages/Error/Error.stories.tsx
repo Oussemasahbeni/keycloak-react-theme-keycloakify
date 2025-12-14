@@ -1,4 +1,4 @@
-import { createKcPageStory } from '@/login/KcPageStory';
+import { createKcPageStory } from "@/login/KcPageStory";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const { KcPageStory } = createKcPageStory({ pageId: "error.ftl" });
@@ -54,7 +54,8 @@ export const WithHtmlErrorMessage: Story = {
         <KcPageStory
             kcContext={{
                 message: {
-                    summary: "<strong>Error:</strong> Something went wrong. <a href='https://example.com'>Go back</a>"
+                    summary:
+                        "<strong>Error:</strong> Something went wrong. <a href='https://example.com'>Go back</a>"
                 }
             }}
         />

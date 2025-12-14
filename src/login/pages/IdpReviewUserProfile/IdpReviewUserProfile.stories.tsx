@@ -43,7 +43,8 @@ export const WithFormValidationErrors: Story = {
         <KcPageStory
             kcContext={{
                 messagesPerField: {
-                    existsError: (fieldName: string) => ["email", "firstName"].includes(fieldName),
+                    existsError: (fieldName: string) =>
+                        ["email", "firstName"].includes(fieldName),
                     get: (fieldName: string) => {
                         if (fieldName === "email") return "Invalid email format.";
                         if (fieldName === "firstName") return "First name is required.";

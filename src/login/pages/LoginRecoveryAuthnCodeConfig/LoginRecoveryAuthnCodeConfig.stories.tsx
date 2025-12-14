@@ -1,7 +1,9 @@
-import { createKcPageStory } from '@/login/KcPageStory';
+import { createKcPageStory } from "@/login/KcPageStory";
 import type { Meta, StoryObj } from "@storybook/react";
 
-const { KcPageStory } = createKcPageStory({ pageId: "login-recovery-authn-code-config.ftl" });
+const { KcPageStory } = createKcPageStory({
+    pageId: "login-recovery-authn-code-config.ftl"
+});
 
 const meta = {
     title: "login/login-recovery-authn-code-config.ftl",
@@ -54,7 +56,8 @@ export const WithErrorDuringCodeGeneration: Story = {
                     loginAction: "/mock-login-action"
                 },
                 message: {
-                    summary: "An error occurred during recovery code generation. Please try again.",
+                    summary:
+                        "An error occurred during recovery code generation. Please try again.",
                     type: "error"
                 }
             }}

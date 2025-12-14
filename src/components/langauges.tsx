@@ -44,7 +44,9 @@ export function Languages(props: Readonly<{ i18n: I18n }>) {
                                     className="flex w-full items-center justify-between  cursor-pointer"
                                 >
                                     {label}
-                                    {isActive && <IoCheckmark className="h-4 w-4 opacity-50" />}
+                                    {isActive && (
+                                        <IoCheckmark className="h-4 w-4 opacity-50" />
+                                    )}
                                 </a>
                             </DropdownMenuItem>
                         );

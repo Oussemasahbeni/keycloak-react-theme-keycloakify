@@ -12,10 +12,10 @@ export default defineConfig({
         tailwindcss(),
         keycloakify({
             accountThemeImplementation: "none",
-            themeName: "planingo-theme",
+            themeName: "acme-theme",
             keycloakVersionTargets: {
                 "22-to-25": false,
-                "all-other-versions": "planingo-theme.jar"
+                "all-other-versions": "acme-theme.jar"
             },
             environmentVariables: [{ name: "ENABLE_THEME_TOGGLE", default: "true" }],
             postBuild: async buildContext => {

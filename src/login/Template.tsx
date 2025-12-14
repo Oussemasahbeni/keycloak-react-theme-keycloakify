@@ -14,11 +14,11 @@ import shape from "./assets/img/shape.svg";
 import { Languages } from "@/components/langauges";
 import { ModeToggle } from "@/components/theme-toggle";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@radix-ui/react-tooltip';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@radix-ui/react-tooltip";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
-import { RotateCcw } from 'lucide-react';
+import { RotateCcw } from "lucide-react";
 
-const APP_NAME = 'Acme Inc.';
+const APP_NAME = "Acme Inc.";
 
 export default function Template(props: TemplateProps<KcContext, I18n>) {
     const {
@@ -65,15 +65,10 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 
     return (
         <div className="grid min-h-svh lg:grid-cols-2 bg-white dark:bg-background lg:bg-transparent">
-
-
-
             {/* Main content */}
             <div className="flex flex-col gap-4 px-0 py-0 pb-6 lg:p-6 lg:md:p-10 lg:pt-10 min-h-screen lg:min-h-0">
-
                 {/*  navigation */}
                 <div className="absolute top-4 right-4 lg:left-4  z-20 flex gap-2">
-
                     {/* <Button variant="outline" size="sm" className="border-gray-400 self-center font-medium text-base">
                             <a className="flex items-center gap-1" href={kcContext.client.baseUrl ?? redirectUrlOrigin}>
                                 <FiArrowLeft /> {msg("home")}
@@ -97,9 +92,8 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                     <div className="flex flex-col items-center justify-center gap-3 mt-4">
                         <div className=" mb-4 flex items-center gap-3">
                             <img src={companylogo} alt="Logo" />
-                            <span className='text-white text-xl'> {APP_NAME}</span>
+                            <span className="text-white text-xl"> {APP_NAME}</span>
                         </div>
-
                     </div>
                 </div>
 
@@ -112,14 +106,20 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                         const node = !(auth !== undefined && auth.showUsername && !auth.showResetCredentials) ? (
                                             <h1 className="text-xl">{headerNode}</h1>
                                         ) : (
-                                            <div id="kc-username" className='flex items-center justify-center gap-2'>
-                                                <label className='font-semibold text-lg' id="kc-attempted-username">{auth.attemptedUsername}</label>
+                                            <div id="kc-username" className="flex items-center justify-center gap-2">
+                                                <label className="font-semibold text-lg" id="kc-attempted-username">
+                                                    {auth.attemptedUsername}
+                                                </label>
 
                                                 <TooltipProvider>
                                                     <Tooltip>
                                                         <TooltipTrigger asChild>
                                                             <Button variant="outline" size="icon" asChild>
-                                                                <a id="reset-login" href={url.loginRestartFlowUrl} aria-label={msgStr("restartLoginTooltip")}>
+                                                                <a
+                                                                    id="reset-login"
+                                                                    href={url.loginRestartFlowUrl}
+                                                                    aria-label={msgStr("restartLoginTooltip")}
+                                                                >
                                                                     <RotateCcw className="h-4 w-4" />
                                                                 </a>
                                                             </Button>
@@ -154,7 +154,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                 <div id="kc-content">
                                     <div id="kc-content-wrapper">
                                         {displayMessage && message !== undefined && (message.type !== "warning" || !isAppInitiatedAction) && (
-                                            <Alert variant={message.type} className="flex gap-2 justify-center my-3">
+                                            <Alert variant={message.type} className="my-3">
                                                 <AlertDescription>
                                                     <div>
                                                         <span
@@ -206,7 +206,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                     <div className="flex justify-center my-auto flex-col items-center max-w-xs">
                         <div className=" mb-4 flex items-center gap-3">
                             <img src={companylogo} alt="Logo" />
-                            <span className='text-white text-xl'> {APP_NAME}</span>
+                            <span className="text-white text-xl"> {APP_NAME}</span>
                         </div>
 
                         <p className="text-center  text-gray-400 dark:text-white/60">{msg("welcomeMessage")}</p>

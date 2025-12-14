@@ -1,4 +1,4 @@
-import { createKcPageStory } from '@/login/KcPageStory';
+import { createKcPageStory } from "@/login/KcPageStory";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const { KcPageStory } = createKcPageStory({ pageId: "login-config-totp.ftl" });
@@ -55,10 +55,12 @@ export const WithError: Story = {
         <KcPageStory
             kcContext={{
                 messagesPerField: {
-                    get: (fieldName: string) => (fieldName === "totp" ? "Invalid TOTP" : undefined),
+                    get: (fieldName: string) =>
+                        fieldName === "totp" ? "Invalid TOTP" : undefined,
                     exists: (fieldName: string) => fieldName === "totp",
                     existsError: (fieldName: string) => fieldName === "totp",
-                    printIfExists: <T,>(fieldName: string, x: T) => (fieldName === "totp" ? x : undefined)
+                    printIfExists: <T,>(fieldName: string, x: T) =>
+                        fieldName === "totp" ? x : undefined
                 }
             }}
         />

@@ -1,9 +1,11 @@
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { KcContext } from '@/login/KcContext';
+import { KcContext } from "@/login/KcContext";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { I18n } from "../../i18n";
 
-export default function LoginPageExpired(props: PageProps<Extract<KcContext, { pageId: "login-page-expired.ftl" }>, I18n>) {
+export default function LoginPageExpired(
+    props: PageProps<Extract<KcContext, { pageId: "login-page-expired.ftl" }>, I18n>
+) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
     const { url } = kcContext;
@@ -11,7 +13,13 @@ export default function LoginPageExpired(props: PageProps<Extract<KcContext, { p
     const { msg } = i18n;
 
     return (
-        <Template kcContext={kcContext} i18n={i18n} doUseDefaultCss={doUseDefaultCss} classes={classes} headerNode={msg("pageExpiredTitle")}>
+        <Template
+            kcContext={kcContext}
+            i18n={i18n}
+            doUseDefaultCss={doUseDefaultCss}
+            classes={classes}
+            headerNode={msg("pageExpiredTitle")}
+        >
             <Alert variant="warning" className="my-6">
                 <AlertDescription>
                     <div className="space-y-3 text-sm leading-relaxed">

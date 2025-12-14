@@ -1,4 +1,4 @@
-import { createKcPageStory } from '@/login/KcPageStory';
+import { createKcPageStory } from "@/login/KcPageStory";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const { KcPageStory } = createKcPageStory({ pageId: "webauthn-register.ftl" });
@@ -76,7 +76,8 @@ export const WithErrorDuringRegistration: Story = {
                 isSetRetry: false,
                 isAppInitiatedAction: false,
                 message: {
-                    summary: "An error occurred during WebAuthn registration. Please try again.",
+                    summary:
+                        "An error occurred during WebAuthn registration. Please try again.",
                     type: "error"
                 }
             }}

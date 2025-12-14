@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Field, FieldLabel } from '@/components/ui/field';
+import { Field, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import { PageProps } from "keycloakify/login/pages/PageProps";
@@ -7,7 +7,10 @@ import { KcContext } from "../../KcContext";
 import type { I18n } from "../../i18n";
 
 export default function LoginOauth2DeviceVerifyUserCode(
-    props: PageProps<Extract<KcContext, { pageId: "login-oauth2-device-verify-user-code.ftl" }>, I18n>
+    props: PageProps<
+        Extract<KcContext, { pageId: "login-oauth2-device-verify-user-code.ftl" }>,
+        I18n
+    >
 ) {
     const { kcContext, i18n, doUseDefaultCss, classes, Template } = props;
     const { url } = kcContext;
@@ -27,9 +30,17 @@ export default function LoginOauth2DeviceVerifyUserCode(
             classes={classes}
             headerNode={msg("oauth2DeviceVerificationTitle")}
         >
-            <form id="kc-user-verify-device-user-code-form" className="space-y-5" action={url.oauth2DeviceVerificationAction} method="post">
-                <Field >
-                    <FieldLabel htmlFor="device-user-code"> {msg("verifyOAuth2DeviceUserCode")}</FieldLabel>
+            <form
+                id="kc-user-verify-device-user-code-form"
+                className="space-y-5"
+                action={url.oauth2DeviceVerificationAction}
+                method="post"
+            >
+                <Field>
+                    <FieldLabel htmlFor="device-user-code">
+                        {" "}
+                        {msg("verifyOAuth2DeviceUserCode")}
+                    </FieldLabel>
                     <Input
                         id="device-user-code"
                         name="device_user_code"
@@ -38,7 +49,6 @@ export default function LoginOauth2DeviceVerifyUserCode(
                         className={kcClsx("kcInputClass")}
                         autoFocus
                     />
-
                 </Field>
 
                 <div className={kcClsx("kcFormGroupClass")}>

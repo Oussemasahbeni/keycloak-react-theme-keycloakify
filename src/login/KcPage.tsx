@@ -14,27 +14,44 @@ const LoginUsername = lazy(() => import("./pages/LoginUsername/LoginUsername"));
 const Register = lazy(() => import("./pages/Register/Register"));
 const Terms = lazy(() => import("./pages/Terms/Terms"));
 const LoginOauth2DeviceVerifyUserCode = lazy(
-    () => import("./pages/LoginOauth2DeviceVerifyUserCode/LoginOauth2DeviceVerifyUserCode")
+    () =>
+        import("./pages/LoginOauth2DeviceVerifyUserCode/LoginOauth2DeviceVerifyUserCode")
 );
 const LoginOauthGrant = lazy(() => import("./pages/LoginOauthGrant/LoginOauthGrant"));
 const LoginOtp = lazy(() => import("./pages/LoginOtp/LoginOtp"));
-const LoginUpdateProfile = lazy(() => import("./pages/LoginUpdateProfile/LoginUpdateProfile"));
-const LoginIdpLinkConfirm = lazy(() => import("./pages/LoginIdpLinkConfirm/LoginIdpLinkConfirm"));
-const LoginIdpLinkEmail = lazy(() => import("./pages/LoginIdpLinkEmail/LoginIdpLinkEmail"));
+const LoginUpdateProfile = lazy(
+    () => import("./pages/LoginUpdateProfile/LoginUpdateProfile")
+);
+const LoginIdpLinkConfirm = lazy(
+    () => import("./pages/LoginIdpLinkConfirm/LoginIdpLinkConfirm")
+);
+const LoginIdpLinkEmail = lazy(
+    () => import("./pages/LoginIdpLinkEmail/LoginIdpLinkEmail")
+);
 const LoginPageExpired = lazy(() => import("./pages/LoginPageExpired/LoginPageExpired"));
 const LoginConfigTotp = lazy(() => import("./pages/LoginConfigTotp/LoginConfigTotp"));
 const LogoutConfirm = lazy(() => import("./pages/LogoutConfirm/LogoutConfirm"));
-const LoginResetPassword = lazy(() => import("./pages/LoginResetPassword/LoginResetPassword"));
+const LoginResetPassword = lazy(
+    () => import("./pages/LoginResetPassword/LoginResetPassword")
+);
 const Info = lazy(() => import("./pages/Info/Info"));
 const Error = lazy(() => import("./pages/Error/Error"));
-const WebauthnAuthenticate = lazy(() => import("./pages/WebauthnAuthenticate/WebauthnAuthenticate"));
+const WebauthnAuthenticate = lazy(
+    () => import("./pages/WebauthnAuthenticate/WebauthnAuthenticate")
+);
 const WebauthnRegister = lazy(() => import("./pages/WebauthnRegister/WebauthnRegister"));
-const IdpReviewUserProfile = lazy(() => import("./pages/IdpReviewUserProfile/IdpReviewUserProfile"));
+const IdpReviewUserProfile = lazy(
+    () => import("./pages/IdpReviewUserProfile/IdpReviewUserProfile")
+);
 const UpdateEmail = lazy(() => import("./pages/UpdateEmail/UpdateEmail"));
-const SelectAuthenticator = lazy(() => import("./pages/SelectAuthenticator/SelectAuthenticator"));
+const SelectAuthenticator = lazy(
+    () => import("./pages/SelectAuthenticator/SelectAuthenticator")
+);
 const SamlPostForm = lazy(() => import("./pages/SamlPostForm/SamlPostForm"));
 const DeleteCredential = lazy(() => import("./pages/DeleteCredential/DeleteCredential"));
-const FrontchannelLogout = lazy(() => import("./pages/FrontchannelLogout/FrontchannelLogout"));
+const FrontchannelLogout = lazy(
+    () => import("./pages/FrontchannelLogout/FrontchannelLogout")
+);
 const LoginRecoveryAuthnCodeConfig = lazy(
     () => import("./pages/LoginRecoveryAuthnCodeConfig/LoginRecoveryAuthnCodeConfig")
 );
@@ -45,16 +62,25 @@ const LoginResetOtp = lazy(() => import("./pages/LoginResetOtp/LoginResetOtp"));
 const LoginX509Info = lazy(() => import("./pages/LoginX509Info/LoginX509Info"));
 const WebauthnError = lazy(() => import("./pages/WebauthnError/WebauthnError"));
 const LoginPasskeysConditionalAuthenticate = lazy(
-    () => import("./pages/LoginPasskeysConditionalAuthenticate/LoginPasskeysConditionalAuthenticate")
+    () =>
+        import(
+            "./pages/LoginPasskeysConditionalAuthenticate/LoginPasskeysConditionalAuthenticate"
+        )
 );
 const LoginIdpLinkConfirmOverride = lazy(
     () => import("./pages/LoginIdpLinkConfirmOverride/LoginIdpLinkConfirmOverride")
 );
-const DeleteAccountConfirm = lazy(() => import("./pages/DeleteAccountConfirm/DeleteAccountConfirm"));
-const LoginUpdatePassword = lazy(() => import("./pages/LoginUpdatePassword/LoginUpdatePassword"));
+const DeleteAccountConfirm = lazy(
+    () => import("./pages/DeleteAccountConfirm/DeleteAccountConfirm")
+);
+const LoginUpdatePassword = lazy(
+    () => import("./pages/LoginUpdatePassword/LoginUpdatePassword")
+);
 const LoginVerifyEmail = lazy(() => import("./pages/LoginVerifyEmail/LoginVerifyEmail"));
 const Code = lazy(() => import("./pages/Code/Code"));
-const SelectOrganization = lazy(() => import("./pages/SelectOrganization/SelectOrganization"));
+const SelectOrganization = lazy(
+    () => import("./pages/SelectOrganization/SelectOrganization")
+);
 const LinkIdpAction = lazy(() => import("./pages/LinkIdpAction/LinkIdpAction"));
 
 const doMakeUserConfirmPassword = true;
@@ -377,20 +403,22 @@ export default function KcPage(props: { kcContext: KcContext }) {
                                     doUseDefaultCss={doUseDefaultCss}
                                 />
                             );
-                        case "select-organization.ftl": return (
-                            <SelectOrganization
-                                {...{ kcContext, i18n, classes }}
-                                Template={Template}
-                                doUseDefaultCss={doUseDefaultCss}
-                            />
-                        );
-                        case "link-idp-action.ftl": return (
-                            <LinkIdpAction
-                                {...{ kcContext, i18n, classes }}
-                                Template={Template}
-                                doUseDefaultCss={doUseDefaultCss}
-                            />
-                        );
+                        case "select-organization.ftl":
+                            return (
+                                <SelectOrganization
+                                    {...{ kcContext, i18n, classes }}
+                                    Template={Template}
+                                    doUseDefaultCss={doUseDefaultCss}
+                                />
+                            );
+                        case "link-idp-action.ftl":
+                            return (
+                                <LinkIdpAction
+                                    {...{ kcContext, i18n, classes }}
+                                    Template={Template}
+                                    doUseDefaultCss={doUseDefaultCss}
+                                />
+                            );
 
                         default:
                             return (

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { KcContext } from '@/login/KcContext';
+import { KcContext } from "@/login/KcContext";
 import type { UserProfileFormFieldsProps } from "keycloakify/login/UserProfileFormFieldsProps";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
@@ -8,13 +8,24 @@ import type { LazyOrNot } from "keycloakify/tools/LazyOrNot";
 import { useState } from "react";
 import type { I18n } from "../../i18n";
 
-type LoginUpdateProfileProps = PageProps<Extract<KcContext, { pageId: "login-update-profile.ftl" }>, I18n> & {
+type LoginUpdateProfileProps = PageProps<
+    Extract<KcContext, { pageId: "login-update-profile.ftl" }>,
+    I18n
+> & {
     UserProfileFormFields: LazyOrNot<(props: UserProfileFormFieldsProps) => JSX.Element>;
     doMakeUserConfirmPassword: boolean;
 };
 
 export default function LoginUpdateProfile(props: LoginUpdateProfileProps) {
-    const { kcContext, i18n, doUseDefaultCss, Template, classes, UserProfileFormFields, doMakeUserConfirmPassword } = props;
+    const {
+        kcContext,
+        i18n,
+        doUseDefaultCss,
+        Template,
+        classes,
+        UserProfileFormFields,
+        doMakeUserConfirmPassword
+    } = props;
 
     const { kcClsx } = getKcClsx({
         doUseDefaultCss,
@@ -37,7 +48,12 @@ export default function LoginUpdateProfile(props: LoginUpdateProfileProps) {
             headerNode={msg("loginProfileTitle")}
             displayMessage={messagesPerField.exists("global")}
         >
-            <form id="kc-update-profile-form" className="space-y-6" action={url.loginAction} method="post">
+            <form
+                id="kc-update-profile-form"
+                className="space-y-6"
+                action={url.loginAction}
+                method="post"
+            >
                 <UserProfileFormFields
                     kcContext={kcContext}
                     i18n={i18n}
@@ -50,11 +66,22 @@ export default function LoginUpdateProfile(props: LoginUpdateProfileProps) {
                         <div className={kcClsx("kcFormOptionsWrapperClass")} />
                     </div>
                     <div id="kc-form-buttons" className={kcClsx("kcFormButtonsClass")}>
-                        <Button disabled={!isFormSubmittable} className="w-full" type="submit" value={msgStr("doSubmit")}>
+                        <Button
+                            disabled={!isFormSubmittable}
+                            className="w-full"
+                            type="submit"
+                            value={msgStr("doSubmit")}
+                        >
                             {msgStr("doSubmit")}
                         </Button>
                         {isAppInitiatedAction && (
-                            <Button variant="secondary" className=" w-full mt-2 " type="submit" name="cancel-aia" value="true">
+                            <Button
+                                variant="secondary"
+                                className=" w-full mt-2 "
+                                type="submit"
+                                name="cancel-aia"
+                                value="true"
+                            >
                                 {msg("doCancel")}
                             </Button>
                         )}

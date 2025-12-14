@@ -1,11 +1,13 @@
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { I18n } from '@/login/i18n';
-import { KcContext } from '@/login/KcContext';
+import { I18n } from "@/login/i18n";
+import { KcContext } from "@/login/KcContext";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 
-export default function DeleteAccountConfirm(props: PageProps<Extract<KcContext, { pageId: "delete-account-confirm.ftl" }>, I18n>) {
+export default function DeleteAccountConfirm(
+    props: PageProps<Extract<KcContext, { pageId: "delete-account-confirm.ftl" }>, I18n>
+) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
     getKcClsx({
@@ -18,7 +20,13 @@ export default function DeleteAccountConfirm(props: PageProps<Extract<KcContext,
     const { msg, msgStr } = i18n;
 
     return (
-        <Template kcContext={kcContext} i18n={i18n} doUseDefaultCss={doUseDefaultCss} classes={classes} headerNode={msg("deleteAccountConfirm")}>
+        <Template
+            kcContext={kcContext}
+            i18n={i18n}
+            doUseDefaultCss={doUseDefaultCss}
+            classes={classes}
+            headerNode={msg("deleteAccountConfirm")}
+        >
             <form action={url.loginAction} className="space-y-6" method="post">
                 <Alert variant="warning" className="my-3">
                     <AlertDescription>
@@ -34,17 +42,29 @@ export default function DeleteAccountConfirm(props: PageProps<Extract<KcContext,
                         <li>{msg("errasingData")}</li>
                     </ul>
 
-                    <p className="text-foreground font-medium mt-6">{msg("finalDeletionConfirmation")}</p>
+                    <p className="text-foreground font-medium mt-6">
+                        {msg("finalDeletionConfirmation")}
+                    </p>
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-3 sm:justify-between mt-6">
                     {triggered_from_aia && (
-                        <Button variant="outline" type="submit" name="cancel-aia" value="true" className="sm:flex-1">
+                        <Button
+                            variant="outline"
+                            type="submit"
+                            name="cancel-aia"
+                            value="true"
+                            className="sm:flex-1"
+                        >
                             {msgStr("doCancel")}
                         </Button>
                     )}
 
-                    <Button type="submit" variant="destructive" className="sm:flex-1 text-white">
+                    <Button
+                        type="submit"
+                        variant="destructive"
+                        className="sm:flex-1 text-white"
+                    >
                         {msgStr("doConfirmDelete")}
                     </Button>
                 </div>

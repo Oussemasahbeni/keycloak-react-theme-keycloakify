@@ -1,4 +1,4 @@
-import { createKcPageStory } from '@/login/KcPageStory';
+import { createKcPageStory } from "@/login/KcPageStory";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const { KcPageStory } = createKcPageStory({ pageId: "login.ftl" });
@@ -29,7 +29,10 @@ export const WithInvalidCredential: Story = {
                     // existsError() so they are the only ones that need to mock.
                     existsError: (fieldName: string, ...otherFieldNames: string[]) => {
                         const fieldNames = [fieldName, ...otherFieldNames];
-                        return fieldNames.includes("username") || fieldNames.includes("password");
+                        return (
+                            fieldNames.includes("username") ||
+                            fieldNames.includes("password")
+                        );
                     },
                     get: (fieldName: string) => {
                         if (fieldName === "username" || fieldName === "password") {
@@ -332,7 +335,6 @@ export const WithoutPasswordField: Story = {
     )
 };
 
-
 export const WithWebauthn: Story = {
     render: () => (
         <KcPageStory
@@ -340,7 +342,7 @@ export const WithWebauthn: Story = {
                 url: {
                     loginAction: "/mock-login-action"
                 },
-                enableWebAuthnConditionalUI: true,
+                enableWebAuthnConditionalUI: true
             }}
         />
     )
@@ -352,7 +354,8 @@ export const WithErrorMessage: Story = {
             {...args}
             kcContext={{
                 message: {
-                    summary: "The time allotted for the connection has elapsed.<br/>The login process will restart from the beginning.",
+                    summary:
+                        "The time allotted for the connection has elapsed.<br/>The login process will restart from the beginning.",
                     type: "error"
                 }
             }}

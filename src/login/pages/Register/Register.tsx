@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { InputError } from "@/components/ui/input-error";
+import { FieldError } from '@/components/ui/field';
 import { Label } from "@/components/ui/label";
-import { KcContext } from '@/login/KcContext';
+import { KcContext } from "@/login/KcContext";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import type { UserProfileFormFieldsProps } from "keycloakify/login/UserProfileFormFieldsProps";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
@@ -19,15 +19,31 @@ type RegisterProps = PageProps<Extract<KcContext, { pageId: "register.ftl" }>, I
 };
 
 export default function Register(props: RegisterProps) {
-    const { kcContext, i18n, doUseDefaultCss, Template, classes, UserProfileFormFields, doMakeUserConfirmPassword } = props;
+    const {
+        kcContext,
+        i18n,
+        doUseDefaultCss,
+        Template,
+        classes,
+        UserProfileFormFields,
+        doMakeUserConfirmPassword
+    } = props;
 
     const { kcClsx } = getKcClsx({
         doUseDefaultCss,
         classes
     });
 
-    const { messageHeader, url, messagesPerField, recaptchaRequired, recaptchaVisible, recaptchaSiteKey, recaptchaAction, termsAcceptanceRequired } =
-        kcContext;
+    const {
+        messageHeader,
+        url,
+        messagesPerField,
+        recaptchaRequired,
+        recaptchaVisible,
+        recaptchaSiteKey,
+        recaptchaAction,
+        termsAcceptanceRequired
+    } = kcContext;
 
     const { msg, msgStr, advancedMsg } = i18n;
 
@@ -40,11 +56,20 @@ export default function Register(props: RegisterProps) {
             i18n={i18n}
             doUseDefaultCss={doUseDefaultCss}
             classes={classes}
-            headerNode={messageHeader !== undefined ? advancedMsg(messageHeader) : msg("registerTitle")}
+            headerNode={
+                messageHeader !== undefined
+                    ? advancedMsg(messageHeader)
+                    : msg("registerTitle")
+            }
             displayMessage={messagesPerField.exists("global")}
             displayRequiredFields
         >
-            <form id="kc-register-form" className="space-y-3" action={url.registrationAction} method="post">
+            <form
+                id="kc-register-form"
+                className="space-y-3"
+                action={url.registrationAction}
+                method="post"
+            >
                 <UserProfileFormFields
                     kcContext={kcContext}
                     i18n={i18n}
@@ -62,16 +87,24 @@ export default function Register(props: RegisterProps) {
                     />
                 )}
 
-                {recaptchaRequired && (recaptchaVisible || recaptchaAction === undefined) && (
-                    <div className="space-y-2">
-                        <div className="flex justify-center">
-                            <div className="g-recaptcha" data-size="compact" data-sitekey={recaptchaSiteKey} data-action={recaptchaAction}></div>
+                {recaptchaRequired &&
+                    (recaptchaVisible || recaptchaAction === undefined) && (
+                        <div className="space-y-2">
+                            <div className="flex justify-center">
+                                <div
+                                    className="g-recaptcha"
+                                    data-size="compact"
+                                    data-sitekey={recaptchaSiteKey}
+                                    data-action={recaptchaAction}
+                                ></div>
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
 
                 <div className="space-y-4">
-                    {recaptchaRequired && !recaptchaVisible && recaptchaAction !== undefined ? (
+                    {recaptchaRequired &&
+                        !recaptchaVisible &&
+                        recaptchaAction !== undefined ? (
                         <button
                             className={clsx(
                                 "w-full px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors",
@@ -80,7 +113,11 @@ export default function Register(props: RegisterProps) {
                             data-sitekey={recaptchaSiteKey}
                             style={{ width: "100%" }}
                             data-callback={() => {
-                                (document.getElementById("kc-register-form") as HTMLFormElement).submit();
+                                (
+                                    document.getElementById(
+                                        "kc-register-form"
+                                    ) as HTMLFormElement
+                                ).submit();
                             }}
                             data-action={recaptchaAction}
                             type="submit"
@@ -89,7 +126,10 @@ export default function Register(props: RegisterProps) {
                         </button>
                     ) : (
                         <Button
-                            disabled={!isFormSubmittable || (termsAcceptanceRequired && !areTermsAccepted)}
+                            disabled={
+                                !isFormSubmittable ||
+                                (termsAcceptanceRequired && !areTermsAccepted)
+                            }
                             className="w-full"
                             name="register"
                             type="submit"
@@ -115,7 +155,8 @@ function TermsAcceptance(props: {
     areTermsAccepted: boolean;
     onAreTermsAcceptedValueChange: (areTermsAccepted: boolean) => void;
 }) {
-    const { i18n, messagesPerField, areTermsAccepted, onAreTermsAcceptedValueChange } = props;
+    const { i18n, messagesPerField, areTermsAccepted, onAreTermsAcceptedValueChange } =
+        props;
 
     const { msg } = i18n;
 
@@ -132,18 +173,27 @@ function TermsAcceptance(props: {
                         id="termsAccepted"
                         name="termsAccepted"
                         checked={areTermsAccepted}
-                        onCheckedChange={checked => onAreTermsAcceptedValueChange(!!checked)}
+                        onCheckedChange={checked =>
+                            onAreTermsAcceptedValueChange(!!checked)
+                        }
                         aria-invalid={messagesPerField.existsError("termsAccepted")}
                     />
-                    <Label htmlFor="termsAccepted" className="text-sm font-medium cursor-pointer">
+                    <Label
+                        htmlFor="termsAccepted"
+                        className="text-sm font-medium cursor-pointer"
+                    >
                         {msg("acceptTerms")}
                     </Label>
                 </div>
 
                 {messagesPerField.existsError("termsAccepted") && (
-                    <InputError id="input-error-terms-accepted">
-                        <span dangerouslySetInnerHTML={{ __html: kcSanitize(messagesPerField.get("termsAccepted")) }} />
-                    </InputError>
+                    <FieldError id="input-error-terms-accepted">
+                        <span
+                            dangerouslySetInnerHTML={{
+                                __html: kcSanitize(messagesPerField.get("termsAccepted"))
+                            }}
+                        />
+                    </FieldError>
                 )}
             </div>
         </div>

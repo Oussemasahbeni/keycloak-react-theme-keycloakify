@@ -1,4 +1,4 @@
-import { createKcPageStory } from '@/login/KcPageStory';
+import { createKcPageStory } from "@/login/KcPageStory";
 import type { Meta, StoryObj } from "@storybook/react";
 
 // Mock kcContext to simulate real environment
@@ -7,7 +7,10 @@ const mockKcContext = {
         oauthAction: "/oauth-action"
     },
     oauth: {
-        clientScopesRequested: [{ consentScreenText: "Scope1", dynamicScopeParameter: "dynamicScope1" }, { consentScreenText: "Scope2" }],
+        clientScopesRequested: [
+            { consentScreenText: "Scope1", dynamicScopeParameter: "dynamicScope1" },
+            { consentScreenText: "Scope2" }
+        ],
         code: "mockCode"
     },
     client: {
