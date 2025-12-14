@@ -1,7 +1,6 @@
 
-
-import { useI18n } from '@/login/i18n';
 import type { Attribute } from "@keycloakify/login-ui/KcContext";
+import { useI18n } from "../../i18n";
 
 export function InputLabel(props: { attribute: Attribute; option: string }) {
     const { attribute, option } = props;
@@ -14,8 +13,10 @@ export function InputLabel(props: { attribute: Attribute; option: string }) {
     }
 
     if (attribute.annotations.inputOptionLabelsI18nPrefix !== undefined) {
-        return advancedMsg(`${attribute.annotations.inputOptionLabelsI18nPrefix}.${option}`);
+        return advancedMsg(
+            `${attribute.annotations.inputOptionLabelsI18nPrefix}.${option}`
+        );
     }
 
-    return option;
+    return <>{option}</>;
 }
