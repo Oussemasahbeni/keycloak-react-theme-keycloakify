@@ -13,7 +13,7 @@ import { Button } from "./ui/button";
 export function ModeToggle() {
     const { setTheme } = useTheme();
 
-    const { msg } = useI18n();
+    const { msgStr } = useI18n();
 
     return (
         <DropdownMenu>
@@ -26,13 +26,13 @@ export function ModeToggle() {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
                 <DropdownMenuItem onClick={() => setTheme("light")}>
-                    {msg("light")}
+                    {msgStr("light")}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setTheme("dark")}>
-                    {msg("dark")}
+                    {msgStr("dark")}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setTheme("system")}>
-                    {msg("system")}
+                    {msgStr("system")}
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>

@@ -4,7 +4,6 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { kcSanitize } from "@keycloakify/login-ui/kcSanitize";
-import { useSetClassName } from "@keycloakify/login-ui/tools/useSetClassName";
 import { useKcClsx } from "@keycloakify/login-ui/useKcClsx";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@radix-ui/react-tooltip';
 import { RotateCcw } from 'lucide-react';
@@ -15,6 +14,7 @@ import { useKcContext } from "../../KcContext";
 import companylogo from "./../../assets/img/auth-logo.svg";
 import shape from "./../../assets/img/shape.svg";
 import { useInitializeTemplate } from "./useInitializeTemplate";
+import { useSetClassName } from 'keycloakify/tools/useSetClassName';
 
 const APP_NAME = "Acme Inc.";
 
