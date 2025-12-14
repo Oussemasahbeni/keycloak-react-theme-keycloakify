@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
-import { InputError } from "@/components/ui/input-error";
 import { Label } from "@/components/ui/label";
 import { KcContext } from '@/login/KcContext';
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
@@ -10,6 +9,8 @@ import { clsx } from "keycloakify/tools/clsx";
 import { useState } from "react";
 import type { I18n } from "../../i18n";
 
+import { Field, FieldError, FieldLabel } from '@/components/ui/field';
+import { kcSanitize } from 'keycloakify/lib/kcSanitize';
 import { useScript } from "keycloakify/login/pages/LoginUsername.useScript";
 import { Fingerprint } from "lucide-react";
 
@@ -90,7 +91,7 @@ export default function LoginUsername(props: PageProps<Extract<KcContext, { page
                 {realm.password && (
                     <form
                         id="kc-form-login"
-                        className="space-y-6"
+                        className="space-y-4"
                         onSubmit={() => {
                             setIsLoginButtonDisabled(true);
                             return true;
@@ -99,28 +100,34 @@ export default function LoginUsername(props: PageProps<Extract<KcContext, { page
                         method="post"
                     >
                         {!usernameHidden && (
-                            <div className="space-y-2">
-                                <Label htmlFor="username" className="text-sm font-medium">
-                                    {!realm.loginWithEmailAllowed
-                                        ? msg("username")
-                                        : !realm.registrationEmailAsUsername
-                                            ? msg("usernameOrEmail")
-                                            : msg("email")}
-                                </Label>
-                                <Input
-                                    tabIndex={2}
+                            <Field >
+                                <FieldLabel htmlFor="username">{!realm.loginWithEmailAllowed
+                                    ? msg("email")
+                                    : !realm.registrationEmailAsUsername
+                                        ? msg("usernameOrEmail")
+                                        : msg("username")}</FieldLabel>
+                                <Input tabIndex={2}
                                     type="text"
                                     id="username"
                                     defaultValue={login.username ?? ""}
                                     name="username"
                                     autoFocus
+                                    className="autofill:bg-background"
                                     autoComplete="username"
-                                    error={messagesPerField.existsError("username")}
+                                    aria-invalid={messagesPerField.existsError("username")}
                                 />
                                 {messagesPerField.existsError("username") && (
-                                    <InputError id="input-error">{messagesPerField.getFirstError("username")}</InputError>
+                                    <FieldError>
+                                        <span
+                                            id="input-error"
+                                            aria-live="polite"
+                                            dangerouslySetInnerHTML={{
+                                                __html: kcSanitize(messagesPerField.getFirstError("username"))
+                                            }}
+                                        />
+                                    </FieldError>
                                 )}
-                            </div>
+                            </Field>
                         )}
 
                         {realm.rememberMe && !usernameHidden && (

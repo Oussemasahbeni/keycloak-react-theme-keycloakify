@@ -1,9 +1,8 @@
 import { LogoutOtherSessions } from "@/components/logout-other-sessions";
 import { PasswordWrapper } from "@/components/password-wrapper";
 import { Button } from "@/components/ui/button";
+import { Field, FieldError, FieldLabel } from '@/components/ui/field';
 import { Input } from "@/components/ui/input";
-import { InputError } from "@/components/ui/input-error";
-import { Label } from "@/components/ui/label";
 import { KcContext } from '@/login/KcContext';
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
@@ -32,10 +31,9 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
             headerNode={msg("updatePasswordTitle")}
         >
             <form id="kc-passwd-update-form" className="space-y-6" action={url.loginAction} method="post">
-                <div className="space-y-2">
-                    <Label htmlFor="password-new" className="text-sm font-medium">
-                        {msg("passwordNew")}
-                    </Label>
+
+                <Field>
+                    <FieldLabel htmlFor="password-new">{msg("passwordNew")}</FieldLabel>
                     <PasswordWrapper kcClsx={kcClsx} i18n={i18n} locale={locale} passwordInputId="password-new">
                         <Input
                             type="password"
@@ -43,43 +41,45 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
                             name="password-new"
                             autoFocus
                             autoComplete="new-password"
-                            error={messagesPerField.existsError("password")}
+                            aria-invalid={messagesPerField.existsError("password")}
                         />
                     </PasswordWrapper>
                     {messagesPerField.existsError("password") && (
-                        <InputError id="input-error-password">
+                        <FieldError>
                             <span
+                                id="input-error"
+                                aria-live="polite"
                                 dangerouslySetInnerHTML={{
-                                    __html: kcSanitize(messagesPerField.get("password"))
+                                    __html: kcSanitize(messagesPerField.getFirstError("password"))
                                 }}
                             />
-                        </InputError>
+                        </FieldError>
                     )}
-                </div>
+                </Field>
 
-                <div className="space-y-2">
-                    <Label htmlFor="password-confirm" className="text-sm font-medium">
-                        {msg("passwordConfirm")}
-                    </Label>
+                <Field>
+                    <FieldLabel htmlFor="password-confirm">{msg("passwordConfirm")}</FieldLabel>
                     <PasswordWrapper kcClsx={kcClsx} i18n={i18n} locale={locale} passwordInputId="password-confirm">
                         <Input
                             type="password"
                             id="password-confirm"
                             name="password-confirm"
                             autoComplete="new-password"
-                            error={messagesPerField.existsError("password-confirm")}
+                            aria-invalid={messagesPerField.existsError("password-confirm")}
                         />
                     </PasswordWrapper>
                     {messagesPerField.existsError("password-confirm") && (
-                        <InputError id="input-error-password-confirm">
+                        <FieldError>
                             <span
+                                id="input-error"
+                                aria-live="polite"
                                 dangerouslySetInnerHTML={{
-                                    __html: kcSanitize(messagesPerField.get("password-confirm"))
+                                    __html: kcSanitize(messagesPerField.getFirstError("password-confirm"))
                                 }}
                             />
-                        </InputError>
+                        </FieldError>
                     )}
-                </div>
+                </Field>
 
                 <LogoutOtherSessions i18n={i18n} />
 

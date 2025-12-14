@@ -38,6 +38,15 @@ const logo = {
     padding: 30
 };
 
+const logoImage = {
+    display: "block",
+    border: "0",
+    outline: "none",
+    textDecoration: "none",
+    maxWidth: "100%",
+};
+
+
 const sectionsBorders = {
     width: "100%",
     display: "flex"
@@ -81,7 +90,13 @@ export const EmailLayout = ({
             <Body style={main}>
                 <Container style={container}>
                     <Section style={logo}>
-                        <Img width={200} src={companyLogo} />
+                        <Img
+                            src={companyLogo}
+                            width={200}
+                            height={50}
+                            alt="Company Name"
+                            style={logoImage}
+                        />
                     </Section>
 
                     <Section style={sectionsBorders}>

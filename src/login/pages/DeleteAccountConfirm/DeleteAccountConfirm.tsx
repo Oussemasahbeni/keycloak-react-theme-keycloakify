@@ -20,7 +20,7 @@ export default function DeleteAccountConfirm(props: PageProps<Extract<KcContext,
     return (
         <Template kcContext={kcContext} i18n={i18n} doUseDefaultCss={doUseDefaultCss} classes={classes} headerNode={msg("deleteAccountConfirm")}>
             <form action={url.loginAction} className="space-y-6" method="post">
-                <Alert type="warning" className="my-3">
+                <Alert variant="warning" className="my-3">
                     <AlertDescription>
                         <span>{msg("irreversibleAction")}</span>
                     </AlertDescription>
@@ -44,7 +44,7 @@ export default function DeleteAccountConfirm(props: PageProps<Extract<KcContext,
                         </Button>
                     )}
 
-                    <Button type="submit" variant="destructive" className="sm:flex-1">
+                    <Button type="submit" variant="destructive" className="sm:flex-1 text-white">
                         {msgStr("doConfirmDelete")}
                     </Button>
                 </div>

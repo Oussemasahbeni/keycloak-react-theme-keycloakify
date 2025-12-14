@@ -28,7 +28,7 @@ export default function FrontchannelLogout(props: PageProps<Extract<KcContext, {
             documentTitle={msgStr("frontchannel-logout.title")}
             headerNode={msg("frontchannel-logout.title")}
         >
-            <Alert type="info" className="my-6">
+            <Alert variant="info" className="my-6">
                 <AlertDescription>
                     <p>{msg("frontchannel-logout.message")}</p>
                 </AlertDescription>
@@ -50,7 +50,7 @@ export default function FrontchannelLogout(props: PageProps<Extract<KcContext, {
 
             {logout.logoutRedirectUri && (
                 <div className="mt-6 flex justify-center">
-                    <Button asChild size="lg" className="min-w-[200px]">
+                    <Button asChild size="lg">
                         <a id="continue" href={logout.logoutRedirectUri} className="flex items-center gap-2">
                             {msg("doContinue")}
                             <FiExternalLink className="h-4 w-4" />

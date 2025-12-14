@@ -8,13 +8,13 @@ import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { useState } from "react";
 
-import { PasswordWrapper } from "@/components/password-wrapper";
+import { PasswordWrapper } from '@/components/password-wrapper';
 import { Checkbox } from "@/components/ui/checkbox";
-import { InputError } from "@/components/ui/input-error";
+import { Field, FieldError, FieldLabel } from '@/components/ui/field';
 import { I18n } from '@/login/i18n';
 import { useScript } from 'keycloakify/login/pages/LoginUsername.useScript';
-import useProviderLogos from "./useProviderLogos";
 import { Fingerprint } from "lucide-react";
+import useProviderLogos from "./useProviderLogos";
 
 export default function Login(props: PageProps<Extract<KcContext, { pageId: "login.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
@@ -107,7 +107,6 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                                     )}
                                                 </div>
 
-                                                {/* {p.iconClasses && <i className={clsx(kcClsx("kcCommonLogoIdP"), p.iconClasses)} aria-hidden="true"></i>} */}
                                                 <span dangerouslySetInnerHTML={{ __html: kcSanitize(p.displayName) }}></span>
                                             </a>
                                         </Button>
@@ -130,19 +129,17 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                             }}
                             action={url.loginAction}
                             method="post"
-                            className={messagesPerField.existsError("username", "password") ? "space-y-1" : "space-y-4"}
+                            className="space-y-3"
                         >
+
                             {!usernameHidden && (
-                                <div>
-                                    <Label htmlFor="username">
-                                        {!realm.loginWithEmailAllowed
-                                            ? msg("email")
-                                            : !realm.registrationEmailAsUsername
-                                                ? msg("usernameOrEmail")
-                                                : msg("username")}
-                                    </Label>
-                                    <Input
-                                        tabIndex={2}
+                                <Field >
+                                    <FieldLabel htmlFor="username">{!realm.loginWithEmailAllowed
+                                        ? msg("email")
+                                        : !realm.registrationEmailAsUsername
+                                            ? msg("usernameOrEmail")
+                                            : msg("username")}</FieldLabel>
+                                    <Input tabIndex={2}
                                         type="text"
                                         id="username"
                                         defaultValue={login.username ?? ""}
@@ -151,18 +148,24 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                         className="autofill:bg-background"
                                         autoComplete="username"
                                         placeholder="m@example.com"
-                                        error={messagesPerField.existsError("username", "password")}
+                                        aria-invalid={messagesPerField.existsError("username", "password")}
                                     />
-
                                     {messagesPerField.existsError("username", "password") && (
-                                        <InputError id="input-error-password">{messagesPerField.getFirstError("username", "password")}</InputError>
+                                        <FieldError>
+                                            <span
+                                                id="input-error"
+                                                aria-live="polite"
+                                                dangerouslySetInnerHTML={{
+                                                    __html: kcSanitize(messagesPerField.getFirstError("username", "password"))
+                                                }}
+                                            />
+                                        </FieldError>
                                     )}
-                                </div>
+                                </Field>
                             )}
 
-                            <div>
-                                <Label htmlFor="password">{msg("password")}</Label>
-
+                            <Field>
+                                <FieldLabel htmlFor="password">{msg("password")}</FieldLabel>
                                 <PasswordWrapper kcClsx={kcClsx} i18n={i18n} locale={locale} passwordInputId="password">
                                     <Input
                                         tabIndex={3}
@@ -171,14 +174,21 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                         name="password"
                                         placeholder={msgStr("passwordPlaceholder")}
                                         autoComplete="current-password"
-                                        error={messagesPerField.existsError("username", "password")}
+                                        aria-invalid={messagesPerField.existsError("username", "password")}
                                     />
                                 </PasswordWrapper>
-
                                 {messagesPerField.existsError("username", "password") && (
-                                    <InputError id="input-error-password">{messagesPerField.getFirstError("username", "password")}</InputError>
+                                    <FieldError>
+                                        <span
+                                            id="input-error"
+                                            aria-live="polite"
+                                            dangerouslySetInnerHTML={{
+                                                __html: kcSanitize(messagesPerField.getFirstError("username", "password"))
+                                            }}
+                                        />
+                                    </FieldError>
                                 )}
-                            </div>
+                            </Field>
 
                             <div className=" space-y-1 my-3 flex justify-between text-xs  ">
                                 <div>
@@ -194,7 +204,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                 </div>
                                 <div className="link-style ">
                                     {realm.resetPasswordAllowed && (
-                                        <span className="text-primary dark:text-primary-foreground underline-offset-4 hover:underline">
+                                        <span className=" underline-offset-4 hover:underline">
                                             <a tabIndex={6} href={url.loginResetCredentialsUrl}>
                                                 <Label className="text-sm font-medium cursor-pointer">{msg("doForgotPassword")}</Label>
                                             </a>

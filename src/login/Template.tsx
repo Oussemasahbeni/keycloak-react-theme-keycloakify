@@ -154,7 +154,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                 <div id="kc-content">
                                     <div id="kc-content-wrapper">
                                         {displayMessage && message !== undefined && (message.type !== "warning" || !isAppInitiatedAction) && (
-                                            <Alert type={message.type} className="flex  gap-2 justify-center my-3">
+                                            <Alert variant={message.type} className="flex gap-2 justify-center my-3">
                                                 <AlertDescription>
                                                     <div>
                                                         <span

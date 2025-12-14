@@ -18,7 +18,7 @@ export default function LoginIdpLinkEmail(props: PageProps<Extract<KcContext, { 
             classes={classes}
             headerNode={msg("emailLinkIdpTitle", idpAlias)}
         >
-            <Alert id="instruction1" type={"info"} className="my-3">
+            <Alert id="instruction1" variant="info" className="my-3">
                 <AlertDescription>{msg("emailLinkIdp1", idpAlias, brokerContext.username, realm.displayName)}</AlertDescription>
             </Alert>
 

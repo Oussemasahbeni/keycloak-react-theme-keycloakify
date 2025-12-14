@@ -35,7 +35,7 @@ export default function LoginRecoveryAuthnCodeConfig(props: PageProps<Extract<Kc
             headerNode={msg("recovery-code-config-header")}
         >
             <div className="space-y-6">
-                <Alert type="warning">
+                <Alert variant="warning">
                     <AlertDescription>
                         <div className="space-y-2">
                             <h4 className="font-medium">{msg("recovery-code-config-warning-title")}</h4>

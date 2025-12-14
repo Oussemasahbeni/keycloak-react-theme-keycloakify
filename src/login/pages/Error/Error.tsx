@@ -25,7 +25,7 @@ export default function Error(props: PageProps<Extract<KcContext, { pageId: "err
             headerNode={msg("errorTitle")}
         >
             <div id="kc-error-message">
-                <Alert type="error" className="my-3">
+                <Alert variant="error" className="my-3">
                     <AlertDescription>
                         <span
                             className="instruction"

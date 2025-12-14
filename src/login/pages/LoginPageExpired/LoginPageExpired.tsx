@@ -12,7 +12,7 @@ export default function LoginPageExpired(props: PageProps<Extract<KcContext, { p
 
     return (
         <Template kcContext={kcContext} i18n={i18n} doUseDefaultCss={doUseDefaultCss} classes={classes} headerNode={msg("pageExpiredTitle")}>
-            <Alert type="warning" className="my-6">
+            <Alert variant="warning" className="my-6">
                 <AlertDescription>
                     <div className="space-y-3 text-sm leading-relaxed">
                         <p>

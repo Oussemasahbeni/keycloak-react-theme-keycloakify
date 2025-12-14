@@ -30,7 +30,7 @@ export default function LoginResetOtp(props: PageProps<Extract<KcContext, { page
             headerNode={msg("doLogIn")}
         >
             <form id="kc-otp-reset-form" className={kcClsx("kcFormClass")} action={url.loginAction} method="post">
-                <div className="flex flex-col gap-2 w-full">
+                <div className="flex flex-col gap-4 w-full">
                     <p id="kc-otp-reset-form-description">{msg("otp-reset-description")}</p>
 
                     <RadioGroup name="selectedCredentialId" defaultValue={configuredOtpCredentials.selectedCredentialId} className="space-y-2">

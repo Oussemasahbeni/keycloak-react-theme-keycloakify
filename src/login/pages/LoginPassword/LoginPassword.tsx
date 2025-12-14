@@ -1,13 +1,13 @@
 import { PasswordWrapper } from "@/components/password-wrapper";
 import { Button } from "@/components/ui/button";
+import { Field, FieldError, FieldLabel } from '@/components/ui/field';
 import { Input } from "@/components/ui/input";
-import { InputError } from "@/components/ui/input-error";
-import { Label } from "@/components/ui/label";
 import { KcContext } from '@/login/KcContext';
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import { useScript } from 'keycloakify/login/pages/LoginUsername.useScript';
 import type { PageProps } from "keycloakify/login/pages/PageProps";
+import { Fingerprint } from 'lucide-react';
 import { useState } from "react";
 import type { I18n } from "../../i18n";
 
@@ -45,57 +45,59 @@ export default function LoginPassword(props: PageProps<Extract<KcContext, { page
         >
             <form
                 id="kc-form-login"
-                className="space-y-3"
                 onSubmit={() => {
                     setIsLoginButtonDisabled(true);
                     return true;
                 }}
                 action={url.loginAction}
+                className='flex flex-col gap-4'
                 method="post"
             >
-                <div className="space-y-2">
-                    <Label htmlFor="password" className="text-sm font-medium">
-                        {msg("password")}
-                    </Label>
+
+                <Field>
+                    <FieldLabel htmlFor="password">{msg("password")}</FieldLabel>
                     <PasswordWrapper kcClsx={kcClsx} i18n={i18n} locale={locale} passwordInputId="password">
                         <Input
                             tabIndex={2}
                             type="password"
                             id="password"
                             name="password"
-                            autoFocus
-                            autoComplete="current-password"
                             placeholder={msgStr("passwordPlaceholder")}
-                            error={messagesPerField.existsError("password")}
+                            autoComplete="current-password"
+                            aria-invalid={messagesPerField.existsError("password")}
                         />
                     </PasswordWrapper>
-
                     {messagesPerField.existsError("password") && (
-                        <InputError id="input-error-password">
+                        <FieldError>
                             <span
+                                id="input-error"
+                                aria-live="polite"
                                 dangerouslySetInnerHTML={{
-                                    __html: kcSanitize(messagesPerField.get("password"))
+                                    __html: kcSanitize(messagesPerField.getFirstError("password"))
                                 }}
                             />
-                        </InputError>
+                        </FieldError>
                     )}
-                </div>
+                </Field>
+
 
                 <div className="flex justify-end">
                     {realm.resetPasswordAllowed && (
                         <a
                             tabIndex={5}
                             href={url.loginResetCredentialsUrl}
-                            className="text-primary dark:text-primary-foreground underline-offset-4 hover:underline"
                         >
                             {msg("doForgotPassword")}
                         </a>
                     )}
                 </div>
 
-                <Button disabled={isLoginButtonDisabled} className="w-full" name="login" type="submit" tabIndex={4}>
-                    {msgStr("doLogIn")}
-                </Button>
+                <div className="flex justify-end ">
+                    <Button disabled={isLoginButtonDisabled} className="w-full" name="login" type="submit" tabIndex={4}>
+                        {msgStr("doLogIn")}
+                    </Button>
+                </div>
+
             </form>
             {enableWebAuthnConditionalUI && (
                 <>
@@ -126,6 +128,7 @@ export default function LoginPassword(props: PageProps<Extract<KcContext, { page
                         variant="outline"
 
                     >
+                        <Fingerprint className="w-4 h-4" />
                         {msgStr("passkey-doAuthenticate")}
                     </Button>
                 </>

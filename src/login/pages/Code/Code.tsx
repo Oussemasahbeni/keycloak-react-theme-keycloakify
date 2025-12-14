@@ -47,13 +47,13 @@ export default function Code(props: PageProps<Extract<KcContext, { pageId: "code
             <div id="kc-code">
                 {code.success ? (
                     <>
-                        <Alert type="success" className=" my-3">
+                        <Alert variant="success" className=" my-3">
                             <AlertDescription>
                                 <span>{msg("copyCodeInstruction")}</span>
                             </AlertDescription>
                         </Alert>
                         <div className="relative">
-                            <Input id="code" defaultValue={code.code} readOnly className=" font-mono" />
+                            <Input id="code" defaultValue={code.code} readOnly className="font-mono" />
 
                             <Button
                                 onClick={handleCopy}
@@ -67,7 +67,7 @@ export default function Code(props: PageProps<Extract<KcContext, { pageId: "code
                     </>
                 ) : (
                     code.error && (
-                        <Alert type="error" className="my-3">
+                        <Alert variant="error" className="my-3">
                             <AlertDescription>
                                 <p
                                     id="error"

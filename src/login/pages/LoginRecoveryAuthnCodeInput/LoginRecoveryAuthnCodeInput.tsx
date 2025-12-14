@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
+import { Field, FieldError, FieldLabel } from '@/components/ui/field';
 import { Input } from "@/components/ui/input";
-import { InputError } from "@/components/ui/input-error";
-import { Label } from "@/components/ui/label";
 import { KcContext } from '@/login/KcContext';
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
@@ -30,31 +29,30 @@ export default function LoginRecoveryAuthnCodeInput(props: PageProps<Extract<KcC
             displayMessage={!messagesPerField.existsError("recoveryCodeInput")}
         >
             <form id="kc-recovery-code-login-form" className="space-y-6" action={url.loginAction} method="post">
-                <div className="space-y-2">
-                    <Label htmlFor="recoveryCodeInput" className="text-sm font-medium">
-                        {msg("auth-recovery-code-prompt", `${recoveryAuthnCodesInputBean.codeNumber}`)}
-                    </Label>
+                <Field >
+                    <FieldLabel htmlFor="recoveryCodeInput"> {msg("auth-recovery-code-prompt", `${recoveryAuthnCodesInputBean.codeNumber}`)}</FieldLabel>
                     <Input
                         tabIndex={1}
                         id="recoveryCodeInput"
                         name="recoveryCodeInput"
-                        aria-invalid={messagesPerField.existsError("recoveryCodeInput")}
                         autoComplete="off"
                         type="text"
                         autoFocus
                         placeholder="Enter recovery code"
-                        error={messagesPerField.existsError("recoveryCodeInput")}
+                        aria-invalid={messagesPerField.existsError("recoveryCodeInput")}
                     />
                     {messagesPerField.existsError("recoveryCodeInput") && (
-                        <InputError id="input-error">
+                        <FieldError>
                             <span
+                                id="input-error"
+                                aria-live="polite"
                                 dangerouslySetInnerHTML={{
-                                    __html: kcSanitize(messagesPerField.get("recoveryCodeInput"))
+                                    __html: kcSanitize(messagesPerField.getFirstError("recoveryCodeInput"))
                                 }}
                             />
-                        </InputError>
+                        </FieldError>
                     )}
-                </div>
+                </Field>
 
                 <Button className="w-full" name="login" id="kc-login" type="submit">
                     {msgStr("doLogIn")}

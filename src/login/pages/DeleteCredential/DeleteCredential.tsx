@@ -26,7 +26,7 @@ export default function DeleteCredential(props: PageProps<Extract<KcContext, { p
             displayMessage={false}
             headerNode={msg("deleteCredentialTitle", credentialLabel)}
         >
-            <Alert type="warning" className=" my-3">
+            <Alert variant="warning" className=" my-3">
                 <AlertDescription>
                     <span>{msg("deleteCredentialMessage", credentialLabel)}</span>
                 </AlertDescription>
@@ -38,7 +38,7 @@ export default function DeleteCredential(props: PageProps<Extract<KcContext, { p
                         {msgStr("doCancel")}
                     </Button>
 
-                    <Button name="accept" id="kc-accept" type="submit" variant="destructive" className="sm:flex-1">
+                    <Button name="accept" id="kc-accept" type="submit" variant="destructive" className="sm:flex-1 text-white">
                         {msgStr("doConfirmDelete")}
                     </Button>
                 </div>

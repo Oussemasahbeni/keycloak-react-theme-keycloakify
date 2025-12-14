@@ -295,7 +295,7 @@ function InputTag(props: InputFieldByTypeProps & { fieldIndex: number | undefine
 
                     return valueOrValues;
                 })()}
-                error={displayableErrors.length !== 0}
+                aria-invalid={displayableErrors.length !== 0}
                 disabled={attribute.readOnly}
                 autoComplete={attribute.autocomplete}
                 placeholder={

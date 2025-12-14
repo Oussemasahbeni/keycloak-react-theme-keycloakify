@@ -1,8 +1,7 @@
 import { LogoutOtherSessions } from "@/components/logout-other-sessions";
 import { Button } from "@/components/ui/button";
+import { Field, FieldError, FieldLabel } from '@/components/ui/field';
 import { Input } from "@/components/ui/input";
-import { InputError } from "@/components/ui/input-error";
-import { Label } from "@/components/ui/label";
 import { I18n } from '@/login/i18n';
 import { KcContext } from '@/login/KcContext';
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
@@ -117,60 +116,45 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
 
                 <form action={url.loginAction} className="space-y-4 mt-2" id="kc-totp-settings-form" method="post">
                     <div className={kcClsx("kcFormGroupClass")}>
-                        <div className={kcClsx("kcInputWrapperClass")}>
-                            <Label htmlFor="totp">{msg("authenticatorCode")}</Label>
-                            <span className="required">*</span>
-                        </div>
-                        <div className={kcClsx("kcInputWrapperClass")}>
+                        <Field >
+                            <FieldLabel htmlFor="totp">{msg("authenticatorCode")} <span className="required">*</span></FieldLabel>
                             <Input
                                 type="text"
                                 id="totp"
                                 name="totp"
                                 autoComplete="off"
-                                className={kcClsx("kcInputClass")}
                                 aria-invalid={messagesPerField.existsError("totp")}
                             />
-
                             {messagesPerField.existsError("totp") && (
-                                <InputError id="input-error-otp-code">
-                                    <span
-                                        dangerouslySetInnerHTML={{
-                                            __html: kcSanitize(messagesPerField.get("totp"))
-                                        }}
-                                    />
-                                </InputError>
+                                <FieldError> <span
+                                    dangerouslySetInnerHTML={{
+                                        __html: kcSanitize(messagesPerField.get("totp"))
+                                    }}
+                                /></FieldError>
                             )}
-                        </div>
+                        </Field>
                         <input type="hidden" id="totpSecret" name="totpSecret" value={totp.totpSecret} />
                         {mode && <input type="hidden" id="mode" value={mode} />}
                     </div>
 
                     <div className={kcClsx("kcFormGroupClass")}>
-                        <div className={kcClsx("kcInputWrapperClass")}>
-                            <Label htmlFor="userLabel" className={kcClsx("kcLabelClass")}>
-                                {msg("loginTotpDeviceName")}
-                            </Label>{" "}
-                            {totp.otpCredentials.length >= 1 && <span className="required">*</span>}
-                        </div>
-                        <div className={kcClsx("kcInputWrapperClass")}>
+                        <Field >
+                            <FieldLabel htmlFor="userLabel">{msg("loginTotpDeviceName")}  {totp.otpCredentials.length >= 1 && <span className="required">*</span>}</FieldLabel>
                             <Input
                                 type="text"
                                 id="userLabel"
                                 name="userLabel"
                                 autoComplete="off"
-                                className={kcClsx("kcInputClass")}
-                                error={messagesPerField.existsError("userLabel")}
+                                aria-invalid={messagesPerField.existsError("userLabel")}
                             />
                             {messagesPerField.existsError("userLabel") && (
-                                <InputError id="input-error-otp-label">
-                                    <span
-                                        dangerouslySetInnerHTML={{
-                                            __html: kcSanitize(messagesPerField.get("userLabel"))
-                                        }}
-                                    />
-                                </InputError>
+                                <FieldError> <span
+                                    dangerouslySetInnerHTML={{
+                                        __html: kcSanitize(messagesPerField.get("userLabel"))
+                                    }}
+                                /></FieldError>
                             )}
-                        </div>
+                        </Field>
                     </div>
 
                     <div className={kcClsx("kcFormGroupClass")}>
@@ -179,13 +163,14 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
 
                     {isAppInitiatedAction ? (
                         <>
-                            <div className="flex justify-between mt-4">
-                                <Button id="saveTOTPBtn" type="submit">
-                                    {msgStr("doSubmit")}
-                                </Button>
-                                <Button variant="secondary" value="true" id="cancelTOTPBtn" name="cancel-aia" type="submit">
+                            <div className="flex justify-between mt-4 gap-3">
+                                <Button variant="secondary" value="true" id="cancelTOTPBtn" name="cancel-aia" type="submit" className='flex-1'>
                                     {msgStr("doCancel")}
                                 </Button>
+                                <Button id="saveTOTPBtn" type="submit" className='flex-1'>
+                                    {msgStr("doSubmit")}
+                                </Button>
+
                             </div>
                         </>
                     ) : (

@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
+import { Field, FieldError, FieldLabel } from '@/components/ui/field';
 import { Input } from "@/components/ui/input";
-import { InputError } from "@/components/ui/input-error";
-import { Label } from "@/components/ui/label";
 import { KcContext } from '@/login/KcContext';
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
@@ -31,42 +30,41 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
             infoNode={realm.duplicateEmailsAllowed ? msg("emailInstructionUsername") : msg("emailInstruction")}
             headerNode={msg("emailForgotTitle")}
         >
-            <form id="kc-reset-password-form" className="space-y-2" action={url.loginAction} method="post">
-                <div className="space-y-2">
-                    <Label htmlFor="username" className="text-sm font-medium">
-                        {!realm.loginWithEmailAllowed ? msg("username") : !realm.registrationEmailAsUsername ? msg("usernameOrEmail") : msg("email")}
-                    </Label>
+            <form id="kc-reset-password-form" className='space-y-3' action={url.loginAction} method="post">
+                <Field >
+                    <FieldLabel htmlFor="username">  {!realm.loginWithEmailAllowed ? msg("username") : !realm.registrationEmailAsUsername ? msg("usernameOrEmail") : msg("email")}</FieldLabel>
                     <Input
                         type="text"
                         id="username"
                         name="username"
                         autoFocus
                         defaultValue={auth.attemptedUsername ?? ""}
-                        error={messagesPerField.existsError("username")}
                         aria-invalid={messagesPerField.existsError("username")}
                     />
                     {messagesPerField.existsError("username") && (
-                        <InputError id="input-error-username">
+                        <FieldError>
                             <span
+                                id="input-error"
+                                aria-live="polite"
                                 dangerouslySetInnerHTML={{
-                                    __html: kcSanitize(messagesPerField.get("username"))
+                                    __html: kcSanitize(messagesPerField.getFirstError("username"))
                                 }}
                             />
-                        </InputError>
+                        </FieldError>
                     )}
-                </div>
-
-                <div className="flex justify-end">
-                    <Button variant="link" type="button">
-                        <a id="backToApplication" className="dark:text-white" href={url.loginUrl}>
-                            {msg("backToApplication")}
-                        </a>
-                    </Button>
-                </div>
+                </Field>
 
                 <Button className="w-full" type="submit">
                     {msgStr("doSubmit")}
                 </Button>
+
+                <div className="flex justify-end">
+                    <Button variant="link" type="button">
+                        <a id="backToApplication" href={url.loginUrl}>
+                            {msg("backToApplication")}
+                        </a>
+                    </Button>
+                </div>
             </form>
         </Template>
     );
