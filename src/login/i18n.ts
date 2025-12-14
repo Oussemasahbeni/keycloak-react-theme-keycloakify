@@ -15,9 +15,6 @@ const { I18nProvider, useI18n } = i18nBuilder
             noAccount: "Don't have an account?",
             doRegister: "Sign up",
             home: "Home",
-            dark: "Dark",
-            light: "Light",
-            system: "System",
             "organization.selectTitle": "Choose Your Organization",
             "organization.pickPlaceholder": "Pick an organization to continue"
         },
@@ -30,9 +27,7 @@ const { I18nProvider, useI18n } = i18nBuilder
             doRegister: "إنشاء حساب",
             noAccount: "ليس لديك حساب؟",
             home: "الصفحة الرئيسية",
-            dark: "داكن",
-            light: "نور",
-            system: "النظام",
+
             "organization.selectTitle": "اختر مؤسستك",
             "organization.pickPlaceholder": "اختر مؤسسة للمتابعة"
         },
@@ -47,9 +42,6 @@ const { I18nProvider, useI18n } = i18nBuilder
             doRegister: "S'inscrire",
             noAccount: "Vous n'avez pas de compte?",
             home: "Accueil",
-            dark: "Sombre",
-            light: "Lumière",
-            system: "Système",
             "organization.selectTitle": "Choisissez Votre Organisation",
             "organization.pickPlaceholder": "Sélectionnez une organisation pour continuer"
         }
