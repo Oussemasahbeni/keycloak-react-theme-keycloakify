@@ -95,12 +95,12 @@ export function Template(props: {
                 </div>
 
                 {/* Mobile header with logo */}
-                <div className="lg:hidden bg-blue-950 dark:bg-white/5 relative pt-8 pb-6 px-6">
+                <div className="lg:hidden relative pt-8 px-6">
                     {/* Logo and welcome message */}
                     <div className="flex flex-col items-center justify-center gap-3 mt-4">
                         <div className=" mb-4 flex items-center gap-3">
                             <img src={companylogo} alt="Logo" />
-                            <span className="text-white text-xl"> {APP_NAME}</span>
+                            <span className=" text-xl"> {APP_NAME}</span>
                         </div>
                     </div>
                 </div>

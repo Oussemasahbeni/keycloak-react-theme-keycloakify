@@ -1,6 +1,6 @@
 
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/components/lib/utils';
 import { useI18n } from '@/login/i18n';
 import type { Attribute } from "@keycloakify/login-ui/KcContext";
 import { useKcClsx } from '@keycloakify/login-ui/useKcClsx';

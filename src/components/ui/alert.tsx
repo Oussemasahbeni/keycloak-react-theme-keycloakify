@@ -3,7 +3,7 @@ import { AlertTriangle, Info, XCircle } from "lucide-react";
 import * as React from "react";
 import { MdCheckCircle } from "react-icons/md";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/lib/utils";
 
 const alertVariants = cva(
     "relative w-full rounded-lg border p-4 text-sm [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg~*]:pl-7",
@@ -27,7 +27,7 @@ const alertVariants = cva(
 const Alert = React.forwardRef<
     HTMLDivElement,
     React.HTMLAttributes<HTMLDivElement> &
-        VariantProps<typeof alertVariants> & { showIcon?: boolean }
+    VariantProps<typeof alertVariants> & { showIcon?: boolean }
 >(({ className, showIcon = true, variant, ...props }, ref) => (
     <div
         ref={ref}
@@ -79,3 +79,4 @@ const AlertDescription = React.forwardRef<
 AlertDescription.displayName = "AlertDescription";
 
 export { Alert, AlertDescription, AlertTitle };
+

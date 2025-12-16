@@ -16,7 +16,7 @@ export function Info() {
                 <span className="space-x-2">
                     {msg("noAccount")}
                     <a
-                        className="text-primary dark:text-primary-foreground underline underline-offset-4 "
+                        className=" underline underline-offset-4 "
                         tabIndex={8}
                         href={url.registrationUrl}
                     >

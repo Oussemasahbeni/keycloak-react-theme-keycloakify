@@ -1,5 +1,5 @@
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/components/lib/utils';
 import { assert } from "tsafe/assert";
 import type { InputFieldByTypeProps } from "./InputFieldByType";
 

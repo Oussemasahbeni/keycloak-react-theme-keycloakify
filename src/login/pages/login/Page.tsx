@@ -24,7 +24,7 @@ export function Page() {
                     <p className="text-balance font-normal text-sm text-muted-foreground">
                         {msg("enterCredentials")}
                     </p>
-                    <hr className="my-3" />
+                    <hr className="mt-3" />
                 </div>
             }
             displayInfo={
