@@ -99,6 +99,6 @@
     },
     "footer": {
         "allRightsReserved": "© {{currentYear}} {{realmName}}, All Rights Reserved",
-        "address": "7 Bizerte Island Street, 1053, Tunis, Tunisia"
+        "address": "{{realmName}}, 123 Example St., City, Country"
     }
 }

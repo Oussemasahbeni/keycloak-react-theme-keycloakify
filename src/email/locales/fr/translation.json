@@ -99,6 +99,6 @@
     },
     "footer": {
         "allRightsReserved": "© {{currentYear}} {{realmName}}, Tous droits réservés",
-        "address": "7 rue de l'île de Bizerte, 1053, Tunis, Tunisie"
+        "address": "{{realmName}}, 123 Example St., City, Country"
     }
 }

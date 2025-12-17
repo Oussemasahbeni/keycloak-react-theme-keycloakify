@@ -2,10 +2,7 @@ import fs from "fs";
 import path from "path";
 
 const TARGET_DIR = "keycloak-theme_to_publish";
-const NPM_PACKAGE_NAME = "@oussemasahbeni/keycloak-shadcn-theme";
-
-// dependencies that MUST remain as regular dependencies
-const DEPS_TO_KEEP = ["@keycloakify/login-ui"];
+const NPM_PACKAGE_NAME = "@oussemasahbeni/keycloakify-login-shadcn";
 
 // dependencies to REMOVE entirely from the published package
 const DEPS_TO_EXCLUDE = [
@@ -13,7 +10,7 @@ const DEPS_TO_EXCLUDE = [
     "react-dom",
     "i18next",
     "react-i18next",
-    "keycloakify", // provided by the host project
+    "keycloakify",
     "keycloakify-emails"
 ];
 
@@ -23,7 +20,6 @@ const DIRS_TO_COPY = [
     { src: "src/components", dest: "keycloak-theme/components" },
     { src: "public", dest: "keycloak-theme/public" }
 ];
-
 
 // Clean/Create Target Directory
 if (fs.existsSync(TARGET_DIR)) {
@@ -41,9 +37,8 @@ const newPackageJson = {
     description: "Keycloakify Shadcn Theme extensions",
     license: rootPackageJson.license,
     type: "module",
-    main: "keycloak-theme/login/index.js", 
+    main: "keycloak-theme/login/index.js",
     files: ["keycloak-theme"],
-    dependencies: {},
     peerDependencies: {}
 };
 
@@ -56,10 +51,6 @@ Object.entries(allDeps).forEach(([depName, depVersion]) => {
         return;
     }
 
-    //  If it is meant to be a dependency (like login-ui), keep it there
-    if (DEPS_TO_KEEP.includes(depName)) {
-        newPackageJson.dependencies[depName] = depVersion;
-    }
     //  Otherwise, move to peerDependencies (shadcn deps, tailwind, etc.)
     else {
         newPackageJson.peerDependencies[depName] = depVersion;

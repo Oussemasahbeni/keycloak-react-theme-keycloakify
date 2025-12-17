@@ -1,6 +1,6 @@
-import { btnTextColor, primaryColor } from "emails/constants";
-import { previewLocale } from "emails/utils/previewLocale";
-import { applyRTL } from "emails/utils/RTL";
+import { btnTextColor, primaryColor } from "@/email/constants";
+import { previewLocale } from "@/email/utils/previewLocale";
+import { applyRTL } from "@/email/utils/RTL";
 import i18n, { TFunction } from "i18next";
 import { Button, Text, render } from "jsx-email";
 import { GetSubject, GetTemplate, GetTemplateProps } from "keycloakify-emails";

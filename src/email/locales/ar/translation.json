@@ -99,6 +99,6 @@
     },
     "footer": {
         "allRightsReserved": "© {{currentYear}} {{realmName}}، جميع الحقوق محفوظة",
-        "address": "7 نهج ليل بنزرت، 1053، تونس، تونس"
+        "address": "{{realmName}}، شارع المثال 123، المدينة، الدولة"
     }
 }

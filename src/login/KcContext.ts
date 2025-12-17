@@ -9,6 +9,10 @@ export type KcContextExtension = {
     properties: Record<KcEnvName, string> & {};
     // NOTE: Here you can declare more properties to extend the KcContext
     // See: https://docs.keycloakify.dev/faq-and-help/some-values-you-need-are-missing-from-in-kccontext
+    client: {
+        baseUrl?: string;
+    };
+    darkMode?: boolean;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type

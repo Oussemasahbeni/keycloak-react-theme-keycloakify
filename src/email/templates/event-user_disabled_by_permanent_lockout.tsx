@@ -1,5 +1,5 @@
-import { previewLocale } from "emails/utils/previewLocale";
-import { applyRTL } from "emails/utils/RTL";
+import { previewLocale } from "@/email/utils/previewLocale";
+import { applyRTL } from "@/email/utils/RTL";
 import i18n, { TFunction } from "i18next";
 import { Text, render } from "jsx-email";
 import { GetSubject, GetTemplate, GetTemplateProps } from "keycloakify-emails";
@@ -25,24 +25,26 @@ export const previewProps: TemplateProps = {
     themeName: "vanilla"
 };
 
-export const templateName = "Update OTP";
+export const templateName = "User Disabled by Permanent Lockout";
 
-const { exp } = createVariablesHelper("event-update_totp.ftl");
+const { exp } = createVariablesHelper("event-user_disabled_by_permanent_lockout.ftl");
 
 export const Template = ({ locale, t }: TemplateProps) => {
     const isRTL = locale === "ar";
 
     return (
-        <EmailLayout preview={t("event-update_totp.subject")} locale={locale}>
+        <EmailLayout
+            preview={t("event-user_disabled_by_permanent_lockout.subject")}
+            locale={locale}
+        >
             <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
-                {t("event-update_totp.message", {
-                    date: exp("event.date"),
-                    ipAddress: exp("event.ipAddress")
+                {t("event-user_disabled_by_permanent_lockout.message", {
+                    date: exp("event.date")
                 })}
             </Text>
 
             <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
-                {t("event-update_totp.contactAdmin")}
+                {t("event-user_disabled_by_permanent_lockout.contactAdmin")}
             </Text>
         </EmailLayout>
     );
@@ -55,5 +57,5 @@ export const getTemplate: GetTemplate = async props => {
 
 export const getSubject: GetSubject = async props => {
     const t = i18n.getFixedT(props.locale);
-    return t("event-update_totp.subject");
+    return t("event-user_disabled_by_permanent_lockout.subject");
 };

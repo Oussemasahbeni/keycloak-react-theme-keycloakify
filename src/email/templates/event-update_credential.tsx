@@ -1,8 +1,7 @@
-import { btnTextColor, primaryColor } from "emails/constants";
-import { previewLocale } from "emails/utils/previewLocale";
-import { applyRTL } from "emails/utils/RTL";
+import { previewLocale } from "@/email/utils/previewLocale";
+import { applyRTL } from "@/email/utils/RTL";
 import i18n, { TFunction } from "i18next";
-import { Button, Text, render } from "jsx-email";
+import { Text, render } from "jsx-email";
 import { GetSubject, GetTemplate, GetTemplateProps } from "keycloakify-emails";
 import { createVariablesHelper } from "keycloakify-emails/variables";
 import { EmailLayout } from "../layout";
@@ -26,38 +25,25 @@ export const previewProps: TemplateProps = {
     themeName: "vanilla"
 };
 
-export const templateName = "Email Verification";
+export const templateName = "Update credential";
 
-const { exp } = createVariablesHelper("email-verification.ftl");
+const { exp } = createVariablesHelper("event-update_credential.ftl");
 
 export const Template = ({ locale, t }: TemplateProps) => {
     const isRTL = locale === "ar";
 
     return (
-        <EmailLayout preview={t("email-verification.subject")} locale={locale}>
+        <EmailLayout preview={t("event-update_credential.subject")} locale={locale}>
             <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
-                {t("email-verification.message", { firstName: exp("user.firstName") })}
-            </Text>
-
-            <Button
-                width={200}
-                align={isRTL ? "right" : "left"}
-                height={40}
-                backgroundColor={primaryColor}
-                textColor={btnTextColor}
-                borderRadius={3}
-                fontSize={15}
-                href={exp("link")}
-            >
-                {t("email-verification.verifyButton")}
-            </Button>
-            <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
-                {t("email-verification.linkExpiration", {
-                    expiration: exp("linkExpirationFormatter(linkExpiration)")
+                {t("event-update_credential.message", {
+                    credentialType: exp('event.details.credential_type!"unknown"'),
+                    date: exp("event.date"),
+                    ipAddress: exp("event.ipAddress")
                 })}
             </Text>
+
             <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
-                {t("email-verification.ignoreMessage")}
+                {t("event-update_credential.contactAdmin")}
             </Text>
         </EmailLayout>
     );
@@ -70,5 +56,5 @@ export const getTemplate: GetTemplate = async props => {
 
 export const getSubject: GetSubject = async props => {
     const t = i18n.getFixedT(props.locale);
-    return t("email-verification.subject");
+    return t("event-update_credential.subject");
 };

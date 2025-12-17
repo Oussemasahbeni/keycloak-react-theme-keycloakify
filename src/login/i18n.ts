@@ -14,7 +14,6 @@ const { I18nProvider, useI18n } = i18nBuilder
             enterCredentials: "Enter your credentials below to login",
             noAccount: "Don't have an account?",
             doRegister: "Sign up",
-            home: "Home",
             "organization.selectTitle": "Choose Your Organization",
             "organization.pickPlaceholder": "Pick an organization to continue"
         },
@@ -26,8 +25,6 @@ const { I18nProvider, useI18n } = i18nBuilder
             enterCredentials: "أدخل بيانات الاعتماد الخاصة بك أدناه لتسجيل الدخول",
             doRegister: "إنشاء حساب",
             noAccount: "ليس لديك حساب؟",
-            home: "الصفحة الرئيسية",
-
             "organization.selectTitle": "اختر مؤسستك",
             "organization.pickPlaceholder": "اختر مؤسسة للمتابعة"
         },
@@ -41,7 +38,6 @@ const { I18nProvider, useI18n } = i18nBuilder
                 "Entrez vos informations d'identification ci-dessous pour vous connecter",
             doRegister: "S'inscrire",
             noAccount: "Vous n'avez pas de compte?",
-            home: "Accueil",
             "organization.selectTitle": "Choisissez Votre Organisation",
             "organization.pickPlaceholder": "Sélectionnez une organisation pour continuer"
         }

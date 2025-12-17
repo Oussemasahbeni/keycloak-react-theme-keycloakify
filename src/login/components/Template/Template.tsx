@@ -3,6 +3,7 @@ import { ModeToggle } from '@/components/theme-toggle';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { redirectUrlOrigin } from '@/login/shared/redirectUrlOrigin';
 import { kcSanitize } from "@keycloakify/login-ui/kcSanitize";
 import { useKcClsx } from "@keycloakify/login-ui/useKcClsx";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@radix-ui/react-tooltip';
@@ -10,6 +11,7 @@ import { useSetClassName } from "keycloakify/tools/useSetClassName";
 import { RotateCcw } from 'lucide-react';
 import type { ReactNode } from "react";
 import { useEffect } from "react";
+import { FiHome } from 'react-icons/fi';
 import { useI18n } from "../../i18n";
 import { useKcContext } from "../../KcContext";
 import companylogo from "./../../assets/img/auth-logo.svg";
@@ -77,20 +79,19 @@ export function Template(props: {
             <div className="flex flex-col gap-4 px-0 py-0 pb-6 lg:p-6 lg:md:p-10 lg:pt-10 min-h-screen lg:min-h-0">
                 {/*  navigation */}
                 <div className="absolute top-4 right-4 lg:left-4  z-20 flex gap-2">
-                    {/* <Button variant="outline" size="sm" className="border-gray-400 self-center font-medium text-base">
-                            <a className="flex items-center gap-1" href={kcContext.client.baseUrl ?? redirectUrlOrigin}>
-                                <FiArrowLeft /> {msg("home")}
-                            </a>
-                        </Button> */}
+                    <Button variant="outline" size="icon" >
+                        <a href={kcContext.client.baseUrl ?? redirectUrlOrigin}>
+                            <FiHome />
+                        </a>
+                    </Button>
+
                     {enabledLanguages.length > 1 && (
-                        <div className="bg-white/10 dark:bg-white/10 backdrop-blur-sm rounded-md">
-                            <Languages />
-                        </div>
+                        <Languages />
                     )}
-                    {kcContext.properties.ENABLE_THEME_TOGGLE == "true" && (
-                        <div className="bg-white/10 dark:bg-white/10 backdrop-blur-sm rounded-md">
-                            <ModeToggle />
-                        </div>
+
+
+                    {kcContext.darkMode !== false && (
+                        <ModeToggle />
                     )}
                 </div>
 

@@ -1,5 +1,5 @@
-import { previewLocale } from "emails/utils/previewLocale";
-import { applyRTL } from "emails/utils/RTL";
+import { previewLocale } from "@/email/utils/previewLocale";
+import { applyRTL } from "@/email/utils/RTL";
 import i18n, { TFunction } from "i18next";
 import { Text, render } from "jsx-email";
 import { GetSubject, GetTemplate, GetTemplateProps } from "keycloakify-emails";
@@ -25,24 +25,24 @@ export const previewProps: TemplateProps = {
     themeName: "vanilla"
 };
 
-export const templateName = "Remove OTP";
+export const templateName = "Update Password";
 
-const { exp } = createVariablesHelper("event-remove_totp.ftl");
+const { exp } = createVariablesHelper("event-update_password.ftl");
 
 export const Template = ({ locale, t }: TemplateProps) => {
     const isRTL = locale === "ar";
 
     return (
-        <EmailLayout preview={t("event-remove_totp.subject")} locale={locale}>
+        <EmailLayout preview={t("event-update_password.subject")} locale={locale}>
             <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
-                {t("event-remove_totp.message", {
+                {t("event-update_password.message", {
                     date: exp("event.date"),
                     ipAddress: exp("event.ipAddress")
                 })}
             </Text>
 
             <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
-                {t("event-remove_totp.contactAdmin")}
+                {t("event-update_password.contactAdmin")}
             </Text>
         </EmailLayout>
     );
@@ -55,5 +55,5 @@ export const getTemplate: GetTemplate = async props => {
 
 export const getSubject: GetSubject = async props => {
     const t = i18n.getFixedT(props.locale);
-    return t("event-remove_totp.subject");
+    return t("event-update_password.subject");
 };

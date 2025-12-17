@@ -38,13 +38,13 @@ const Alert = React.forwardRef<
         <div className="flex items-start gap-3">
             {showIcon && (
                 <>
-                    {variant === "info" && <Info className="h-5 w-5 flex-shrink-0" />}
-                    {variant === "error" && <XCircle className="h-5 w-5 flex-shrink-0" />}
+                    {variant === "info" && <Info className="h-5 w-5 shrink-0" />}
+                    {variant === "error" && <XCircle className="h-5 w-5 shrink-0" />}
                     {variant === "warning" && (
-                        <AlertTriangle className="h-5 w-5 flex-shrink-0" />
+                        <AlertTriangle className="h-5 w-5 shrink-0" />
                     )}
                     {variant === "success" && (
-                        <MdCheckCircle className="h-5 w-5 flex-shrink-0" />
+                        <MdCheckCircle className="h-5 w-5 shrink-0" />
                     )}
                 </>
             )}

@@ -1,8 +1,8 @@
-import { btnTextColor, primaryColor } from "emails/constants";
-import { previewLocale } from "emails/utils/previewLocale";
-import { applyRTL } from "emails/utils/RTL";
+import { btnTextColor, primaryColor } from "@/email/constants";
+import { previewLocale } from "@/email/utils/previewLocale";
+import { applyRTL } from "@/email/utils/RTL";
 import i18n, { TFunction } from "i18next";
-import { Button, Raw, Text, render } from "jsx-email";
+import { Button, Text, render } from "jsx-email";
 import { GetSubject, GetTemplate, GetTemplateProps } from "keycloakify-emails";
 import { createVariablesHelper } from "keycloakify-emails/variables";
 import { EmailLayout } from "../layout";
@@ -26,45 +26,38 @@ export const previewProps: TemplateProps = {
     themeName: "vanilla"
 };
 
-export const templateName = "ExecuteActions";
+export const templateName = "Email Verification";
 
-const { exp } = createVariablesHelper("executeActions.ftl");
+const { exp } = createVariablesHelper("email-verification.ftl");
 
 export const Template = ({ locale, t }: TemplateProps) => {
     const isRTL = locale === "ar";
 
     return (
-        <EmailLayout preview={t("executeActions.subject")} locale={locale}>
+        <EmailLayout preview={t("email-verification.subject")} locale={locale}>
             <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
-                {t("executeActions.message", { realmName: exp("realmName") })}
-                <Raw content="<#assign requiredActionsText><#if requiredActions??><#list requiredActions><#items as reqActionItem>${msg('requiredAction.${reqActionItem}')}<#sep>, </#sep></#items></#list></#if></#assign>" />
-            </Text>
-
-            <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
-                {t("executeActions.clickLink")}
+                {t("email-verification.message", { firstName: exp("user.firstName") })}
             </Text>
 
             <Button
                 width={200}
+                align={isRTL ? "right" : "left"}
                 height={40}
                 backgroundColor={primaryColor}
                 textColor={btnTextColor}
-                align={isRTL ? "right" : "left"}
                 borderRadius={3}
                 fontSize={15}
                 href={exp("link")}
             >
-                {t("executeActions.updateAccountButton")}
+                {t("email-verification.verifyButton")}
             </Button>
-
             <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
-                {t("executeActions.linkExpiration", {
+                {t("email-verification.linkExpiration", {
                     expiration: exp("linkExpirationFormatter(linkExpiration)")
                 })}
             </Text>
-
             <Text style={applyRTL(paragraph, isRTL, rtlStyle)}>
-                {t("executeActions.ignoreMessage")}
+                {t("email-verification.ignoreMessage")}
             </Text>
         </EmailLayout>
     );
@@ -77,5 +70,5 @@ export const getTemplate: GetTemplate = async props => {
 
 export const getSubject: GetSubject = async props => {
     const t = i18n.getFixedT(props.locale);
-    return t("executeActions.subject");
+    return t("email-verification.subject");
 };
