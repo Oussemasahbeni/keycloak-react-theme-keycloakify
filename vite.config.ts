@@ -17,17 +17,6 @@ export default defineConfig({
                 "22-to-25": false,
                 "all-other-versions": "acme-theme.jar"
             },
-            // postBuild: async buildContext => {
-            //     await buildEmailTheme({
-            //         templatesSrcDirPath: import.meta.dirname + "/emails/templates",
-            //         themeNames: buildContext.themeNames,
-            //         keycloakifyBuildDirPath: buildContext.keycloakifyBuildDirPath,
-            //         i18nSourceFile: import.meta.dirname + "/emails/i18n.ts",
-            //         locales: ["en", "fr", "ar"],
-            //         cwd: import.meta.dirname,
-            //         esbuild: {}
-            //     });
-            // }
             postBuild: async buildContext => {
                 await buildEmailTheme({
                     templatesSrcDirPath: path.join(
@@ -43,7 +32,9 @@ export default defineConfig({
                     themeNames: buildContext.themeNames,
                     keycloakifyBuildDirPath: buildContext.keycloakifyBuildDirPath,
                     locales: ["en", "fr", "ar"],
-                    esbuild: {},
+                    esbuild: {
+                        jsx: "automatic"
+                    },
                     cwd: import.meta.dirname,
                     environmentVariables: buildContext.environmentVariables
                 });
