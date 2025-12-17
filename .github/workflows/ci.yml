@@ -157,6 +157,4 @@ jobs:
             - name: Publish to NPM
               run: |
                   cd keycloak-theme_to_publish
-                  npm publish --access public
-              env:
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+                  npm publish --access public --provenance
