@@ -36,6 +36,7 @@ const newPackageJson = {
     version: rootPackageJson.version,
     description: "Keycloakify Shadcn Theme extensions",
     license: rootPackageJson.license,
+    repository: rootPackageJson.repository,
     type: "module",
     main: "keycloak-theme/login/index.js",
     files: ["keycloak-theme"],

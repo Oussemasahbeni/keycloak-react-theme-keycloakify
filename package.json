@@ -1,8 +1,16 @@
 {
     "name": "keycloakify-starter",
-    "version": "250004.0.6",
+    "version": "250004.0.7",
     "description": "Starter for Keycloakify themes using React, Shadcn, TailwindCSS and Keycloakify",
     "type": "module",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Oussemasahbeni/keycloakify-shadcn-starter.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Oussemasahbeni/keycloakify-shadcn-starter/issues"
+    },
+    "homepage": "https://github.com/Oussemasahbeni/keycloakify-shadcn-starter#readme",
     "scripts": {
         "postinstall": "keycloakify sync-extensions",
         "prepare": "node scripts/prepare-publish.js",
