@@ -1,6 +1,5 @@
 import { createKcPageStory, type Meta, type StoryObj } from "../../mocks/KcPageStory";
 
-
 // Mock kcContext to avoid the TS2304 error
 const mockKcContext = {
     url: {

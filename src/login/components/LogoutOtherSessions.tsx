@@ -1,10 +1,8 @@
-import { Checkbox } from '@/components/ui/checkbox';
-import { useI18n } from '@/login/i18n';
-import { Label } from '@radix-ui/react-label';
-
+import { Checkbox } from "@/components/ui/checkbox";
+import { useI18n } from "@/login/i18n";
+import { Label } from "@radix-ui/react-label";
 
 export function LogoutOtherSessions() {
-
     const { msg } = useI18n();
 
     return (

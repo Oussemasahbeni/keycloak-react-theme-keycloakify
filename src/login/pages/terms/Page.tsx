@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import { assert } from "tsafe/assert";
 import { useKcContext } from "../../KcContext";
 import { Template } from "../../components/Template";
@@ -7,7 +7,6 @@ import { useI18n } from "../../i18n";
 export function Page() {
     const { kcContext } = useKcContext();
     assert(kcContext.pageId === "terms.ftl");
-
 
     const { msg, msgStr } = useI18n();
 
@@ -42,7 +41,6 @@ export function Page() {
                         >
                             {msgStr("doAccept")}
                         </Button>
-
                     </div>
                 </form>
             </div>

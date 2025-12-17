@@ -6,13 +6,12 @@ import {
     SelectTrigger,
     SelectValue
 } from "@/components/ui/select";
-import { useI18n } from '@/login/i18n';
-import { useKcContext } from '@/login/KcContext';
+import { useI18n } from "@/login/i18n";
+import { useKcContext } from "@/login/KcContext";
 import { Building2 } from "lucide-react";
-import { MouseEvent, useRef, useState } from "react";
-import { assert } from 'tsafe/assert';
+import { type MouseEvent, useRef, useState } from "react";
+import { assert } from "tsafe/assert";
 import { Template } from "../../components/Template";
-
 
 export function Page() {
     const { kcContext } = useKcContext();
@@ -65,9 +64,7 @@ export function Page() {
     const useSelect = organizations.length > 3;
 
     return (
-        <Template
-            headerNode={msg("organization.selectTitle")}
-        >
+        <Template headerNode={msg("organization.selectTitle")}>
             <form ref={formRef} action={kcContext.url.loginAction} method="post">
                 <div id="kc-user-organizations" className="space-y-2">
                     <h2 className="text-md font-semibold">

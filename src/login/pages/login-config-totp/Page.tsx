@@ -1,16 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { LogoutOtherSessions } from '@/login/components/LogoutOtherSessions';
-import { useI18n } from '@/login/i18n';
-import { useKcContext } from '@/login/KcContext';
-import { useKcClsx } from '@keycloakify/login-ui/useKcClsx';
+import { LogoutOtherSessions } from "@/login/components/LogoutOtherSessions";
+import { useI18n } from "@/login/i18n";
+import { useKcContext } from "@/login/KcContext";
+import { useKcClsx } from "@keycloakify/login-ui/useKcClsx";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { assert } from "tsafe/assert";
 import { Template } from "../../components/Template";
 
 export function Page() {
-
     const { kcContext } = useKcContext();
     assert(kcContext.pageId === "login-config-totp.ftl");
 
@@ -60,7 +59,10 @@ export function Page() {
                                     </div>
                                     <div className="mt-4">
                                         <Button variant="outline" asChild>
-                                            <a href={kcContext.totp.qrUrl} className="text-sm">
+                                            <a
+                                                href={kcContext.totp.qrUrl}
+                                                className="text-sm"
+                                            >
                                                 {msg("loginTotpScanBarcode")}
                                             </a>
                                         </Button>
@@ -76,7 +78,9 @@ export function Page() {
                                                 {msg("loginTotpType")}:
                                             </span>
                                             <span className="font-mono bg-secondary px-2 py-1 rounded text-xs">
-                                                {msg(`loginTotp.${kcContext.totp.policy.type}`)}
+                                                {msg(
+                                                    `loginTotp.${kcContext.totp.policy.type}`
+                                                )}
                                             </span>
                                         </div>
                                         <div className="flex justify-between">
@@ -105,7 +109,8 @@ export function Page() {
                                             <span className="font-mono bg-secondary px-2 py-1 rounded text-xs">
                                                 {kcContext.totp.policy.type === "totp"
                                                     ? kcContext.totp.policy.period
-                                                    : kcContext.totp.policy.initialCounter}
+                                                    : kcContext.totp.policy
+                                                          .initialCounter}
                                             </span>
                                         </div>
                                     </div>
@@ -152,7 +157,9 @@ export function Page() {
                                 id="totp"
                                 name="totp"
                                 autoComplete="off"
-                                aria-invalid={kcContext.messagesPerField.existsError("totp")}
+                                aria-invalid={kcContext.messagesPerField.existsError(
+                                    "totp"
+                                )}
                             />
                             {kcContext.messagesPerField.existsError("totp") && (
                                 <FieldError>
@@ -173,7 +180,9 @@ export function Page() {
                             name="totpSecret"
                             value={kcContext.totp.totpSecret}
                         />
-                        {kcContext.mode && <input type="hidden" id="mode" value={kcContext.mode} />}
+                        {kcContext.mode && (
+                            <input type="hidden" id="mode" value={kcContext.mode} />
+                        )}
                     </div>
 
                     <div className={kcClsx("kcFormGroupClass")}>
@@ -189,7 +198,9 @@ export function Page() {
                                 id="userLabel"
                                 name="userLabel"
                                 autoComplete="off"
-                                aria-invalid={kcContext.messagesPerField.existsError("userLabel")}
+                                aria-invalid={kcContext.messagesPerField.existsError(
+                                    "userLabel"
+                                )}
                             />
                             {kcContext.messagesPerField.existsError("userLabel") && (
                                 <FieldError>
@@ -197,7 +208,9 @@ export function Page() {
                                     <span
                                         dangerouslySetInnerHTML={{
                                             __html: kcSanitize(
-                                                kcContext.messagesPerField.get("userLabel")
+                                                kcContext.messagesPerField.get(
+                                                    "userLabel"
+                                                )
                                             )
                                         }}
                                     />

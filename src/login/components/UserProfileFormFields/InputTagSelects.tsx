@@ -1,21 +1,20 @@
-
-import { cn } from '@/components/lib/utils';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Label } from '@/components/ui/label';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { assert } from 'tsafe/assert';
+import { cn } from "@/components/lib/utils";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { assert } from "tsafe/assert";
 import type { InputFieldByTypeProps } from "./InputFieldByType";
-import { InputLabel } from './InputLabel';
+import { InputLabel } from "./InputLabel";
 
 export function InputTagSelects(props: InputFieldByTypeProps) {
     const { attribute, dispatchFormAction, valueOrValues } = props;
 
-
-
     const isRadio = (() => {
         const { inputType } = attribute.annotations;
 
-        assert(inputType === "select-radiobuttons" || inputType === "multiselect-checkboxes");
+        assert(
+            inputType === "select-radiobuttons" || inputType === "multiselect-checkboxes"
+        );
 
         return inputType === "select-radiobuttons";
     })();
@@ -28,7 +27,9 @@ export function InputTagSelects(props: InputFieldByTypeProps) {
                 break walk;
             }
 
-            const validator = (attribute.validators as Record<string, { options?: string[] }>)[inputOptionsFromValidation];
+            const validator = (
+                attribute.validators as Record<string, { options?: string[] }>
+            )[inputOptionsFromValidation];
 
             if (validator === undefined) {
                 break walk;
@@ -74,7 +75,10 @@ export function InputTagSelects(props: InputFieldByTypeProps) {
                         />
                         <Label
                             htmlFor={`${attribute.name}-${option}`}
-                            className={cn("text-sm font-normal", attribute.readOnly && "opacity-50 cursor-not-allowed")}
+                            className={cn(
+                                "text-sm font-normal",
+                                attribute.readOnly && "opacity-50 cursor-not-allowed"
+                            )}
                         >
                             <InputLabel attribute={attribute} option={option} />
                         </Label>
@@ -90,7 +94,11 @@ export function InputTagSelects(props: InputFieldByTypeProps) {
                 <div key={option} className="flex items-center space-x-2">
                     <Checkbox
                         id={`${attribute.name}-${option}`}
-                        checked={valueOrValues instanceof Array ? valueOrValues.includes(option) : valueOrValues === option}
+                        checked={
+                            valueOrValues instanceof Array
+                                ? valueOrValues.includes(option)
+                                : valueOrValues === option
+                        }
                         disabled={attribute.readOnly}
                         onCheckedChange={checked =>
                             dispatchFormAction({
@@ -105,7 +113,10 @@ export function InputTagSelects(props: InputFieldByTypeProps) {
                                         if (isChecked) {
                                             newValues.push(option);
                                         } else {
-                                            newValues.splice(newValues.indexOf(option), 1);
+                                            newValues.splice(
+                                                newValues.indexOf(option),
+                                                1
+                                            );
                                         }
 
                                         return newValues;
@@ -125,7 +136,10 @@ export function InputTagSelects(props: InputFieldByTypeProps) {
                     />
                     <Label
                         htmlFor={`${attribute.name}-${option}`}
-                        className={cn("text-sm font-normal", attribute.readOnly && "opacity-50 cursor-not-allowed")}
+                        className={cn(
+                            "text-sm font-normal",
+                            attribute.readOnly && "opacity-50 cursor-not-allowed"
+                        )}
                     >
                         <InputLabel attribute={attribute} option={option} />
                     </Label>

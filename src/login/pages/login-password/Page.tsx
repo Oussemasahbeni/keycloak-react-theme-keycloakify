@@ -1,17 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Label } from '@/components/ui/label';
-import { PasswordWrapper } from '@/login/components/PasswordWrapper';
-import { useI18n } from '@/login/i18n';
-import { useKcContext } from '@/login/KcContext';
-import { useKcClsx } from '@keycloakify/login-ui/useKcClsx';
+import { Label } from "@/components/ui/label";
+import { PasswordWrapper } from "@/login/components/PasswordWrapper";
+import { useI18n } from "@/login/i18n";
+import { useKcContext } from "@/login/KcContext";
+import { useKcClsx } from "@keycloakify/login-ui/useKcClsx";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { Fingerprint } from "lucide-react";
 import { useState } from "react";
 import { assert } from "tsafe/assert";
 import { Template } from "../../components/Template";
-import { useScript } from './useScript';
+import { useScript } from "./useScript";
 
 export function Page() {
     const { kcContext } = useKcContext();
@@ -44,16 +44,16 @@ export function Page() {
             >
                 <Field>
                     <FieldLabel htmlFor="password">{msg("password")}</FieldLabel>
-                    <PasswordWrapper
-                        passwordInputId="password"
-                    >
+                    <PasswordWrapper passwordInputId="password">
                         <Input
                             tabIndex={2}
                             type="password"
                             id="password"
                             name="password"
                             autoComplete="current-password"
-                            aria-invalid={kcContext.messagesPerField.existsError("password")}
+                            aria-invalid={kcContext.messagesPerField.existsError(
+                                "password"
+                            )}
                         />
                     </PasswordWrapper>
                     {kcContext.messagesPerField.existsError("password") && (
@@ -63,7 +63,9 @@ export function Page() {
                                 aria-live="polite"
                                 dangerouslySetInnerHTML={{
                                     __html: kcSanitize(
-                                        kcContext.messagesPerField.getFirstError("password")
+                                        kcContext.messagesPerField.getFirstError(
+                                            "password"
+                                        )
                                     )
                                 }}
                             />
@@ -74,10 +76,7 @@ export function Page() {
                 <div className="flex justify-end">
                     {kcContext.realm.resetPasswordAllowed && (
                         <span className=" underline-offset-4 hover:underline">
-                            <a
-                                tabIndex={5}
-                                href={kcContext.url.loginResetCredentialsUrl}
-                            >
+                            <a tabIndex={5} href={kcContext.url.loginResetCredentialsUrl}>
                                 <Label className="text-sm font-medium cursor-pointer">
                                     {msg("doForgotPassword")}
                                 </Label>

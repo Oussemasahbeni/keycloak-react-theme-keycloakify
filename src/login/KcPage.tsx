@@ -8,9 +8,6 @@ import "./index.css";
 import { PageIndex } from "./pages/PageIndex";
 import { useStyleLevelCustomization } from "./styleLevelCustomization";
 
-
-
-
 export default function KcPage(props: { kcContext: KcContext }) {
     const { kcContext } = props;
 
@@ -28,7 +25,8 @@ export default function KcPage(props: { kcContext: KcContext }) {
 function StyleLevelCustomization(props: { children: ReactNode }) {
     const { children } = props;
 
-    const { doUseDefaultCss, classes, loadCustomStylesheet, Provider } = useStyleLevelCustomization();
+    const { doUseDefaultCss, classes, loadCustomStylesheet, Provider } =
+        useStyleLevelCustomization();
 
     useExclusiveAppInstanceEffect({
         effectId: "loadCustomStylesheet",

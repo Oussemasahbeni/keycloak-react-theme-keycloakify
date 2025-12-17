@@ -1,14 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { useI18n } from '@/login/i18n';
-import { useKcContext } from '@/login/KcContext';
+import { useI18n } from "@/login/i18n";
+import { useKcContext } from "@/login/KcContext";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { assert } from "tsafe/assert";
 import { Template } from "../../components/Template";
 
 export function Page() {
-
     const { kcContext } = useKcContext();
     assert(kcContext.pageId === "login-recovery-authn-code-input.ftl");
 

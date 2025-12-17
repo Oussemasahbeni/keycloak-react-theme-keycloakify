@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import { clsx } from "@keycloakify/login-ui/tools/clsx";
 import { useKcClsx } from "@keycloakify/login-ui/useKcClsx";
 import { useLayoutEffect, useState } from "react";
@@ -35,7 +35,9 @@ export function Form() {
             className="space-y-3"
             method="post"
         >
-            <UserProfileFormFields onIsFormSubmittableValueChange={setIsFormSubmittable} />
+            <UserProfileFormFields
+                onIsFormSubmittableValueChange={setIsFormSubmittable}
+            />
             {kcContext.termsAcceptanceRequired && (
                 <TermsAcceptance
                     messagesPerField={kcContext.messagesPerField}
@@ -44,7 +46,8 @@ export function Form() {
                 />
             )}
             {kcContext.recaptchaRequired &&
-                (kcContext.recaptchaVisible || kcContext.recaptchaAction === undefined) && (
+                (kcContext.recaptchaVisible ||
+                    kcContext.recaptchaAction === undefined) && (
                     <div className="form-group">
                         <div className={kcClsx("kcInputWrapperClass")}>
                             <div
@@ -57,10 +60,9 @@ export function Form() {
                     </div>
                 )}
             <div className={kcClsx("kcFormGroupClass")}>
-
                 {kcContext.recaptchaRequired &&
-                    !kcContext.recaptchaVisible &&
-                    kcContext.recaptchaAction !== undefined ? (
+                !kcContext.recaptchaVisible &&
+                kcContext.recaptchaAction !== undefined ? (
                     <div id="kc-form-buttons" className={kcClsx("kcFormButtonsClass")}>
                         <button
                             className={clsx(
@@ -100,7 +102,6 @@ export function Form() {
                     <a href={kcContext.url.loginUrl}>{msg("backToLogin")}</a>
                 </Button>
             </div>
-
         </form>
     );
 }

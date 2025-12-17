@@ -6,14 +6,14 @@ import { clsx } from "keycloakify/tools/clsx";
 import { useState } from "react";
 
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
-import { useI18n } from '@/login/i18n';
-import { useKcContext } from '@/login/KcContext';
-import { useKcClsx } from '@keycloakify/login-ui/useKcClsx';
+import { useI18n } from "@/login/i18n";
+import { useKcContext } from "@/login/KcContext";
+import { useKcClsx } from "@keycloakify/login-ui/useKcClsx";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { Fingerprint } from "lucide-react";
 import { assert } from "tsafe/assert";
 import { Template } from "../../components/Template";
-import { useScript } from './useScript';
+import { useScript } from "./useScript";
 
 export function Page() {
     const { kcContext } = useKcContext();
@@ -123,8 +123,8 @@ export function Page() {
                                     {!realm.loginWithEmailAllowed
                                         ? msg("email")
                                         : !realm.registrationEmailAsUsername
-                                            ? msg("usernameOrEmail")
-                                            : msg("username")}
+                                          ? msg("usernameOrEmail")
+                                          : msg("username")}
                                 </FieldLabel>
                                 <Input
                                     tabIndex={2}

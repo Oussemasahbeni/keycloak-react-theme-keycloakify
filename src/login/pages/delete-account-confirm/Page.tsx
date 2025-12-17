@@ -1,21 +1,18 @@
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { useI18n } from '@/login/i18n';
-import { useKcContext } from '@/login/KcContext';
+import { useI18n } from "@/login/i18n";
+import { useKcContext } from "@/login/KcContext";
 import { assert } from "tsafe/assert";
 import { Template } from "../../components/Template";
 
 export function Page() {
-
     const { kcContext } = useKcContext();
     assert(kcContext.pageId === "delete-account-confirm.ftl");
 
     const { msg, msgStr } = useI18n();
 
     return (
-        <Template
-            headerNode={msg("deleteAccountConfirm")}
-        >
+        <Template headerNode={msg("deleteAccountConfirm")}>
             <form action={kcContext.url.loginAction} className="space-y-6" method="post">
                 <Alert variant="warning" className="my-3">
                     <AlertDescription>

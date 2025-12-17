@@ -1,16 +1,13 @@
 import { Button } from "@/components/ui/button";
-import { useI18n } from '@/login/i18n';
-import { useKcContext } from '@/login/KcContext';
-import { useKcClsx } from '@keycloakify/login-ui/useKcClsx';
+import { useI18n } from "@/login/i18n";
+import { useKcContext } from "@/login/KcContext";
+import { useKcClsx } from "@keycloakify/login-ui/useKcClsx";
 import { useState } from "react";
 import { assert } from "tsafe/assert";
 import { Template } from "../../components/Template";
 import { UserProfileFormFields } from "../../components/UserProfileFormFields";
 
-
-
 export function Page() {
-
     const { kcContext } = useKcContext();
     assert(kcContext.pageId === "login-update-profile.ftl");
 
@@ -34,7 +31,9 @@ export function Page() {
                 action={url.loginAction}
                 method="post"
             >
-                <UserProfileFormFields onIsFormSubmittableValueChange={setIsFormSubmittable} />
+                <UserProfileFormFields
+                    onIsFormSubmittableValueChange={setIsFormSubmittable}
+                />
 
                 <div className={kcClsx("kcFormGroupClass")}>
                     <div id="kc-form-options" className={kcClsx("kcFormOptionsClass")}>

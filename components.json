@@ -5,11 +5,12 @@
     "tsx": true,
     "tailwind": {
         "config": "",
-        "css": "src/login/index.css",
+        "css": "src/login/test.css",
         "baseColor": "neutral",
         "cssVariables": true,
         "prefix": ""
     },
+    "iconLibrary": "lucide",
     "aliases": {
         "components": "@/components",
         "utils": "@/lib/utils",
@@ -17,5 +18,5 @@
         "lib": "@/lib",
         "hooks": "@/hooks"
     },
-    "iconLibrary": "lucide"
+    "registries": {}
 }

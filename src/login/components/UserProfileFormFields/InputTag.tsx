@@ -1,5 +1,4 @@
-
-import { Input } from '@/components/ui/input';
+import { Input } from "@/components/ui/input";
 import { assert } from "tsafe/assert";
 import { useI18n } from "../../i18n";
 import { AddRemoveButtonsMultiValuedAttribute } from "./AddRemoveButtonsMultiValuedAttribute";
@@ -47,20 +46,34 @@ export function InputTag(
                 disabled={attribute.readOnly}
                 autoComplete={attribute.autocomplete}
                 placeholder={
-                    attribute.annotations.inputTypePlaceholder === undefined ? undefined : advancedMsgStr(attribute.annotations.inputTypePlaceholder)
+                    attribute.annotations.inputTypePlaceholder === undefined
+                        ? undefined
+                        : advancedMsgStr(attribute.annotations.inputTypePlaceholder)
                 }
                 pattern={attribute.annotations.inputTypePattern}
-                size={attribute.annotations.inputTypeSize === undefined ? undefined : parseInt(`${attribute.annotations.inputTypeSize}`)}
+                size={
+                    attribute.annotations.inputTypeSize === undefined
+                        ? undefined
+                        : parseInt(`${attribute.annotations.inputTypeSize}`)
+                }
                 maxLength={
-                    attribute.annotations.inputTypeMaxlength === undefined ? undefined : parseInt(`${attribute.annotations.inputTypeMaxlength}`)
+                    attribute.annotations.inputTypeMaxlength === undefined
+                        ? undefined
+                        : parseInt(`${attribute.annotations.inputTypeMaxlength}`)
                 }
                 minLength={
-                    attribute.annotations.inputTypeMinlength === undefined ? undefined : parseInt(`${attribute.annotations.inputTypeMinlength}`)
+                    attribute.annotations.inputTypeMinlength === undefined
+                        ? undefined
+                        : parseInt(`${attribute.annotations.inputTypeMinlength}`)
                 }
                 max={attribute.annotations.inputTypeMax}
                 min={attribute.annotations.inputTypeMin}
                 step={attribute.annotations.inputTypeStep}
-                {...Object.fromEntries(Object.entries(attribute.html5DataAnnotations ?? {}).map(([key, value]) => [`data-${key}`, value]))}
+                {...Object.fromEntries(
+                    Object.entries(attribute.html5DataAnnotations ?? {}).map(
+                        ([key, value]) => [`data-${key}`, value]
+                    )
+                )}
                 onChange={event =>
                     dispatchFormAction({
                         action: "update",
@@ -101,7 +114,11 @@ export function InputTag(
 
                 return (
                     <>
-                        <FieldErrors attribute={attribute} displayableErrors={displayableErrors} fieldIndex={fieldIndex} />
+                        <FieldErrors
+                            attribute={attribute}
+                            displayableErrors={displayableErrors}
+                            fieldIndex={fieldIndex}
+                        />
                         <AddRemoveButtonsMultiValuedAttribute
                             attribute={attribute}
                             values={values}

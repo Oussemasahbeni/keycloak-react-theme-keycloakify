@@ -1,5 +1,5 @@
-import { Button } from '@/components/ui/button';
-import { useI18n } from '@/login/i18n';
+import { Button } from "@/components/ui/button";
+import { useI18n } from "@/login/i18n";
 import type { Attribute } from "@keycloakify/login-ui/KcContext";
 import {
     getButtonToDisplayForMultivaluedAttributeField,
@@ -16,7 +16,11 @@ export function AddRemoveButtonsMultiValuedAttribute(props: {
 
     const { msg } = useI18n();
 
-    const { hasAdd, hasRemove } = getButtonToDisplayForMultivaluedAttributeField({ attribute, values, fieldIndex });
+    const { hasAdd, hasRemove } = getButtonToDisplayForMultivaluedAttributeField({
+        attribute,
+        values,
+        fieldIndex
+    });
 
     const idPostfix = `-${attribute.name}-${fieldIndex + 1}`;
 

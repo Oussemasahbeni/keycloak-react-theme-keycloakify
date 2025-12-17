@@ -2,10 +2,10 @@ import i18n, { type TFunction } from "i18next";
 import { Button, Text, render } from "jsx-email";
 import type { GetSubject, GetTemplate, GetTemplateProps } from "keycloakify-emails";
 import { createVariablesHelper } from "keycloakify-emails/variables";
-import { btnTextColor, primaryColor } from '../constants';
+import { btnTextColor, primaryColor } from "../constants";
 import { EmailLayout } from "../layout";
-import { previewLocale } from '../utils/previewLocale';
-import { applyRTL } from '../utils/RTL';
+import { previewLocale } from "../utils/previewLocale";
+import { applyRTL } from "../utils/RTL";
 
 type TemplateProps = Omit<GetTemplateProps, "plainText"> & { t: TFunction };
 

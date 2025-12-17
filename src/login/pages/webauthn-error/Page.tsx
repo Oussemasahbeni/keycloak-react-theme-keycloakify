@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { useI18n } from '@/login/i18n';
-import { useKcContext } from '@/login/KcContext';
+import { useI18n } from "@/login/i18n";
+import { useKcContext } from "@/login/KcContext";
 import { assert } from "tsafe/assert";
 import { Template } from "../../components/Template";
 
@@ -13,10 +13,7 @@ export function Page() {
     const { msg, msgStr } = useI18n();
 
     return (
-        <Template
-            displayMessage
-            headerNode={msg("webauthn-error-title")}
-        >
+        <Template displayMessage headerNode={msg("webauthn-error-title")}>
             <div className="space-y-4">
                 <form
                     id="kc-error-credential-form"

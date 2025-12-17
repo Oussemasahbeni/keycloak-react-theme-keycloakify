@@ -1,6 +1,5 @@
-
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Button } from '@/components/ui/button';
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 import { kcSanitize } from "@keycloakify/login-ui/kcSanitize";
 import { assert } from "tsafe/assert";
 import { Template } from "../../components/Template";
@@ -8,7 +7,6 @@ import { useI18n } from "../../i18n";
 import { useKcContext } from "../../KcContext";
 
 export function Page() {
-    
     const { kcContext } = useKcContext();
     assert(kcContext.pageId === "info.ftl");
 
@@ -67,7 +65,9 @@ export function Page() {
                 if (kcContext.pageRedirectUri) {
                     return (
                         <Button type="button" className="mt-2 flex ms-auto">
-                            <a href={kcContext.pageRedirectUri}>{msg("backToApplication")}</a>
+                            <a href={kcContext.pageRedirectUri}>
+                                {msg("backToApplication")}
+                            </a>
                         </Button>
                     );
                 }
@@ -82,7 +82,9 @@ export function Page() {
                 if (kcContext.client.baseUrl) {
                     return (
                         <Button type="button" className="mt-2 flex  ms-auto-end">
-                            <a href={kcContext.client.baseUrl}>{msg("backToApplication")}</a>
+                            <a href={kcContext.client.baseUrl}>
+                                {msg("backToApplication")}
+                            </a>
                         </Button>
                     );
                 }

@@ -1,7 +1,5 @@
-
 import { Suspense, lazy } from "react";
 import { useKcContext } from "../KcContext";
-
 
 const Page_login = lazy(() => import("./login"));
 const Page_register = lazy(() => import("./register"));
@@ -46,7 +44,6 @@ export function PageIndex() {
     const { kcContext } = useKcContext();
 
     return (
-
         <Suspense>
             {(() => {
                 switch (kcContext.pageId) {
@@ -127,7 +124,6 @@ export function PageIndex() {
                     case "select-organization.ftl":
                         return <Page_select_organization />;
                 }
-
             })()}
         </Suspense>
     );

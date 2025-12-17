@@ -7,7 +7,6 @@ const meta = {
     component: KcPageStory
 } satisfies Meta<typeof KcPageStory>;
 
-
 export default meta;
 
 type Story = StoryObj<typeof meta>;

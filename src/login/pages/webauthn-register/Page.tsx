@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { LogoutOtherSessions } from '@/login/components/LogoutOtherSessions';
-import { useI18n } from '@/login/i18n';
-import { useKcContext } from '@/login/KcContext';
+import { LogoutOtherSessions } from "@/login/components/LogoutOtherSessions";
+import { useI18n } from "@/login/i18n";
+import { useKcContext } from "@/login/KcContext";
 import { assert } from "tsafe/assert";
 import { Template } from "../../components/Template";
-import { useScript } from './useScript';
+import { useScript } from "./useScript";
 
 export function Page() {
     const { kcContext } = useKcContext();

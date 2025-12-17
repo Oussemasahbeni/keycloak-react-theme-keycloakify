@@ -12,8 +12,8 @@ import {
 } from "jsx-email";
 import { createVariablesHelper } from "keycloakify-emails/variables";
 import type { PropsWithChildren, ReactNode } from "react";
-import i18n from './i18n';
-import { primaryColor, companyLogo } from './constants';
+import i18n from "./i18n";
+import { primaryColor, companyLogo } from "./constants";
 
 const main = {
     backgroundColor: "#f6f9fc",

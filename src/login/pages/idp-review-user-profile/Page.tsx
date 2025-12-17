@@ -6,10 +6,7 @@ import { Template } from "../../components/Template";
 import { UserProfileFormFields } from "../../components/UserProfileFormFields";
 import { useI18n } from "../../i18n";
 
-
 export function Page() {
-
-
     const { kcContext } = useKcContext();
     assert(kcContext.pageId === "idp-review-user-profile.ftl");
 
@@ -32,8 +29,8 @@ export function Page() {
                 <UserProfileFormFields
                     onIsFormSubmittableValueChange={setIsFomSubmittable}
                 />
-                <div >
-                    <div id="kc-form-options" >
+                <div>
+                    <div id="kc-form-options">
                         <div />
                     </div>
                     <div id="kc-form-buttons">

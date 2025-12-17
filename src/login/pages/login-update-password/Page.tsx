@@ -1,17 +1,15 @@
-
 import { Button } from "@/components/ui/button";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { LogoutOtherSessions } from '@/login/components/LogoutOtherSessions';
-import { PasswordWrapper } from '@/login/components/PasswordWrapper';
-import { useI18n } from '@/login/i18n';
-import { useKcContext } from '@/login/KcContext';
+import { LogoutOtherSessions } from "@/login/components/LogoutOtherSessions";
+import { PasswordWrapper } from "@/login/components/PasswordWrapper";
+import { useI18n } from "@/login/i18n";
+import { useKcContext } from "@/login/KcContext";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { assert } from "tsafe/assert";
 import { Template } from "../../components/Template";
 
 export function Page() {
-
     const { kcContext } = useKcContext();
     assert(kcContext.pageId === "login-update-password.ftl");
 
@@ -32,7 +30,7 @@ export function Page() {
             >
                 <Field>
                     <FieldLabel htmlFor="password-new">{msg("passwordNew")}</FieldLabel>
-                    <PasswordWrapper passwordInputId="password-new" >
+                    <PasswordWrapper passwordInputId="password-new">
                         <Input
                             type="password"
                             id="password-new"

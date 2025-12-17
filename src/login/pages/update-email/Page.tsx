@@ -1,18 +1,15 @@
 import { Button } from "@/components/ui/button";
-import { LogoutOtherSessions } from '@/login/components/LogoutOtherSessions';
-import { useI18n } from '@/login/i18n';
-import { useKcContext } from '@/login/KcContext';
+import { LogoutOtherSessions } from "@/login/components/LogoutOtherSessions";
+import { useI18n } from "@/login/i18n";
+import { useKcContext } from "@/login/KcContext";
 import { useState } from "react";
 import { assert } from "tsafe/assert";
 import { Template } from "../../components/Template";
 import { UserProfileFormFields } from "../../components/UserProfileFormFields";
 
-
 export function Page() {
-
     const { kcContext } = useKcContext();
     assert(kcContext.pageId === "update-email.ftl");
-
 
     const { msg, msgStr } = useI18n();
 
@@ -32,7 +29,9 @@ export function Page() {
                 action={url.loginAction}
                 method="post"
             >
-                <UserProfileFormFields onIsFormSubmittableValueChange={setIsFormSubmittable} />
+                <UserProfileFormFields
+                    onIsFormSubmittableValueChange={setIsFormSubmittable}
+                />
 
                 <LogoutOtherSessions />
 

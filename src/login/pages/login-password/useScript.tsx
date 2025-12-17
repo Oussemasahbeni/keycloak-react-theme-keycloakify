@@ -1,4 +1,3 @@
-
 import { useInsertScriptTags } from "@keycloakify/login-ui/tools/useInsertScriptTags";
 import { waitForElementMountedOnDom } from "@keycloakify/login-ui/tools/waitForElementMountedOnDom";
 import { useEffect } from "react";

@@ -1,4 +1,3 @@
-
 import type { Attribute } from "@keycloakify/login-ui/KcContext";
 import { useI18n } from "../../i18n";
 

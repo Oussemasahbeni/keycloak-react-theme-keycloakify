@@ -3,8 +3,8 @@ import { Text, render } from "jsx-email";
 import type { GetSubject, GetTemplate, GetTemplateProps } from "keycloakify-emails";
 import { createVariablesHelper } from "keycloakify-emails/variables";
 import { EmailLayout } from "../layout";
-import { previewLocale } from '../utils/previewLocale';
-import { applyRTL } from '../utils/RTL';
+import { previewLocale } from "../utils/previewLocale";
+import { applyRTL } from "../utils/RTL";
 
 type TemplateProps = Omit<GetTemplateProps, "plainText"> & { t: TFunction };
 

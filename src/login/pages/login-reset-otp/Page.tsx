@@ -1,16 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { RadioGroupItem } from "@/components/ui/radio-group";
-import { useI18n } from '@/login/i18n';
-import { useKcContext } from '@/login/KcContext';
-import { useKcClsx } from '@keycloakify/login-ui/useKcClsx';
+import { useI18n } from "@/login/i18n";
+import { useKcContext } from "@/login/KcContext";
+import { useKcClsx } from "@keycloakify/login-ui/useKcClsx";
 import { RadioGroup } from "@radix-ui/react-radio-group";
 import { Smartphone } from "lucide-react";
 import { assert } from "tsafe/assert";
 import { Template } from "../../components/Template";
 
 export function Page() {
-
     const { kcContext } = useKcContext();
     assert(kcContext.pageId === "login-reset-otp.ftl");
 

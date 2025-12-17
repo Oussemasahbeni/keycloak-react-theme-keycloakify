@@ -1,12 +1,11 @@
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { useI18n } from '@/login/i18n';
-import { useKcContext } from '@/login/KcContext';
+import { useI18n } from "@/login/i18n";
+import { useKcContext } from "@/login/KcContext";
 import { assert } from "tsafe/assert";
 import { Template } from "../../components/Template";
 
-export function Page(
-) {
+export function Page() {
     const { kcContext } = useKcContext();
     assert(kcContext.pageId === "delete-credential.ftl");
 
@@ -19,11 +18,17 @@ export function Page(
         >
             <Alert variant="warning" className=" my-3">
                 <AlertDescription>
-                    <span>{msg("deleteCredentialMessage", kcContext.credentialLabel)}</span>
+                    <span>
+                        {msg("deleteCredentialMessage", kcContext.credentialLabel)}
+                    </span>
                 </AlertDescription>
             </Alert>
 
-            <form className="form-actions" action={kcContext.url.loginAction} method="POST">
+            <form
+                className="form-actions"
+                action={kcContext.url.loginAction}
+                method="POST"
+            >
                 <div className="flex flex-col sm:flex-row gap-3 sm:justify-between mt-6">
                     <Button
                         variant="outline"

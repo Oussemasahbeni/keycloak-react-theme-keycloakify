@@ -1,4 +1,3 @@
-
 import { assert } from "tsafe/assert";
 import { Template } from "../../components/Template";
 import { useI18n } from "../../i18n";

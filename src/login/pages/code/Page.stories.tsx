@@ -35,13 +35,12 @@ export const French: Story = {
     }
 };
 
-
 /**
- * This reflects the state when "Dark Theme" is set to "Disabled" in the realm settings 
+ * This reflects the state when "Dark Theme" is set to "Disabled" in the realm settings
  * (Theme configuration tab of the Keycloak Admin UI).
- * 
- * You should enable this configuration if you want to hide the "dark mode switch" 
- * and ensure that the theme always renders in light mode, even if the user's system 
+ *
+ * You should enable this configuration if you want to hide the "dark mode switch"
+ * and ensure that the theme always renders in light mode, even if the user's system
  * preference is set to dark.
  */
 export const WithDarkModeForbidden: Story = {

@@ -1,20 +1,17 @@
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { useI18n } from '@/login/i18n';
-import { useKcContext } from '@/login/KcContext';
-import { assert } from 'tsafe/assert';
+import { useI18n } from "@/login/i18n";
+import { useKcContext } from "@/login/KcContext";
+import { assert } from "tsafe/assert";
 import { Template } from "../../components/Template";
 
 export function Page() {
-
     const { kcContext } = useKcContext();
     assert(kcContext.pageId === "login-idp-link-email.ftl");
 
     const { msg } = useI18n();
 
     return (
-        <Template
-            headerNode={msg("emailLinkIdpTitle", kcContext.idpAlias)}
-        >
+        <Template headerNode={msg("emailLinkIdpTitle", kcContext.idpAlias)}>
             <Alert id="instruction1" variant="info" className="my-3">
                 <AlertDescription>
                     {msg(

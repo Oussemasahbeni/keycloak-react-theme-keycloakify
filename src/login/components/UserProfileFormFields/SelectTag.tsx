@@ -1,10 +1,14 @@
-
-
-import { cn } from '@/components/lib/utils';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { cn } from "@/components/lib/utils";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue
+} from "@/components/ui/select";
 import { assert } from "tsafe/assert";
 import type { InputFieldByTypeProps } from "./InputFieldByType";
-import { InputLabel } from './InputLabel';
+import { InputLabel } from "./InputLabel";
 
 export function SelectTag(props: InputFieldByTypeProps) {
     const { attribute, dispatchFormAction, displayableErrors, valueOrValues } = props;
@@ -21,7 +25,9 @@ export function SelectTag(props: InputFieldByTypeProps) {
 
             assert(typeof inputOptionsFromValidation === "string");
 
-            const validator = (attribute.validators as Record<string, { options?: string[] }>)[inputOptionsFromValidation];
+            const validator = (
+                attribute.validators as Record<string, { options?: string[] }>
+            )[inputOptionsFromValidation];
 
             if (validator === undefined) {
                 break walk;
@@ -45,18 +51,25 @@ export function SelectTag(props: InputFieldByTypeProps) {
                 name={attribute.name}
                 className={cn(
                     "flex min-h-25 h-auto w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
-                    displayableErrors.length !== 0 && "border-destructive ring-destructive/20 focus:ring-destructive"
+                    displayableErrors.length !== 0 &&
+                        "border-destructive ring-destructive/20 focus:ring-destructive"
                 )}
                 aria-invalid={displayableErrors.length !== 0}
                 disabled={attribute.readOnly}
                 multiple={true}
-                size={attribute.annotations.inputTypeSize === undefined ? undefined : parseInt(`${attribute.annotations.inputTypeSize}`)}
+                size={
+                    attribute.annotations.inputTypeSize === undefined
+                        ? undefined
+                        : parseInt(`${attribute.annotations.inputTypeSize}`)
+                }
                 value={valueOrValues}
                 onChange={event =>
                     dispatchFormAction({
                         action: "update",
                         name: attribute.name,
-                        valueOrValues: Array.from(event.target.selectedOptions).map(option => option.value)
+                        valueOrValues: Array.from(event.target.selectedOptions).map(
+                            option => option.value
+                        )
                     })
                 }
                 onBlur={() =>
@@ -78,7 +91,11 @@ export function SelectTag(props: InputFieldByTypeProps) {
 
     return (
         <Select
-            value={typeof valueOrValues === "string" && valueOrValues !== "" ? valueOrValues : undefined}
+            value={
+                typeof valueOrValues === "string" && valueOrValues !== ""
+                    ? valueOrValues
+                    : undefined
+            }
             onValueChange={value =>
                 dispatchFormAction({
                     action: "update",
@@ -90,7 +107,11 @@ export function SelectTag(props: InputFieldByTypeProps) {
         >
             <SelectTrigger
                 id={attribute.name}
-                className={cn("w-full", displayableErrors.length !== 0 && "border-destructive ring-destructive/20 focus-visible:ring-destructive")}
+                className={cn(
+                    "w-full",
+                    displayableErrors.length !== 0 &&
+                        "border-destructive ring-destructive/20 focus-visible:ring-destructive"
+                )}
                 aria-invalid={displayableErrors.length !== 0}
                 onBlur={() =>
                     dispatchFormAction({

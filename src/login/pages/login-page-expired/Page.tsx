@@ -1,7 +1,7 @@
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { useI18n } from '@/login/i18n';
-import { useKcContext } from '@/login/KcContext';
-import { assert } from 'tsafe/assert';
+import { useI18n } from "@/login/i18n";
+import { useKcContext } from "@/login/KcContext";
+import { assert } from "tsafe/assert";
 import { Template } from "../../components/Template";
 
 export function Page() {
@@ -11,9 +11,7 @@ export function Page() {
     const { msg } = useI18n();
 
     return (
-        <Template
-            headerNode={msg("pageExpiredTitle")}
-        >
+        <Template headerNode={msg("pageExpiredTitle")}>
             <Alert variant="warning" className="my-6">
                 <AlertDescription>
                     <div className="space-y-3 text-sm leading-relaxed">

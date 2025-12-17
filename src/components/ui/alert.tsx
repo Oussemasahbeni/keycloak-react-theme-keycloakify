@@ -27,7 +27,7 @@ const alertVariants = cva(
 const Alert = React.forwardRef<
     HTMLDivElement,
     React.HTMLAttributes<HTMLDivElement> &
-    VariantProps<typeof alertVariants> & { showIcon?: boolean }
+        VariantProps<typeof alertVariants> & { showIcon?: boolean }
 >(({ className, showIcon = true, variant, ...props }, ref) => (
     <div
         ref={ref}
@@ -79,4 +79,3 @@ const AlertDescription = React.forwardRef<
 AlertDescription.displayName = "AlertDescription";
 
 export { Alert, AlertDescription, AlertTitle };
-

@@ -1,19 +1,18 @@
 import { Button } from "@/components/ui/button";
-import { FieldError } from '@/components/ui/field';
+import { FieldError } from "@/components/ui/field";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { useI18n } from '@/login/i18n';
-import { useKcContext } from '@/login/KcContext';
+import { useI18n } from "@/login/i18n";
+import { useKcContext } from "@/login/KcContext";
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
-import { useState } from 'react';
+import { useState } from "react";
 import { MdOutlineDevices } from "react-icons/md";
 import { assert } from "tsafe/assert";
 import { Template } from "../../components/Template";
 
 export function Page() {
-
     const { kcContext } = useKcContext();
 
     assert(kcContext.pageId === "login-otp.ftl");
@@ -43,26 +42,28 @@ export function Page() {
                             defaultValue={kcContext.otpLogin.selectedCredentialId}
                             className="space-y-2"
                         >
-                            {kcContext.otpLogin.userOtpCredentials.map((otpCredential, index) => (
-                                <div
-                                    key={otpCredential.id}
-                                    className="flex items-center space-x-3 p-3 border rounded-lg"
-                                >
-                                    <RadioGroupItem
-                                        value={otpCredential.id}
-                                        id={`kc-otp-credential-${index}`}
-                                    />
-                                    <Label
-                                        htmlFor={`kc-otp-credential-${index}`}
-                                        className="flex items-center space-x-2 cursor-pointer flex-1"
+                            {kcContext.otpLogin.userOtpCredentials.map(
+                                (otpCredential, index) => (
+                                    <div
+                                        key={otpCredential.id}
+                                        className="flex items-center space-x-3 p-3 border rounded-lg"
                                     >
-                                        <MdOutlineDevices />
-                                        <span className="text-sm font-medium">
-                                            {otpCredential.userLabel}
-                                        </span>
-                                    </Label>
-                                </div>
-                            ))}
+                                        <RadioGroupItem
+                                            value={otpCredential.id}
+                                            id={`kc-otp-credential-${index}`}
+                                        />
+                                        <Label
+                                            htmlFor={`kc-otp-credential-${index}`}
+                                            className="flex items-center space-x-2 cursor-pointer flex-1"
+                                        >
+                                            <MdOutlineDevices />
+                                            <span className="text-sm font-medium">
+                                                {otpCredential.userLabel}
+                                            </span>
+                                        </Label>
+                                    </div>
+                                )
+                            )}
                         </RadioGroup>
                     </div>
                 )}
@@ -92,14 +93,22 @@ export function Page() {
                         <FieldError id="input-error-otp-code">
                             <span
                                 dangerouslySetInnerHTML={{
-                                    __html: kcSanitize(kcContext.messagesPerField.get("totp"))
+                                    __html: kcSanitize(
+                                        kcContext.messagesPerField.get("totp")
+                                    )
                                 }}
                             />
                         </FieldError>
                     )}
                 </div>
 
-                <Button className="w-full" name="login" id="kc-login" type="submit" disabled={isSubmitting}>
+                <Button
+                    className="w-full"
+                    name="login"
+                    id="kc-login"
+                    type="submit"
+                    disabled={isSubmitting}
+                >
                     {msgStr("doLogIn")}
                 </Button>
             </form>

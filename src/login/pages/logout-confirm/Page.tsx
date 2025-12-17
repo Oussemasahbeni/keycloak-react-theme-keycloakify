@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { useI18n } from '@/login/i18n';
-import { useKcContext } from '@/login/KcContext';
+import { useI18n } from "@/login/i18n";
+import { useKcContext } from "@/login/KcContext";
 import { assert } from "tsafe/assert";
 import { Template } from "../../components/Template";
 
@@ -8,14 +8,11 @@ export function Page() {
     const { kcContext } = useKcContext();
     assert(kcContext.pageId === "logout-confirm.ftl");
 
-
     const { url, client, logoutConfirm } = kcContext;
 
     const { msg, msgStr } = useI18n();
     return (
-        <Template
-            headerNode={msg("logoutConfirmTitle")}
-        >
+        <Template headerNode={msg("logoutConfirmTitle")}>
             <div className="space-y-4">
                 <p className="text-foreground ">{msg("logoutConfirmHeader")}</p>
 

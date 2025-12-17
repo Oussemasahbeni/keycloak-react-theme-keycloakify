@@ -1,14 +1,13 @@
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { useI18n } from '@/login/i18n';
-import { useKcContext } from '@/login/KcContext';
+import { useI18n } from "@/login/i18n";
+import { useKcContext } from "@/login/KcContext";
 import { useEffect, useState } from "react";
 import { FiCheck, FiExternalLink } from "react-icons/fi";
 import { assert } from "tsafe/assert";
 import { Template } from "../../components/Template";
 
 export function Page() {
-
     const { kcContext } = useKcContext();
     assert(kcContext.pageId === "frontchannel-logout.ftl");
 
@@ -26,7 +25,6 @@ export function Page() {
 
         window.location.replace(kcContext.logout.logoutRedirectUri);
     }, [iframeLoadCount]);
-
 
     return (
         <Template

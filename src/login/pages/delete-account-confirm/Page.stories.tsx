@@ -1,4 +1,3 @@
-
 import { createKcPageStory, type Meta, type StoryObj } from "../../mocks/KcPageStory";
 
 const { KcPageStory } = createKcPageStory({ pageId: "delete-account-confirm.ftl" });
@@ -13,7 +12,6 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
-
 
 export const Arabic: Story = {
     args: {

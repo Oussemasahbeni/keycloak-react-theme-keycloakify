@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { useI18n } from '@/login/i18n';
-import { useKcContext } from '@/login/KcContext';
+import { useI18n } from "@/login/i18n";
+import { useKcContext } from "@/login/KcContext";
 import { assert } from "tsafe/assert";
 import { Template } from "../../components/Template";
 
@@ -15,7 +15,9 @@ export function Page() {
             headerNode={msg("linkIdpActionTitle", kcContext.idpDisplayName)}
             displayMessage={false}
         >
-            <div id="kc-link-text">{msg("linkIdpActionMessage", kcContext.idpDisplayName)}</div>
+            <div id="kc-link-text">
+                {msg("linkIdpActionMessage", kcContext.idpDisplayName)}
+            </div>
             <form action={kcContext.url.loginAction} method="post">
                 <div className="flex flex-col sm:flex-row gap-3 sm:justify-between mt-6">
                     <Button

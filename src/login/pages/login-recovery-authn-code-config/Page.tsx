@@ -2,18 +2,17 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import { LogoutOtherSessions } from '@/login/components/LogoutOtherSessions';
-import { useI18n } from '@/login/i18n';
-import { useKcContext } from '@/login/KcContext';
+import { LogoutOtherSessions } from "@/login/components/LogoutOtherSessions";
+import { useI18n } from "@/login/i18n";
+import { useKcContext } from "@/login/KcContext";
 import { Copy, Download, Printer } from "lucide-react";
 import { assert } from "tsafe/assert";
 import { Template } from "../../components/Template";
-import { useScript } from './useScript';
+import { useScript } from "./useScript";
 
 export function Page() {
     const { kcContext } = useKcContext();
     assert(kcContext.pageId === "login-recovery-authn-code-config.ftl");
-
 
     const { recoveryAuthnCodesConfigBean, isAppInitiatedAction } = kcContext;
 
@@ -24,9 +23,7 @@ export function Page() {
     useScript({ olRecoveryCodesListId });
 
     return (
-        <Template
-            headerNode={msg("recovery-code-config-header")}
-        >
+        <Template headerNode={msg("recovery-code-config-header")}>
             <div className="space-y-6">
                 <Alert variant="warning">
                     <AlertDescription>

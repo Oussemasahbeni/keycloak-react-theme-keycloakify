@@ -1,7 +1,6 @@
-
-import { Button } from '@/components/ui/button';
-import { Field, FieldError, FieldLabel } from '@/components/ui/field';
-import { Input } from '@/components/ui/input';
+import { Button } from "@/components/ui/button";
+import { Field, FieldError, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
 import { kcSanitize } from "@keycloakify/login-ui/kcSanitize";
 import { assert } from "tsafe/assert";
 import { useKcContext } from "../../KcContext";
@@ -26,8 +25,8 @@ export function Form() {
                     {!kcContext.realm.loginWithEmailAllowed
                         ? msg("username")
                         : !kcContext.realm.registrationEmailAsUsername
-                            ? msg("usernameOrEmail")
-                            : msg("email")}
+                          ? msg("usernameOrEmail")
+                          : msg("email")}
                 </FieldLabel>
                 <Input
                     type="text"

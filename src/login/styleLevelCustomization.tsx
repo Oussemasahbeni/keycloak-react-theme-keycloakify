@@ -1,8 +1,8 @@
-import { ThemeProvider } from '@/components/theme-provider';
+import { ThemeProvider } from "@/components/theme-provider";
 import type { ClassKey } from "@keycloakify/login-ui/useKcClsx";
 import type { ReactNode } from "react";
-import { useKcContext } from './KcContext';
-import { getTheme } from './shared/getColorScheme';
+import { useKcContext } from "./KcContext";
+import { getTheme } from "./shared/getColorScheme";
 
 type Classes = { [key in ClassKey]?: string };
 
@@ -19,14 +19,12 @@ function Provider(props: { children: ReactNode }) {
 
     const { kcContext } = useKcContext();
 
-
     return (
         <ThemeProvider defaultTheme={getTheme(kcContext.darkMode)}>
             {children}
         </ThemeProvider>
     );
 }
-
 
 export function useStyleLevelCustomization(): StyleLevelCustomization {
     return {

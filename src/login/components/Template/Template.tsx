@@ -1,17 +1,22 @@
-import { Languages } from '@/components/langauges';
-import { ModeToggle } from '@/components/theme-toggle';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { redirectUrlOrigin } from '@/login/shared/redirectUrlOrigin';
+import { Languages } from "@/components/langauges";
+import { ModeToggle } from "@/components/theme-toggle";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { redirectUrlOrigin } from "@/login/shared/redirectUrlOrigin";
 import { kcSanitize } from "@keycloakify/login-ui/kcSanitize";
 import { useKcClsx } from "@keycloakify/login-ui/useKcClsx";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@radix-ui/react-tooltip';
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger
+} from "@radix-ui/react-tooltip";
 import { useSetClassName } from "keycloakify/tools/useSetClassName";
-import { RotateCcw } from 'lucide-react';
+import { RotateCcw } from "lucide-react";
 import type { ReactNode } from "react";
 import { useEffect } from "react";
-import { FiHome } from 'react-icons/fi';
+import { FiHome } from "react-icons/fi";
 import { useI18n } from "../../i18n";
 import { useKcContext } from "../../KcContext";
 import companylogo from "./../../assets/img/auth-logo.svg";
@@ -47,7 +52,6 @@ export function Template(props: {
 
     const { auth, url, message, isAppInitiatedAction } = kcContext;
 
-
     const { msg, msgStr, enabledLanguages } = useI18n();
 
     const { kcClsx } = useKcClsx();
@@ -79,20 +83,15 @@ export function Template(props: {
             <div className="flex flex-col gap-4 px-0 py-0 pb-6 lg:p-6 lg:md:p-10 lg:pt-10 min-h-screen lg:min-h-0">
                 {/*  navigation */}
                 <div className="absolute top-4 right-4 lg:left-4  z-20 flex gap-2">
-                    <Button variant="outline" size="icon" >
+                    <Button variant="outline" size="icon">
                         <a href={kcContext.client.baseUrl ?? redirectUrlOrigin}>
                             <FiHome />
                         </a>
                     </Button>
 
-                    {enabledLanguages.length > 1 && (
-                        <Languages />
-                    )}
+                    {enabledLanguages.length > 1 && <Languages />}
 
-
-                    {kcContext.darkMode !== false && (
-                        <ModeToggle />
-                    )}
+                    {kcContext.darkMode !== false && <ModeToggle />}
                 </div>
 
                 {/* Mobile header with logo */}
@@ -112,29 +111,51 @@ export function Template(props: {
                             <CardHeader className="text-center mb-3 px-6 pt-8 pb-4 lg:pt-6">
                                 <CardTitle>
                                     {(() => {
-                                        const node = !(auth !== undefined && auth.showUsername && !auth.showResetCredentials) ? (
+                                        const node = !(
+                                            auth !== undefined &&
+                                            auth.showUsername &&
+                                            !auth.showResetCredentials
+                                        ) ? (
                                             <h1 className="text-xl">{headerNode}</h1>
                                         ) : (
-                                            <div id="kc-username" className="flex items-center justify-center gap-2">
-                                                <label className="font-semibold text-lg" id="kc-attempted-username">
+                                            <div
+                                                id="kc-username"
+                                                className="flex items-center justify-center gap-2"
+                                            >
+                                                <label
+                                                    className="font-semibold text-lg"
+                                                    id="kc-attempted-username"
+                                                >
                                                     {auth.attemptedUsername}
                                                 </label>
 
                                                 <TooltipProvider>
                                                     <Tooltip>
                                                         <TooltipTrigger asChild>
-                                                            <Button variant="outline" size="icon" asChild>
+                                                            <Button
+                                                                variant="outline"
+                                                                size="icon"
+                                                                asChild
+                                                            >
                                                                 <a
                                                                     id="reset-login"
-                                                                    href={url.loginRestartFlowUrl}
-                                                                    aria-label={msgStr("restartLoginTooltip")}
+                                                                    href={
+                                                                        url.loginRestartFlowUrl
+                                                                    }
+                                                                    aria-label={msgStr(
+                                                                        "restartLoginTooltip"
+                                                                    )}
                                                                 >
                                                                     <RotateCcw className="h-4 w-4" />
                                                                 </a>
                                                             </Button>
                                                         </TooltipTrigger>
                                                         <TooltipContent>
-                                                            <p>{msg("restartLoginTooltip")}</p>
+                                                            <p>
+                                                                {msg(
+                                                                    "restartLoginTooltip"
+                                                                )}
+                                                            </p>
                                                         </TooltipContent>
                                                     </Tooltip>
                                                 </TooltipProvider>
@@ -147,7 +168,9 @@ export function Template(props: {
                                                     <div>{node}</div>
                                                     <div>
                                                         <span className="subtitle">
-                                                            <span className="text-red-500">*</span>
+                                                            <span className="text-red-500">
+                                                                *
+                                                            </span>
                                                             {msg("requiredFields")}
                                                         </span>
                                                     </div>
@@ -162,39 +185,66 @@ export function Template(props: {
                             <CardContent className="px-6 pb-8">
                                 <div id="kc-content">
                                     <div id="kc-content-wrapper">
-                                        {displayMessage && message !== undefined && (message.type !== "warning" || !isAppInitiatedAction) && (
-                                            <Alert variant={message.type} className="my-3">
-                                                <AlertDescription>
-                                                    <div>
-                                                        <span
-                                                            dangerouslySetInnerHTML={{
-                                                                __html: kcSanitize(message.summary)
-                                                            }}
-                                                        />
-                                                    </div>
-                                                </AlertDescription>
-                                            </Alert>
-                                        )}
+                                        {displayMessage &&
+                                            message !== undefined &&
+                                            (message.type !== "warning" ||
+                                                !isAppInitiatedAction) && (
+                                                <Alert
+                                                    variant={message.type}
+                                                    className="my-3"
+                                                >
+                                                    <AlertDescription>
+                                                        <div>
+                                                            <span
+                                                                dangerouslySetInnerHTML={{
+                                                                    __html: kcSanitize(
+                                                                        message.summary
+                                                                    )
+                                                                }}
+                                                            />
+                                                        </div>
+                                                    </AlertDescription>
+                                                </Alert>
+                                            )}
                                         <div className="children">{children}</div>
                                         {socialProvidersNode}
-                                        {auth !== undefined && auth.showTryAnotherWayLink && (
-                                            <form id="kc-select-try-another-way-form" action={url.loginAction} method="post">
-                                                <div className={kcClsx("kcFormGroupClass")}>
-                                                    <input type="hidden" name="tryAnotherWay" value="on" />
-                                                    <a
-                                                        href="#"
-                                                        id="try-another-way"
-                                                        onClick={() => {
-                                                            document.forms["kc-select-try-another-way-form" as never].submit();
-                                                            return false;
-                                                        }}
+                                        {auth !== undefined &&
+                                            auth.showTryAnotherWayLink && (
+                                                <form
+                                                    id="kc-select-try-another-way-form"
+                                                    action={url.loginAction}
+                                                    method="post"
+                                                >
+                                                    <div
+                                                        className={kcClsx(
+                                                            "kcFormGroupClass"
+                                                        )}
                                                     >
-                                                        {msg("doTryAnotherWay")}
-                                                    </a>
-                                                </div>
-                                            </form>
+                                                        <input
+                                                            type="hidden"
+                                                            name="tryAnotherWay"
+                                                            value="on"
+                                                        />
+                                                        <a
+                                                            href="#"
+                                                            id="try-another-way"
+                                                            onClick={() => {
+                                                                document.forms[
+                                                                    "kc-select-try-another-way-form" as never
+                                                                ].submit();
+                                                                return false;
+                                                            }}
+                                                        >
+                                                            {msg("doTryAnotherWay")}
+                                                        </a>
+                                                    </div>
+                                                </form>
+                                            )}
+                                        {displayInfo && (
+                                            <div className="text-center text-sm mt-4">
+                                                {infoNode}
+                                            </div>
                                         )}
-                                        {displayInfo && <div className="text-center text-sm mt-4">{infoNode}</div>}
                                     </div>
                                 </div>
                             </CardContent>
@@ -218,7 +268,9 @@ export function Template(props: {
                             <span className="text-white text-xl"> {APP_NAME}</span>
                         </div>
 
-                        <p className="text-center  text-gray-400 dark:text-white/60">{msg("welcomeMessage")}</p>
+                        <p className="text-center  text-gray-400 dark:text-white/60">
+                            {msg("welcomeMessage")}
+                        </p>
                     </div>
                 </div>
             </div>

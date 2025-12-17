@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { useI18n } from '@/login/i18n';
-import { useKcContext } from '@/login/KcContext';
+import { useI18n } from "@/login/i18n";
+import { useKcContext } from "@/login/KcContext";
 import { assert } from "tsafe/assert";
 import { Template } from "../../components/Template";
 
@@ -9,15 +9,12 @@ export function Page() {
     const { kcContext } = useKcContext();
     assert(kcContext.pageId === "login-x509-info.ftl");
 
-
     const { url, x509 } = kcContext;
 
     const { msg, msgStr } = useI18n();
 
     return (
-        <Template
-            headerNode={msg("doLogIn")}
-        >
+        <Template headerNode={msg("doLogIn")}>
             <form
                 id="kc-x509-login-info"
                 className="space-y-6"

@@ -1,6 +1,5 @@
 import { createKcPageStory, type Meta, type StoryObj } from "../../mocks/KcPageStory";
 
-
 const { KcPageStory } = createKcPageStory({ pageId: "saml-post-form.ftl" });
 
 const meta = {

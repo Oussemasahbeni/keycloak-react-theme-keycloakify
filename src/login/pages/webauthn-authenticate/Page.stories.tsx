@@ -1,6 +1,5 @@
 import { createKcPageStory, type Meta, type StoryObj } from "../../mocks/KcPageStory";
 
-
 const { KcPageStory } = createKcPageStory({ pageId: "webauthn-authenticate.ftl" });
 
 const meta = {

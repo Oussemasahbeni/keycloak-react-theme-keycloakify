@@ -1,9 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { useI18n } from '@/login/i18n';
-import { useKcContext } from '@/login/KcContext';
-import { assert } from 'tsafe/assert';
+import { useI18n } from "@/login/i18n";
+import { useKcContext } from "@/login/KcContext";
+import { assert } from "tsafe/assert";
 import { Template } from "../../components/Template";
-
 
 export function Page() {
     const { kcContext } = useKcContext();
@@ -12,9 +11,7 @@ export function Page() {
     const { msg } = useI18n();
 
     return (
-        <Template
-            headerNode={msg("confirmLinkIdpTitle")}
-        >
+        <Template headerNode={msg("confirmLinkIdpTitle")}>
             <form id="kc-register-form" action={kcContext.url.loginAction} method="post">
                 <div className="flex flex-col gap-4">
                     <Button

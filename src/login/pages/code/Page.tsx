@@ -6,22 +6,20 @@ import { Button } from "@/components/ui/button";
 
 import { MdContentCopy } from "react-icons/md";
 
-import { useI18n } from '@/login/i18n';
-import { useKcContext } from '@/login/KcContext';
-import { useState } from 'react';
+import { useI18n } from "@/login/i18n";
+import { useKcContext } from "@/login/KcContext";
+import { useState } from "react";
 import { MdCheck } from "react-icons/md";
 import { assert } from "tsafe/assert";
 import { Template } from "../../components/Template";
 
 export function Page() {
-
     const { kcContext } = useKcContext();
     assert(kcContext.pageId === "code.ftl");
 
     const [copied, setCopied] = useState(false);
 
     const { msg } = useI18n();
-
 
     const handleCopy = async () => {
         try {
@@ -36,7 +34,9 @@ export function Page() {
     return (
         <Template
             headerNode={
-                kcContext.code.success ? msg("codeSuccessTitle") : msg("codeErrorTitle", kcContext.code.error)
+                kcContext.code.success
+                    ? msg("codeSuccessTitle")
+                    : msg("codeErrorTitle", kcContext.code.error)
             }
         >
             <div id="kc-code">

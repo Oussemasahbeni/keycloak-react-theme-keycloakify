@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { useI18n } from '@/login/i18n';
-import { useKcContext } from '@/login/KcContext';
+import { useI18n } from "@/login/i18n";
+import { useKcContext } from "@/login/KcContext";
 import { ChevronRight, Fingerprint, Globe, KeyRound, Shield } from "lucide-react";
 import { FaKey } from "react-icons/fa";
 import { assert } from "tsafe/assert";
@@ -58,10 +58,7 @@ export function Page() {
 
     const { msg, advancedMsg } = useI18n();
     return (
-        <Template
-            displayInfo={false}
-            headerNode={msg("loginChooseAuthenticator")}
-        >
+        <Template displayInfo={false} headerNode={msg("loginChooseAuthenticator")}>
             <form
                 id="kc-select-credential-form"
                 className="space-y-3"

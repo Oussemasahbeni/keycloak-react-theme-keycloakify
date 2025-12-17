@@ -1,4 +1,3 @@
-
 import { Field, FieldDescription, FieldLabel } from "@/components/ui/field";
 import type { Attribute } from "@keycloakify/login-ui/KcContext";
 import type { JSX } from "@keycloakify/login-ui/tools/JSX";
@@ -70,7 +69,9 @@ export function UserProfileFormFields(props: UserProfileFormFieldsProps) {
                             />
                         )}
                         <Field
-                            data-invalid={displayableErrors.length > 0 ? "true" : undefined}
+                            data-invalid={
+                                displayableErrors.length > 0 ? "true" : undefined
+                            }
                             style={{
                                 display:
                                     attribute.annotations.inputType === "hidden"
@@ -82,12 +83,15 @@ export function UserProfileFormFields(props: UserProfileFormFieldsProps) {
                                 {advancedMsg(attribute.displayName ?? "")}
                                 {attribute.required && <> *</>}
                             </FieldLabel>
-                            {attribute.annotations.inputHelperTextBefore !== undefined && (
+                            {attribute.annotations.inputHelperTextBefore !==
+                                undefined && (
                                 <FieldDescription
                                     id={`form-help-text-before-${attribute.name}`}
                                     aria-live="polite"
                                 >
-                                    {advancedMsg(attribute.annotations.inputHelperTextBefore)}
+                                    {advancedMsg(
+                                        attribute.annotations.inputHelperTextBefore
+                                    )}
                                 </FieldDescription>
                             )}
                             <InputFieldByType
@@ -106,7 +110,9 @@ export function UserProfileFormFields(props: UserProfileFormFieldsProps) {
                                     id={`form-help-text-after-${attribute.name}`}
                                     aria-live="polite"
                                 >
-                                    {advancedMsg(attribute.annotations.inputHelperTextAfter)}
+                                    {advancedMsg(
+                                        attribute.annotations.inputHelperTextAfter
+                                    )}
                                 </FieldDescription>
                             )}
                             {AfterField !== undefined && (

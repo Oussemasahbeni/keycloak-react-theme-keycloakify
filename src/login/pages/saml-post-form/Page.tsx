@@ -1,7 +1,7 @@
-import { useI18n } from '@/login/i18n';
-import { useKcContext } from '@/login/KcContext';
+import { useI18n } from "@/login/i18n";
+import { useKcContext } from "@/login/KcContext";
 import { useEffect, useState } from "react";
-import { assert } from 'tsafe/assert';
+import { assert } from "tsafe/assert";
 import { Template } from "../../components/Template";
 
 export function Page() {
@@ -29,9 +29,7 @@ export function Page() {
     }, [htmlFormElement]);
 
     return (
-        <Template
-            headerNode={msg("saml.post-form.title")}
-        >
+        <Template headerNode={msg("saml.post-form.title")}>
             <p>{msg("saml.post-form.message")}</p>
             <form
                 name="saml-post-binding"

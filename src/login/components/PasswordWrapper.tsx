@@ -1,7 +1,9 @@
-import { useI18n } from '@/login/i18n';
-import { useKcContext } from '@/login/KcContext';
+import { useI18n } from "@/login/i18n";
+import { useKcContext } from "@/login/KcContext";
 import { useIsPasswordRevealed } from "keycloakify/tools/useIsPasswordRevealed";
+import type { JSX } from 'react';
 import { FiEye, FiEyeOff } from "react-icons/fi";
+
 
 export function PasswordWrapper(props: {
     passwordInputId: string;
@@ -12,11 +14,9 @@ export function PasswordWrapper(props: {
 
     const { msgStr } = useI18n();
 
-
     const { isPasswordRevealed, toggleIsPasswordRevealed } = useIsPasswordRevealed({
         passwordInputId
     });
-
 
     return (
         <div className="relative">

@@ -1,11 +1,11 @@
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import { kcSanitize } from "@keycloakify/login-ui/kcSanitize";
 import { clsx } from "@keycloakify/login-ui/tools/clsx";
 import { useKcClsx } from "@keycloakify/login-ui/useKcClsx";
 import { assert } from "tsafe/assert";
 import { useI18n } from "../../i18n";
 import { useKcContext } from "../../KcContext";
-import useProviderLogos from './useProviderLogos';
+import useProviderLogos from "./useProviderLogos";
 
 /** To use this component make sure that kcContext.social exists */
 export function SocialProviders() {
@@ -14,7 +14,6 @@ export function SocialProviders() {
     assert("social" in kcContext && kcContext.social !== undefined);
 
     const providerLogos = useProviderLogos();
-
 
     const { msg } = useI18n();
 
@@ -41,20 +40,16 @@ export function SocialProviders() {
             </div>
             <ul
                 className={`mt-4! grid gap-2 sm:grid-cols-1 ${(kcContext.social?.providers?.length ?? 0) > 3 ? "sm:grid-cols-2" : ""}`}
-
             >
                 {kcContext.social.providers.map((...[p, , providers]) => (
                     <li key={p.alias}>
-                        <Button
-                            variant="outline"
-                            className="w-full hover:text-current"
-                        >
+                        <Button variant="outline" className="w-full hover:text-current">
                             <a
                                 id={`social-${p.alias}`}
                                 className={clsx(
                                     kcClsx(
                                         providers.length > 3 &&
-                                        "kcFormSocialAccountGridItem"
+                                            "kcFormSocialAccountGridItem"
                                     ),
                                     "flex items-center justify-center gap-2 "
                                 )}
@@ -64,22 +59,16 @@ export function SocialProviders() {
                                 <div className={"h-5 w-5"}>
                                     {providerLogos[p.alias] ? (
                                         <img
-                                            src={
-                                                providerLogos[p.alias]
-                                            }
+                                            src={providerLogos[p.alias]}
                                             alt={`${p.displayName} logo`}
-                                            className={
-                                                "h-full w-auto"
-                                            }
+                                            className={"h-full w-auto"}
                                         />
                                     ) : (
                                         // Fallback to the original iconClasses if the logo is not defined
                                         p.iconClasses && (
                                             <i
                                                 className={clsx(
-                                                    kcClsx(
-                                                        "kcCommonLogoIdP"
-                                                    ),
+                                                    kcClsx("kcCommonLogoIdP"),
                                                     p.iconClasses,
                                                     `text-provider-${p.alias}`
                                                 )}
@@ -91,15 +80,12 @@ export function SocialProviders() {
 
                                 <span
                                     dangerouslySetInnerHTML={{
-                                        __html: kcSanitize(
-                                            p.displayName
-                                        )
+                                        __html: kcSanitize(p.displayName)
                                     }}
                                 ></span>
                             </a>
                         </Button>
                     </li>
-
                 ))}
             </ul>
         </div>
