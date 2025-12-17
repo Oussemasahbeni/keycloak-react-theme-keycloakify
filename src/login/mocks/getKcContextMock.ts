@@ -1,9 +1,13 @@
 import { createGetKcContextMock } from "@keycloakify/login-ui/KcContext/getKcContextMock";
+import { kcEnvDefaults, themeNames } from "../../kc.gen";
 import type { KcContextExtension, KcContextExtensionPerPage } from "../KcContext";
-import { themeNames, kcEnvDefaults } from "../../kc.gen";
 
 const kcContextExtension: KcContextExtension = {
     themeName: themeNames[0],
+    client: {
+        baseUrl: "https://my-theme.keycloakify.dev"
+    },
+    darkMode: true,
     properties: {
         ...kcEnvDefaults
     }
