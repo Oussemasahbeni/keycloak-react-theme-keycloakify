@@ -12,32 +12,26 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-    render: () => <KcPageStory />
-};
+export const Default: Story = {};
 
 export const Arabic: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                locale: {
-                    currentLanguageTag: "ar",
-                    rtl: true
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "ar",
+                rtl: true
+            }
+        }
+    }
 };
 export const French: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                locale: {
-                    currentLanguageTag: "fr"
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "fr"
+            }
+        }
+    }
 };
 
 /**
@@ -47,17 +41,15 @@ export const French: Story = {
  * - Key Aspect: Ensures the retry functionality is available and the form allows the user to retry.
  */
 export const WithRetryAvailable: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                url: {
-                    loginAction: "/mock-login-action"
-                },
-                isSetRetry: true,
-                isAppInitiatedAction: false
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            url: {
+                loginAction: "/mock-login-action"
+            },
+            isSetRetry: true,
+            isAppInitiatedAction: false
+        }
+    }
 };
 
 /**
@@ -67,20 +59,18 @@ export const WithRetryAvailable: Story = {
  * - Key Aspect: Ensures the error message is displayed correctly, informing the user of the registration failure.
  */
 export const WithErrorDuringRegistration: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                url: {
-                    loginAction: "/mock-login-action"
-                },
-                isSetRetry: false,
-                isAppInitiatedAction: false,
-                message: {
-                    summary:
-                        "An error occurred during WebAuthn registration. Please try again.",
-                    type: "error"
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            url: {
+                loginAction: "/mock-login-action"
+            },
+            isSetRetry: false,
+            isAppInitiatedAction: false,
+            message: {
+                summary:
+                    "An error occurred during WebAuthn registration. Please try again.",
+                type: "error"
+            }
+        }
+    }
 };

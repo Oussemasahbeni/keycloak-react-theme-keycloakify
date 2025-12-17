@@ -12,32 +12,26 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-    render: () => <KcPageStory />
-};
+export const Default: Story = {};
 
 export const Arabic: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                locale: {
-                    currentLanguageTag: "ar",
-                    rtl: true
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "ar",
+                rtl: true
+            }
+        }
+    }
 };
 export const French: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                locale: {
-                    currentLanguageTag: "fr"
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "fr"
+            }
+        }
+    }
 };
 
 /**
@@ -47,38 +41,36 @@ export const French: Story = {
  * - Key Aspect: Ensures that the available authenticators are displayed, and the user can select one.
  */
 export const WithMultipleAuthenticators: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                url: {
-                    loginAction: "/mock-login-action"
-                },
-                authenticators: {
-                    authenticators: [
-                        {
-                            credentialId: "authenticator-1",
-                            label: "Security Key 1",
-                            transports: {
-                                iconClass: "kcAuthenticatorUsbIcon",
-                                displayNameProperties: ["USB"]
-                            },
-                            createdAt: "2023-01-01"
+    args: {
+        kcContext: {
+            url: {
+                loginAction: "/mock-login-action"
+            },
+            authenticators: {
+                authenticators: [
+                    {
+                        credentialId: "authenticator-1",
+                        label: "Security Key 1",
+                        transports: {
+                            iconClass: "kcAuthenticatorUsbIcon",
+                            displayNameProperties: ["USB"]
                         },
-                        {
-                            credentialId: "authenticator-2",
-                            label: "Security Key 2",
-                            transports: {
-                                iconClass: "kcAuthenticatorNfcIcon",
-                                displayNameProperties: ["NFC"]
-                            },
-                            createdAt: "2023-02-01"
-                        }
-                    ]
-                },
-                shouldDisplayAuthenticators: true
-            }}
-        />
-    )
+                        createdAt: "2023-01-01"
+                    },
+                    {
+                        credentialId: "authenticator-2",
+                        label: "Security Key 2",
+                        transports: {
+                            iconClass: "kcAuthenticatorNfcIcon",
+                            displayNameProperties: ["NFC"]
+                        },
+                        createdAt: "2023-02-01"
+                    }
+                ]
+            },
+            shouldDisplayAuthenticators: true
+        }
+    }
 };
 
 /**
@@ -88,29 +80,27 @@ export const WithMultipleAuthenticators: Story = {
  * - Key Aspect: Ensures the form renders correctly when there is only one authenticator available.
  */
 export const WithSingleAuthenticator: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                url: {
-                    loginAction: "/mock-login-action"
-                },
-                authenticators: {
-                    authenticators: [
-                        {
-                            credentialId: "authenticator-1",
-                            label: "My Security Key",
-                            transports: {
-                                iconClass: "kcAuthenticatorUsbIcon",
-                                displayNameProperties: ["USB"]
-                            },
-                            createdAt: "2023-01-01"
-                        }
-                    ]
-                },
-                shouldDisplayAuthenticators: true
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            url: {
+                loginAction: "/mock-login-action"
+            },
+            authenticators: {
+                authenticators: [
+                    {
+                        credentialId: "authenticator-1",
+                        label: "My Security Key",
+                        transports: {
+                            iconClass: "kcAuthenticatorUsbIcon",
+                            displayNameProperties: ["USB"]
+                        },
+                        createdAt: "2023-01-01"
+                    }
+                ]
+            },
+            shouldDisplayAuthenticators: true
+        }
+    }
 };
 
 /**
@@ -120,33 +110,31 @@ export const WithSingleAuthenticator: Story = {
  * - Key Aspect: Ensures the form handles authentication errors and displays a relevant message.
  */
 export const WithErrorDuringAuthentication: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                url: {
-                    loginAction: "/mock-login-action"
-                },
-                authenticators: {
-                    authenticators: [
-                        {
-                            credentialId: "authenticator-1",
-                            label: "My Security Key",
-                            transports: {
-                                iconClass: "kcAuthenticatorUsbIcon",
-                                displayNameProperties: ["USB"]
-                            },
-                            createdAt: "2023-01-01"
-                        }
-                    ]
-                },
-                shouldDisplayAuthenticators: true,
-                message: {
-                    summary: "An error occurred during WebAuthn authentication.",
-                    type: "error"
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            url: {
+                loginAction: "/mock-login-action"
+            },
+            authenticators: {
+                authenticators: [
+                    {
+                        credentialId: "authenticator-1",
+                        label: "My Security Key",
+                        transports: {
+                            iconClass: "kcAuthenticatorUsbIcon",
+                            displayNameProperties: ["USB"]
+                        },
+                        createdAt: "2023-01-01"
+                    }
+                ]
+            },
+            shouldDisplayAuthenticators: true,
+            message: {
+                summary: "An error occurred during WebAuthn authentication.",
+                type: "error"
+            }
+        }
+    }
 };
 
 /**
@@ -156,27 +144,25 @@ export const WithErrorDuringAuthentication: Story = {
  * - Key Aspect: Ensures the form provides a clear message when JavaScript is required but unavailable.
  */
 export const WithJavaScriptDisabled: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                url: {
-                    loginAction: "/mock-login-action"
-                },
-                authenticators: {
-                    authenticators: [
-                        {
-                            credentialId: "authenticator-1",
-                            label: "My Security Key",
-                            transports: {
-                                iconClass: "kcAuthenticatorUsbIcon",
-                                displayNameProperties: ["USB"]
-                            },
-                            createdAt: "2023-01-01"
-                        }
-                    ]
-                },
-                shouldDisplayAuthenticators: true
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            url: {
+                loginAction: "/mock-login-action"
+            },
+            authenticators: {
+                authenticators: [
+                    {
+                        credentialId: "authenticator-1",
+                        label: "My Security Key",
+                        transports: {
+                            iconClass: "kcAuthenticatorUsbIcon",
+                            displayNameProperties: ["USB"]
+                        },
+                        createdAt: "2023-01-01"
+                    }
+                ]
+            },
+            shouldDisplayAuthenticators: true
+        }
+    }
 };

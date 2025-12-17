@@ -23,6 +23,21 @@ export const Default: Story = {
     }
 };
 
+export const Arabic: Story = {
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "ar",
+                rtl: true
+            },
+            "x-keycloakify": {
+                messages: {
+                    termsText: "<p>شروطي باللغة <strong>العربية</strong></p>"
+                }
+            }
+        }
+    }
+};
 export const French: Story = {
     args: {
         kcContext: {

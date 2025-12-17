@@ -1,5 +1,5 @@
 import i18n from "i18next";
-import { GetMessages } from "keycloakify-emails";
+import type { GetMessages } from "keycloakify-emails";
 import { initReactI18next } from "react-i18next";
 
 import arTranslation from "./locales/ar/translation.json";

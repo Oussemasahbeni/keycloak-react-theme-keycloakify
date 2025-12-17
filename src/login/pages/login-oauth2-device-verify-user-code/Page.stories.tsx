@@ -13,32 +13,26 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-    render: () => <KcPageStory />
-};
+export const Default: Story = {};
 
 export const Arabic: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                locale: {
-                    currentLanguageTag: "ar",
-                    rtl: true
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "ar",
+                rtl: true
+            }
+        }
+    }
 };
 export const French: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                locale: {
-                    currentLanguageTag: "fr"
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "fr"
+            }
+        }
+    }
 };
 
 /**
@@ -48,19 +42,17 @@ export const French: Story = {
  * - Key Aspect: Ensures the error message is properly shown when the user enters an invalid code.
  */
 export const WithErrorMessage: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                url: {
-                    oauth2DeviceVerificationAction: "/mock-oauth2-device-verification"
-                },
-                message: {
-                    summary: "The user code you entered is invalid. Please try again.",
-                    type: "error"
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            url: {
+                oauth2DeviceVerificationAction: "/mock-oauth2-device-verification"
+            },
+            message: {
+                summary: "The user code you entered is invalid. Please try again.",
+                type: "error"
+            }
+        }
+    }
 };
 
 /**
@@ -70,17 +62,15 @@ export const WithErrorMessage: Story = {
  * - Key Aspect: Ensures the form displays validation errors when the field is left empty.
  */
 export const WithEmptyInputField: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                url: {
-                    oauth2DeviceVerificationAction: "/mock-oauth2-device-verification"
-                },
-                message: {
-                    summary: "User code cannot be empty. Please enter a valid code.",
-                    type: "error"
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            url: {
+                oauth2DeviceVerificationAction: "/mock-oauth2-device-verification"
+            },
+            message: {
+                summary: "User code cannot be empty. Please enter a valid code.",
+                type: "error"
+            }
+        }
+    }
 };

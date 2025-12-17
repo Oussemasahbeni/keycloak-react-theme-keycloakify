@@ -11,8 +11,27 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-    render: () => <KcPageStory />
+export const Default: Story = {};
+
+export const Arabic: Story = {
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "ar",
+                rtl: true
+            }
+        }
+    }
+};
+export const French: Story = {
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "fr",
+                rtl: false
+            }
+        }
+    }
 };
 
 /**
@@ -22,25 +41,23 @@ export const Default: Story = {
  * - Key Aspect: Ensures that when there are more than 3 organizations, they are displayed in a grid.
  */
 export const WithManyOrganizations: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                url: {
-                    loginAction: "/mock-login-action"
-                },
-                user: {
-                    organizations: [
-                        { alias: "org1", name: "Organization 1" },
-                        { alias: "org2", name: "Organization 2" },
-                        { alias: "org3", name: "Organization 3" },
-                        { alias: "org4", name: "Organization 4" },
-                        { alias: "org5", name: "Organization 5" },
-                        { alias: "org6", name: "Organization 6" }
-                    ]
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            url: {
+                loginAction: "/mock-login-action"
+            },
+            user: {
+                organizations: [
+                    { alias: "org1", name: "Organization 1" },
+                    { alias: "org2", name: "Organization 2" },
+                    { alias: "org3", name: "Organization 3" },
+                    { alias: "org4", name: "Organization 4" },
+                    { alias: "org5", name: "Organization 5" },
+                    { alias: "org6", name: "Organization 6" }
+                ]
+            }
+        }
+    }
 };
 
 /**
@@ -50,22 +67,20 @@ export const WithManyOrganizations: Story = {
  * - Key Aspect: Ensures that when there are 3 or fewer organizations, they are displayed in a list.
  */
 export const WithFewOrganizations: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                url: {
-                    loginAction: "/mock-login-action"
-                },
-                user: {
-                    organizations: [
-                        { alias: "org1", name: "Organization 1" },
-                        { alias: "org2", name: "Organization 2" },
-                        { alias: "org3", name: "Organization 3" }
-                    ]
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            url: {
+                loginAction: "/mock-login-action"
+            },
+            user: {
+                organizations: [
+                    { alias: "org1", name: "Organization 1" },
+                    { alias: "org2", name: "Organization 2" },
+                    { alias: "org3", name: "Organization 3" }
+                ]
+            }
+        }
+    }
 };
 
 /**
@@ -75,16 +90,14 @@ export const WithFewOrganizations: Story = {
  * - Key Aspect: Ensures that a single organization is displayed correctly.
  */
 export const WithSingleOrganization: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                url: {
-                    loginAction: "/mock-login-action"
-                },
-                user: {
-                    organizations: [{ alias: "org1", name: "My Organization" }]
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            url: {
+                loginAction: "/mock-login-action"
+            },
+            user: {
+                organizations: [{ alias: "org1", name: "My Organization" }]
+            }
+        }
+    }
 };

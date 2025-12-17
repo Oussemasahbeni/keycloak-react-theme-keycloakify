@@ -12,75 +12,65 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                messageHeader: "Message header",
-                message: {
-                    summary: "Server info message"
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            messageHeader: "Message header",
+            message: {
+                summary: "Server info message"
+            }
+        }
+    }
 };
 export const Arabic: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                locale: {
-                    currentLanguageTag: "ar",
-                    rtl: true
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "ar",
+                rtl: true
+            }
+        }
+    }
 };
 export const French: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                locale: {
-                    currentLanguageTag: "fr"
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "fr"
+            }
+        }
+    }
 };
 
 export const WithLinkBack: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                messageHeader: "Message header",
-                message: {
-                    summary: "Server message"
-                },
-                actionUri: undefined
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            messageHeader: "Message header",
+            message: {
+                summary: "Server message"
+            },
+            actionUri: undefined
+        }
+    }
 };
 
 export const WithRequiredActions: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                messageHeader: "Message header",
-                message: {
-                    summary: "Required actions: "
-                },
-                requiredActions: [
-                    "CONFIGURE_TOTP",
-                    "UPDATE_PROFILE",
-                    "VERIFY_EMAIL",
-                    "CUSTOM_ACTION"
-                ],
-                "x-keycloakify": {
-                    messages: {
-                        "requiredAction.CUSTOM_ACTION": "Custom action"
-                    }
+    args: {
+        kcContext: {
+            messageHeader: "Message header",
+            message: {
+                summary: "Required actions: "
+            },
+            requiredActions: [
+                "CONFIGURE_TOTP",
+                "UPDATE_PROFILE",
+                "VERIFY_EMAIL",
+                "CUSTOM_ACTION"
+            ],
+            "x-keycloakify": {
+                messages: {
+                    "requiredAction.CUSTOM_ACTION": "Custom action"
                 }
-            }}
-        />
-    )
+            }
+        }
+    }
 };

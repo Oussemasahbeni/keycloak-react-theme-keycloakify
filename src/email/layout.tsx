@@ -11,7 +11,7 @@ import {
     Text
 } from "jsx-email";
 import { createVariablesHelper } from "keycloakify-emails/variables";
-import { PropsWithChildren, ReactNode } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 import i18n from './i18n';
 import { primaryColor, companyLogo } from './constants';
 

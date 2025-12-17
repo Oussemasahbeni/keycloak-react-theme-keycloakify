@@ -1,9 +1,4 @@
-import { KcContextExtension } from '@/login/KcContext';
-import { KcContext } from '@keycloakify/login-ui/core/KcContext/KcContext';
-import { DeepPartial } from '@keycloakify/login-ui/tools/DeepPartial';
-import { JSX } from 'react/jsx-runtime';
 import { createKcPageStory, type Meta, type StoryObj } from "../../mocks/KcPageStory";
-
 
 const { KcPageStory } = createKcPageStory({ pageId: "login.ftl" });
 
@@ -16,350 +11,335 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-    render: (args: JSX.IntrinsicAttributes & { kcContext?: DeepPartial<KcContext.Common & { pageId: "login.ftl"; url: { loginResetCredentialsUrl: string; registrationUrl: string; }; realm: { loginWithEmailAllowed: boolean; rememberMe: boolean; password: boolean; resetPasswordAllowed: boolean; registrationAllowed: boolean; }; auth: { selectedCredential?: string; }; registrationDisabled: boolean; login: { username?: string; rememberMe?: string; password?: string; }; usernameHidden?: boolean; social?: { displayInfo: boolean; providers?: { loginUrl: string; alias: string; providerId: string; displayName: string; iconClasses?: string; }[]; }; enableWebAuthnConditionalUI?: boolean; authenticators?: { authenticators: KcContext.WebauthnAuthenticate.WebauthnAuthenticator[]; }; challenge: string; userVerification: KcContext.WebauthnAuthenticate["userVerification"]; rpId: string; createTimeout: number | string; isUserIdentified: "true" | "false"; shouldDisplayAuthenticators?: boolean; } & KcContextExtension> | undefined; }) => <KcPageStory {...args} />
+export const Default: Story = {};
+
+
+export const Arabic: Story = {
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "ar",
+                rtl: true
+            }
+        }
+    }
+};
+export const French: Story = {
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "fr",
+                rtl: false
+            }
+        }
+    }
 };
 
 export const WithInvalidCredential: Story = {
-    render: (args: JSX.IntrinsicAttributes & { kcContext?: DeepPartial<KcContext.Common & { pageId: "login.ftl"; url: { loginResetCredentialsUrl: string; registrationUrl: string; }; realm: { loginWithEmailAllowed: boolean; rememberMe: boolean; password: boolean; resetPasswordAllowed: boolean; registrationAllowed: boolean; }; auth: { selectedCredential?: string; }; registrationDisabled: boolean; login: { username?: string; rememberMe?: string; password?: string; }; usernameHidden?: boolean; social?: { displayInfo: boolean; providers?: { loginUrl: string; alias: string; providerId: string; displayName: string; iconClasses?: string; }[]; }; enableWebAuthnConditionalUI?: boolean; authenticators?: { authenticators: KcContext.WebauthnAuthenticate.WebauthnAuthenticator[]; }; challenge: string; userVerification: KcContext.WebauthnAuthenticate["userVerification"]; rpId: string; createTimeout: number | string; isUserIdentified: "true" | "false"; shouldDisplayAuthenticators?: boolean; } & KcContextExtension> | undefined; }) => (
-        <KcPageStory
-            {...args}
-            kcContext={{
-                login: {
-                    username: "johndoe"
+    args: {
+        kcContext: {
+            login: {
+                username: "johndoe"
+            },
+            messagesPerField: {
+                // NOTE: The other functions of messagesPerField are derived from get() and
+                // existsError() so they are the only ones that need to mock.
+                existsError: (fieldName: string, ...otherFieldNames: string[]) => {
+                    const fieldNames = [fieldName, ...otherFieldNames];
+                    return fieldNames.includes("username") || fieldNames.includes("password");
                 },
-                messagesPerField: {
-                    // NOTE: The other functions of messagesPerField are derived from get() and
-                    // existsError() so they are the only ones that need to mock.
-                    existsError: (fieldName: string, ...otherFieldNames: string[]) => {
-                        const fieldNames = [fieldName, ...otherFieldNames];
-                        return (
-                            fieldNames.includes("username") ||
-                            fieldNames.includes("password")
-                        );
-                    },
-                    get: (fieldName: string) => {
-                        if (fieldName === "username" || fieldName === "password") {
-                            return "Invalid username or password.";
-                        }
-                        return "";
+                get: (fieldName: string) => {
+                    if (fieldName === "username" || fieldName === "password") {
+                        return "Invalid username or password.";
                     }
+                    return "";
                 }
-            }}
-        />
-    )
+            }
+        }
+    }
 };
 
 export const WithoutRegistration: Story = {
-    render: (args: JSX.IntrinsicAttributes & { kcContext?: DeepPartial<KcContext.Common & { pageId: "login.ftl"; url: { loginResetCredentialsUrl: string; registrationUrl: string; }; realm: { loginWithEmailAllowed: boolean; rememberMe: boolean; password: boolean; resetPasswordAllowed: boolean; registrationAllowed: boolean; }; auth: { selectedCredential?: string; }; registrationDisabled: boolean; login: { username?: string; rememberMe?: string; password?: string; }; usernameHidden?: boolean; social?: { displayInfo: boolean; providers?: { loginUrl: string; alias: string; providerId: string; displayName: string; iconClasses?: string; }[]; }; enableWebAuthnConditionalUI?: boolean; authenticators?: { authenticators: KcContext.WebauthnAuthenticate.WebauthnAuthenticator[]; }; challenge: string; userVerification: KcContext.WebauthnAuthenticate["userVerification"]; rpId: string; createTimeout: number | string; isUserIdentified: "true" | "false"; shouldDisplayAuthenticators?: boolean; } & KcContextExtension> | undefined; }) => (
-        <KcPageStory
-            {...args}
-            kcContext={{
-                realm: { registrationAllowed: false }
-            }}
-        />
-    )
-};
-
-export const Arabic: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                locale: {
-                    currentLanguageTag: "ar",
-                    rtl: true
-                }
-            }}
-        />
-    )
-};
-export const French: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                locale: {
-                    currentLanguageTag: "fr"
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            realm: { registrationAllowed: false }
+        }
+    }
 };
 
 export const WithoutRememberMe: Story = {
-    render: (args: JSX.IntrinsicAttributes & { kcContext?: DeepPartial<KcContext.Common & { pageId: "login.ftl"; url: { loginResetCredentialsUrl: string; registrationUrl: string; }; realm: { loginWithEmailAllowed: boolean; rememberMe: boolean; password: boolean; resetPasswordAllowed: boolean; registrationAllowed: boolean; }; auth: { selectedCredential?: string; }; registrationDisabled: boolean; login: { username?: string; rememberMe?: string; password?: string; }; usernameHidden?: boolean; social?: { displayInfo: boolean; providers?: { loginUrl: string; alias: string; providerId: string; displayName: string; iconClasses?: string; }[]; }; enableWebAuthnConditionalUI?: boolean; authenticators?: { authenticators: KcContext.WebauthnAuthenticate.WebauthnAuthenticator[]; }; challenge: string; userVerification: KcContext.WebauthnAuthenticate["userVerification"]; rpId: string; createTimeout: number | string; isUserIdentified: "true" | "false"; shouldDisplayAuthenticators?: boolean; } & KcContextExtension> | undefined; }) => (
-        <KcPageStory
-            {...args}
-            kcContext={{
-                realm: { rememberMe: false }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            realm: { rememberMe: false }
+        }
+    }
 };
 
 export const WithoutPasswordReset: Story = {
-    render: (args: JSX.IntrinsicAttributes & { kcContext?: DeepPartial<KcContext.Common & { pageId: "login.ftl"; url: { loginResetCredentialsUrl: string; registrationUrl: string; }; realm: { loginWithEmailAllowed: boolean; rememberMe: boolean; password: boolean; resetPasswordAllowed: boolean; registrationAllowed: boolean; }; auth: { selectedCredential?: string; }; registrationDisabled: boolean; login: { username?: string; rememberMe?: string; password?: string; }; usernameHidden?: boolean; social?: { displayInfo: boolean; providers?: { loginUrl: string; alias: string; providerId: string; displayName: string; iconClasses?: string; }[]; }; enableWebAuthnConditionalUI?: boolean; authenticators?: { authenticators: KcContext.WebauthnAuthenticate.WebauthnAuthenticator[]; }; challenge: string; userVerification: KcContext.WebauthnAuthenticate["userVerification"]; rpId: string; createTimeout: number | string; isUserIdentified: "true" | "false"; shouldDisplayAuthenticators?: boolean; } & KcContextExtension> | undefined; }) => (
-        <KcPageStory
-            {...args}
-            kcContext={{
-                realm: { resetPasswordAllowed: false }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            realm: { resetPasswordAllowed: false }
+        }
+    }
 };
 
 export const WithEmailAsUsername: Story = {
-    render: (args: JSX.IntrinsicAttributes & { kcContext?: DeepPartial<KcContext.Common & { pageId: "login.ftl"; url: { loginResetCredentialsUrl: string; registrationUrl: string; }; realm: { loginWithEmailAllowed: boolean; rememberMe: boolean; password: boolean; resetPasswordAllowed: boolean; registrationAllowed: boolean; }; auth: { selectedCredential?: string; }; registrationDisabled: boolean; login: { username?: string; rememberMe?: string; password?: string; }; usernameHidden?: boolean; social?: { displayInfo: boolean; providers?: { loginUrl: string; alias: string; providerId: string; displayName: string; iconClasses?: string; }[]; }; enableWebAuthnConditionalUI?: boolean; authenticators?: { authenticators: KcContext.WebauthnAuthenticate.WebauthnAuthenticator[]; }; challenge: string; userVerification: KcContext.WebauthnAuthenticate["userVerification"]; rpId: string; createTimeout: number | string; isUserIdentified: "true" | "false"; shouldDisplayAuthenticators?: boolean; } & KcContextExtension> | undefined; }) => (
-        <KcPageStory
-            {...args}
-            kcContext={{
-                realm: { loginWithEmailAllowed: false }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            realm: { loginWithEmailAllowed: false }
+        }
+    }
 };
 
 export const WithPresetUsername: Story = {
-    render: (args: JSX.IntrinsicAttributes & { kcContext?: DeepPartial<KcContext.Common & { pageId: "login.ftl"; url: { loginResetCredentialsUrl: string; registrationUrl: string; }; realm: { loginWithEmailAllowed: boolean; rememberMe: boolean; password: boolean; resetPasswordAllowed: boolean; registrationAllowed: boolean; }; auth: { selectedCredential?: string; }; registrationDisabled: boolean; login: { username?: string; rememberMe?: string; password?: string; }; usernameHidden?: boolean; social?: { displayInfo: boolean; providers?: { loginUrl: string; alias: string; providerId: string; displayName: string; iconClasses?: string; }[]; }; enableWebAuthnConditionalUI?: boolean; authenticators?: { authenticators: KcContext.WebauthnAuthenticate.WebauthnAuthenticator[]; }; challenge: string; userVerification: KcContext.WebauthnAuthenticate["userVerification"]; rpId: string; createTimeout: number | string; isUserIdentified: "true" | "false"; shouldDisplayAuthenticators?: boolean; } & KcContextExtension> | undefined; }) => (
-        <KcPageStory
-            {...args}
-            kcContext={{
-                login: { username: "max.mustermann@mail.com" }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            login: { username: "max.mustermann@mail.com" }
+        }
+    }
 };
 
 export const WithImmutablePresetUsername: Story = {
-    render: (args: JSX.IntrinsicAttributes & { kcContext?: DeepPartial<KcContext.Common & { pageId: "login.ftl"; url: { loginResetCredentialsUrl: string; registrationUrl: string; }; realm: { loginWithEmailAllowed: boolean; rememberMe: boolean; password: boolean; resetPasswordAllowed: boolean; registrationAllowed: boolean; }; auth: { selectedCredential?: string; }; registrationDisabled: boolean; login: { username?: string; rememberMe?: string; password?: string; }; usernameHidden?: boolean; social?: { displayInfo: boolean; providers?: { loginUrl: string; alias: string; providerId: string; displayName: string; iconClasses?: string; }[]; }; enableWebAuthnConditionalUI?: boolean; authenticators?: { authenticators: KcContext.WebauthnAuthenticate.WebauthnAuthenticator[]; }; challenge: string; userVerification: KcContext.WebauthnAuthenticate["userVerification"]; rpId: string; createTimeout: number | string; isUserIdentified: "true" | "false"; shouldDisplayAuthenticators?: boolean; } & KcContextExtension> | undefined; }) => (
-        <KcPageStory
-            {...args}
-            kcContext={{
-                auth: {
-                    attemptedUsername: "max.mustermann@mail.com",
-                    showUsername: true
-                },
-                usernameHidden: true,
-                message: {
-                    type: "info",
-                    summary: "Please re-authenticate to continue"
-                }
-            }}
-        />
-    )
-};
-export const WithOneSocialProvider: Story = {
-    render: (args: JSX.IntrinsicAttributes & { kcContext?: DeepPartial<KcContext.Common & { pageId: "login.ftl"; url: { loginResetCredentialsUrl: string; registrationUrl: string; }; realm: { loginWithEmailAllowed: boolean; rememberMe: boolean; password: boolean; resetPasswordAllowed: boolean; registrationAllowed: boolean; }; auth: { selectedCredential?: string; }; registrationDisabled: boolean; login: { username?: string; rememberMe?: string; password?: string; }; usernameHidden?: boolean; social?: { displayInfo: boolean; providers?: { loginUrl: string; alias: string; providerId: string; displayName: string; iconClasses?: string; }[]; }; enableWebAuthnConditionalUI?: boolean; authenticators?: { authenticators: KcContext.WebauthnAuthenticate.WebauthnAuthenticator[]; }; challenge: string; userVerification: KcContext.WebauthnAuthenticate["userVerification"]; rpId: string; createTimeout: number | string; isUserIdentified: "true" | "false"; shouldDisplayAuthenticators?: boolean; } & KcContextExtension> | undefined; }) => (
-        <KcPageStory
-            {...args}
-            kcContext={{
-                social: {
-                    displayInfo: true,
-                    providers: [
-                        {
-                            loginUrl: "google",
-                            alias: "google",
-                            providerId: "google",
-                            displayName: "Google",
-                            iconClasses: "fa fa-google"
-                        }
-                    ]
-                }
-            }}
-        />
-    )
-};
-export const WithTwoSocialProviders: Story = {
-    render: (args: JSX.IntrinsicAttributes & { kcContext?: DeepPartial<KcContext.Common & { pageId: "login.ftl"; url: { loginResetCredentialsUrl: string; registrationUrl: string; }; realm: { loginWithEmailAllowed: boolean; rememberMe: boolean; password: boolean; resetPasswordAllowed: boolean; registrationAllowed: boolean; }; auth: { selectedCredential?: string; }; registrationDisabled: boolean; login: { username?: string; rememberMe?: string; password?: string; }; usernameHidden?: boolean; social?: { displayInfo: boolean; providers?: { loginUrl: string; alias: string; providerId: string; displayName: string; iconClasses?: string; }[]; }; enableWebAuthnConditionalUI?: boolean; authenticators?: { authenticators: KcContext.WebauthnAuthenticate.WebauthnAuthenticator[]; }; challenge: string; userVerification: KcContext.WebauthnAuthenticate["userVerification"]; rpId: string; createTimeout: number | string; isUserIdentified: "true" | "false"; shouldDisplayAuthenticators?: boolean; } & KcContextExtension> | undefined; }) => (
-        <KcPageStory
-            {...args}
-            kcContext={{
-                social: {
-                    displayInfo: true,
-                    providers: [
-                        {
-                            loginUrl: "google",
-                            alias: "google",
-                            providerId: "google",
-                            displayName: "Google",
-                            iconClasses: "fa fa-google"
-                        },
-                        {
-                            loginUrl: "linkedin",
-                            alias: "linkedin-openid-connect",
-                            providerId: "linkedin-openid-connect",
-                            displayName: "LinkedIn",
-                            iconClasses: "fa fa-linkedin"
-                        }
-                    ]
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            auth: {
+                attemptedUsername: "max.mustermann@mail.com",
+                showUsername: true
+            },
+            usernameHidden: true,
+            message: {
+                type: "info",
+                summary: "Please re-authenticate to continue"
+            }
+        }
+    }
 };
 
-export const WithTwoSocialProvidersArabic: Story = {
-    render: (args: JSX.IntrinsicAttributes & { kcContext?: DeepPartial<KcContext.Common & { pageId: "login.ftl"; url: { loginResetCredentialsUrl: string; registrationUrl: string; }; realm: { loginWithEmailAllowed: boolean; rememberMe: boolean; password: boolean; resetPasswordAllowed: boolean; registrationAllowed: boolean; }; auth: { selectedCredential?: string; }; registrationDisabled: boolean; login: { username?: string; rememberMe?: string; password?: string; }; usernameHidden?: boolean; social?: { displayInfo: boolean; providers?: { loginUrl: string; alias: string; providerId: string; displayName: string; iconClasses?: string; }[]; }; enableWebAuthnConditionalUI?: boolean; authenticators?: { authenticators: KcContext.WebauthnAuthenticate.WebauthnAuthenticator[]; }; challenge: string; userVerification: KcContext.WebauthnAuthenticate["userVerification"]; rpId: string; createTimeout: number | string; isUserIdentified: "true" | "false"; shouldDisplayAuthenticators?: boolean; } & KcContextExtension> | undefined; }) => (
-        <KcPageStory
-            {...args}
-            kcContext={{
-                locale: {
-                    currentLanguageTag: "ar",
-                    rtl: true
-                },
-                social: {
-                    displayInfo: true,
-                    providers: [
-                        {
-                            loginUrl: "google",
-                            alias: "google",
-                            providerId: "google",
-                            displayName: "Google",
-                            iconClasses: "fa fa-google"
-                        },
-                        {
-                            loginUrl: "linkedin",
-                            alias: "linkedin-openid-connect",
-                            providerId: "linkedin-openid-connect",
-                            displayName: "LinkedIn",
-                            iconClasses: "fa fa-linkedin"
-                        }
-                    ]
-                }
-            }}
-        />
-    )
-};
 export const WithSocialProviders: Story = {
-    render: (args: JSX.IntrinsicAttributes & { kcContext?: DeepPartial<KcContext.Common & { pageId: "login.ftl"; url: { loginResetCredentialsUrl: string; registrationUrl: string; }; realm: { loginWithEmailAllowed: boolean; rememberMe: boolean; password: boolean; resetPasswordAllowed: boolean; registrationAllowed: boolean; }; auth: { selectedCredential?: string; }; registrationDisabled: boolean; login: { username?: string; rememberMe?: string; password?: string; }; usernameHidden?: boolean; social?: { displayInfo: boolean; providers?: { loginUrl: string; alias: string; providerId: string; displayName: string; iconClasses?: string; }[]; }; enableWebAuthnConditionalUI?: boolean; authenticators?: { authenticators: KcContext.WebauthnAuthenticate.WebauthnAuthenticator[]; }; challenge: string; userVerification: KcContext.WebauthnAuthenticate["userVerification"]; rpId: string; createTimeout: number | string; isUserIdentified: "true" | "false"; shouldDisplayAuthenticators?: boolean; } & KcContextExtension> | undefined; }) => (
-        <KcPageStory
-            {...args}
-            kcContext={{
-                social: {
-                    displayInfo: true,
-                    providers: [
-                        {
-                            loginUrl: "google",
-                            alias: "google",
-                            providerId: "google",
-                            displayName: "Google",
-                            iconClasses: "fa fa-google"
-                        },
-                        {
-                            loginUrl: "microsoft",
-                            alias: "microsoft",
-                            providerId: "microsoft",
-                            displayName: "Microsoft",
-                            iconClasses: "fa fa-windows"
-                        },
-                        {
-                            loginUrl: "facebook",
-                            alias: "facebook",
-                            providerId: "facebook",
-                            displayName: "Facebook",
-                            iconClasses: "fa fa-facebook"
-                        },
-                        {
-                            loginUrl: "instagram",
-                            alias: "instagram",
-                            providerId: "instagram",
-                            displayName: "Instagram",
-                            iconClasses: "fa fa-instagram"
-                        },
-                        {
-                            loginUrl: "twitter",
-                            alias: "twitter",
-                            providerId: "twitter",
-                            displayName: "Twitter",
-                            iconClasses: "fa fa-twitter"
-                        },
-                        {
-                            loginUrl: "linkedin",
-                            alias: "linkedin-openid-connect",
-                            providerId: "linkedin-openid-connect",
-                            displayName: "LinkedIn",
-                            iconClasses: "fa fa-linkedin"
-                        },
-                        {
-                            loginUrl: "stackoverflow",
-                            alias: "stackoverflow",
-                            providerId: "stackoverflow",
-                            displayName: "Stackoverflow",
-                            iconClasses: "fa fa-stack-overflow"
-                        },
-                        {
-                            loginUrl: "github",
-                            alias: "github",
-                            providerId: "github",
-                            displayName: "Github",
-                            iconClasses: "fa fa-github"
-                        },
-                        {
-                            loginUrl: "gitlab",
-                            alias: "gitlab",
-                            providerId: "gitlab",
-                            displayName: "Gitlab",
-                            iconClasses: "fa fa-gitlab"
-                        },
-                        {
-                            loginUrl: "bitbucket",
-                            alias: "bitbucket",
-                            providerId: "bitbucket",
-                            displayName: "Bitbucket",
-                            iconClasses: "fa fa-bitbucket"
-                        },
-                        {
-                            loginUrl: "paypal",
-                            alias: "paypal",
-                            providerId: "paypal",
-                            displayName: "PayPal",
-                            iconClasses: "fa fa-paypal"
-                        },
-                        {
-                            loginUrl: "openshift",
-                            alias: "openshift-v4",
-                            providerId: "openshift-v4",
-                            displayName: "OpenShift",
-                            iconClasses: "fa fa-cloud"
-                        }
-                    ]
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            social: {
+                displayInfo: true,
+                providers: [
+                    {
+                        loginUrl: "google",
+                        alias: "google",
+                        providerId: "google",
+                        displayName: "Google",
+                        iconClasses: "fa fa-google"
+                    },
+                    {
+                        loginUrl: "microsoft",
+                        alias: "microsoft",
+                        providerId: "microsoft",
+                        displayName: "Microsoft",
+                        iconClasses: "fa fa-windows"
+                    },
+                    {
+                        loginUrl: "facebook",
+                        alias: "facebook",
+                        providerId: "facebook",
+                        displayName: "Facebook",
+                        iconClasses: "fa fa-facebook"
+                    },
+                    {
+                        loginUrl: "instagram",
+                        alias: "instagram",
+                        providerId: "instagram",
+                        displayName: "Instagram",
+                        iconClasses: "fa fa-instagram"
+                    },
+                    {
+                        loginUrl: "twitter",
+                        alias: "twitter",
+                        providerId: "twitter",
+                        displayName: "Twitter",
+                        iconClasses: "fa fa-twitter"
+                    },
+                    {
+                        loginUrl: "linkedin",
+                        alias: "linkedin",
+                        providerId: "linkedin",
+                        displayName: "LinkedIn",
+                        iconClasses: "fa fa-linkedin"
+                    },
+                    {
+                        loginUrl: "stackoverflow",
+                        alias: "stackoverflow",
+                        providerId: "stackoverflow",
+                        displayName: "Stackoverflow",
+                        iconClasses: "fa fa-stack-overflow"
+                    },
+                    {
+                        loginUrl: "github",
+                        alias: "github",
+                        providerId: "github",
+                        displayName: "Github",
+                        iconClasses: "fa fa-github"
+                    },
+                    {
+                        loginUrl: "gitlab",
+                        alias: "gitlab",
+                        providerId: "gitlab",
+                        displayName: "Gitlab",
+                        iconClasses: "fa fa-gitlab"
+                    },
+                    {
+                        loginUrl: "bitbucket",
+                        alias: "bitbucket",
+                        providerId: "bitbucket",
+                        displayName: "Bitbucket",
+                        iconClasses: "fa fa-bitbucket"
+                    },
+                    {
+                        loginUrl: "paypal",
+                        alias: "paypal",
+                        providerId: "paypal",
+                        displayName: "PayPal",
+                        iconClasses: "fa fa-paypal"
+                    },
+                    {
+                        loginUrl: "openshift",
+                        alias: "openshift",
+                        providerId: "openshift",
+                        displayName: "OpenShift",
+                        iconClasses: "fa fa-cloud"
+                    }
+                ]
+            }
+        }
+    }
 };
 
 export const WithoutPasswordField: Story = {
-    render: (args: JSX.IntrinsicAttributes & { kcContext?: DeepPartial<KcContext.Common & { pageId: "login.ftl"; url: { loginResetCredentialsUrl: string; registrationUrl: string; }; realm: { loginWithEmailAllowed: boolean; rememberMe: boolean; password: boolean; resetPasswordAllowed: boolean; registrationAllowed: boolean; }; auth: { selectedCredential?: string; }; registrationDisabled: boolean; login: { username?: string; rememberMe?: string; password?: string; }; usernameHidden?: boolean; social?: { displayInfo: boolean; providers?: { loginUrl: string; alias: string; providerId: string; displayName: string; iconClasses?: string; }[]; }; enableWebAuthnConditionalUI?: boolean; authenticators?: { authenticators: KcContext.WebauthnAuthenticate.WebauthnAuthenticator[]; }; challenge: string; userVerification: KcContext.WebauthnAuthenticate["userVerification"]; rpId: string; createTimeout: number | string; isUserIdentified: "true" | "false"; shouldDisplayAuthenticators?: boolean; } & KcContextExtension> | undefined; }) => (
-        <KcPageStory
-            {...args}
-            kcContext={{
-                realm: { password: false }
-            }}
-        />
-    )
-};
-
-export const WithWebauthn: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                enableWebAuthnConditionalUI: true
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            realm: { password: false }
+        }
+    }
 };
 
 export const WithErrorMessage: Story = {
-    render: (args: JSX.IntrinsicAttributes & { kcContext?: DeepPartial<KcContext.Common & { pageId: "login.ftl"; url: { loginResetCredentialsUrl: string; registrationUrl: string; }; realm: { loginWithEmailAllowed: boolean; rememberMe: boolean; password: boolean; resetPasswordAllowed: boolean; registrationAllowed: boolean; }; auth: { selectedCredential?: string; }; registrationDisabled: boolean; login: { username?: string; rememberMe?: string; password?: string; }; usernameHidden?: boolean; social?: { displayInfo: boolean; providers?: { loginUrl: string; alias: string; providerId: string; displayName: string; iconClasses?: string; }[]; }; enableWebAuthnConditionalUI?: boolean; authenticators?: { authenticators: KcContext.WebauthnAuthenticate.WebauthnAuthenticator[]; }; challenge: string; userVerification: KcContext.WebauthnAuthenticate["userVerification"]; rpId: string; createTimeout: number | string; isUserIdentified: "true" | "false"; shouldDisplayAuthenticators?: boolean; } & KcContextExtension> | undefined; }) => (
-        <KcPageStory
-            {...args}
-            kcContext={{
-                message: {
-                    summary:
-                        "The time allotted for the connection has elapsed.<br/>The login process will restart from the beginning.",
-                    type: "error"
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            message: {
+                summary:
+                    "The time allotted for the connection has elapsed.<br/>The login process will restart from the beginning.",
+                type: "error"
+            }
+        }
+    }
+};
+
+export const WithOneSocialProvider: Story = {
+    args: {
+        kcContext: {
+            social: {
+                displayInfo: true,
+                providers: [
+                    {
+                        loginUrl: "google",
+                        alias: "google",
+                        providerId: "google",
+                        displayName: "Google",
+                        iconClasses: "fa fa-google"
+                    }
+                ]
+            }
+        }
+    }
+};
+
+export const WithTwoSocialProviders: Story = {
+    args: {
+        kcContext: {
+            social: {
+                displayInfo: true,
+                providers: [
+                    {
+                        loginUrl: "google",
+                        alias: "google",
+                        providerId: "google",
+                        displayName: "Google",
+                        iconClasses: "fa fa-google"
+                    },
+                    {
+                        loginUrl: "microsoft",
+                        alias: "microsoft",
+                        providerId: "microsoft",
+                        displayName: "Microsoft",
+                        iconClasses: "fa fa-windows"
+                    }
+                ]
+            }
+        }
+    }
+};
+export const WithNoSocialProviders: Story = {
+    args: {
+        kcContext: {
+            social: {
+                displayInfo: true,
+                providers: []
+            }
+        }
+    }
+};
+export const WithMoreThanTwoSocialProviders: Story = {
+    args: {
+        kcContext: {
+            social: {
+                displayInfo: true,
+                providers: [
+                    {
+                        loginUrl: "google",
+                        alias: "google",
+                        providerId: "google",
+                        displayName: "Google",
+                        iconClasses: "fa fa-google"
+                    },
+                    {
+                        loginUrl: "microsoft",
+                        alias: "microsoft",
+                        providerId: "microsoft",
+                        displayName: "Microsoft",
+                        iconClasses: "fa fa-windows"
+                    },
+                    {
+                        loginUrl: "facebook",
+                        alias: "facebook",
+                        providerId: "facebook",
+                        displayName: "Facebook",
+                        iconClasses: "fa fa-facebook"
+                    },
+                    {
+                        loginUrl: "twitter",
+                        alias: "twitter",
+                        providerId: "twitter",
+                        displayName: "Twitter",
+                        iconClasses: "fa fa-twitter"
+                    }
+                ]
+            }
+        }
+    }
+};
+export const WithSocialProvidersAndWithoutRememberMe: Story = {
+    args: {
+        kcContext: {
+            social: {
+                displayInfo: true,
+                providers: [
+                    {
+                        loginUrl: "google",
+                        alias: "google",
+                        providerId: "google",
+                        displayName: "Google",
+                        iconClasses: "fa fa-google"
+                    }
+                ]
+            },
+            realm: { rememberMe: false }
+        }
+    }
 };

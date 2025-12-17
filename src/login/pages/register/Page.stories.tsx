@@ -1,8 +1,4 @@
-import { KcContextExtension } from '@/login/KcContext';
-import { KcContext } from '@keycloakify/login-ui/core/KcContext/KcContext';
-import type { Attribute, PasswordPolicies, UserProfile } from "@keycloakify/login-ui/KcContext";
-import { DeepPartial } from '@keycloakify/login-ui/tools/DeepPartial';
-import { JSX } from 'react/jsx-runtime';
+import type { Attribute } from "@keycloakify/login-ui/KcContext";
 import { createKcPageStory, type Meta, type StoryObj } from "../../mocks/KcPageStory";
 
 const { KcPageStory } = createKcPageStory({ pageId: "register.ftl" });
@@ -17,6 +13,27 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
+
+export const Arabic: Story = {
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "ar",
+                rtl: true
+            }
+        }
+    }
+};
+export const French: Story = {
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "fr",
+                rtl: false
+            }
+        }
+    }
+};
 
 export const WithEmailAlreadyExists: Story = {
     args: {
@@ -200,7 +217,7 @@ export const WithTermsAcceptance: Story = {
     }
 };
 export const WithTermsNotAccepted: Story = {
-    render: (args: JSX.IntrinsicAttributes & { kcContext?: DeepPartial<KcContext.Common & { pageId: "register.ftl"; profile: UserProfile; passwordPolicies?: PasswordPolicies; url: { registrationAction: string; }; passwordRequired: boolean; recaptchaRequired?: boolean; recaptchaVisible?: boolean; recaptchaSiteKey?: string; recaptchaAction?: string; termsAcceptanceRequired?: boolean; messageHeader?: string; social?: KcContext.Login["social"]; } & KcContextExtension> | undefined; }) => (
+    render: args => (
         <KcPageStory
             {...args}
             kcContext={{

@@ -40,31 +40,29 @@ type Story = StoryObj<typeof meta>;
  * - Key Aspect: Ensures the component works with a realistic `logoUri` and client name.
  */
 export const Default: Story = {
-    render: () => <KcPageStory kcContext={mockKcContext} />
+    args: {
+        kcContext: mockKcContext
+    }
 };
 
 export const Arabic: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                locale: {
-                    currentLanguageTag: "ar",
-                    rtl: true
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "ar",
+                rtl: true
+            }
+        }
+    }
 };
 export const French: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                locale: {
-                    currentLanguageTag: "fr"
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "fr"
+            }
+        }
+    }
 };
 
 /**
@@ -74,17 +72,15 @@ export const French: Story = {
  * - Key Aspect: Ensures the component renders correctly when there are no requested scopes.
  */
 export const WithoutScopes: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                ...mockKcContext,
-                oauth: {
-                    ...mockKcContext.oauth,
-                    clientScopesRequested: []
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            ...mockKcContext,
+            oauth: {
+                ...mockKcContext.oauth,
+                clientScopesRequested: []
+            }
+        }
+    }
 };
 
 /**
@@ -94,18 +90,16 @@ export const WithoutScopes: Story = {
  * - Key Aspect: Ensures that the component can display error messages when form submission fails.
  */
 export const WithFormSubmissionError: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                ...mockKcContext,
-                url: {
-                    oauthAction: "/error"
-                },
-                message: {
-                    type: "error",
-                    summary: "An error occurred during form submission."
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            ...mockKcContext,
+            url: {
+                oauthAction: "/error"
+            },
+            message: {
+                type: "error",
+                summary: "An error occurred during form submission."
+            }
+        }
+    }
 };

@@ -27,31 +27,29 @@ type Story = StoryObj<typeof meta>;
  * - Key Aspect: Ensures the default behavior of the component with standard values for kcContext.
  */
 export const Default: Story = {
-    render: () => <KcPageStory kcContext={mockKcContext} />
+    args: {
+        kcContext: mockKcContext
+    }
 };
 
 export const Arabic: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                locale: {
-                    currentLanguageTag: "ar",
-                    rtl: true
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "ar",
+                rtl: true
+            }
+        }
+    }
 };
 export const French: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                locale: {
-                    currentLanguageTag: "fr"
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "fr"
+            }
+        }
+    }
 };
 
 /**
@@ -61,18 +59,16 @@ export const French: Story = {
  * - Key Aspect: Verifies that the component can display error messages during form submission failure, ensuring proper error handling.
  */
 export const WithFormSubmissionError: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                ...mockKcContext,
-                url: {
-                    loginAction: "/error"
-                },
-                message: {
-                    type: "error",
-                    summary: "An error occurred during form submission."
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            ...mockKcContext,
+            url: {
+                loginAction: "/error"
+            },
+            message: {
+                type: "error",
+                summary: "An error occurred during form submission."
+            }
+        }
+    }
 };

@@ -7,43 +7,39 @@ const meta = {
     component: KcPageStory
 } satisfies Meta<typeof KcPageStory>;
 
+
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-    render: () => <KcPageStory />
-};
+export const Default: Story = {};
+
 export const Arabic: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                locale: {
-                    currentLanguageTag: "ar",
-                    rtl: true
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "ar",
+                rtl: true
+            }
+        }
+    }
 };
 export const French: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                locale: {
-                    currentLanguageTag: "fr"
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "fr",
+                rtl: false
+            }
+        }
+    }
 };
+
 export const WithCustomCredentialLabel: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                credentialLabel: "Test Credential",
-                url: { loginAction: "/login-action" }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            credentialLabel: "Test Credential",
+            url: { loginAction: "/login-action" }
+        }
+    }
 };

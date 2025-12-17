@@ -12,32 +12,26 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-    render: () => <KcPageStory />
-};
+export const Default: Story = {};
 
 export const Arabic: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                locale: {
-                    currentLanguageTag: "ar",
-                    rtl: true
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "ar",
+                rtl: true
+            }
+        }
+    }
 };
 export const French: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                locale: {
-                    currentLanguageTag: "fr"
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "fr"
+            }
+        }
+    }
 };
 
 /**
@@ -47,20 +41,18 @@ export const French: Story = {
  * - Key Aspect: Ensures that the login buttons are not displayed when the user is not enabled.
  */
 export const WithoutUserEnabled: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                url: {
-                    loginAction: "/mock-login-action"
-                },
-                x509: {
-                    formData: {
-                        subjectDN: "CN=John Doe, OU=Example Org, O=Example Inc, C=US",
-                        username: "johndoe",
-                        isUserEnabled: false // User not enabled for login
-                    }
+    args: {
+        kcContext: {
+            url: {
+                loginAction: "/mock-login-action"
+            },
+            x509: {
+                formData: {
+                    subjectDN: "CN=John Doe, OU=Example Org, O=Example Inc, C=US",
+                    username: "johndoe",
+                    isUserEnabled: false // User not enabled for login
                 }
-            }}
-        />
-    )
+            }
+        }
+    }
 };

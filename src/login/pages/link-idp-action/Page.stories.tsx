@@ -12,23 +12,39 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                idpDisplayName: "GitHub",
-                url: { loginAction: "/mock-login-action" }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            idpDisplayName: "GitHub",
+            url: { loginAction: "/mock-login-action" }
+        }
+    }
+};
+
+export const Arabic: Story = {
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "ar",
+                rtl: true
+            }
+        }
+    }
+};
+export const French: Story = {
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "fr"
+            }
+        }
+    }
 };
 
 export const DifferentProvider: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                idpDisplayName: "Google",
-                url: { loginAction: "/custom-login-action" }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            idpDisplayName: "Google",
+            url: { loginAction: "/custom-login-action" }
+        }
+    }
 };

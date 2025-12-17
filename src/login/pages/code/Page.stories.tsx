@@ -11,8 +11,28 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-    render: () => <KcPageStory />
+export const Default: Story = {};
+
+export const Arabic: Story = {
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "ar",
+                rtl: true
+            }
+        }
+    }
+};
+
+export const French: Story = {
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "fr",
+                rtl: false
+            }
+        }
+    }
 };
 
 
@@ -25,75 +45,43 @@ export const Default: Story = {
  * preference is set to dark.
  */
 export const WithDarkModeForbidden: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                darkMode: false
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            darkMode: false
+        }
+    }
 };
-
 
 export const WithErrorCode: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                code: {
-                    success: false,
-                    error: "Failed to generate code"
-                }
-            }}
-        />
-    )
-};
-export const Arabic: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                locale: {
-                    currentLanguageTag: "ar",
-                    rtl: true
-                }
-            }}
-        />
-    )
-};
-export const French: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                locale: {
-                    currentLanguageTag: "fr"
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            code: {
+                success: false,
+                error: "Failed to generate code"
+            }
+        }
+    }
 };
 export const WithFrenchLanguage: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                locale: {
-                    currentLanguageTag: "fr"
-                },
-                code: {
-                    success: true,
-                    code: "XYZ789"
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            locale: {
+                currentLanguageTag: "fr"
+            },
+            code: {
+                success: true,
+                code: "XYZ789"
+            }
+        }
+    }
 };
 export const WithHtmlErrorMessage: Story = {
-    render: () => (
-        <KcPageStory
-            kcContext={{
-                code: {
-                    success: false,
-                    error: "Something went wrong. <a href='https://example.com'>Try again</a>"
-                }
-            }}
-        />
-    )
+    args: {
+        kcContext: {
+            code: {
+                success: false,
+                error: "Something went wrong. <a href='https://example.com'>Try again</a>"
+            }
+        }
+    }
 };
