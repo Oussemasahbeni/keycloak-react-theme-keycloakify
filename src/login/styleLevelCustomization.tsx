@@ -1,6 +1,7 @@
 import { ThemeProvider } from "@/components/theme-provider";
 import type { ClassKey } from "@keycloakify/login-ui/useKcClsx";
 import type { ReactNode } from "react";
+import "./index.css";
 import { useKcContext } from "./KcContext";
 import { getTheme } from "./shared/getColorScheme";
 

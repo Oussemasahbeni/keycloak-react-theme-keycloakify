@@ -49,8 +49,8 @@ export function Form() {
                                         {!kcContext.realm.loginWithEmailAllowed
                                             ? msg("email")
                                             : !kcContext.realm.registrationEmailAsUsername
-                                              ? msg("usernameOrEmail")
-                                              : msg("username")}
+                                                ? msg("usernameOrEmail")
+                                                : msg("username")}
                                     </FieldLabel>
                                     <Input
                                         tabIndex={2}
@@ -69,21 +69,21 @@ export function Form() {
                                         "username",
                                         "password"
                                     ) && (
-                                        <FieldError>
-                                            <span
-                                                id="input-error"
-                                                aria-live="polite"
-                                                dangerouslySetInnerHTML={{
-                                                    __html: kcSanitize(
-                                                        kcContext.messagesPerField.getFirstError(
-                                                            "username",
-                                                            "password"
+                                            <FieldError>
+                                                <span
+                                                    id="input-error"
+                                                    aria-live="polite"
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: kcSanitize(
+                                                            kcContext.messagesPerField.getFirstError(
+                                                                "username",
+                                                                "password"
+                                                            )
                                                         )
-                                                    )
-                                                }}
-                                            />
-                                        </FieldError>
-                                    )}
+                                                    }}
+                                                />
+                                            </FieldError>
+                                        )}
                                 </Field>
                             )}
 
@@ -108,46 +108,44 @@ export function Form() {
                                     "username",
                                     "password"
                                 ) && (
-                                    <FieldError>
-                                        <span
-                                            id="input-error"
-                                            aria-live="polite"
-                                            dangerouslySetInnerHTML={{
-                                                __html: kcSanitize(
-                                                    kcContext.messagesPerField.getFirstError(
-                                                        "username",
-                                                        "password"
+                                        <FieldError>
+                                            <span
+                                                id="input-error"
+                                                aria-live="polite"
+                                                dangerouslySetInnerHTML={{
+                                                    __html: kcSanitize(
+                                                        kcContext.messagesPerField.getFirstError(
+                                                            "username",
+                                                            "password"
+                                                        )
                                                     )
-                                                )
-                                            }}
-                                        />
-                                    </FieldError>
-                                )}
+                                                }}
+                                            />
+                                        </FieldError>
+                                    )}
                             </Field>
 
                             <div className=" space-y-1 my-3 flex justify-between text-xs  ">
-                                <div>
-                                    {kcContext.realm.rememberMe &&
-                                        !kcContext.usernameHidden && (
-                                            <div className="flex items-center space-x-2 ">
-                                                <Checkbox
-                                                    tabIndex={5}
-                                                    id="rememberMe"
-                                                    name="rememberMe"
-                                                    defaultChecked={
-                                                        !!kcContext.login.rememberMe
-                                                    }
-                                                />
+                                {kcContext.realm.rememberMe &&
+                                    !kcContext.usernameHidden && (
+                                        <div className="flex items-center space-x-2 ">
+                                            <Checkbox
+                                                tabIndex={5}
+                                                id="rememberMe"
+                                                name="rememberMe"
+                                                defaultChecked={
+                                                    !!kcContext.login.rememberMe
+                                                }
+                                            />
 
-                                                <Label
-                                                    htmlFor="rememberMe"
-                                                    className="text-sm font-medium cursor-pointer"
-                                                >
-                                                    {msg("rememberMe")}
-                                                </Label>
-                                            </div>
-                                        )}
-                                </div>
+                                            <Label
+                                                htmlFor="rememberMe"
+                                                className="text-sm font-medium cursor-pointer"
+                                            >
+                                                {msg("rememberMe")}
+                                            </Label>
+                                        </div>
+                                    )}
                                 <div className="link-style ">
                                     {kcContext.realm.resetPasswordAllowed && (
                                         <span className=" underline-offset-4 hover:underline">

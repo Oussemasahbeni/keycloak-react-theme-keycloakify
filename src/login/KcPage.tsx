@@ -4,7 +4,6 @@ import type { ReactNode } from "react";
 import { assert } from "tsafe/assert";
 import { type KcContext, KcContextProvider } from "./KcContext";
 import { I18nProvider } from "./i18n";
-import "./index.css";
 import { PageIndex } from "./pages/PageIndex";
 import { useStyleLevelCustomization } from "./styleLevelCustomization";
 

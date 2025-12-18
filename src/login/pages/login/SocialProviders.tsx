@@ -1,3 +1,4 @@
+import { cn } from '@/components/lib/utils';
 import { Button } from "@/components/ui/button";
 import { kcSanitize } from "@keycloakify/login-ui/kcSanitize";
 import { clsx } from "@keycloakify/login-ui/tools/clsx";
@@ -39,7 +40,7 @@ export function SocialProviders() {
                 <div className="mt-px flex-auto border-t"></div>
             </div>
             <ul
-                className={`mt-4! grid gap-2 sm:grid-cols-1 ${(kcContext.social?.providers?.length ?? 0) > 3 ? "sm:grid-cols-2" : ""}`}
+                className={`mt-4! grid gap-3 sm:grid-cols-1 ${(kcContext.social?.providers?.length ?? 0) > 3 ? "sm:grid-cols-2" : ""}`}
             >
                 {kcContext.social.providers.map((...[p, , providers]) => (
                     <li key={p.alias}>
@@ -49,9 +50,9 @@ export function SocialProviders() {
                                 className={clsx(
                                     kcClsx(
                                         providers.length > 3 &&
-                                            "kcFormSocialAccountGridItem"
+                                        "kcFormSocialAccountGridItem"
                                     ),
-                                    "flex items-center justify-center gap-2 "
+                                    "flex items-center justify-center gap-3 "
                                 )}
                                 type="button"
                                 href={p.loginUrl}
@@ -61,7 +62,11 @@ export function SocialProviders() {
                                         <img
                                             src={providerLogos[p.alias]}
                                             alt={`${p.displayName} logo`}
-                                            className={"h-full w-auto"}
+                                            className={cn(
+                                                "h-full w-auto",
+                                                // Invert specific icons in dark mode
+                                                (p.alias === "github" || p.alias === "x" || p.alias === "twitter") && "dark:invert"
+                                            )}
                                         />
                                     ) : (
                                         // Fallback to the original iconClasses if the logo is not defined

@@ -1,81 +1,89 @@
+import { cn } from "@/components/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 import { AlertTriangle, Info, XCircle } from "lucide-react";
 import * as React from "react";
 import { MdCheckCircle } from "react-icons/md";
 
-import { cn } from "@/components/lib/utils";
-
 const alertVariants = cva(
-    "relative w-full rounded-lg border p-4 text-sm [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg~*]:pl-7",
+    "relative w-full rounded-lg border px-5 py-4 text-sm flex items-center gap-4 transition-all",
     {
         variants: {
             variant: {
                 info: "bg-card text-card-foreground",
-                error: "border-red-200 bg-red-50 text-red-800 dark:border-red-800 dark:bg-red-950/50 dark:text-red-300 [&>svg]:text-red-800 dark:[&>svg]:text-red-300",
-                warning:
-                    "border-amber-200 bg-amber-50 text-amber-800 dark:border-amber-800 dark:bg-amber-950/50 dark:text-amber-300 [&>svg]:text-amber-800 dark:[&>svg]:text-amber-300",
-                success:
-                    "border-green-200 bg-green-50 text-green-800 dark:border-green-800 dark:bg-green-950/50 dark:text-green-300 [&>svg]:text-green-800 dark:[&>svg]:text-green-300"
-            }
+                success: "bg-emerald-50/50 border-emerald-200 text-emerald-900 dark:bg-emerald-500/5 dark:border-emerald-500/20 dark:text-emerald-400",
+                warning: "bg-amber-50/50 border-amber-200 text-amber-900 dark:bg-amber-500/5 dark:border-amber-500/20 dark:text-amber-400",
+                error: "bg-destructive/5 border-destructive/20 text-destructive",
+            },
         },
         defaultVariants: {
-            variant: "info"
-        }
+            variant: "info",
+        },
     }
 );
 
-const Alert = React.forwardRef<
-    HTMLDivElement,
-    React.HTMLAttributes<HTMLDivElement> &
-        VariantProps<typeof alertVariants> & { showIcon?: boolean }
->(({ className, showIcon = true, variant, ...props }, ref) => (
-    <div
-        ref={ref}
-        role="alert"
-        className={cn(alertVariants({ variant }), className)}
-        {...props}
-    >
-        <div className="flex items-start gap-3">
-            {showIcon && (
-                <>
-                    {variant === "info" && <Info className="h-5 w-5 shrink-0" />}
-                    {variant === "error" && <XCircle className="h-5 w-5 shrink-0" />}
-                    {variant === "warning" && (
-                        <AlertTriangle className="h-5 w-5 shrink-0" />
-                    )}
-                    {variant === "success" && (
-                        <MdCheckCircle className="h-5 w-5 shrink-0" />
-                    )}
-                </>
-            )}
-            {props.children}
+interface AlertProps
+    extends React.ComponentProps<"div">,
+    VariantProps<typeof alertVariants> {
+    showIcon?: boolean;
+}
+
+function Alert({
+    className,
+    variant = "info",
+    showIcon = true,
+    children,
+    ...props
+}: AlertProps) {
+    const Icon = {
+        info: Info,
+        error: XCircle,
+        warning: AlertTriangle,
+        success: MdCheckCircle,
+    }[variant as string] || Info;
+
+    return (
+        <div
+            data-slot="alert"
+            role="alert"
+            className={cn(alertVariants({ variant }), className)}
+            {...props}
+        >
+            {showIcon && <Icon className="size-5 shrink-0" data-slot="alert-icon" />}
+            {/* We use a div wrapper for children to ensure Title and Description stack vertically */}
+            <div className="flex flex-col gap-0.5 flex-1">
+                {children}
+            </div>
         </div>
-    </div>
-));
-Alert.displayName = "Alert";
+    );
+}
 
-const AlertTitle = React.forwardRef<
-    HTMLParagraphElement,
-    React.HTMLAttributes<HTMLHeadingElement>
->(({ className, ...props }, ref) => (
-    <h5
-        ref={ref}
-        className={cn("mb-1 font-medium leading-none tracking-tight", className)}
-        {...props}
-    />
-));
-AlertTitle.displayName = "AlertTitle";
+function AlertTitle({ className, ...props }: React.ComponentProps<"div">) {
+    return (
+        <div
+            data-slot="alert-title"
+            className={cn(
+                "font-medium leading-none tracking-tight",
+                className
+            )}
+            {...props}
+        />
+    );
+}
 
-const AlertDescription = React.forwardRef<
-    HTMLParagraphElement,
-    React.HTMLAttributes<HTMLParagraphElement>
->(({ className, ...props }, ref) => (
-    <div
-        ref={ref}
-        className={cn("text-sm [&_p]:leading-relaxed", className)}
-        {...props}
-    />
-));
-AlertDescription.displayName = "AlertDescription";
+function AlertDescription({
+    className,
+    ...props
+}: React.ComponentProps<"div">) {
+    return (
+        <div
+            data-slot="alert-description"
+            className={cn(
+                "text-muted-foreground text-sm [&_p]:leading-relaxed",
+                className
+            )}
+            {...props}
+        />
+    );
+}
 
 export { Alert, AlertDescription, AlertTitle };

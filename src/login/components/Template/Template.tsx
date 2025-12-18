@@ -108,7 +108,7 @@ export function Template(props: {
                 <div className="flex flex-1 items-start lg:items-center justify-center lg:mt-0 ">
                     <div className="w-full max-w-xl ">
                         <Card className=" shadow-none bg-transparent lg:bg-card border-0 lg:rounded-lg lg:border lg:shadow-sm rounded-t-2xl">
-                            <CardHeader className="text-center mb-3 px-6 pt-8 pb-4 lg:pt-6">
+                            <CardHeader className="text-center">
                                 <CardTitle>
                                     {(() => {
                                         const node = !(
@@ -182,7 +182,7 @@ export function Template(props: {
                                     })()}
                                 </CardTitle>
                             </CardHeader>
-                            <CardContent className="px-6 pb-8">
+                            <CardContent >
                                 <div id="kc-content">
                                     <div id="kc-content-wrapper">
                                         {displayMessage &&
