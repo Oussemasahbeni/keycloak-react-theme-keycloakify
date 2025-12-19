@@ -1,6 +1,11 @@
 # This file is managed by Keycloakify, do not edit it manually.
 
 # === Owned files start ===
+# login/js/authChecker.js
+# login/js/passkeysConditionalAuth.js
+# login/js/rfc4648.js
+# login/js/webauthnAuthenticate.js
+# login/js/webauthnRegister.js
 # === Owned files end =====
 
 # === @keycloakify/login-ui v250004.6.5 ===
@@ -14,18 +19,13 @@
 /login/img/keycloak-bg.png
 /login/img/keycloak-logo-text.png
 /login/img/keycloak-logo.png
-/login/js/authChecker.js
 /login/js/common.js
 /login/js/kcMultivalued.js
 /login/js/kcNumberFormat.js
 /login/js/kcNumberUnFormat.js
 /login/js/menu-button-links.js
-/login/js/passkeysConditionalAuth.js
 /login/js/passwordVisibility.js
-/login/js/rfc4648.js
 /login/js/userProfile.js
-/login/js/webauthnAuthenticate.js
-/login/js/webauthnRegister.js
 /login/resources-common/img/favicon.ico
 /login/resources-common/lib/pficon/pficon.css
 /login/resources-common/lib/pficon/pficon.woff2

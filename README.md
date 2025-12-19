@@ -1,24 +1,157 @@
-<p align="center">
-  <img src="src/login/assets/img/auth-logo.svg" alt="Planingo Logo" width="200"/>
-</p>
+# Keycloakify Shadcn Starter
 
-Keycloak React Theme
+A modern, production-ready Keycloak login theme built with React, TypeScript, Tailwind CSS v4, shadcn/ui, and Keycloakify v11.
 
-A modern, customizable Keycloak login theme built with React, Tailwind CSS, and Keycloakify v11</strong>
+**npm Package:** [@oussemasahbeni/keycloakify-login-shadcn](https://www.npmjs.com/package/@oussemasahbeni/keycloakify-login-shadcn)
 
 ---
 
 ## ✨ Features
 
--   🎨 **Modern UI** - Beautiful, responsive design using Tailwind CSS v4 and shadcn/ui components
--   🌙 **Dark Mode** - Built-in dark/light/system theme toggle with persistent preferences
--   🌍 **Multi-language Support** - i18n ready with English, French, and Arabic translations (RTL supported)
--   📧 **Custom Email Templates** - Styled email templates using jsx-email for all Keycloak events
--   🔐 **Complete Login Flow** - All 35+ Keycloak login pages fully customized
--   🎭 **Social Login Providers** - Pre-styled icons for 16+ OAuth providers (Google, GitHub, Microsoft, etc.)
--   📖 **Storybook Integration** - Visual testing and documentation for all components
--   ⚡ **Vite Powered** - Fast development with HMR and optimized builds
--   🔧 **Type-Safe** - Full TypeScript support throughout the codebase
+- 🎨 **Modern UI** - Beautiful, responsive design using Tailwind CSS v4 and shadcn/ui components
+- 🌙 **Dark Mode** - Built-in dark/light/system theme toggle with persistent preferences
+- 🌍 **Multi-language Support** - i18n ready with English, French, and Arabic translations (RTL supported)
+- 📧 **Custom Email Templates** - Styled email templates using jsx-email for all Keycloak events
+- 🔐 **Complete Login Flow** - All 35+ Keycloak login pages fully customized
+- 🎭 **Social Login Providers** - Pre-styled icons for 16+ OAuth providers (Google, GitHub, Microsoft, etc.)
+- 📖 **Storybook Integration** - Visual testing and documentation for all components
+- ⚡ **Vite Powered** - Fast development with HMR and optimized builds
+- 🔧 **Type-Safe** - Full TypeScript support throughout the codebase
+
+---
+
+## 🚀 Quick Start with npm
+
+Get started quickly by using the published npm package in your own project.
+
+### Step 1: Create a new Vite + React + TypeScript project
+
+```bash
+pnpm create vite
+```
+
+When prompted:
+
+- **Project name:** `keycloak-theme` (or your preferred name)
+- **Select a framework:** Choose **React**
+- **Select a variant:** Choose **TypeScript**
+
+```bash
+cd keycloak-theme
+```
+
+### Step 2: Install dependencies
+
+```bash
+pnpm add keycloakify @oussemasahbeni/keycloakify-login-shadcn
+pnpm install
+```
+
+### Step 3: Initialize Keycloakify
+
+```bash
+npx keycloakify init
+```
+
+When prompted:
+
+- **Which theme type would you like to initialize?** Select **(x) login**
+- **Do you want to install the Stories?** Select **(x) Yes (Recommended)**
+
+### Step 4: Configure Vite
+
+Update your `vite.config.ts` to include Tailwind CSS, path aliases, and the Keycloakify plugin:
+
+```typescript
+import react from "@vitejs/plugin-react";
+import { keycloakify } from "keycloakify/vite-plugin";
+import { defineConfig } from "vite";
+import path from "node:path";
+import tailwindcss from "@tailwindcss/vite";
+
+// https://vite.dev/config/
+export default defineConfig({
+    plugins: [
+        react(),
+        tailwindcss(),
+        keycloakify({
+            accountThemeImplementation: "none"
+        })
+    ],
+    resolve: {
+        alias: {
+            "@": path.resolve(__dirname, "./src")
+        }
+    }
+});
+```
+
+### Step 5: Configure TypeScript paths
+
+Add the path alias to your `tsconfig.app.json`:
+
+```json
+{
+    "compilerOptions": {
+        "paths": {
+            "@/*": ["./src/*"]
+        }
+    }
+}
+```
+
+### Step 6: Run Storybook and build
+
+```bash
+# Run Storybook for component development and testing
+pnpm storybook
+
+# Build the Keycloak theme JAR file
+pnpm build-keycloak-theme
+```
+
+That's it! You now have a fully functional Keycloak login theme using the published package.
+
+---
+
+## 🛠️ Development (for contributors)
+
+If you want to clone this repository and develop/customize the theme locally:
+
+### Prerequisites
+
+- Node.js 18+
+- pnpm (or npm/yarn)
+- [Maven](https://maven.apache.org/) (for building the theme JAR)
+
+### Clone and Install
+
+```bash
+# Clone the repository
+git clone https://github.com/Oussemasahbeni/keycloakify-shadcn-starter.git
+cd keycloakify-shadcn-starter
+
+# Install dependencies
+pnpm install
+```
+
+### Development Commands
+
+```bash
+# Start development server with hot reload
+pnpm dev
+
+# Run Storybook for component development
+pnpm storybook
+
+# Preview email templates
+pnpm emails:preview
+
+# Build the Keycloak theme JAR
+pnpm build-keycloak-theme
+```
+
+---
 
 ## 🖼️ Supported Pages
 
@@ -34,55 +167,7 @@ This theme includes custom implementations for all Keycloak login pages:
 | OAuth Grant         | Terms & Conditions  | X509 Info             |
 | Device Verification | Select Organization | Delete Credential     |
 
-## 🚀 Quick Start
-
-### Prerequisites
-
--   Node.js 18+
--   npm, yarn, or pnpm
--   [Maven](https://maven.apache.org/) (for building the theme JAR)
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/Oussemasahbeni/keycloak-react-theme-keycloakify.git
-cd keycloak-react-theme-keycloakify
-
-# Install dependencies
-pnpm  install
-```
-
-### Development
-
-```bash
-# Start development server with hot reload
-pnpm  dev
-
-# Run Storybook for component development
-pnpm  storybook
-
-# Preview email templates
-pnpm emails:preview
-```
-
-## 🎨 Customization
-
-### Theme Configuration
-
-The theme is configured in `vite.config.ts`:
-
-```typescript
-keycloakify({
-    accountThemeImplementation: "none",
-    themeName: "planingo-theme",
-    keycloakVersionTargets: {
-        "22-to-25": false,
-        "all-other-versions": "planingo-theme.jar"
-    },
-    environmentVariables: [{ name: "ENABLE_THEME_TOGGLE", default: "true" }]
-});
-```
+---
 
 ### Branding
 
@@ -110,15 +195,17 @@ Add or modify translations in `src/login/i18n.ts`:
 
 The theme uses shadcn/ui components located in `src/components/ui/`:
 
--   `alert.tsx` - Alert messages
--   `button.tsx` - Buttons with variants
--   `card.tsx` - Card containers
--   `checkbox.tsx` - Checkbox inputs
--   `input.tsx` - Text inputs
--   `label.tsx` - Form labels
--   `dropdown-menu.tsx` - Dropdown menus
--   `radio-group.tsx` - Radio button groups
--   `tooltip.tsx` - Tooltips
+- `alert.tsx` - Alert messages
+- `button.tsx` - Buttons with variants
+- `card.tsx` - Card containers
+- `checkbox.tsx` - Checkbox inputs
+- `input.tsx` - Text inputs
+- `label.tsx` - Form labels
+- `dropdown-menu.tsx` - Dropdown menus
+- `radio-group.tsx` - Radio button groups
+- `tooltip.tsx` - Tooltips
+
+---
 
 ## 📧 Email Templates
 
@@ -138,89 +225,93 @@ Custom email templates are built with [jsx-email](https://jsx.email/) and suppor
 | `event-update_totp.tsx`      | TOTP configuration notification |
 | And more...                  |                                 |
 
-### Preview Emails
+### Preview Emails Locally
 
 ```bash
-pnpm run emails:preview
+pnpm emails:preview
 ```
 
 ### Email Locales
 
-Translations are in `emails/locales/{locale}/translation.json`:
+Translations are in `src/email/locales/{locale}/translation.json`:
 
--   `en/` - English
--   `fr/` - French
--   `ar/` - Arabic
+- `en/` - English
+- `fr/` - French
+- `ar/` - Arabic
 
-## 🔨 Building
+---
+
+## 🔨 Building for Production
 
 ### Install Maven
 
--   **macOS**: `brew install maven`
--   **Ubuntu/Debian**: `sudo apt-get install maven`
--   **Windows**: `choco install openjdk && choco install maven`
+Required for building the Keycloak theme JAR file.
+
+- **macOS**: `brew install maven`
+- **Ubuntu/Debian**: `sudo apt-get install maven`
+- **Windows**: `choco install openjdk && choco install maven`
 
 ### Build the Theme
 
 ```bash
-# Build the Keycloak theme JAR
-pnpm  build-keycloak-theme
+pnpm build-keycloak-theme
 ```
 
-The built theme will be output as `planingo-theme.jar` in the `dist_keycloak` directory.
+The built theme will be output as a `.jar` file in the `dist_keycloak/` directory.
 
 ### Deploy to Keycloak
 
 1. Copy the `.jar` file to your Keycloak's `providers/` directory
 2. Restart Keycloak
-3. Select the theme in Keycloak Admin Console under Realm Settings → Themes
+3. Go to Keycloak Admin Console → **Realm Settings** → **Themes**
+4. Select your custom theme from the dropdown
+
+---
 
 ## 🧪 Testing
 
 ### Storybook
 
-```bash
-# Run Storybook for visual testing
-pnpm  storybook
+Run Storybook for visual testing and component documentation:
 
-# Build static Storybook
-pnpm  build-storybook
+```bash
+pnpm storybook
 ```
 
 ### Local Keycloak Testing
 
-See the [Keycloakify documentation](https://docs.keycloakify.dev/testing-your-theme) for testing with a local Keycloak instance.
+For local testing with a Keycloak instance, see the [Keycloakify documentation](https://docs.keycloakify.dev/testing-your-theme).
 
-## 📁 Project Structure
-
-```text
-├── src/
-│   ├── components/          # Reusable UI components
-│   │   ├── ui/              # shadcn/ui components
-│   │   ├── langauges.tsx    # Language switcher
-│   │   ├── theme-toggle.tsx # Dark mode toggle
-│   │   └── theme-provider.tsx
-│   └── login/
-│       ├── assets/          # Fonts, images, provider logos
-│       ├── pages/           # All login page components
-│       ├── shared/          # Shared components
-│       ├── Template.tsx     # Main page template
-│       ├── i18n.ts          # Translations
-│       └── index.css        # Tailwind styles
-├── emails/
-│   ├── templates/           # Email templates (jsx-email)
-│   ├── locales/             # Email translations
-│   └── i18n.ts              # Email i18n config
-└── vite.config.ts           # Vite & Keycloakify config
-```
+---
 
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
 ## 🙏 Acknowledgments
 
--   [Keycloakify](https://keycloakify.dev) - For making Keycloak theming with React possible
--   [shadcn/ui](https://ui.shadcn.com) - For the beautiful UI components
--   [Tailwind CSS](https://tailwindcss.com) - For the utility-first CSS framework
--   [jsx-email](https://jsx.email) - For React email templates
+- [Keycloakify](https://keycloakify.dev) - For making Keycloak theming with React possible
+- [shadcn/ui](https://ui.shadcn.com) - For the beautiful UI components
+- [Tailwind CSS](https://tailwindcss.com) - For the utility-first CSS framework
+- [jsx-email](https://jsx.email) - For React email templates
+
+---
+
+## 📦 Package Information
+
+**npm:** [@oussemasahbeni/keycloakify-login-shadcn](https://www.npmjs.com/package/@oussemasahbeni/keycloakify-login-shadcn)  
+**GitHub:** [Oussemasahbeni/keycloakify-shadcn-starter](https://github.com/Oussemasahbeni/keycloakify-shadcn-starter)
