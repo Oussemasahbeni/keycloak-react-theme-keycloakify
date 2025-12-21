@@ -61,8 +61,8 @@ export function Form() {
                 )}
             <div className={kcClsx("kcFormGroupClass")}>
                 {kcContext.recaptchaRequired &&
-                !kcContext.recaptchaVisible &&
-                kcContext.recaptchaAction !== undefined ? (
+                    !kcContext.recaptchaVisible &&
+                    kcContext.recaptchaAction !== undefined ? (
                     <div id="kc-form-buttons" className={kcClsx("kcFormButtonsClass")}>
                         <button
                             className={clsx(
@@ -98,7 +98,7 @@ export function Form() {
             </div>
 
             <div className=" flex justify-end">
-                <Button variant="ghost">
+                <Button type="button" variant="ghost">
                     <a href={kcContext.url.loginUrl}>{msg("backToLogin")}</a>
                 </Button>
             </div>

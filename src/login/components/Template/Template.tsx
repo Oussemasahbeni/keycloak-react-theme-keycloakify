@@ -83,7 +83,7 @@ export function Template(props: {
             <div className="flex flex-col gap-4 px-0 py-0 pb-6 lg:p-6 lg:md:p-10 lg:pt-10 min-h-screen lg:min-h-0">
                 {/*  navigation */}
                 <div className="absolute top-4 right-4 lg:left-4  z-20 flex gap-2">
-                    <Button variant="outline" size="icon">
+                    <Button type="button" variant="outline" size="icon" asChild>
                         <a href={kcContext.client.baseUrl ?? redirectUrlOrigin}>
                             <FiHome />
                         </a>
